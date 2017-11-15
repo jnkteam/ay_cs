@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>WebUI</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="AspNetPager, Version=7.0.2.0, Culture=neutral, PublicKeyToken=fb0a0fe055d40fd4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output2\AspNetPager.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Cells, Version=7.6.0.0, Culture=neutral, PublicKeyToken=00725b1ceb58d0a9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output2\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+    <Reference Include="KuaiCard.Cache" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json.Net20" />
+    <Reference Include="System.Drawing" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\DataBaseType\SqlDataProvider.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\DataProvider.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\DataProviderType.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\Json.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\Request.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\Str.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\Utils.cs" />
+    <Compile Include="KuaiCard\ChartApi\Common\WebUtility.cs" />
+    <Compile Include="KuaiCard\ChartApi\EnumPayApi.cs" />
+    <Compile Include="KuaiCard\ChartApi\PayApiHandler.cs" />
+    <Compile Include="KuaiCard\ChartApi\ResponseJsonData.cs" />
+    <Compile Include="KuaiCard\ChartApi\SQLServerHelper.cs" />
+    <Compile Include="KuaiCard\ETAPI\SellFactory.cs" />
+    <Compile Include="KuaiCard\ETAPI\Withdraw.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\channel\tfb.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\channel\Ygww.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Console\CleanUpData.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\Console_Order_ResetOrder.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderPrint.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderSearchList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\PingAn\CreateSubMerchant.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\StatCharts\DayOrdersChart.aspx.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\StatCharts\SingleDayHourChart.aspx.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserPayAccts.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport2.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Settled\IncreaseAmts.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\CardOrderList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\NewsList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Newsuser.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Index.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Default.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\channel\mutisupp.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\CodeMappingEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\ChannelEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserInfoPrint.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserInfoPrint_bak.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\UserSupplierConfig.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Api\index_zft.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Api\modify.cs" />
+    <Compile Include="KuaiCard\WebUI\User\awalpassword\index%28旧%29.cs" />
+    <Compile Include="KuaiCard\WebUI\User\email\index%28旧%29.cs" />
+    <Compile Include="KuaiCard\WebUI\User\forget\Account.cs" />
+    <Compile Include="KuaiCard\WebUI\User\forget\SelectMode.cs" />
+    <Compile Include="KuaiCard\WebUI\User\forget\GetByTel.cs" />
+    <Compile Include="KuaiCard\WebUI\User\forget\SetPwd.cs" />
+    <Compile Include="KuaiCard\WebUI\User\IP\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\IP\list.cs" />
+    <Compile Include="KuaiCard\WebUI\User\IP\delete.cs" />
+    <Compile Include="KuaiCard\WebUI\User\mobile\index_modify.cs" />
+    <Compile Include="KuaiCard\WebUI\User\mobile\index%28旧%29.cs" />
+    <Compile Include="KuaiCard\WebUI\User\news\NewsDetail.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\Recharge\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Recharge\notify.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\Recharge\post.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\changethemes.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\chartDataSource.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\withdrawal.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\withdrawalbatch.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\withdrawalzft.cs" />
+    <Compile Include="KuaiCard\WebUI\User\UserLogin.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\verify\addbank.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\Code.cs" />
+    <Compile Include="KuaiCard\WebUI\User\realname\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\message\index.cs" />
+    <Compile Include="KuaiCard\WebUI\register\ajaxcheckmobilecode.cs" />
+    <Compile Include="KuaiCard\WebUI\product.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\newsnotice.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\phonevalid1.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\GetCardFaceValue.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\emailb.cs" />
+    <Compile Include="KuaiCard\WebUI\emailForm.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\business\User\UserPayRateEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserChannels.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\ResetOrder.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\DebugInfoShow.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\BankOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\business\orderreport2.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\Index.cs" />
+    <Compile Include="KuaiCard\WebUI\NewIndex.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\news\NewsList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\UserLoginV2.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\withdrawal\batch.cs" />
+    <Compile Include="KuaiCard\WebUI\User\withdrawal\index2.cs" />
+    <Compile Include="KuaiCard\WebUI\User\ZFTRegister.cs" />
+    <Compile Include="KuaiCard\WebUI\ZFTRegister.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\web\Agent\User\UserPayRateEdit.cs" />
+    <Compile Include="agent_stat.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\agent\Order\CardOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Default.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistNotifyInfo.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserLoginLog.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserImageCheck.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserChannel.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SettledList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\chargessetting.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\BankForUser.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\Salesman.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Reconciliation.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\DebugInfos.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\CardReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\BankReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\NewsEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\News\NewsEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\ManageLoginLog.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\DataBackup.cs" />
+    <Compile Include="KuaiCard\WebUI\User\validate\tel.cs" />
+    <Compile Include="KuaiCard\WebUI\solution.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\selectForm.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\news.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\business\User\UserList.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\Logout.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Business_Contact.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistsSchemes.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDists.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserEdits.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\PayRate.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Tools\Supplier1.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SupplierList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\OrderReport.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UnFreeze.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\Console_Order_DebugInfoShow.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Jubao\List.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\CodeMappingList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\ChannelList.cs" />
+    <Compile Include="KuaiCard\WebUI\webservice\checkuser.cs" />
+    <Compile Include="KuaiCard\WebUI\User\withdrawal\post.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\upload2.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\sendtixianemail.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\sendMail.cs" />
+    <Compile Include="KuaiCard\WebUI\User\profile\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\order\view.cs" />
+    <Compile Include="KuaiCard\WebUI\User\message\unread.cs" />
+    <Compile Include="KuaiCard\WebUI\User\message\content.cs" />
+    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\CardSellOld.cs" />
+    <Compile Include="KuaiCard\WebUI\Index.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\helper2.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Controls\WebUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\contact.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\business\QuestionEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\PayRateEdit.cs" />
+    <Compile Include="business_User_idimg.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Business\login2.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Order\BankReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserAdd.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport6.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\Trades.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\TocashScheme.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Reconciliation2.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\User\email\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\awalpassword\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Api\index.cs" />
+    <Compile Include="KuaiCard\WebUI\register\ajaxcheckmobile.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\CardOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\Default.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\agent\Order\CardReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Order\BankOrderList.cs" />
+    <Compile Include="KuaiCard\WebUI\about.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\Reissue.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\PayingByApi.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Pay.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SMSLogList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\xTrades.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Top.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\usersOrderIncomes.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\SmsReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\wxkmadmin_Md5.cs" />
+    <Compile Include="KuaiCard\web\console\Manage\Md5.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Logout.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Left.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\EmailTest.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\emailconfig.cs" />
+    <Compile Include="KuaiCard\WebUI\User\validate\frame.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\password.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Pincard\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\mobile\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\loginout.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\service.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\OrderJson.cs" />
+    <Compile Include="KuaiCard\WebUI\getPassword.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Business_stat.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\business\Order\BankReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\QuestionEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\TransferschemeModi.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Manage.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Jubao\ItemModi.cs" />
+    <Compile Include="WebMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\validate\set.cs" />
+    <Compile Include="KuaiCard\WebUI\User\userrate\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\sendtixianCode.cs" />
+    <Compile Include="KuaiCard\WebUI\User\password\index.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\SendVerifyCode.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserHosts.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserEdits.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Questions.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\SmsOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\CardReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\User\ManageLoginLog.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Pays.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Audits.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistNotifys.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserChannels.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\PayRateEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport5.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport4.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\transfers.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\TocashSchemeModi.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SettledSearch.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Settled\Recharges.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\Freeze.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\Console_Order_ResetOrder.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\changeorde.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\CardOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\ManageEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\CahceManage.cs" />
+    <Compile Include="KuaiCard\WebUI\User\withdrawal\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\realname\add.cs" />
+    <Compile Include="KuaiCard\WebUI\User\money\index.cs" />
+    <Compile Include="KuaiCard\WebUI\setForm.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\pubInfo.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\web\Merchant\Ajax\smartcardsell.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\mailcheckreceive.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\GetCardSupplier.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\DPI3.cs" />
+    <Compile Include="KuaiCard\WebUI\helper.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\CodeImage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\business\User\UserUpdateLog.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserImageCheck.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserChannel.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\SendMsg.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\BankOrderList.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Login.cs" />
+    <Compile Include="agent_Contact.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\agent\ChangePwd.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserList.cs" />
+    <Compile Include="Console_User_idimg.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Tools\Alarm.cs" />
+    <Compile Include="ConsoleDll\Console\Sys\SiteInfo.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Reviewname.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\SmsOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderList.cs" />
+    <Compile Include="KuaiCard\web\console\Manage\ManageEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\WithdrawChannels.cs" />
+    <Compile Include="KuaiCard\WebUI\User\validate\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\user.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\sendMobileCode.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Index.cs" />
+    <Compile Include="KuaiCard\WebUI\mobileForm.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\PayAcct1.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserIdImgLists.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\CardOrderList.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Index.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Historys.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\distribution\Distributions2.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\distribution\Distributions.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistsSchemeModi.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\agentratelimit.cs" />
+    <Compile Include="ConsoleDll\Console\CleanUpData.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SupplierEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SiteInfo.cs" />
+    <Compile Include="KuaiCard\WebUI\zhaopin.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\Service\cleanupcardcontent.cs" />
+    <Compile Include="KuaiCard\WebUI\security.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\register\sendMobileCode.cs" />
+    <Compile Include="KuaiCard\WebUI\register\reg.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\SmsReportList.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\SmsOrderList.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\ChangePwd.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\User\UserEdits.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Top.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Order\CardOrderList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistsInfo.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\SendMsg.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Questions.cs" />
+    <Compile Include="ConsoleDll\Console\DataBackup.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\SupplierPayrate.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Login.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\distribution\list.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\ChannelTypeEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\upload.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\modifypwd.cs" />
+    <Compile Include="KuaiCard\WebUI\user\order\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\cashcoupon\index.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\userinfo.cs" />
+    <Compile Include="KuaiCard\WebUI\Merchant\ajax\cleanupcardcontent.cs" />
+    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\CardSell.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\PromUserList.cs" />
+    <Compile Include="KuaiCard\WebUI\business\PayRate.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Login.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Order\BankOrderShow.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Logout.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserUpdateLog.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserHosts.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Template\Configuration.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\feedback\List.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\thebank.cs" />
+    <Compile Include="KuaiCard\WebUI\User\message\read.cs" />
+    <Compile Include="KuaiCard\WebUI\Register.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\business\User\UserPayAccts.cs" />
+    <Compile Include="KuaiCard\WebUI\business\User\UserLoginLog.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\Top.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\Login1.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\User\UserList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserIdImgLists.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\login2.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\UserAgent.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\amt.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Pincard\card\index.cs" />
+    <Compile Include="KuaiCard\WebUI\user\ordercard\index.cs" />
+    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\OrderJsonResult.cs" />
+    <Compile Include="KuaiCard\WebUI\IpList.cs" />
+    <Compile Include="KuaiCard\WebUI\business\SMSLogList.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Settled\IncreaseAmtEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\SmsOrderList.cs" />
+    <Compile Include="KuaiCard\web\console\Manage\Salesman.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\web\console\CleanUpData.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\WebUtility.cs" />
+    <Compile Include="KuaiCard\WebUI\webservice\sendMailCode.cs" />
+    <Compile Include="KuaiCard\WebUI\webservice\checkemail.cs" />
+    <Compile Include="KuaiCard\WebUI\agent\Left.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\settledAgentSummarys.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserPayRateEdit.cs" />
+    <Compile Include="KuaiCard\WebUI\User\MainSite.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\register\reg1.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Global.cs" />
+    <Compile Include="KuaiCard\WebUI\business\Order\DebugInfos.cs" />
+    <Compile Include="KuaiCard\WebUI\Business\Left.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\User\PromUserList.cs" />
+    <Compile Include="KuaiCard\web\console\Manage\ManageLoginLog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\web\console\Manage\Manage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\ChannelTypeList.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\setread.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\realname.cs" />
+    <Compile Include="KuaiCard\WebUI\User\ordercard\view.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\replenish.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\ordersearch1.cs" />
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\getdaxie.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport7.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\ChangePwd.cs" />
+    <Compile Include="KuaiCard\WebUI\webservice\setForm.cs" />
+    <Compile Include="KuaiCard\WebUI\webservice\Register.cs" />
+    <Compile Include="KuaiCard\WebUI\User\verify\index.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\password2.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\delbank.cs" />
+    <Compile Include="KuaiCard\web\UserCtrls\header.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\merchant\ajax\DPI1.cs" />
+    <Compile Include="KuaiCard\WebUI\Manage\APIConfig.cs" />
+    <Compile Include="KuaiCard\WebUI\webservice\sendMobileCode.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Service\sendPhone.cs" />
+    <Compile Include="KuaiCard\WebUI\User\Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\web\UserCtrls\footer.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBAccess2.0\DBAccess.csproj">
+      <Project>{AFC87E10-538D-4068-9428-62F4FC94F2CC}</Project>
+      <Name>DBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.BLL2.0\KuaiCard.BLL.csproj">
+      <Project>{D77B7D1C-894E-4449-B8CA-A3FF31E39401}</Project>
+      <Name>KuaiCard.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.Model2.0\KuaiCard.Model.csproj">
+      <Project>{EA23ECFA-7392-4BD3-849F-F03144CFCDD8}</Project>
+      <Name>KuaiCard.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.SysConfig2.0\KuaiCard.SysConfig.csproj">
+      <Project>{170588BA-4FE1-4C40-85F1-C9654C7D3B3D}</Project>
+      <Name>KuaiCard.SysConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.WebComponents2.0\KuaiCard.WebComponents.csproj">
+      <Project>{257C046C-345F-44DB-ADBD-877F74CB4B0A}</Project>
+      <Name>KuaiCard.WebComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCardLib2.0\KuaiCardLib.csproj">
+      <Project>{D8703E4F-9C28-4266-9B1C-676871306C68}</Project>
+      <Name>KuaiCardLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="KuaiCard\WebUI\User\forget\GetByMail.cs" />
+  </ItemGroup>
+</Project>

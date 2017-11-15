@@ -737,13 +737,7 @@
                     }
                 }
             }
-            string tmpStr = "";
-            foreach (var K in waitSign.Keys)
-            {
-                tmpStr += K + "=" + waitSign[K] + "&";
-            }
-            tmpStr = tmpStr.Substring(0, tmpStr.Length - 1);
-            return OriginalStudio.Lib.Security.Cryptography.MD5(tmpStr + key).ToLower() == sign;
+            return OriginalStudio.Lib.Security.Cryptography.SignSortedDictionary(waitSign,key).ToLower() == sign;
 
             //return (OriginalStudio.Lib.Security.Cryptography.MD5(string.Format("merchant={0}&type={1}&value={2}&orderid={3}&callbackurl={4}{5}",
             //                                    new object[] { merchant, channeltype, money, orderid, notify_url, key })).ToLower() == sign);

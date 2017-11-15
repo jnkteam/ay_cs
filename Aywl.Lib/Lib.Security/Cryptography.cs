@@ -1,5 +1,6 @@
 using OriginalStudio.Lib.ExceptionHandling;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -266,5 +267,29 @@ namespace OriginalStudio.Lib.Security
         }
 
         #endregion
+
+        #region 加密数组
+
+        /// <summary>
+        /// 获取SortedDictionary签名结果
+        /// </summary>
+        /// <param name="waitSign"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string SignSortedDictionary(SortedDictionary<string, string> waitSign, string key)
+        {
+            string tmpStr = "";
+            foreach (var K in waitSign.Keys)
+            {
+                if (K.ToLower() != "sign" && !String.IsNullOrWhiteSpace(waitSign[K]))
+                tmpStr += K + "=" + waitSign[K] + "&";
+            }
+            tmpStr = tmpStr.Substring(0, tmpStr.Length - 1);
+            return OriginalStudio.Lib.Security.Cryptography.MD5(tmpStr + key).ToLower();
+        }
+
+        #endregion
+
+
     }
 }

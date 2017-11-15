@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{257C046C-345F-44DB-ADBD-877F74CB4B0A}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>KuaiCard.WebComponents</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Aiyang_web\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output2\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="KuaiCard\WebComponents\ScheduledTask\IntervalTask.cs" />
+    <Compile Include="KuaiCardLib\WebComponents\UrlManager\HandlerBase.cs" />
+    <Compile Include="KuaiCardLib\WebComponents\UrlManager\PageHandler.cs" />
+    <Compile Include="KuaiCard\WebComponents\JSON.cs" />
+    <Compile Include="KuaiCardLib\WebComponents\UrlManager\UrlManagerFactory.cs" />
+    <Compile Include="KuaiCard\WebComponents\Web\PageBaseControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebComponents\Web\PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebComponents\Web\AgentPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebComponents\Web\UserHandlerBase.cs" />
+    <Compile Include="KuaiCard\WebComponents\ScheduledTask\ScheduledTasks.cs" />
+    <Compile Include="KuaiCardLib\WebComponents\UrlManager\Filter.cs" />
+    <Compile Include="KuaiCard\WebComponents\ScheduledTask\DailyTask.cs" />
+    <Compile Include="KuaiCard\WebComponents\Web\UserPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebComponents\Template\Helper.cs" />
+    <Compile Include="KuaiCard\WebComponents\EquipmentDetermine.cs" />
+    <Compile Include="KuaiCard\WebComponents\FileUploadHelper.cs" />
+    <Compile Include="KuaiCardLib\WebComponents\UrlManager\StaticFileHandler.cs" />
+    <Compile Include="KuaiCard\WebComponents\VerifyImage.cs" />
+    <Compile Include="KuaiCard\WebComponents\Web\ManagePageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebComponents\Web\BusinessPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebComponents\EmailHelper.cs" />
+    <Compile Include="KuaiCard\WebComponents\RandomController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KuaiCard.BLL2.0\KuaiCard.BLL.csproj">
+      <Project>{D77B7D1C-894E-4449-B8CA-A3FF31E39401}</Project>
+      <Name>KuaiCard.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.Cache2.0\KuaiCard.Cache.csproj">
+      <Project>{BE9D6E2B-E70E-4A2F-9C96-96C3B4822A2D}</Project>
+      <Name>KuaiCard.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.Model2.0\KuaiCard.Model.csproj">
+      <Project>{EA23ECFA-7392-4BD3-849F-F03144CFCDD8}</Project>
+      <Name>KuaiCard.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.SysConfig2.0\KuaiCard.SysConfig.csproj">
+      <Project>{170588BA-4FE1-4C40-85F1-C9654C7D3B3D}</Project>
+      <Name>KuaiCard.SysConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCardLib2.0\KuaiCardLib.csproj">
+      <Project>{D8703E4F-9C28-4266-9B1C-676871306C68}</Project>
+      <Name>KuaiCardLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="jmail">
+      <Guid>{AED3A6B0-2171-11D2-B77C-0008C73ACA8F}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+D:\创意工厂\聚合支付系统\虚拟支付Dll源码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.csprojResolveAssemblyReference.cache
+D:\创意工厂\聚合支付系统\虚拟支付Dll源码\Output2\KuaiCard.MSMQMessaging.dll
+D:\创意工厂\聚合支付系统\虚拟支付Dll源码\Output2\KuaiCard.MSMQMessaging.pdb
+D:\创意工厂\聚合支付系统\虚拟支付Dll源码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.dll
+D:\创意工厂\聚合支付系统\虚拟支付Dll源码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.pdb
+D:\创意工厂\聚合支付系统\对接代码\Output2\KuaiCard.MSMQMessaging.dll
+D:\创意工厂\聚合支付系统\对接代码\Output2\KuaiCard.MSMQMessaging.pdb
+D:\创意工厂\聚合支付系统\对接代码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.csprojResolveAssemblyReference.cache
+D:\创意工厂\聚合支付系统\对接代码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.csproj.CoreCompileInputs.cache
+D:\创意工厂\聚合支付系统\对接代码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.dll
+D:\创意工厂\聚合支付系统\对接代码\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.pdb
+E:\3_ASP\Aiyang_cs\Output2\KuaiCard.MSMQMessaging.dll
+E:\3_ASP\Aiyang_cs\Output2\KuaiCard.MSMQMessaging.pdb
+E:\3_ASP\Aiyang_cs\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.csprojResolveAssemblyReference.cache
+E:\3_ASP\Aiyang_cs\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.dll
+E:\3_ASP\Aiyang_cs\KuaiCard.MSMQMessaging2.0\obj\x86\Debug\KuaiCard.MSMQMessaging.pdb

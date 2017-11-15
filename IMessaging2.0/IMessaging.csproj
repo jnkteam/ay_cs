@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CACD1829-E419-4AB7-BC40-23B8F18115CD}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>IMessaging</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output2\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="KuaiCard\IMessaging\IOrderSms.cs" />
+    <Compile Include="KuaiCard\IMessaging\IOrderCard.cs" />
+    <Compile Include="KuaiCard\IMessaging\IOrderBank.cs" />
+    <Compile Include="KuaiCard\IMessaging\IOrderCardNotify.cs" />
+    <Compile Include="KuaiCard\IMessaging\IOrderBankNotify.cs" />
+    <Compile Include="KuaiCard\IMessaging\IOrderSmsNotify.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KuaiCard.Model2.0\KuaiCard.Model.csproj">
+      <Project>{ea23ecfa-7392-4bd3-849f-f03144cfcdd8}</Project>
+      <Name>KuaiCard.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

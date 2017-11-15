@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8E119086-E92E-408B-9C16-8EC597C14BCF}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>ScpClient</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output2\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="com\todaynic\ScpClient\UserType.cs" />
+    <Compile Include="com\todaynic\ScpClient\SCPException.cs" />
+    <Compile Include="com\todaynic\ScpClient\XmlClient.cs" />
+    <Compile Include="com\todaynic\ScpClient\EmailClient.cs" />
+    <Compile Include="com\todaynic\ScpClient\SCPReply.cs" />
+    <Compile Include="com\todaynic\ScpClient\VHostClient.cs" />
+    <Compile Include="com\todaynic\ScpClient\EmailInfo.cs" />
+    <Compile Include="com\todaynic\ScpClient\XMLParser.cs" />
+    <Compile Include="com\todaynic\ScpClient\DomainInfo.cs" />
+    <Compile Include="com\todaynic\ScpClient\SMSClient.cs" />
+    <Compile Include="com\todaynic\ScpClient\DomainClient.cs" />
+    <Compile Include="com\todaynic\ScpClient\VHostInfo.cs" />
+    <Compile Include="com\todaynic\ScpClient\ScpStatus.cs" />
+    <Compile Include="com\todaynic\ScpClient\ContactType.cs" />
+    <Compile Include="com\todaynic\ScpClient\ContactInfo.cs" />
+    <Compile Include="com\todaynic\ScpClient\Utility.cs" />
+    <Compile Include="com\todaynic\ScpClient\ProductClient.cs" />
+  </ItemGroup>
+</Project>

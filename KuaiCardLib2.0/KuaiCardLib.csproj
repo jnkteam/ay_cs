@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{D8703E4F-9C28-4266-9B1C-676871306C68}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>KuaiCardLib</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>..\output2\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="AntiXssLibrary">
+      <HintPath>..\Output2\AntiXssLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="KuaiCardLib.Configuration\ConfigHelper.cs" />
+    <Compile Include="KuaiCardLib.Configuration\LogSetting.cs" />
+    <Compile Include="KuaiCardLib.Data\SearchParam.cs" />
+    <Compile Include="KuaiCardLib.ExceptionHandling\ExceptionHandler.cs" />
+    <Compile Include="KuaiCardLib.Image\VerifyImage.cs" />
+    <Compile Include="KuaiCardLib.Image\VerifyImageInfo.cs" />
+    <Compile Include="KuaiCardLib.IO\File.cs" />
+    <Compile Include="KuaiCardLib.Logging\LogHelper.cs" />
+    <Compile Include="KuaiCardLib.ScheduledTask\IScheduledTaskExecute.cs" />
+    <Compile Include="KuaiCardLib.ScheduledTask\ScheduledTask.cs" />
+    <Compile Include="KuaiCardLib.ScheduledTask\ScheduledTaskConfiguration.cs" />
+    <Compile Include="KuaiCardLib.ScheduledTask\ScheduledTaskConfigurationSectionHandler.cs" />
+    <Compile Include="KuaiCardLib.ScheduledTask\ScheduledTaskExecuteBase.cs" />
+    <Compile Include="KuaiCardLib.ScheduledTask\ScheduledTaskLog.cs" />
+    <Compile Include="KuaiCardLib.Security\AntiXss.cs" />
+    <Compile Include="KuaiCardLib.Security\Cryptography.cs" />
+    <Compile Include="KuaiCardLib.Security\Des3.cs" />
+    <Compile Include="KuaiCardLib.Text\PageValidate.cs" />
+    <Compile Include="KuaiCardLib.Text\Regular.cs" />
+    <Compile Include="KuaiCardLib.Text\RegularType.cs" />
+    <Compile Include="KuaiCardLib.Text\Strings.cs" />
+    <Compile Include="KuaiCardLib.Text\Validate.cs" />
+    <Compile Include="KuaiCardLib.TimeControl\FormatConvertor.cs" />
+    <Compile Include="KuaiCardLib.Utils\Common.cs" />
+    <Compile Include="KuaiCardLib.Utils\DirFile.cs" />
+    <Compile Include="KuaiCardLib.Utils\FileHelp.cs" />
+    <Compile Include="KuaiCardLib.Utils\MessageObject.cs" />
+    <Compile Include="KuaiCardLib.Utils\RandomController.cs" />
+    <Compile Include="KuaiCardLib.Utils\Request.cs" />
+    <Compile Include="KuaiCardLib.Utils\StringText.cs" />
+    <Compile Include="KuaiCardLib.Utils\TypeParse.cs" />
+    <Compile Include="KuaiCardLib.Utils\Utils.cs" />
+    <Compile Include="KuaiCardLib.Web\IPHelper.cs" />
+    <Compile Include="KuaiCardLib.Web\SafeCookie.cs" />
+    <Compile Include="KuaiCardLib.Web\ServerVariables.cs" />
+    <Compile Include="KuaiCardLib.Web\WebBase.cs" />
+    <Compile Include="KuaiCardLib.Web\WebClientHelper.cs" />
+    <Compile Include="KuaiCardLib\AES.cs" />
+    <Compile Include="KuaiCardLib\PageData.cs" />
+    <Compile Include="KuaiCardLib\SqlKey.cs" />
+    <Compile Include="KuaiCardLib\Utility.cs" />
+    <Compile Include="KuaiCardLib\XRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

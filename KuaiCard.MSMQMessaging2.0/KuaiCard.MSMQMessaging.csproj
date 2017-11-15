@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F29A875-A360-4167-BA71-F7EE41BC78C7}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>KuaiCard.MSMQMessaging</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output2\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\BaseQueue.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\OrderCardNotify.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\OrderCard.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\OrderSmsNotify.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\OrderBankNotify.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\OrderBank.cs" />
+    <Compile Include="KuaiCard\MSMQMessaging\OrderSms.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IMessaging2.0\IMessaging.csproj">
+      <Project>{CACD1829-E419-4AB7-BC40-23B8F18115CD}</Project>
+      <Name>IMessaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.Model2.0\KuaiCard.Model.csproj">
+      <Project>{EA23ECFA-7392-4BD3-849F-F03144CFCDD8}</Project>
+      <Name>KuaiCard.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCard.SysConfig2.0\KuaiCard.SysConfig.csproj">
+      <Project>{170588BA-4FE1-4C40-85F1-C9654C7D3B3D}</Project>
+      <Name>KuaiCard.SysConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuaiCardLib2.0\KuaiCardLib.csproj">
+      <Project>{D8703E4F-9C28-4266-9B1C-676871306C68}</Project>
+      <Name>KuaiCardLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

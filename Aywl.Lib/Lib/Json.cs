@@ -1,17 +1,12 @@
-using System;
 using System.Data;
-using System.Diagnostics;
-using System.Collections;
 using System.Text;
-using System.Xml;
-using System.Collections.Generic;
 
 namespace OriginalStudio.Lib
 {
-	/// <summary>
-	/// Json对象类。
-	/// </summary>
-	public class Json
+    /// <summary>
+    /// Json对象类。
+    /// </summary>
+    public class Json
 	{
 		StringBuilder sbJson = new StringBuilder();
 		

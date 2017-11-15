@@ -137,6 +137,10 @@
       <Project>{C0EA7CD6-9D1B-4FFD-8B00-CDFCD66E48CC}</Project>
       <Name>Aywl.IDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Aywl.IMessaging\Aywl.IMessaging.csproj">
+      <Project>{28a955ec-48d9-446a-a023-d733fadfc524}</Project>
+      <Name>Aywl.IMessaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aywl.Lib\Aywl.Lib.csproj">
       <Project>{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}</Project>
       <Name>Aywl.Lib</Name>
@@ -145,9 +149,9 @@
       <Project>{4768644C-A02E-4D57-B4C4-4D432D87EB47}</Project>
       <Name>Aywl.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OriginalStudio.IMessaging\Aywl.IMessaging.csproj">
-      <Project>{28A955EC-48D9-446A-A023-D733FADFC524}</Project>
-      <Name>Aywl.IMessaging</Name>
+    <ProjectReference Include="..\Aywl.MSMQMessaging\Aywl.MSMQMessaging.csproj">
+      <Project>{e28110c1-e206-4b6e-bc2b-983683facc5c}</Project>
+      <Name>Aywl.MSMQMessaging</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

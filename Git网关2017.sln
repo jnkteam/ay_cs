@@ -23,9 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.MSMQMessaging", "Aywl.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.SQLServerDAL", "Aywl.SQLServerDAL\Aywl.SQLServerDAL.csproj", "{7E15E9D2-D904-4917-A61B-DE56183E306F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.IMessaging", "OriginalStudio.IMessaging\Aywl.IMessaging.csproj", "{28A955EC-48D9-446A-A023-D733FADFC524}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI2.0\WebUI.csproj", "{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.IMessaging", "Aywl.IMessaging\Aywl.IMessaging.csproj", "{28A955EC-48D9-446A-A023-D733FADFC524}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,12 +121,6 @@ Global
 		{28A955EC-48D9-446A-A023-D733FADFC524}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28A955EC-48D9-446A-A023-D733FADFC524}.Release|x86.ActiveCfg = Release|Any CPU
 		{28A955EC-48D9-446A-A023-D733FADFC524}.Release|x86.Build.0 = Release|Any CPU
-		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Debug|x86.ActiveCfg = Debug|x86
-		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Debug|x86.Build.0 = Debug|x86
-		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Release|Any CPU.ActiveCfg = Release|x86
-		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Release|x86.ActiveCfg = Release|x86
-		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

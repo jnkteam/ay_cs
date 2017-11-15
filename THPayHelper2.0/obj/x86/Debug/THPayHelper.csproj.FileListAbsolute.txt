@@ -1,4 +1,0 @@
-D:\创意工厂\外包软件\虚拟支付dll\Output2\THPayHelper.dll
-D:\创意工厂\外包软件\虚拟支付dll\Output2\THPayHelper.pdb
-D:\创意工厂\外包软件\虚拟支付dll\THPayHelper2.0\obj\x86\Debug\THPayHelper.dll
-D:\创意工厂\外包软件\虚拟支付dll\THPayHelper2.0\obj\x86\Debug\THPayHelper.pdb

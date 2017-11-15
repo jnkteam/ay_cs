@@ -721,7 +721,7 @@
             {
                 foreach (string K in HttpContext.Current.Request.QueryString.AllKeys)
                 {
-                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.QueryString[K]))
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.QueryString[K]) && K.ToLower() != "sign")
                     {
                         waitSign.Add(K, HttpContext.Current.Request.QueryString[K].ToString());
                     }
@@ -731,7 +731,7 @@
             {
                 foreach (string K in HttpContext.Current.Request.Form.AllKeys)
                 {
-                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.Form[K]))
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.Form[K]) && K.ToLower() != "sign")
                     {
                         waitSign.Add(K, HttpContext.Current.Request.Form[K].ToString());
                     }

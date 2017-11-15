@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="AntiXssLibrary, Version=1.5.0.0, Culture=neutral, PublicKeyToken=bcdc0d0c766dd6e4">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Output\AntiXssLibrary.dll</HintPath>
+      <HintPath>D:\创意工厂\聚合支付系统\新版本网关开发2010\Output\AntiXssLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

@@ -13,6 +13,7 @@ namespace OriginalStudio.Lib
 	/// </summary>
 	public class Json
 	{
+
 		StringBuilder sbJson = new StringBuilder();
 		
 		public Json()

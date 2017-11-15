@@ -10,6 +10,7 @@
     using System.Text;
     using System.Web;
     using System.Data;
+    using System.Collections.Generic;
 
     public class SystemApiHelper
     {
@@ -97,16 +98,22 @@
                 {
                     opstate = orderinfo.opstate;
                     string ordermoney = decimal.Round(orderinfo.realvalue.Value, 2).ToString();
-                    str = Cryptography.MD5(string.Format("orderid={0}&opstate={1}&ovalue={2}{3}", new object[] { userorder, opstate, ordermoney, aPIKey }));
-                    builder.AppendFormat("orderid={0}", HttpUtility.UrlEncode(userorder));
-                    builder.AppendFormat("&opstate={0}", HttpUtility.UrlEncode(opstate));
-                    builder.AppendFormat("&ovalue={0}", HttpUtility.UrlEncode(ordermoney));
-                    builder.AppendFormat("&systime={0}", HttpUtility.UrlEncode(orderinfo.completetime.Value.ToString("yyyy/MM/dd HH:mm:ss")));
-                    builder.AppendFormat("&sysorderid={0}", HttpUtility.UrlEncode(orderinfo.orderid));
-                    builder.AppendFormat("&completiontime={0}", HttpUtility.UrlEncode(orderinfo.completetime.Value.ToString("yyyy/MM/dd HH:mm:ss")));
-                    builder.AppendFormat("&attach={0}", HttpUtility.UrlEncode(orderinfo.attach, Encoding.GetEncoding("GB2312")));
-                    builder.AppendFormat("&msg={0}", HttpUtility.UrlEncode(orderinfo.msg, Encoding.GetEncoding("GB2312")));
-                    builder.AppendFormat("&sign={0}", HttpUtility.UrlEncode(str));
+
+                    SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
+                    waitSign.Add("orderid", userorder);
+                    waitSign.Add("opstate", opstate);
+                    waitSign.Add("ovalue", ordermoney);
+                    waitSign.Add("systime", orderinfo.completetime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                    waitSign.Add("sysorderid", orderinfo.orderid);
+                    waitSign.Add("completiontime", orderinfo.completetime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                    waitSign.Add("attach", orderinfo.attach);
+                    waitSign.Add("msg", orderinfo.msg);
+                    str = Cryptography.SignSortedDictionary(waitSign, aPIKey);
+                    waitSign.Add("sign", str);
+                    foreach (var K in waitSign.Keys)
+                    {
+                        builder.Append(K + "=" + HttpUtility.UrlEncode(waitSign[K], Encoding.GetEncoding("GB2312")));
+                    }
                     return (notifyurl + "?" + builder.ToString());
                 }
             }

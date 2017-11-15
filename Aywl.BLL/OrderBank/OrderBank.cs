@@ -713,6 +713,42 @@
                                                 new object[] { merchant, channeltype, money, orderid, notify_url, key })).ToLower() == sign);
         }
 
+        public bool BankMD5Check(string key, string sign)
+        {
+            SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
+            //判断是get还是post
+            if (OriginalStudio.Lib.XRequest.IsGet())
+            {
+                foreach (string K in HttpContext.Current.Request.QueryString.AllKeys)
+                {
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.QueryString[K]))
+                    {
+                        waitSign.Add(K, HttpContext.Current.Request.QueryString[K].ToString());
+                    }
+                }
+            }
+            else if (OriginalStudio.Lib.XRequest.IsPost())
+            {
+                foreach (string K in HttpContext.Current.Request.Form.AllKeys)
+                {
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.Form[K]))
+                    {
+                        waitSign.Add(K, HttpContext.Current.Request.Form[K].ToString());
+                    }
+                }
+            }
+            string tmpStr = "";
+            foreach (var K in waitSign.Keys)
+            {
+                tmpStr += K + "=" + waitSign[K] + "&";
+            }
+            tmpStr = tmpStr.Substring(0, tmpStr.Length - 1);
+            return OriginalStudio.Lib.Security.Cryptography.MD5(tmpStr + key).ToLower() == sign;
+
+            //return (OriginalStudio.Lib.Security.Cryptography.MD5(string.Format("merchant={0}&type={1}&value={2}&orderid={3}&callbackurl={4}{5}",
+            //                                    new object[] { merchant, channeltype, money, orderid, notify_url, key })).ToLower() == sign);
+        }
+
         #endregion
 
         #region 查询列表

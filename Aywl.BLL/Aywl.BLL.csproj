@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CD71BED8-E92E-434C-A0D3-EC26CD240F29}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OriginalStudio.BLL</RootNamespace>
+    <AssemblyName>Aywl.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\PayBank20.cs" />
+    <Compile Include="BaseFactory.cs" />
+    <Compile Include="Channel\Channel.cs" />
+    <Compile Include="Channel\Channelsupplier.cs" />
+    <Compile Include="Channel\ChannelType.cs" />
+    <Compile Include="Channel\ChannelTypeUsers.cs" />
+    <Compile Include="Channel\CodeMappingFactory.cs" />
+    <Compile Include="Channel\currchannel.cs" />
+    <Compile Include="Channel\SysChannel.cs" />
+    <Compile Include="Channel\SysChannelType.cs" />
+    <Compile Include="MessagingFactory\QueueAccess.cs" />
+    <Compile Include="OrderBank\OrderBankAccess.cs" />
+    <Compile Include="Sys\SysRunLog.cs" />
+    <Compile Include="User\MchUsersChannelType.cs" />
+    <Compile Include="Settled\Distribution.cs" />
+    <Compile Include="Encrypt.cs" />
+    <Compile Include="Manage\ManageFactory.cs" />
+    <Compile Include="OrderBank\OrderBank.cs" />
+    <Compile Include="OrderBank\OrderBankAsynchronous.cs" />
+    <Compile Include="OrderBank\OrderBankNotify.cs" />
+    <Compile Include="OrderBank\OrderBankNotifyQueue.cs" />
+    <Compile Include="OrderBank\OrderBankSynchronous.cs" />
+    <Compile Include="OrderBank\OrderNotifyBase.cs" />
+    <Compile Include="Order\Bank\TaskInterval.cs" />
+    <Compile Include="Order\Dal.cs" />
+    <Compile Include="Order\Helper.cs" />
+    <Compile Include="Order\Notify\RequestState.cs" />
+    <Compile Include="PayRate\del\OrderConvernFactory.cs" />
+    <Compile Include="PayRate\del\PayKeyFactory.cs" />
+    <Compile Include="PayRate\del\PaymodeType.cs" />
+    <Compile Include="PayRate\del\PayPriceConverFactory.cs" />
+    <Compile Include="PayRate\PayRateFactory.cs" />
+    <Compile Include="PayRate\del\Pay_PriceFactory.cs" />
+    <Compile Include="PayRate\SysPayRateFactory.cs" />
+    <Compile Include="ProductFactory.cs" />
+    <Compile Include="PromotionUserFactory.cs" />
+    <Compile Include="Settled\SettledFactory.cs" />
+    <Compile Include="Settled\IncreaseAmt.cs" />
+    <Compile Include="Settled\ManageTrade.cs" />
+    <Compile Include="Settled\WithdrawScheme.cs" />
+    <Compile Include="Settled\Trade.cs" />
+    <Compile Include="Settled\UsersAmtFreeze.cs" />
+    <Compile Include="Supplier\SupplierPayRateFactory.cs" />
+    <Compile Include="Supplier\SysSupplierFactory.cs" />
+    <Compile Include="Supplier\SysSupplierPayRateFactory.cs" />
+    <Compile Include="SysConfig.cs" />
+    <Compile Include="Api\SystemApiHelper.cs" />
+    <Compile Include="Api\SystemApiInfo.cs" />
+    <Compile Include="Sys\Constant.cs" />
+    <Compile Include="Sys\debuglog.cs" />
+    <Compile Include="Sys\Transaction\YeePay\DES.cs" />
+    <Compile Include="Sys\Transaction\YeePay\Digest.cs" />
+    <Compile Include="Sys\Transaction\YeePay\Helper.cs" />
+    <Compile Include="Sys\Transaction\YeePay\HmacMD5.cs" />
+    <Compile Include="Tools\db.cs" />
+    <Compile Include="User\MchUserPayRateFactory.cs" />
+    <Compile Include="User\UserFactory.cs" />
+    <Compile Include="User\userHost.cs" />
+    <Compile Include="User\UsersAmt.cs" />
+    <Compile Include="User\usersetting.cs" />
+    <Compile Include="User\usersIdImage.cs" />
+    <Compile Include="User\usersOrderIncome.cs" />
+    <Compile Include="User\userspaybank.cs" />
+    <Compile Include="User\MchUserFactory.cs" />
+    <Compile Include="WebInfoFactory.cs" />
+    <Compile Include="Withdraw\ChannelWithdraw.cs" />
+    <Compile Include="Withdraw\notifyHelper.cs" />
+    <Compile Include="Withdraw\settledAgent.cs" />
+    <Compile Include="Withdraw\settledAgentNotify.cs" />
+    <Compile Include="Withdraw\settledAgentSummary.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Aywl.Cache\Aywl.Cache.csproj">
+      <Project>{6FEDD60E-713B-42B6-8004-757E5B352A4D}</Project>
+      <Name>Aywl.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.DAL\Aywl.DAL.csproj">
+      <Project>{4583D8DC-80B2-4139-A9E6-E718AECDC6D4}</Project>
+      <Name>Aywl.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.DBAccess\Aywl.DBAccess.csproj">
+      <Project>{E5A6069E-1C86-44F1-9185-56E565B1AB46}</Project>
+      <Name>Aywl.DBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.IBLLStrategy\Aywl.IBLLStrategy.csproj">
+      <Project>{35CB7B93-8111-4A22-8EF3-AAF29DD39C49}</Project>
+      <Name>Aywl.IBLLStrategy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.IDAL\Aywl.IDAL.csproj">
+      <Project>{C0EA7CD6-9D1B-4FFD-8B00-CDFCD66E48CC}</Project>
+      <Name>Aywl.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Lib\Aywl.Lib.csproj">
+      <Project>{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}</Project>
+      <Name>Aywl.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Model\Aywl.Model.csproj">
+      <Project>{4768644C-A02E-4D57-B4C4-4D432D87EB47}</Project>
+      <Name>Aywl.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OriginalStudio.IMessaging\Aywl.IMessaging.csproj">
+      <Project>{28A955EC-48D9-446A-A023-D733FADFC524}</Project>
+      <Name>Aywl.IMessaging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

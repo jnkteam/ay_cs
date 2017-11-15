@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.Lib", "Aywl.Lib\Aywl.Lib.csproj", "{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F6AE540-4333-423B-B0E5-2B51ABB99C97}
+	EndGlobalSection
+EndGlobal

@@ -279,12 +279,13 @@ namespace OriginalStudio.Lib.Security
         public static string SignSortedDictionary(SortedDictionary<string, string> waitSign, string key)
         {
             string tmpStr = "";
+            StringBuilder sb = new StringBuilder();
             foreach (var K in waitSign.Keys)
             {
                 if (K.ToLower() != "sign" && !String.IsNullOrWhiteSpace(waitSign[K]))
-                tmpStr += K + "=" + waitSign[K] + "&";
-            }
-            tmpStr = tmpStr.Substring(0, tmpStr.Length - 1);
+                    sb.Append(K + "=" + waitSign[K] + "&");
+            }            
+            tmpStr = sb.Remove(sb.Length - 1, 1).ToString();
             return OriginalStudio.Lib.Security.Cryptography.MD5(tmpStr + key).ToLower();
         }
 

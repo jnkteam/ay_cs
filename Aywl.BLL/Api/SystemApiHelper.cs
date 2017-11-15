@@ -112,8 +112,9 @@
                     waitSign.Add("sign", str);
                     foreach (var K in waitSign.Keys)
                     {
-                        builder.Append(K + "=" + HttpUtility.UrlEncode(waitSign[K], Encoding.GetEncoding("GB2312")));
+                        builder.Append(K + "=" + HttpUtility.UrlEncode(waitSign[K], Encoding.UTF8) + "&");
                     }
+                    builder.Remove(builder.Length - 1, 1).ToString();
                     return (notifyurl + "?" + builder.ToString());
                 }
             }

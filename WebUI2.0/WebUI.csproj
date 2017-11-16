@@ -374,9 +374,6 @@
     <Compile Include="KuaiCard\WebUI\Index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\helper2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Controls\WebUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -592,9 +589,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\merchant\ajax\mailcheckreceive.cs" />
-    <Compile Include="KuaiCard\WebUI\helper.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\CodeImage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

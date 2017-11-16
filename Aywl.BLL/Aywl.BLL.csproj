@@ -61,7 +61,6 @@
     <Compile Include="Channel\ChannelType.cs" />
     <Compile Include="Channel\ChannelTypeUsers.cs" />
     <Compile Include="Channel\CodeMappingFactory.cs" />
-    <Compile Include="Channel\currchannel.cs" />
     <Compile Include="Channel\SysChannel.cs" />
     <Compile Include="Channel\SysChannelType.cs" />
     <Compile Include="Email\EmailCheck.cs" />

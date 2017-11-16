@@ -1,7 +1,7 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.basedata;
+    using OriginalStudio.BLL.BaseData;
     using OriginalStudio.BLL.Payment;
     using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.Sys;
@@ -17,12 +17,13 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.BaseData;
 
     public class UserEdits : ManagePageBase
     {
         public UserInfo _ItemInfo = null;
         private usersettingInfo _setting = null;
-        public KuaiCard.Model.User.userspaybank _settleaccoutmodel = null;
+        public OriginalStudio.Model.User.userspaybank _settleaccoutmodel = null;
         protected Button btnAdd;
         protected CheckBox cb_isagentDistribution;
         protected CheckBox cb_isdebug;
@@ -51,7 +52,7 @@
         protected Label lbllastLoginIp;
         protected Label lbllastLoginTime;
         protected Label lblregTime;
-        protected KuaiCard.BLL.User.userspaybank pbankBLL = new KuaiCard.BLL.User.userspaybank();
+        protected OriginalStudio.BLL.User.userspaybank pbankBLL = new OriginalStudio.BLL.User.userspaybank();
         protected RadioButtonList rbl_settledmode;
         protected RadioButtonList rblaccoutType;
         protected RadioButtonList rblsettlemode;
@@ -103,7 +104,7 @@
             string s = this.ddlagents.SelectedValue.ToString();
             if (s != "")
             {
-                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.Member);
+                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
                 UserInfo model = UserFactory.GetModel(int.Parse(s));
                 if (model.manageId > 0)
                 {
@@ -138,13 +139,13 @@
                 string name = Enum.GetName(typeof(UserStatusEnum), num2);
                 this.ddlStatus.Items.Add(new ListItem(name, num2.ToString()));
             }
-            DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.Member);
+            DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
             this.ddlmemvip.Items.Add("--商户等级--");
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlmemvip.Items.Add(new ListItem(row2["levName"].ToString(), row2["userLevel"].ToString()));
             }
-            levName = PayRateFactory.GetLevName(RateTypeEnum.Agent);
+            levName = PayRateFactory.GetLevName(RateTypeEnum.代理);
             this.ddlpromvip.Items.Add("--代理等级--");
             foreach (DataRow row2 in levName.Rows)
             {
@@ -616,7 +617,7 @@
             }
         }
 
-        public KuaiCard.Model.User.userspaybank settleaccoutmodel
+        public OriginalStudio.Model.User.userspaybank settleaccoutmodel
         {
             get
             {

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Stat
+﻿namespace OriginalStudio.WebUI.Manage.Stat
 {
     using System;
     using System.Collections.Generic;
@@ -14,8 +14,8 @@
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
-            setPower();
+            //ManageFactory.CheckSecondPwd();
+            //setPower();
         }
 
         private void setPower()

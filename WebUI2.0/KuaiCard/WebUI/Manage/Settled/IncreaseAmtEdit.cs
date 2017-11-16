@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Settled
+﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -63,8 +63,8 @@
                 base.Response.Write(s);
                 base.Response.End();
             }
-            ManageFactory.CheckSecondPwd();
-            this.setPower();
+            //ManageFactory.CheckSecondPwd();
+            //this.setPower();
             if (!base.IsPostBack)
             {
                 this.ShowInfo();

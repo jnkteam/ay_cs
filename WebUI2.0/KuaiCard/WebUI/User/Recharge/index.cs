@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Recharge
+﻿namespace OriginalStudio.WebUI.User.Recharge
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;

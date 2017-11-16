@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.Order
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Stat;
@@ -23,7 +23,7 @@
         {
             DateTime beginTime = DateTime.Parse(this.StimeBox.Text.Trim());
             DateTime endTime = DateTime.Parse(this.EtimeBox.Text.Trim());
-            DataTable table = KuaiCard.BLL.Stat.OrderReport.ReportByUser(beginTime, endTime, 0);
+            DataTable table = OriginalStudio.BLL.Stat.OrderReport.ReportByUser(beginTime, endTime, 0);
             double num = 0.0;
             double num2 = 0.0;
             foreach (DataRow row in table.Rows)

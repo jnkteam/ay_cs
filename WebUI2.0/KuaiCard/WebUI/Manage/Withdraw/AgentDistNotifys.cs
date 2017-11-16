@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Withdraw
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Withdraw;

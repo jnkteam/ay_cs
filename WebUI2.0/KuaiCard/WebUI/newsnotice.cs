@@ -1,10 +1,12 @@
-﻿namespace KuaiCard.WebUI
+﻿namespace OriginalStudio.WebUI
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
     using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI;
+    using OriginalStudio.Model.News;
+    using OriginalStudio.BLL.News;
 
     public class newsnotice : Page
     {

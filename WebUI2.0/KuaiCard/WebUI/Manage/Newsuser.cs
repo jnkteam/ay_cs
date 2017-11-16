@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
@@ -111,7 +111,7 @@
             string s = this.ddlagents.SelectedValue.ToString();
             if (s != "")
             {
-                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.Member);
+                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
                 UserInfo model = UserFactory.GetModel(int.Parse(s));
                 if (model.manageId > 0)
                 {
@@ -132,7 +132,7 @@
                     string name = Enum.GetName(typeof(UserStatusEnum), num);
                     this.ddlStatus.Items.Add(new ListItem(name, num.ToString()));
                 }
-                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.Member);
+                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
                 this.ddlmange.Items.Add(new ListItem("--请选择所属商务--", ""));
                 levName = ManageFactory.GetList(" status =1").Tables[0];
                 foreach (DataRow row in levName.Rows)

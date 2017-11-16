@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -16,6 +16,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class Pay : ManagePageBase
     {
@@ -50,12 +51,12 @@
             {
                 decimal num = decimal.Parse(this.TaxBox.Text.Trim());
                 decimal num2 = decimal.Parse(this.ChargesBox.Text.Trim());
-                this.ItemInfo.tax = new decimal?(num);
-                this.ItemInfo.charges = new decimal?(num2);
-                this.ItemInfo.paytime = DateTime.Now;
+                this.ItemInfo.Tax = new decimal?(num);
+                this.ItemInfo.Charges = new decimal?(num2);
+                this.ItemInfo.PayTime = DateTime.Now;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
                 {
-                    this.ItemInfo.suppid = int.Parse(this.ddlSupplier.SelectedValue);
+                    this.ItemInfo.Suppid = int.Parse(this.ddlSupplier.SelectedValue);
                 }
                 if (SettledFactory.Update(this.ItemInfo))
                 {
@@ -84,15 +85,15 @@
             {
                 decimal num = decimal.Parse(this.TaxBox.Text.Trim());
                 decimal num2 = decimal.Parse(this.ChargesBox.Text.Trim());
-                this.ItemInfo.paytime = DateTime.Now;
-                this.ItemInfo.tax = new decimal?(num);
-                this.ItemInfo.charges = new decimal?(num2);
-                this.ItemInfo.status = SettledStatus.已支付;
+                this.ItemInfo.PayTime = DateTime.Now;
+                this.ItemInfo.Tax = new decimal?(num);
+                this.ItemInfo.Charges = new decimal?(num2);
+                this.ItemInfo.Status =  SettledStatusEnum.已支付;
                 this.ItemInfo.AppType = AppTypeEnum.t0;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
                 {
                     //接口商
-                    this.ItemInfo.suppid = int.Parse(this.ddlSupplier.SelectedValue);
+                    this.ItemInfo.Suppid = int.Parse(this.ddlSupplier.SelectedValue);
                 }
 
                 //Step1：先记录
@@ -109,11 +110,11 @@
                         //    str = str.Replace("{@username}", this.userInfo.UserName).Replace("{@settledmoney}", this.ItemInfo.amount.ToString("f2"));
                         //    SMS.Send(this.userInfo.Tel, str, "");
                         //}
-                        //KuaiCardLib.Logging.LogHelper.Write("提现:DoPay");
-                        if (this.ItemInfo.suppid > 0)
+                        //OriginalStudio.Lib.Logging.LogHelper.Write("提现:DoPay");
+                        if (this.ItemInfo.Suppid > 0)
                         {
                             //Step1：走 网关代付。
-                            KuaiCard.ETAPI.Withdraw.InitDistribution(this.ItemInfo);
+                            OriginalStudio.ETAPI.Withdraw.InitDistribution(this.ItemInfo);
                         }
                         return "";
                     }
@@ -146,20 +147,20 @@
                 }
                 if (((this.ItemInfoId > 0) && (this.ItemInfo != null)) && (this.userInfo != null))
                 {
-                    this.PayMoneyLabel.Text = this.ItemInfo.amount.ToString("c2");
-                    this.AddTimeLabel.Text = FormatConvertor.DateTimeToTimeString(this.ItemInfo.addtime);
-                    this.lblPayeeName.Text = this.ItemInfo.payeeName;
+                    this.PayMoneyLabel.Text = this.ItemInfo.Amount.ToString("c2");
+                    this.AddTimeLabel.Text = FormatConvertor.DateTimeToTimeString(this.ItemInfo.AddTime);
+                    this.lblPayeeName.Text = this.ItemInfo.PayeeName;
                     this.lblBank.Text = SettledFactory.GetSettleBankName(this.ItemInfo.PayeeBank);
-                    this.lblPayeeaddress.Text = this.ItemInfo.Payeeaddress;
+                    this.lblPayeeaddress.Text = this.ItemInfo.PayeeAddress;
                     this.lblAccount.Text = this.ItemInfo.Account;
-                    if (this.ItemInfo.charges.HasValue)
+                    if (this.ItemInfo.Charges.HasValue)
                     {
-                        this.ChargesBox.Text = this.ItemInfo.charges.Value.ToString("f2");
+                        this.ChargesBox.Text = this.ItemInfo.Charges.Value.ToString("f2");
                     }
                     else
                     {
-                        TocashSchemeInfo modelByUser = KuaiCard.BLL.Settled.TocashScheme.GetModelByUser(1, this.ItemInfo.userid);
-                        decimal chargeleastofeach = modelByUser.chargerate * this.ItemInfo.amount;
+                        TocashSchemeInfo modelByUser = OriginalStudio.BLL.Settled.TocashScheme.GetModelByUser(1, this.ItemInfo.UserID);
+                        decimal chargeleastofeach = modelByUser.chargerate * this.ItemInfo.Amount;
                         if (chargeleastofeach < modelByUser.chargeleastofeach)
                         {
                             chargeleastofeach = modelByUser.chargeleastofeach;
@@ -170,7 +171,7 @@
                         }
                         this.ChargesBox.Text = chargeleastofeach.ToString("f2");
                     }
-                    this.ddlSupplier.SelectedValue = this.ItemInfo.suppid.ToString();
+                    this.ddlSupplier.SelectedValue = this.ItemInfo.Suppid.ToString();
                     this.UidLabel.Text = this.userInfo.ID.ToString();
                     this.UserNameLabel.Text = this.userInfo.UserName;
                     this.MoneyLabel.Text = this.userInfo.Balance.ToString("c2");
@@ -179,7 +180,7 @@
                     this.AccountLabel.Text = this.userInfo.Account;
                     this.BankLabel.Text = this.userInfo.PayeeBank;
                     this.UserStatusLabel.Text = Enum.GetName(typeof(UserStatusEnum), this.userInfo.Status);
-                    if (this.ItemInfo.status != SettledStatus.支付中)
+                    if (this.ItemInfo.Status !=  SettledStatusEnum.支付中)
                     {
                         this.TaxBox.Enabled = false;
                         this.TaxBox.ReadOnly = true;
@@ -257,7 +258,7 @@
             {
                 if ((this._userInfo == null) && (this.ItemInfo != null))
                 {
-                    this._userInfo = UserFactory.GetModel(this.ItemInfo.userid);
+                    this._userInfo = UserFactory.GetModel(this.ItemInfo.UserID);
                 }
                 return this._userInfo;
             }

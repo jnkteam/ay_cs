@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User
+﻿namespace OriginalStudio.WebUI.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -35,27 +35,27 @@
             string str3 = this.j_captcha_response.Value.Trim();
             if (string.IsNullOrEmpty(str3))
             {
-                KuaiCard.WebUI.WebUtility.ShowMessage(this, "请输入验证码!");
+                OriginalStudio.WebUI.WebUtility.ShowMessage(this, "请输入验证码!");
             }
             else if (string.IsNullOrEmpty(str))
             {
-                KuaiCard.WebUI.WebUtility.ShowMessage(this, "请输入商户名!");
+                OriginalStudio.WebUI.WebUtility.ShowMessage(this, "请输入商户名!");
             }
             else if (string.IsNullOrEmpty(str2))
             {
-                KuaiCard.WebUI.WebUtility.ShowMessage(this, "请输入商户密码!");
+                OriginalStudio.WebUI.WebUtility.ShowMessage(this, "请输入商户密码!");
             }
             else if (this.Session["CCode"] == null)
             {
-                KuaiCard.WebUI.WebUtility.ShowMessage(this, "验证码失效!请刷新页面");
+                OriginalStudio.WebUI.WebUtility.ShowMessage(this, "验证码失效!请刷新页面");
             }
             else if (this.Session["CCode"].ToString() != str3.ToUpper())
             {
-                KuaiCard.WebUI.WebUtility.ShowMessage(this, "验证码不正确");
+                OriginalStudio.WebUI.WebUtility.ShowMessage(this, "验证码不正确");
             }
             else
             {
-                //KuaiCardLib.Logging.LogHelper.Write("登录:" + str2 + ",MAC：" + this.hidDesc.Value.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("登录:" + str2 + ",MAC：" + this.hidDesc.Value.ToString());
 
                 UserInfo userinfo = new UserInfo();
                 userinfo.UserName = str;
@@ -76,7 +76,7 @@
                 }
                 if (error != "登录成功")
                 {
-                    KuaiCard.WebUI.WebUtility.ShowMessage(this, error);
+                    OriginalStudio.WebUI.WebUtility.ShowMessage(this, error);
                     //this.ShowErrorInfo(error);
                 }
                 else

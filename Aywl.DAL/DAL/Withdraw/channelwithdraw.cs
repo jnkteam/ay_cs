@@ -10,7 +10,7 @@
 
     public class channelwithdraw
     {
-        public int Add(OriginalStudio.Model.Withdraw.channelwithdraw model)
+        public int Add(OriginalStudio.Model.Withdraw.ChannelWithdraw model)
         {
             SqlParameter[] parameterArray = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@bankCode", SqlDbType.VarChar, 10), new SqlParameter("@bankName", SqlDbType.VarChar, 30), new SqlParameter("@supplier", SqlDbType.Int, 10), new SqlParameter("@sort", SqlDbType.Int, 10) };
             parameterArray[0].Direction = ParameterDirection.Output;
@@ -22,9 +22,9 @@
             return (int) parameterArray[0].Value;
         }
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw DataRowToModel(DataRow row)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw DataRowToModel(DataRow row)
         {
-            OriginalStudio.Model.Withdraw.channelwithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.channelwithdraw();
+            OriginalStudio.Model.Withdraw.ChannelWithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.ChannelWithdraw();
             if (row != null)
             {
                 if ((row["id"] != null) && (row["id"].ToString() != ""))
@@ -124,11 +124,11 @@
             return DataBase.ExecuteDataset(CommandType.Text, builder.ToString());
         }
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw GetModel(int id)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw GetModel(int id)
         {
             SqlParameter[] parameterArray = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10) };
             parameterArray[0].Value = id;
-            OriginalStudio.Model.Withdraw.channelwithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.channelwithdraw();
+            OriginalStudio.Model.Withdraw.ChannelWithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.ChannelWithdraw();
             DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_channelwithdraw_GetModel", parameterArray);
             if (set.Tables[0].Rows.Count > 0)
             {
@@ -137,11 +137,11 @@
             return null;
         }
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw GetModelByBankName(string bankName)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw GetModelByBankName(string bankName)
         {
             SqlParameter[] parameterArray = new SqlParameter[] { new SqlParameter("@bankName", SqlDbType.VarChar, 30) };
             parameterArray[0].Value = bankName;
-            OriginalStudio.Model.Withdraw.channelwithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.channelwithdraw();
+            OriginalStudio.Model.Withdraw.ChannelWithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.ChannelWithdraw();
 
             DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_channelwithdraw_GetModelBybankName", parameterArray);
             if (set.Tables[0].Rows.Count > 0)
@@ -152,13 +152,13 @@
         }
 
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw GetModelByBankCode(string bankCode)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw GetModelByBankCode(string bankCode)
         {
             SqlParameter[] parameterArray = new SqlParameter[] { 
                 new SqlParameter("@bankCode", SqlDbType.VarChar, 30) 
             };
             parameterArray[0].Value = bankCode;
-            OriginalStudio.Model.Withdraw.channelwithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.channelwithdraw();
+            OriginalStudio.Model.Withdraw.ChannelWithdraw channelwithdraw = new OriginalStudio.Model.Withdraw.ChannelWithdraw();
             DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_channelwithdraw_GetModelByBackCode", parameterArray);
             
             if (set.Tables[0].Rows.Count > 0)
@@ -196,7 +196,7 @@
             return 0;
         }
 
-        public bool Update(OriginalStudio.Model.Withdraw.channelwithdraw model)
+        public bool Update(OriginalStudio.Model.Withdraw.ChannelWithdraw model)
         {
             int rowsAffected = 0;
             SqlParameter[] parameterArray = new SqlParameter[] { 

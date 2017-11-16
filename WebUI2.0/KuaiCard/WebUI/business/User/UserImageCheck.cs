@@ -1,15 +1,16 @@
-﻿namespace KuaiCard.WebUI.business.User
+﻿namespace OriginalStudio.WebUI.business.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.User;
     using OriginalStudio.WebComponents.Web;
-    using KuaiCard.WebUI;
+    using OriginalStudio.WebUI;
     using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.Model.Enum;
 
     public class UserImageCheck : BusinessPageBase
     {

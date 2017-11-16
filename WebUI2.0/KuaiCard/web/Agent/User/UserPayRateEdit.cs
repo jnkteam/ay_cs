@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.web.Agent.User
+﻿namespace OriginalStudio.web.Agent.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
@@ -177,122 +177,122 @@
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string msg = string.Empty;
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp100.Text))
-            {
-                msg = msg + "p100格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp101.Text))
-            {
-                msg = msg + "p101格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp102.Text))
-            {
-                msg = msg + "p102格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp103.Text))
-            {
-                msg = msg + "p103格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp104.Text))
-            {
-                msg = msg + "p104格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp105.Text))
-            {
-                msg = msg + "p105格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp106.Text))
-            {
-                msg = msg + "p106格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp107.Text))
-            {
-                msg = msg + "p107格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp108.Text))
-            {
-                msg = msg + "p108格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp109.Text))
-            {
-                msg = msg + "p109格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp110.Text))
-            {
-                msg = msg + "p110格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp111.Text))
-            {
-                msg = msg + "p111格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp112.Text))
-            {
-                msg = msg + "p112格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp113.Text))
-            {
-                msg = msg + "p113格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp114.Text))
-            {
-                msg = msg + "p114格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp115.Text))
-            {
-                msg = msg + "p115格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp116.Text))
-            {
-                msg = msg + "p116格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp117.Text))
-            {
-                msg = msg + "p117格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp118.Text))
-            {
-                msg = msg + "p118格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp119.Text))
-            {
-                msg = msg + "p119格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp200.Text))
-            {
-                msg = msg + "p200格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp201.Text))
-            {
-                msg = msg + "p201格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp202.Text))
-            {
-                msg = msg + "p202格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp203.Text))
-            {
-                msg = msg + "p203格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp204.Text))
-            {
-                msg = msg + "p204格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp205.Text))
-            {
-                msg = msg + "p205格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp208.Text))
-            {
-                msg = msg + "p208格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp209.Text))
-            {
-                msg = msg + "p209格式错误！\n";
-            }
-            if (!KuaiCardLib.Text.Validate.IsNumber(this.txtp300.Text))
-            {
-                msg = msg + "p300格式错误！\n";
-            }
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp100.Text))
+            //{
+            //    msg = msg + "p100格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp101.Text))
+            //{
+            //    msg = msg + "p101格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp102.Text))
+            //{
+            //    msg = msg + "p102格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp103.Text))
+            //{
+            //    msg = msg + "p103格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp104.Text))
+            //{
+            //    msg = msg + "p104格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp105.Text))
+            //{
+            //    msg = msg + "p105格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp106.Text))
+            //{
+            //    msg = msg + "p106格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp107.Text))
+            //{
+            //    msg = msg + "p107格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp108.Text))
+            //{
+            //    msg = msg + "p108格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp109.Text))
+            //{
+            //    msg = msg + "p109格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp110.Text))
+            //{
+            //    msg = msg + "p110格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp111.Text))
+            //{
+            //    msg = msg + "p111格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp112.Text))
+            //{
+            //    msg = msg + "p112格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp113.Text))
+            //{
+            //    msg = msg + "p113格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp114.Text))
+            //{
+            //    msg = msg + "p114格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp115.Text))
+            //{
+            //    msg = msg + "p115格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp116.Text))
+            //{
+            //    msg = msg + "p116格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp117.Text))
+            //{
+            //    msg = msg + "p117格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp118.Text))
+            //{
+            //    msg = msg + "p118格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp119.Text))
+            //{
+            //    msg = msg + "p119格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp200.Text))
+            //{
+            //    msg = msg + "p200格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp201.Text))
+            //{
+            //    msg = msg + "p201格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp202.Text))
+            //{
+            //    msg = msg + "p202格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp203.Text))
+            //{
+            //    msg = msg + "p203格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp204.Text))
+            //{
+            //    msg = msg + "p204格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp205.Text))
+            //{
+            //    msg = msg + "p205格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp208.Text))
+            //{
+            //    msg = msg + "p208格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp209.Text))
+            //{
+            //    msg = msg + "p209格式错误！\n";
+            //}
+            //if (!OriginalStudio.Lib.Text.Validate.IsNumber(this.txtp300.Text))
+            //{
+            //    msg = msg + "p300格式错误！\n";
+            //}
             if (msg != "")
             {
                 base.AlertAndRedirect(msg);

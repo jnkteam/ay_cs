@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -12,6 +12,7 @@
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class ChannelTypeEdit : ManagePageBase
     {

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Tools;
@@ -145,7 +145,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
+            //ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
                 this.EtimeBox.Text = DateTime.Now.AddDays(0.0).ToString("yyyy-MM-dd");

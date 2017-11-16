@@ -1,6 +1,7 @@
-﻿namespace KuaiCard.WebUI
+﻿namespace OriginalStudio.WebUI
 {
     using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Supplier;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Lib.Security;
     using System;
@@ -69,7 +70,7 @@
         public static void BindBquestionDDL(DropDownList ddl)
         {
             ddl.Items.Clear();
-            DataTable cacheList = new Question().GetCacheList();
+            DataTable cacheList = new QuestionFactory().GetCacheList();
             ddl.Items.Add(new ListItem("--请选择--", "0"));
             if (cacheList != null)
             {

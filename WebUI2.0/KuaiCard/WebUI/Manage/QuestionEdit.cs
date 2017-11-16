@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -22,33 +22,33 @@
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            Question question = new Question();
-            string text = this.txtquestion.Text;
-            bool flag = this.chkrelease.Checked;
-            int num = int.Parse(this.txtsort.Text);
-            this.ItemInfo.question = text;
-            this.ItemInfo.release = flag;
-            this.ItemInfo.sort = num;
-            bool flag2 = false;
-            if (this.isUpdate)
-            {
-                if (question.Update(this.ItemInfo))
-                {
-                    flag2 = true;
-                }
-            }
-            else if (question.Add(this.ItemInfo) > 0)
-            {
-                flag2 = true;
-            }
-            if (flag2)
-            {
-                base.AlertAndRedirect("操作成功", "Questions.aspx");
-            }
-            else
-            {
-                base.AlertAndRedirect("操作失败");
-            }
+            //Question question = new Question();
+            //string text = this.txtquestion.Text;
+            //bool flag = this.chkrelease.Checked;
+            //int num = int.Parse(this.txtsort.Text);
+            //this.ItemInfo.question = text;
+            //this.ItemInfo.release = flag;
+            //this.ItemInfo.sort = num;
+            //bool flag2 = false;
+            //if (this.isUpdate)
+            //{
+            //    if (question.Update(this.ItemInfo))
+            //    {
+            //        flag2 = true;
+            //    }
+            //}
+            //else if (question.Add(this.ItemInfo) > 0)
+            //{
+            //    flag2 = true;
+            //}
+            //if (flag2)
+            //{
+            //    base.AlertAndRedirect("操作成功", "Questions.aspx");
+            //}
+            //else
+            //{
+            //    base.AlertAndRedirect("操作失败");
+            //}
         }
 
         private void InitForm()
@@ -100,7 +100,7 @@
                 {
                     if (this.isUpdate)
                     {
-                        this._ItemInfo = new Question().GetModel(this.ItemInfoId);
+                        this._ItemInfo = new QuestionFactory().GetModel(this.ItemInfoId);
                     }
                     else
                     {

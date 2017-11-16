@@ -1,7 +1,8 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.Supplier;
     using OriginalStudio.Model;
     using OriginalStudio.WebComponents.Web;
     using System;
@@ -30,8 +31,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
-            this.setPower();
+            //ManageFactory.CheckSecondPwd();
+            //this.setPower();
             if (!base.IsPostBack)
             {
                 this.ddlSupp.Items.Add(new ListItem("---选择接口商---", ""));

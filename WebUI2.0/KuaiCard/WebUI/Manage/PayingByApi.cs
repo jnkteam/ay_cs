@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -11,6 +11,9 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Supplier;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.Model.Settled;
 
     public class PayingByApi : ManagePageBase
     {
@@ -75,7 +78,7 @@
                     dataTable.Columns.Add("sName", typeof(string));
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        row["sName"] = Enum.GetName(typeof(SettledStatus), row["status"]);
+                        row["sName"] = Enum.GetName(typeof(SettledStatusEnum), row["status"]);
                         row["PayeeBank"] = SettledFactory.GetSettleBankName(row["PayeeBank"].ToString());
                     }
                     dataTable.AcceptChanges();

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Merchant.ajax
+﻿namespace OriginalStudio.WebUI.Merchant.ajax
 {
     using System;
     using System.Text.RegularExpressions;

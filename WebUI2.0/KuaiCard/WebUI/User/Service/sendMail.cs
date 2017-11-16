@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Cache;
@@ -26,7 +26,7 @@
 
             string str3 = context.Request["template"];
             if (this.currentUser.IsEmailPass == 0 ||
-                    KuaiCard.SysConfig.RuntimeSetting.SiteUser.ToLower() == "zft")
+                    OriginalStudio.Lib.SysConfig.RuntimeSetting.SiteUser.ToLower() == "zft")
             {
                 string emailCheckTemp = Helper.GetEmailCheckTemp();
                 string to = str3;

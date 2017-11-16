@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User
+﻿namespace OriginalStudio.WebUI.User
 {
     using System;
     using System.Web;

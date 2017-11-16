@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User
+﻿namespace OriginalStudio.WebUI.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -43,7 +43,7 @@
             this.getnm = this.currentUser.UserName;
             try
             {
-                UserMsgCount = IMSGFactory.GetUserMsgCount(this.currentUser.ID).ToString();
+                UserMsgCount = "0";//IMSGFactory.GetUserMsgCount(this.currentUser.ID).ToString();
             }
             catch
             {
@@ -63,7 +63,7 @@
             this.UserBalance = ((this.balance - this.unpayment) - this.Freeze).ToString("f2");
             this.UserDefaultThemes = this.currentUser.default_themes;
             this.UserFullName = this.currentUser.full_name;
-            this.UserMsgCount = IMSGFactory.GetUserMsgCount(this.currentUser.ID).ToString();
+            this.UserMsgCount = "";// IMSGFactory.GetUserMsgCount(this.currentUser.ID).ToString();
             //if (this.currentUser.IsEmailPass == 1)
             //{
             //    this.linemail.Attributes["href"] = "/user/email/";

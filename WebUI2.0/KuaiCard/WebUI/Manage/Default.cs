@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using System;
     using System.Web.UI;
@@ -18,7 +18,9 @@
             //this.logintime = FormatConvertor.DateTimeToTimeString(base.currentManage.lastLoginTime.Value);
             //this.username = base.currentManage.username;
             this.DefaultThemes = this.currentManage.DefaultThemes;
-            this.menuTable = ExMenuFactory.getExMenuList();
+
+            //this.menuTable = ExMenuFactory.getExMenuList();
+            
             //this.treeView = ExMenuFactory.getTreeView(0);
             this.DataBind();
             

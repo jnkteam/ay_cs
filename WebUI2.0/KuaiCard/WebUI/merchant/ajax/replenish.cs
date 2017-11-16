@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.merchant.ajax
+﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -24,11 +24,6 @@
             else if (this.type == 1)
             {
                 new OrderBankNotify().SynchronousNotify(this.orderid);
-                s = "true";
-            }
-            else if (this.type == 2)
-            {
-                new OrderCardNotify().SynchronousNotify(this.orderid);
                 s = "true";
             }
             context.Response.ContentType = "text/plain";

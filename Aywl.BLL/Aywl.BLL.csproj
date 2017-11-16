@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScpClient, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output\ScpClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -44,6 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\PayBank20.cs" />
+    <Compile Include="APP\apprecharge.cs" />
+    <Compile Include="APP\entrust.cs" />
+    <Compile Include="APP\recharge.cs" />
+    <Compile Include="APP\transfer.cs" />
+    <Compile Include="BaseData\base_city.cs" />
+    <Compile Include="BaseData\base_province.cs" />
+    <Compile Include="BaseData\identitycard.cs" />
     <Compile Include="BaseFactory.cs" />
     <Compile Include="Channel\Channel.cs" />
     <Compile Include="Channel\Channelsupplier.cs" />
@@ -53,9 +64,25 @@
     <Compile Include="Channel\currchannel.cs" />
     <Compile Include="Channel\SysChannel.cs" />
     <Compile Include="Channel\SysChannelType.cs" />
+    <Compile Include="Email\EmailCheck.cs" />
+    <Compile Include="FeedBack\feedback.cs" />
     <Compile Include="MessagingFactory\QueueAccess.cs" />
+    <Compile Include="News\NewsFactory.cs" />
+    <Compile Include="OKXR\SMS.cs" />
     <Compile Include="OrderBank\OrderBankAccess.cs" />
+    <Compile Include="Payment\OrderConvernFactory.cs" />
+    <Compile Include="Payment\PayKeyFactory.cs" />
+    <Compile Include="Payment\PaymodeType.cs" />
+    <Compile Include="Payment\PayPriceConverFactory.cs" />
+    <Compile Include="Payment\PayRateFactory.cs" />
+    <Compile Include="Payment\Pay_PriceFactory.cs" />
+    <Compile Include="Settled\TocashScheme.cs" />
+    <Compile Include="Settled\Transfer.cs" />
+    <Compile Include="Settled\TransferScheme.cs" />
+    <Compile Include="SMS\PhoneValidFactory.cs" />
+    <Compile Include="Stat\OrderReport.cs" />
     <Compile Include="Sys\SysRunLog.cs" />
+    <Compile Include="SMS\SMS.cs" />
     <Compile Include="User\MchUsersChannelType.cs" />
     <Compile Include="Settled\Distribution.cs" />
     <Compile Include="Encrypt.cs" />
@@ -99,9 +126,11 @@
     <Compile Include="Sys\Transaction\YeePay\HmacMD5.cs" />
     <Compile Include="Tools\db.cs" />
     <Compile Include="User\MchUserPayRateFactory.cs" />
+    <Compile Include="User\Question.cs" />
     <Compile Include="User\UserAccessTime.cs" />
     <Compile Include="User\UserFactory.cs" />
     <Compile Include="User\userHost.cs" />
+    <Compile Include="User\UserLoginLogFactory.cs" />
     <Compile Include="User\UsersAmt.cs" />
     <Compile Include="User\usersetting.cs" />
     <Compile Include="User\usersIdImage.cs" />

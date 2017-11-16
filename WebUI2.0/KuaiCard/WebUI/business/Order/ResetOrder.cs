@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business.Order
+﻿namespace OriginalStudio.WebUI.business.Order
 {
     using OriginalStudio.BLL;
     using OriginalStudio.WebComponents.Web;
@@ -7,6 +7,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class ResetOrder : BusinessPageBase
     {
@@ -38,17 +39,7 @@
                         string str2 = this.rblOrdClass.SelectedValue;
                         if (str2 != null)
                         {
-                            if (!(str2 == "1"))
-                            {
-                                if (str2 == "2")
-                                {
-                                    flag = new OrderCard().RepairOrder(int.Parse(selectedValue), this.txtOrder.Text.Trim(), "ResetOrder", 2, "0", "", "", tranAMT, 0M, string.Empty, 1);
-                                }
-                            }
-                            else
-                            {
-                                flag = new OrderBank().DoBankComplete(int.Parse(selectedValue), this.txtOrder.Text.Trim(), "ResetOrder", 2, "0", "", tranAMT, 0M, true, false, false);
-                            }
+                            flag = new OrderBank().DoBankComplete(int.Parse(selectedValue), this.txtOrder.Text.Trim(), "ResetOrder", 2, "0", "", tranAMT, 0M, true, false, false);
                         }
                     }
                     if (flag)
@@ -65,7 +56,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
+            //ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
                 this.txtOrder.Text = this.OrderId;

@@ -3,7 +3,7 @@
     using System;
 
     [Serializable]
-    public class channelwithdraw
+    public class ChannelWithdraw
     {
         private string _bankcode;
         private string _bankname;

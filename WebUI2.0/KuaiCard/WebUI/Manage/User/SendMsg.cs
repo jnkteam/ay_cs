@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -34,7 +34,7 @@
                         this.Item.msg_content = this.content.Value;
                         this.Item.msg_title = this.tb_title.Text;
                         this.Item.msg_fromname = "管理员";
-                        IMSGFactory.Add(this._item);
+                        //IMSGFactory.Add(this._item);
                     }
                 }
                 this.lblMsg.Text = "发送成功";

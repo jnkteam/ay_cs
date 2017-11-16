@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.Model.Json;
     using OriginalStudio.WebComponents;
@@ -28,7 +28,7 @@
                 try
                 {
                     int userid = this.CurrentUser.ID;
-                    DataSet ds = KuaiCard.BLL.User.UserFactory.GetUserDayOrderChartSource(userid);
+                    DataSet ds = OriginalStudio.BLL.User.UserFactory.GetUserDayOrderChartSource(userid);
 
                     if (ds != null && ds.Tables.Count > 0)
                     {

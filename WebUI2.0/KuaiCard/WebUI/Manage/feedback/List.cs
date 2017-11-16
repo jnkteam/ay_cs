@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.feedback
+﻿namespace OriginalStudio.WebUI.Manage.feedback
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -13,6 +13,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.Model.Enum;
 
     public class List : ManagePageBase
     {
@@ -117,7 +118,7 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            DataSet set = new feedback().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = new DataSet();    // feedback().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.rptIamges.DataSource = set.Tables[1];
             this.rptIamges.DataBind();

@@ -3,7 +3,7 @@
     using System;
 
     [Serializable]
-    public class transfer
+    public class Transfer
     {
         private DateTime _addtime;
         private decimal _amt;

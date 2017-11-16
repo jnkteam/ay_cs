@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI
+﻿namespace OriginalStudio.WebUI
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -9,6 +9,8 @@
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.News;
+    using OriginalStudio.Model.News;
 
     public class emailForm : Page
     {
@@ -20,7 +22,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<KuaiCard.Model.NewsInfo> list = NewsFactory.GetCacheList(4, 1, 6);
+            List<NewsInfo> list = NewsFactory.GetCacheList(4, 1, 6);
             if (list != null)
             {
                 this.rptNews1.DataSource = list;

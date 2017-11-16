@@ -1,9 +1,9 @@
-﻿namespace KuaiCard.WebUI.agent
+﻿namespace OriginalStudio.WebUI.agent
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.User;
     using OriginalStudio.WebComponents.Web;
-    using KuaiCard.WebUI;
+    using OriginalStudio.WebUI;
     using OriginalStudio.Lib;
     using OriginalStudio.Lib.Web;
     using System;

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.IP
+﻿namespace OriginalStudio.WebUI.User.IP
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;
@@ -36,8 +36,8 @@
                 string id = e.CommandArgument.ToString();
                 string ip = ((Label)(e.Item.FindControl("lblip"))).Text;
 
-                this.Response.Redirect("/User/IP/Delete.aspx?id=" + KuaiCardLib.Security.Cryptography.DESEncryptString(id, "aywl") +
-                                                            "&ip=" + KuaiCardLib.Security.Cryptography.DESEncryptString(ip.ToString(), "aywl"));
+                this.Response.Redirect("/User/IP/Delete.aspx?id=" + OriginalStudio.Lib.Security.Cryptography.DESEncryptString(id, "aywl") +
+                                                            "&ip=" + OriginalStudio.Lib.Security.Cryptography.DESEncryptString(ip.ToString(), "aywl"));
             }
 
             //BindData();
@@ -46,7 +46,7 @@
 
         protected string getMarkStr(string ip)
         {
-            return KuaiCardLib.Text.Strings.Mark(ip);
+            return OriginalStudio.Lib.Text.Strings.Mark(ip);
         }
     }
 }

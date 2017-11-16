@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI
+﻿namespace OriginalStudio.WebUI
 {
     using OriginalStudio.WebComponents.ScheduledTask;
     using OriginalStudio.Lib.ExceptionHandling;

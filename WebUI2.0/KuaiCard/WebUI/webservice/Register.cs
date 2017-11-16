@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.webservice
+﻿namespace OriginalStudio.WebUI.webservice
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -173,38 +173,38 @@
 
         public string SendMail(int UserId, string email)
         {
-            string str = string.Empty;
-            EmailCheckInfo model = new EmailCheckInfo();
-            model.userid = UserId;
-            model.status = EmailCheckStatus.提交中;
-            model.addtime = new DateTime?(DateTime.Now);
-            model.checktime = new DateTime?(DateTime.Now);
-            model.email = email;
-            model.typeid = EmailCheckType.注册;
-            model.Expired = DateTime.Now.AddDays(7.0);
-            int num = new EmailCheck().Add(model);
-            if (num <= 0)
-            {
-                return str;
-            }
-            string domain = this.webInfo.Domain;
-            string name = this.webInfo.Name;
-            string kfqq = this.webInfo.Kfqq;
-            string phone = this.webInfo.Phone;
-            string parms = HttpUtility.UrlEncode(Cryptography.RijndaelEncrypt(string.Format("id={0}&", num)));
-            StringBuilder builder = new StringBuilder();
-            builder.AppendFormat("<p>亲爱的{0}:<p>", email);
-            builder.AppendFormat("<p style=\"font-size:14px\">感谢您注册{0}，您需要在一周之内激活您的账号。 您只需点击下面的确认链接，即可完成帐号激活。</p><p>如果不是您本人的操作，可能是有用户误输入您的Email地址，您可以忽略此邮件或与{0}客服联系。</p>", this.SiteName);
-            builder.AppendFormat("<p><a href=\"{0}\" style=\"color:#003300\">{0}</a></p>", this.GetCheckEmailUrl(parms));
-            builder.Append("<p style=\"color:#999;font-size:12px\">如果无法点击该URL链接地址，请将它复制并粘帖到浏览器的地址输入框，然后单击回车即可。");
-            builder.Append("<p><p>————————————————————————————————");
-            builder.AppendFormat("<p style=\"font-size:14px;line-height:150%\">{1} {0} 如有疑问加我们的客服QQ {2} 或者来电咨询 {3}", new object[] { domain, name, kfqq, phone });
-            builder.AppendFormat("<p><img src=\"http://{0}/style/index/images/logo.png\"  />  <!-- --><style>#mailContentContainer .txt {{height:auto;}}</style>", domain);
-            EmailHelper helper = new EmailHelper(string.Empty, email, email + "账号激活", builder.ToString(), true, Encoding.GetEncoding("gbk"));
-            if (helper.Send())
-            {
-                return "ok";
-            }
+            //string str = string.Empty;
+            //EmailCheckInfo model = new EmailCheckInfo();
+            //model.userid = UserId;
+            //model.status = EmailCheckStatus.提交中;
+            //model.addtime = new DateTime?(DateTime.Now);
+            //model.checktime = new DateTime?(DateTime.Now);
+            //model.email = email;
+            //model.typeid = EmailCheckType.注册;
+            //model.Expired = DateTime.Now.AddDays(7.0);
+            //int num = new EmailCheck().Add(model);
+            //if (num <= 0)
+            //{
+            //    return str;
+            //}
+            //string domain = this.webInfo.Domain;
+            //string name = this.webInfo.Name;
+            //string kfqq = this.webInfo.Kfqq;
+            //string phone = this.webInfo.Phone;
+            //string parms = HttpUtility.UrlEncode(Cryptography.RijndaelEncrypt(string.Format("id={0}&", num)));
+            //StringBuilder builder = new StringBuilder();
+            //builder.AppendFormat("<p>亲爱的{0}:<p>", email);
+            //builder.AppendFormat("<p style=\"font-size:14px\">感谢您注册{0}，您需要在一周之内激活您的账号。 您只需点击下面的确认链接，即可完成帐号激活。</p><p>如果不是您本人的操作，可能是有用户误输入您的Email地址，您可以忽略此邮件或与{0}客服联系。</p>", this.SiteName);
+            //builder.AppendFormat("<p><a href=\"{0}\" style=\"color:#003300\">{0}</a></p>", this.GetCheckEmailUrl(parms));
+            //builder.Append("<p style=\"color:#999;font-size:12px\">如果无法点击该URL链接地址，请将它复制并粘帖到浏览器的地址输入框，然后单击回车即可。");
+            //builder.Append("<p><p>————————————————————————————————");
+            //builder.AppendFormat("<p style=\"font-size:14px;line-height:150%\">{1} {0} 如有疑问加我们的客服QQ {2} 或者来电咨询 {3}", new object[] { domain, name, kfqq, phone });
+            //builder.AppendFormat("<p><img src=\"http://{0}/style/index/images/logo.png\"  />  <!-- --><style>#mailContentContainer .txt {{height:auto;}}</style>", domain);
+            //EmailHelper helper = new EmailHelper(string.Empty, email, email + "账号激活", builder.ToString(), true, Encoding.GetEncoding("gbk"));
+            //if (helper.Send())
+            //{
+            //    return "ok";
+            //}
             return "no";
         }
 

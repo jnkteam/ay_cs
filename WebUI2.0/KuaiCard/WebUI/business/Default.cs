@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Business
+﻿namespace OriginalStudio.WebUI.Business
 {
     using System;
     using System.Web.UI;

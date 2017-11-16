@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.merchant.ajax
+﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Tools;

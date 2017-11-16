@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Withdraw
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -16,6 +16,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Supplier;
 
     public class AgentDists : ManagePageBase
     {
@@ -33,7 +34,7 @@
         protected HtmlHead Head1;
         protected AspNetPager Pager1;
         protected Repeater rptList;
-        protected KuaiCard.BLL.Withdraw.settledAgent stlAgtBLL = new KuaiCard.BLL.Withdraw.settledAgent();
+        protected OriginalStudio.BLL.Withdraw.settledAgent stlAgtBLL = new OriginalStudio.BLL.Withdraw.settledAgent();
         protected string total_amount = "0.00元";
         protected string total_charge = "0.00元";
         protected string total_paymoney = "0.00元";
@@ -263,7 +264,7 @@
                 }
                 else
                 {
-                    KuaiCard.Model.Withdraw.settledAgent model;
+                    OriginalStudio.Model.Withdraw.settledAgent model;
                     if (e.CommandName == "Audit")
                     {
                         msg = this.stlAgtBLL.doAudit(str2, base.currentManage.id, base.currentManage.username);

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -11,6 +11,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using System.Collections.Generic;
+    using OriginalStudio.BLL.Supplier;
 
     public class UserSupplierConfig : ManagePageBase
     {
@@ -38,7 +39,7 @@
         protected TextBox txtExtParm2;
         protected Repeater rptList;
 
-        public KuaiCard.Model.UserSupplierInfo ItemModel = new UserSupplierInfo();
+        public OriginalStudio.Model.UserSupplierInfo ItemModel = new UserSupplierInfo();
 
         public int UserID
         {
@@ -66,7 +67,7 @@
             this.ItemModel.PUserKey2 = this.txtpuserkey2.Text.Trim();
             this.ItemModel.PostBankUrl = this.txtpostBankUrl.Text.Trim();
             this.ItemModel.Desc = this.txtdesc.Text.Trim();
-            this.ItemModel.Sort = KuaiCardLib.Utils.Utils.StrToInt(this.txtsort.Text.Trim(), 0);
+            this.ItemModel.Sort = OriginalStudio.Lib.Utils.Utils.StrToInt(this.txtsort.Text.Trim(), 0);
             this.ItemModel.JumpUrl = this.txtJumpUrl.Text.Trim();
             this.ItemModel.distributionUrl = this.txtdistributionUrl.Text.Trim();
             this.ItemModel.Active = 1;
@@ -84,7 +85,7 @@
 
             if (this.ItemModel.ID == 0)
             {
-                if (KuaiCard.BLL.SysSupplierFactory.SaveUserSupplierInfo(this.ItemModel) > 0)
+                if (SysSupplierFactory.SaveUserSupplierInfo(this.ItemModel) > 0)
                 {
                     base.AlertAndRedirect("保存成功！", "UserSupplierConfig.aspx?userid=" + this.ItemModel.UserID.ToString());
                 }
@@ -93,7 +94,7 @@
                     base.AlertAndRedirect("保存失败！");
                 }
             }
-            else if (KuaiCard.BLL.SysSupplierFactory.UpdateUserSupplierInfo(this.ItemModel) > 0)
+            else if (SysSupplierFactory.UpdateUserSupplierInfo(this.ItemModel) > 0)
             {
                 this.hidID.Value = "";
                 base.AlertAndRedirect("更新成功！", "UserSupplierConfig.aspx?userid=" + this.ItemModel.UserID.ToString());
@@ -127,11 +128,11 @@
 
         private void ShowInfo()
         {
-            string p_cmd = KuaiCardLib.Web.WebBase.GetQueryStringString("cmd","").ToLower();
-            int p_id = KuaiCardLib.Web.WebBase.GetQueryStringInt32("id", 0);
+            string p_cmd = WebBase.GetQueryStringString("cmd","").ToLower();
+            int p_id = WebBase.GetQueryStringInt32("id", 0);
             if (p_cmd == "edit" && p_id > 0)
             {
-                DataSet ds = KuaiCard.BLL.SysSupplierFactory.GetUserSupplierList(this.UserID);
+                DataSet ds = SysSupplierFactory.GetUserSupplierList(this.UserID);
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     DataRow[] dr = ds.Tables[0].Select("id = " + p_id.ToString());
@@ -167,7 +168,7 @@
 
         public void LoadInfo()
         {
-            KuaiCard.Model.User.UserInfo userInfo = KuaiCard.BLL.User.UserFactory.GetModel(this.UserID);
+            OriginalStudio.Model.User.UserInfo userInfo = OriginalStudio.BLL.User.UserFactory.GetModel(this.UserID);
             if (userInfo == null) return;
 
             this.txtUserID.Text = userInfo.ID.ToString();
@@ -182,7 +183,7 @@
 
         public void LoadList()
         {
-            this.rptList.DataSource = KuaiCard.BLL.SysSupplierFactory.GetUserSupplierList(this.UserID);
+            this.rptList.DataSource = SysSupplierFactory.GetUserSupplierList(this.UserID);
             this.rptList.DataBind();
         }
 
@@ -194,7 +195,7 @@
                 if (!string.IsNullOrEmpty(id))
                 {
                     //删除服务商通道设置
-                    KuaiCard.BLL.SysSupplierFactory.DeleteUserSupplierInfo(Convert.ToInt32(id));
+                    SysSupplierFactory.DeleteUserSupplierInfo(Convert.ToInt32(id));
                     base.AlertAndRedirect("删除成功！", "UserSupplierConfig.aspx?userid=" + this.UserID.ToString());
                 }
             }

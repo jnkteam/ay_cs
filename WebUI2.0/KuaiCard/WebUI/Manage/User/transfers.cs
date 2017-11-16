@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -22,7 +22,7 @@
         protected Repeater rptTrades;
         protected HtmlInputHidden selectedUsers;
         protected TextBox StimeBox;
-        protected transfer tranBLL = new transfer();
+        protected OriginalStudio.BLL.Settled.Transfer tranBLL = new Transfer();
         protected TextBox txttoUserid;
         protected TextBox txtuserId;
 

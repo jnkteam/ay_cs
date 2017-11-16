@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -8,6 +8,8 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.Model.News;
+    using OriginalStudio.BLL.News;
 
     public class NewsEdit : ManagePageBase
     {

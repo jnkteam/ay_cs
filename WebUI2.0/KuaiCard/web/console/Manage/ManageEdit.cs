@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.web.console.Manage
+﻿namespace OriginalStudio.web.console.Manage
 {
     using System;
     using System.Web.UI;

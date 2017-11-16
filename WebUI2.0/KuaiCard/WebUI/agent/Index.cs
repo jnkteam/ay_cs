@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.agent
+﻿namespace OriginalStudio.WebUI.agent
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Order;

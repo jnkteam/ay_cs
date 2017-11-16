@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
@@ -84,13 +84,13 @@
                 string name = Enum.GetName(typeof(UserStatusEnum), num2);
                 this.ddlStatus.Items.Add(new ListItem(name, num2.ToString()));
             }
-            DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.Member);
+            DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
             this.ddlmemvip.Items.Add("--商户等级--");
             foreach (DataRow row in levName.Rows)
             {
                 this.ddlmemvip.Items.Add(new ListItem(row["levName"].ToString(), row["userLevel"].ToString()));
             }
-            levName = PayRateFactory.GetLevName(RateTypeEnum.Agent);
+            levName = PayRateFactory.GetLevName(RateTypeEnum.代理);
             this.ddlpromvip.Items.Add("--代理等级--");
             foreach (DataRow row in levName.Rows)
             {

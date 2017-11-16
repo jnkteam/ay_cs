@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -12,7 +12,7 @@
 
     public class Manage : ManagePageBase
     {
-        public KuaiCard.Model.Manage _ItemInfo = null;
+        public OriginalStudio.Model.Manage _ItemInfo = null;
         protected Button btnAdd;
         protected Button BtnUpdate;
         protected DropDownList ddlCommissionType;
@@ -214,7 +214,7 @@
             }
         }
 
-        public KuaiCard.Model.Manage ItemInfo
+        public OriginalStudio.Model.Manage ItemInfo
         {
             get
             {
@@ -226,7 +226,7 @@
                     }
                     else
                     {
-                        this._ItemInfo = new KuaiCard.Model.Manage();
+                        this._ItemInfo = new OriginalStudio.Model.Manage();
                     }
                 }
                 return this._ItemInfo;

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.IP
+﻿namespace OriginalStudio.WebUI.User.IP
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;

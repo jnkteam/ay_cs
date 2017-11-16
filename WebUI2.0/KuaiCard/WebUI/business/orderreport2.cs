@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business
+﻿namespace OriginalStudio.WebUI.business
 {
     using OriginalStudio.BLL.Order;
     using OriginalStudio.WebComponents.Web;

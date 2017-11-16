@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.User;
@@ -109,7 +109,7 @@
 
             string typeBank = GetFormValue("typeBank");
             string bankCode = GetFormValue("bankCode");
-            KuaiCard.Model.Withdraw.channelwithdraw chlObj = new KuaiCard.BLL.Withdraw.channelwithdraw().GetModelByBankCode(bankCode);      
+            OriginalStudio.Model.Withdraw.ChannelWithdraw chlObj = new OriginalStudio.BLL.Withdraw.ChannelWithdraw().GetModelByBankCode(bankCode);      
             string accountID = GetFormValue("accountID");
             string str9 = GetFormValue("bankCardNoAgain");
             string payeeName = GetFormValue("accountName");
@@ -166,14 +166,14 @@
                         info.bankAddress = string.Empty;
                         info.account = accountID;
                         info.AddTime = new DateTime?(DateTime.Now);
-                        num = UserPayBankApp.Add(info);
+                        num = 0;  // UserPayBankApp.Add(info);
                         if (num > 0)
                         {
                             info.id = num;
                             info.status = AcctChangeEnum.审核成功;
                             info.SureTime = new DateTime?(DateTime.Now);
                             info.SureUser = 0;
-                            if (UserPayBankApp.Check(info))
+                            if (false)  //UserPayBankApp.Check(info))
                             {
                                 str = "添加成功!";
                                 str3 = "ok";
@@ -215,14 +215,14 @@
                     info.AddTime = new DateTime?(DateTime.Now);
                     info.userid = this.currentUser.ID;
                     info.status = AcctChangeEnum.审核成功;
-                    num = UserPayBankApp.Add(info);
+                    num = 0;//UserPayBankApp.Add(info);
                     if (num > 0)
                     {
                         info.id = num;
                         info.status = AcctChangeEnum.审核成功;
                         info.SureTime = new DateTime?(DateTime.Now);
                         info.SureUser = 0;
-                        if (UserPayBankApp.Check(info))
+                        if (false) // UserPayBankApp.Check(info))
                         {
                             str = "添加成功!";
                             str3 = "ok";

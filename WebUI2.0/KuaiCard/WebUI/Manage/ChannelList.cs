@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -40,7 +40,7 @@
             {
                 if (e.CommandName == "del")
                 {
-                    KuaiCard.BLL.Channel.Channel.Delete(Convert.ToInt32(e.CommandArgument));
+                    OriginalStudio.BLL.Channel.Channel.Delete(Convert.ToInt32(e.CommandArgument));
                     base.AlertAndRedirect("删除成功");
                 }
             }
@@ -79,14 +79,14 @@
             {
                 int.TryParse(this.ddlType.SelectedValue, out result);
             }
-            this.GVChannel.DataSource = KuaiCard.BLL.Channel.Channel.GetList(result);
+            this.GVChannel.DataSource = OriginalStudio.BLL.Channel.Channel.GetList(result);
             this.GVChannel.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
-            this.setPower();
+            //ManageFactory.CheckSecondPwd();
+            //this.setPower();
             if (!base.IsPostBack)
             {
                 this.ddlType.Items.Add(new ListItem("---全部类别---", ""));

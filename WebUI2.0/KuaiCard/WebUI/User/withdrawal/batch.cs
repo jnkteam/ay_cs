@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.withdrawal
+﻿namespace OriginalStudio.WebUI.User.withdrawal
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;

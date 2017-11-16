@@ -3,7 +3,7 @@
     using System;
 
     [Serializable]
-    public class transferscheme
+    public class TransferScheme
     {
         private decimal _chargeleastofeach;
         private decimal _chargemostofeach;

@@ -1,10 +1,8 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.ETAPI;
     using OriginalStudio.Model;
     using OriginalStudio.WebComponents.Web;
-    using Newtonsoft.Json;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;

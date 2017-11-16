@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.email
+﻿namespace OriginalStudio.WebUI.User.email
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;

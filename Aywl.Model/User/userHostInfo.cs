@@ -1,5 +1,6 @@
 ﻿namespace OriginalStudio.Model.User
 {
+    using OriginalStudio.Model.Enum;
     using System;
     using System.Runtime.CompilerServices;
 

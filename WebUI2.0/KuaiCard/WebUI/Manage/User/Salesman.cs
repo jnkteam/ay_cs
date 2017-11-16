@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.verify
+﻿namespace OriginalStudio.WebUI.User.verify
 {
     using OriginalStudio.WebComponents.Web;
     using System;

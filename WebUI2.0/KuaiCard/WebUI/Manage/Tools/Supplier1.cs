@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Tools
+﻿namespace OriginalStudio.WebUI.Manage.Tools
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.WebComponents.Web;

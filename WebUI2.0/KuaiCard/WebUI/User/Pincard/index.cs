@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Pincard
+﻿namespace OriginalStudio.WebUI.User.Pincard
 {
     using OriginalStudio.WebComponents.Web;
     using System;

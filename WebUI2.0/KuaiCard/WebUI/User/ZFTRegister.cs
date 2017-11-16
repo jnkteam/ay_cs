@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User
+﻿namespace OriginalStudio.WebUI.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -12,7 +12,7 @@
     using System.Diagnostics;
     using System.Text.RegularExpressions;
 
-    public class ZFTRegister : KuaiCard.WebComponents.Web.PageBase
+    public class ZFTRegister : OriginalStudio.WebComponents.Web.PageBase
 	{
         protected Button btnReg;
         protected TextBox txtusername;
@@ -31,7 +31,7 @@
         {
             if (!this.IsPostBack)
             {
-                this.dlsquestion.DataSource = new Question().GetCacheList();
+                this.dlsquestion.DataSource = new QuestionFactory().GetCacheList();
                 this.dlsquestion.DataBind();
             }
         }

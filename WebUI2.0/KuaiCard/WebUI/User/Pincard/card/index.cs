@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Pincard.card
+﻿namespace OriginalStudio.WebUI.User.Pincard.card
 {
     using OriginalStudio.BLL.Channel;
     using OriginalStudio.BLL.User;
@@ -50,7 +50,7 @@
         protected string totalpayAmt = "0";
         protected string totalrealvalue = "0";
         protected string totalrefervalue = "0";
-        private KuaiCard.BLL.User.usersetting usersetDAL = new KuaiCard.BLL.User.usersetting();
+        private OriginalStudio.BLL.User.usersetting usersetDAL = new OriginalStudio.BLL.User.usersetting();
         protected HiddenField xk_faceValue;
 
         public void docmd()
@@ -110,11 +110,11 @@
                 if (cid > 0)
                 {
                     string str3 = string.Empty;
-                    DataRow[] rowArray = KuaiCard.BLL.Channel.Channel.GetCacheList().Select("typeId=" + cid.ToString());
+                    DataRow[] rowArray = OriginalStudio.BLL.Channel.Channel.GetCacheList().Select("typeId=" + cid.ToString());
                     for (int i = 0; i < rowArray.Length; i++)
                     {
                         int? nullable;
-                        ChannelInfo info = KuaiCard.BLL.Channel.Channel.GetModel(Convert.ToString(rowArray[i]["code"]), base.UserId, true);
+                        ChannelInfo info = OriginalStudio.BLL.Channel.Channel.GetModel(Convert.ToString(rowArray[i]["code"]), base.UserId, true);
                         if ((info != null) && (((nullable = info.isOpen).GetValueOrDefault() == 1) && nullable.HasValue))
                         {
                             if (info.faceValue != 100)

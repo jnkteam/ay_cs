@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -72,7 +72,7 @@
         protected void Page_Load(object sender, EventArgs e)
         {
             this.setPower();
-            ManageFactory.CheckSecondPwd();
+            //ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
                 this.LoadData();

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Template
+﻿namespace OriginalStudio.WebUI.Manage.Template
 {
     using OriginalStudio.BLL;
     using System;

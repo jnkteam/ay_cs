@@ -1,9 +1,7 @@
-﻿namespace KuaiCard.WebUI.business.User
+﻿namespace OriginalStudio.WebUI.business.User
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.basedata;
     using OriginalStudio.BLL.Payment;
-    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.Sys;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
@@ -17,12 +15,13 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.PayRate;
 
     public class UserEdits : BusinessPageBase
     {
         public UserInfo _ItemInfo = null;
         private usersettingInfo _setting = null;
-        public KuaiCard.Model.User.userspaybank _settleaccoutmodel = null;
+        public OriginalStudio.Model.User.userspaybank _settleaccoutmodel = null;
         protected Button btnAdd;
         protected CheckBox cb_isagentDistribution;
         protected CheckBox cb_isdebug;
@@ -49,7 +48,7 @@
         protected Label lbllastLoginIp;
         protected Label lbllastLoginTime;
         protected Label lblregTime;
-        protected KuaiCard.BLL.User.userspaybank pbankBLL = new KuaiCard.BLL.User.userspaybank();
+        protected OriginalStudio.BLL.User.userspaybank pbankBLL = new OriginalStudio.BLL.User.userspaybank();
         protected RadioButtonList rbl_settledmode;
         protected RadioButtonList rblaccoutType;
         protected RadioButtonList rblsettlemode;
@@ -92,7 +91,7 @@
 
         private void InitForm()
         {
-            DataSet list = base_province.GetList("");
+            DataSet list = OriginalStudio.BLL.BaseData.base_province.GetList("");
             this.ddlprovince.Items.Clear();
             this.ddlprovince.Items.Add(new ListItem("--省份--", ""));
             foreach (DataRow row in list.Tables[0].Rows)
@@ -116,13 +115,13 @@
                 string name = Enum.GetName(typeof(UserStatusEnum), num2);
                 this.ddlStatus.Items.Add(new ListItem(name, num2.ToString()));
             }
-            DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.Member);
+            DataTable levName = BLL.Payment.PayRateFactory.GetLevName(RateTypeEnum.会员);
             this.ddlmemvip.Items.Add("--商户等级--");
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlmemvip.Items.Add(new ListItem(row2["levName"].ToString(), row2["userLevel"].ToString()));
             }
-            levName = PayRateFactory.GetLevName(RateTypeEnum.Agent);
+            levName = BLL.Payment.PayRateFactory.GetLevName(RateTypeEnum.代理);
             this.ddlpromvip.Items.Add("--代理等级--");
             foreach (DataRow row2 in levName.Rows)
             {
@@ -141,13 +140,13 @@
                 this.ddlagents.Items.Add(new ListItem(row2["username"].ToString(), row2["id"].ToString()));
             }
             this.ddlTocashScheme.Items.Add(new ListItem("--默认--", ""));
-            levName = TocashScheme.GetList("type=1").Tables[0];
+            levName = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=1").Tables[0];
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlTocashScheme.Items.Add(new ListItem(row2["schemename"].ToString(), row2["id"].ToString()));
             }
             this.ddlagentDistscheme.Items.Add(new ListItem("--默认--", ""));
-            levName = TocashScheme.GetList("type=2").Tables[0];
+            levName = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=2").Tables[0];
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlagentDistscheme.Items.Add(new ListItem(row2["schemename"].ToString(), row2["id"].ToString()));
@@ -159,7 +158,7 @@
             string selectedValue = this.ddlprovince.SelectedValue;
             if (!string.IsNullOrEmpty(selectedValue))
             {
-                DataSet list = base_city.GetList("ProvinceID=" + selectedValue);
+                DataSet list = OriginalStudio.BLL.BaseData.base_city.GetList("ProvinceID=" + selectedValue);
                 this.ddlcity.Items.Clear();
                 this.ddlcity.Items.Add(new ListItem("--市区--", ""));
                 foreach (DataRow row in list.Tables[0].Rows)
@@ -567,7 +566,7 @@
             }
         }
 
-        public KuaiCard.Model.User.userspaybank settleaccoutmodel
+        public OriginalStudio.Model.User.userspaybank settleaccoutmodel
         {
             get
             {

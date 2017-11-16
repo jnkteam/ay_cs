@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.Order
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -505,11 +505,11 @@
                         button3.OnClientClick = "return confirm('是否确定扣量？')";
                         object completeTime = DataBinder.Eval(e.Item.DataItem, "CompleteTime");
                         double difftime = this.GetDifftime(userId, completeTime);
-                        if (difftime > RuntimeSetting.DeductSafetyTime)
+                        if (difftime > 0)   //RuntimeSetting.DeductSafetyTime)
                         {
                             button3.Text = "扣";
                         }
-                        else if ((difftime > 0.0) && (difftime <= RuntimeSetting.DeductSafetyTime))
+                        else if ((difftime > 0.0) && (difftime <= 0))    //RuntimeSetting.DeductSafetyTime))
                         {
                             button3.Text = "危险";
                         }

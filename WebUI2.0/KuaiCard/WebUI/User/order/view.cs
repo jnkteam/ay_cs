@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.order
+﻿namespace OriginalStudio.WebUI.User.order
 {
     using OriginalStudio.BLL;
     using OriginalStudio.WebComponents.Web;

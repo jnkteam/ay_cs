@@ -1,15 +1,16 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.User;
     using OriginalStudio.WebComponents.Web;
-    using KuaiCard.WebUI;
+    using OriginalStudio.WebUI;
     using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.Model.FeedBack;
 
     public class UserEdit : ManagePageBase
     {
@@ -47,7 +48,7 @@
             this.ItemInfo.status = feedbackstatus.已回复;
             this.ItemInfo.replytime = new DateTime?(DateTime.Now);
             this.ItemInfo.replyer = new int?(base.ManageId);
-            feedback feedback = new feedback();
+            OriginalStudio.BLL.FeedBack.feedback feedback = new OriginalStudio.BLL.FeedBack.feedback();
             if (feedback.Update(this.ItemInfo))
             {
                 WebUtility.AlertAndClose(this, "操作成功");
@@ -95,7 +96,7 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = new feedback().GetModel(this.ItemInfoId);
+                        this._ItemInfo = new OriginalStudio.BLL.FeedBack.feedback().GetModel(this.ItemInfoId);
                     }
                     else
                     {

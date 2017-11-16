@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -14,6 +14,9 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.Supplier;
 
     public class Audits : ManagePageBase
     {
@@ -67,7 +70,7 @@
                     List<SettledInfo> list = SettledFactory.DataTableToList(listWithdrawByApi);
                     foreach (SettledInfo info in list)
                     {
-                        KuaiCard.ETAPI.Withdraw.InitDistribution(info);
+                        OriginalStudio.ETAPI.Withdraw.InitDistribution(info);
                     }
                 }
                 base.AlertAndRedirect("审核成功!");
@@ -90,7 +93,7 @@
                     dataTable.Columns.Add("sName", typeof(string));
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        row["sName"] = Enum.GetName(typeof(SettledStatus), row["status"]);
+                        row["sName"] = Enum.GetName(typeof(SettledStatusEnum), row["status"]);
                         row["PayeeBank"] = SettledFactory.GetSettleBankName(row["PayeeBank"].ToString());
                     }
                     dataTable.AcceptChanges();
@@ -123,7 +126,7 @@
                         List<SettledInfo> list = SettledFactory.DataTableToList(withdrawListByApi);
                         foreach (SettledInfo info in list)
                         {
-                            KuaiCard.ETAPI.Withdraw.InitDistribution(info);
+                            OriginalStudio.ETAPI.Withdraw.InitDistribution(info);
                         }
                     }
                     base.AlertAndRedirect("审核成功!");
@@ -239,9 +242,9 @@
                 if (((status != -1) && SettledFactory.Audit(int.Parse(str), status)) && (status == 2))
                 {
                     SettledInfo model = SettledFactory.GetModel(int.Parse(str));
-                    if (model.status == SettledStatus.付款接口支付中)
+                    if (model.Status == SettledStatusEnum.付款接口支付中)
                     {
-                        KuaiCard.ETAPI.Withdraw.InitDistribution(model);
+                        OriginalStudio.ETAPI.Withdraw.InitDistribution(model);
                     }
                 }
             }

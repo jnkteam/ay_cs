@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.userrate
+﻿namespace OriginalStudio.WebUI.User.userrate
 {
     using OriginalStudio.BLL.Channel;
     using OriginalStudio.BLL.Payment;

@@ -1,9 +1,6 @@
-﻿namespace KuaiCard.WebUI.merchant.ajax
+﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
-    using OriginalStudio.BLL.basedata;
-    using OriginalStudio.BLL.Tools;
     using OriginalStudio.BLL.User;
-    using OriginalStudio.Model.basedata;
     using OriginalStudio.Model.User;
     using OriginalStudio.Lib.Text;
     using OriginalStudio.Lib.Web;
@@ -39,11 +36,11 @@
                         string str7;
                         IdcardInfo info = new IdcardInfo();
                         info.code = queryStringString;
-                        if (KuaiCard.BLL.basedata.identitycard.GetBirthdayAndSex(queryStringString, out str6, out str7))
+                        if (OriginalStudio.BLL.basedata.identitycard.GetBirthdayAndSex(queryStringString, out str6, out str7))
                         {
                             info.birthday = str6;
                             info.gender = str7;
-                            KuaiCard.Model.basedata.identitycard model = KuaiCard.BLL.basedata.identitycard.GetModel(queryStringString.Substring(0, 6));
+                            OriginalStudio.Model.basedata.identitycard model = OriginalStudio.BLL.basedata.identitycard.GetModel(queryStringString.Substring(0, 6));
                             if (model == null)
                             {
                                 info = null;

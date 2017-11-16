@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.mobile
+﻿namespace OriginalStudio.WebUI.User.mobile
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Text;

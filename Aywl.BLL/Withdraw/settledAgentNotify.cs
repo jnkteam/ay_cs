@@ -1,8 +1,6 @@
 ﻿namespace OriginalStudio.BLL.Withdraw
 {
     using OriginalStudio.BLL.User;
-    using OriginalStudio.DAL.Withdraw;
-    using OriginalStudio.Model.Withdraw;
     using OriginalStudio.Lib.ExceptionHandling;
     using OriginalStudio.Lib.Text;
     using OriginalStudio.Lib.Web;

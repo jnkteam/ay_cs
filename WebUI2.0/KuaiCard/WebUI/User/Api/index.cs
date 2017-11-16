@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Api
+﻿namespace OriginalStudio.WebUI.User.Api
 {
     using OriginalStudio.WebComponents.Web;
     using System;

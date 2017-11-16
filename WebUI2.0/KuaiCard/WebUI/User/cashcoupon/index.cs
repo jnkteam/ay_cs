@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.cashcoupon
+﻿namespace OriginalStudio.WebUI.User.cashcoupon
 {
     using OriginalStudio.BLL;
     using OriginalStudio.WebComponents.Web;
@@ -9,6 +9,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Settled;
 
     public class index : UserPageBase
     {

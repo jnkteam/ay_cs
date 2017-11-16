@@ -1,7 +1,6 @@
-﻿namespace KuaiCard.WebUI.Manage.Settled
+﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.APP;
     using OriginalStudio.Model;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Data;
@@ -13,6 +12,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.Model.APP;
 
     public class Recharges : ManagePageBase
     {
@@ -40,7 +40,7 @@
             {
                 return string.Empty;
             }
-            return this.rechargeBLL.GetStatusName(Convert.ToInt32(status));
+            return "";// this.rechargeBLL.GetStatusName(Convert.ToInt32(status));
         }
 
         private void LoadData()
@@ -70,7 +70,7 @@
             {
                 searchParams.Add(new SearchParam("status", int.Parse(this.ddlstatus.SelectedValue)));
             }
-            DataSet set = this.rechargeBLL.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby, true);
+            DataSet set = new DataSet();    // this.rechargeBLL.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby, true);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.recharges.DataSource = set.Tables[1];
             this.recharges.DataBind();

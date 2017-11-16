@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Withdraw
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL;
     using OriginalStudio.ETAPI;
@@ -9,10 +9,11 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class Reissue : ManagePageBase
     {
-        private KuaiCard.Model.distribution _model = null;
+        private OriginalStudio.Model.Settled.Distribution _model = null;
         protected Button btnAdd;
         protected DropDownList ddlstatus;
         protected DropDownList ddlSupplier;
@@ -64,7 +65,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
+            //ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
                 DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
@@ -93,13 +94,13 @@
             }
         }
 
-        public KuaiCard.Model.distribution model
+        public OriginalStudio.Model.Settled.Distribution model
         {
             get
             {
                 if ((this._model == null) && (this.id > 0))
                 {
-                    this._model = KuaiCard.BLL.distribution.GetModel(this.id);
+                    this._model = new OriginalStudio.BLL.Settled.Distribution().GetDistributionModel(this.id);
                 }
                 return this._model;
             }

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Stat
+﻿namespace OriginalStudio.WebUI.Manage.Stat
 {
     using System;
     using System.Collections.Generic;

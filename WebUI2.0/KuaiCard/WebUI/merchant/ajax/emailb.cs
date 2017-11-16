@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.merchant.ajax
+﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -13,6 +13,8 @@
     using System.Text;
     using System.Web;
     using System.Web.SessionState;
+    using OriginalStudio.Model.Email;
+    using OriginalStudio.BLL.Email;
 
     public class emailb : IHttpHandler, IReadOnlySessionState, IRequiresSessionState
     {

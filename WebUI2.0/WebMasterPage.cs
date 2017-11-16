@@ -5,6 +5,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using OriginalStudio.Model;
+using OriginalStudio.Model.News;
+using OriginalStudio.BLL.News;
 
 public class WebMasterPage : MasterPage
 {

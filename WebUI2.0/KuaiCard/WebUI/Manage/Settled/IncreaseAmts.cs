@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Settled
+﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -68,8 +68,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
-            this.setPower();
+            //ManageFactory.CheckSecondPwd();
+            //this.setPower();
             if (!base.IsPostBack)
             {
                 this.StimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");

@@ -1,6 +1,7 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Supplier;
     using OriginalStudio.BLL.Withdraw;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Withdraw;
@@ -13,7 +14,7 @@
 
     public class WithdrawChannels : ManagePageBase
     {
-        private KuaiCard.BLL.Withdraw.channelwithdraw chnlsBLL = new KuaiCard.BLL.Withdraw.channelwithdraw();
+        private OriginalStudio.BLL.Withdraw.ChannelWithdraw chnlsBLL = new OriginalStudio.BLL.Withdraw.ChannelWithdraw();
         protected HtmlForm Form1;
         protected Repeater rptChnls;
 
@@ -26,7 +27,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
+            //ManageFactory.CheckSecondPwd();
             this.setPower();
             if (!base.IsPostBack)
             {
@@ -40,7 +41,7 @@
             {
                 DropDownList list = e.Item.FindControl("ddlsupp") as DropDownList;
                 int id = Convert.ToInt32(e.CommandArgument);
-                KuaiCard.Model.Withdraw.channelwithdraw model = this.chnlsBLL.GetModel(id);
+                OriginalStudio.Model.Withdraw.ChannelWithdraw model = this.chnlsBLL.GetModel(id);
                 model.supplier = int.Parse(list.SelectedValue);
                 this.chnlsBLL.Update(model);
                 this.LoadData();

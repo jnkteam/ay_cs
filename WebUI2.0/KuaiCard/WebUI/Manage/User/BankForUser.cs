@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -24,7 +24,7 @@
         protected Button btnAllSettle;
         protected Button btnBatchSettle;
         protected Button btnSearch;
-        private channelwithdraw chnlBLL = new channelwithdraw();
+        private ChannelWithdraw chnlBLL = new ChannelWithdraw();
         protected HtmlForm form1;
         protected HtmlHead Head1;
         protected AspNetPager Pager1;
@@ -245,7 +245,7 @@
                 TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
                 if (modelByUser != null)
                 {
-                    DataSet ds = KuaiCard.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id,
+                    DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id,
                                             userId,
                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                             DateTime.Now.AddDays(1.0));
@@ -350,14 +350,14 @@
                 return "结算金额大于余额 操作有误";
             }
             SettledInfo info2 = new SettledInfo();
-            info2.addtime = DateTime.Now;
-            info2.amount = settleAmt;
-            info2.paytime = DateTime.Now;
-            info2.status = SettledStatus.审核中;
-            info2.tax = 0;  //税
-            info2.userid = userId;
+            info2.AddTime = DateTime.Now;
+            info2.Amount = settleAmt;
+            info2.PayTime = DateTime.Now;
+            info2.Status =  SettledStatusEnum.审核中;
+            info2.Tax = 0;  //税
+            info2.UserID = userId;
             info2.AppType = AppTypeEnum.t0;
-            info2.settmode = SettledmodeEnum.系统自动结算;
+            info2.SettledMode =  SettledModeEnum.系统自动结算;
             //支付通道
             info2.BankCode = model.BankCode;    //代码
             if (model.PMode == 1)
@@ -375,51 +375,51 @@
                 //财付通
                 info2.PayeeBank = "财付通";
             }
-            info2.Payeeaddress = model.BankAddress;
-            info2.payeeName = model.PayeeName;      //商户收款姓名
+            info2.PayeeAddress = model.BankAddress;
+            info2.PayeeName = model.PayeeName;      //商户收款姓名
             info2.Account = model.Account;                  //商户收款账号
             TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
-            info2.charges = new decimal?(modelByUser.chargerate * settleAmt);
-            decimal? charges = info2.charges;
+            info2.Charges = new decimal?(modelByUser.chargerate * settleAmt);
+            decimal? charges = info2.Charges;
             decimal chargeleastofeach = modelByUser.chargeleastofeach;
             if ((charges.GetValueOrDefault() < chargeleastofeach) && charges.HasValue)
             {
-                info2.charges = new decimal?(modelByUser.chargeleastofeach);
+                info2.Charges = new decimal?(modelByUser.chargeleastofeach);
             }
             else
             {
-                charges = info2.charges;
+                charges = info2.Charges;
                 chargeleastofeach = modelByUser.chargemostofeach;
                 if ((charges.GetValueOrDefault() > chargeleastofeach) && charges.HasValue)
                 {
-                    info2.charges = new decimal?(modelByUser.chargemostofeach);
+                    info2.Charges = new decimal?(modelByUser.chargemostofeach);
                 }
             }
             if (DateTime.Now.Hour > 16)
             {
-                info2.required = DateTime.Now.AddDays(1.0);
+                info2.Required = DateTime.Now.AddDays(1.0);
             }
             else
             {
-                info2.required = DateTime.Now;
+                info2.Required = DateTime.Now;
             }
             if (modelByUser.vaiInterface > 0)
             {
                 //走接口结算。这里选择结算接口供应商
                 //info2.suppid = this.chnlBLL.GetSupplier(info2.PayeeBank);
                 //2017.2.9修改如下，目的是处理 代付自动走接口
-                info2.suppid = this.chnlBLL.GetSupplier(info2.BankCode);
+                info2.Suppid = this.chnlBLL.GetSupplier(info2.BankCode);
             }
             if ((modelByUser.vaiInterface > 0) && (modelByUser.tranRequiredAudit == 0))
             {
                 //结算不需要审核，且走接口代付。状态为16
-                info2.status = SettledStatus.付款接口支付中;
+                info2.Status = SettledStatusEnum.付款接口支付中;
             }
             int num2 = SettledFactory.Apply(info2);
-            info2.id = num2;
+            info2.ID = num2;
             if (num2 > 0)
             {
-                if (info2.status == SettledStatus.付款接口支付中)
+                if (info2.Status == SettledStatusEnum.付款接口支付中)
                 {
                     //结算不需要审核，在点 结算后直接调用接口进行支付。
                     Withdraw.InitDistribution(info2);

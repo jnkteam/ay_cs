@@ -7,7 +7,7 @@
 
     public class ScheduledTasks
     {
-        private OriginalStudio.Lib.ScheduledTask.ScheduledTask[] _scheduledTasks;
+        private ScheduledTask[] _scheduledTasks;
         public static bool TaskExecuting = false;
 
         public void Start()
@@ -15,12 +15,12 @@
             List<ScheduledTaskConfiguration> configs = ScheduledTaskConfigurationSectionHandler.GetConfigs();
             if (configs != null)
             {
-                this._scheduledTasks = new OriginalStudio.Lib.ScheduledTask.ScheduledTask[configs.Count];
+                this._scheduledTasks = new ScheduledTask[configs.Count];
                 for (int i = 0; i < configs.Count; i++)
                 {
                     try
                     {
-                        ScheduledTask task = Activator.CreateInstance(Type.GetType(configs[i].ScheduledTaskType)) as OriginalStudio.ScheduledTask.ScheduledTask;
+                        ScheduledTask task = Activator.CreateInstance(Type.GetType(configs[i].ScheduledTaskType)) as ScheduledTask;
                         if (task != null)
                         {
                             task.Execute(configs[i]);

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -10,6 +10,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class ChannelEdit : ManagePageBase
     {
@@ -70,7 +71,7 @@
             }
             if (!this.isUpdate)
             {
-                if (KuaiCard.BLL.Channel.Channel.Add(this.model) > 0)
+                if (OriginalStudio.BLL.Channel.Channel.Add(this.model) > 0)
                 {
                     base.AlertAndRedirect("保存成功！");
                 }
@@ -79,7 +80,7 @@
                     base.AlertAndRedirect("保存失败！");
                 }
             }
-            else if (KuaiCard.BLL.Channel.Channel.Update(this.model))
+            else if (OriginalStudio.BLL.Channel.Channel.Update(this.model))
             {
                 base.AlertAndRedirect("更新成功！", url);
             }
@@ -107,8 +108,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.setPower();
-            ManageFactory.CheckSecondPwd();
+            //this.setPower();
+            //ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
                 this.ddlType.Items.Add(new ListItem("---全部类别---", ""));
@@ -190,7 +191,7 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = KuaiCard.BLL.Channel.Channel.GetModel(this.ItemInfoId);
+                        this._ItemInfo = OriginalStudio.BLL.Channel.Channel.GetModel(this.ItemInfoId);
                     }
                     else
                     {

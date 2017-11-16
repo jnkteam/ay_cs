@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Tools
+﻿namespace OriginalStudio.WebUI.Manage.Tools
 {
     using OriginalStudio.BLL;
     using OriginalStudio.WebComponents.Web;
@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Web;
+    using OriginalStudio.BLL.Settled;
 
     public class Alarm : ManagePageBase
     {

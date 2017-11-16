@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -217,17 +217,17 @@
                     checkResult = Convert.ToDecimal(moneys[K]); //提现金额
 
                     SettledInfo model = new SettledInfo();
-                    model.addtime = DateTime.Now;
-                    model.amount = checkResult;
-                    model.paytime = DateTime.Now;
-                    model.status = SettledStatus.审核中;
-                    model.tax = 0;
-                    model.userid = UserFactory.CurrentMember.ID;
+                    model.AddTime = DateTime.Now;
+                    model.Amount = checkResult;
+                    model.PayTime = DateTime.Now;
+                    model.Status = SettledStatusEnum.审核中;
+                    model.Tax = 0;
+                    model.UserID = UserFactory.CurrentMember.ID;
                     model.BankCode = bank_code;     //银行代码
                     model.PayeeBank = PayeeBank;     //银行名称
-                    model.payeeName = payeeName;
+                    model.PayeeName = payeeName;
                     model.Account = account;
-                    model.Paytype = 1;          //手动提现 = 1,（商户自己发起）
+                    model.PayType = 1;          //手动提现 = 1,（商户自己发起）
                     //======16.11.15增加到帐时间==========
                     if (bank_code == "0002")    //支付宝
                         model.AppType = AppTypeEnum.t1;      //T+1到张
@@ -236,33 +236,33 @@
                     else
                         model.AppType = AppTypeEnum.t1;      //T+1到张
                     //=============================
-                    model.charges = new decimal?(modelByUser.chargerate * checkResult);
-                    decimal? charges = model.charges;
+                    model.Charges = new decimal?(modelByUser.chargerate * checkResult);
+                    decimal? charges = model.Charges;
                     decimal chargeleastofeach = modelByUser.chargeleastofeach;
                     if ((charges.GetValueOrDefault() < chargeleastofeach) && charges.HasValue)
                     {
-                        model.charges = new decimal?(modelByUser.chargeleastofeach);
+                        model.Charges = new decimal?(modelByUser.chargeleastofeach);
                     }
                     else
                     {
-                        charges = model.charges;
+                        charges = model.Charges;
                         chargeleastofeach = modelByUser.chargemostofeach;
                         if ((charges.GetValueOrDefault() > chargeleastofeach) && charges.HasValue)
                         {
-                            model.charges = new decimal?(modelByUser.chargemostofeach);
+                            model.Charges = new decimal?(modelByUser.chargemostofeach);
                         }
                     }
                     if (DateTime.Now.Hour > 16)
                     {
-                        model.required = DateTime.Now.AddDays(1.0);
+                        model.Required = DateTime.Now.AddDays(1.0);
                     }
                     else
                     {
-                        model.required = DateTime.Now;
+                        model.Required = DateTime.Now;
                     }
                     //==========
-                    model.suppid = 0;
-                    model.status = SettledStatus.审核中;   //1
+                    model.Suppid = 0;
+                    model.Status = SettledStatusEnum.审核中;   //1
                     //==========
 
                     int settledResult = SettledFactory.Apply(model);
@@ -275,17 +275,17 @@
 
                             if (modelByUser.vaiInterface == 1)
                             {
-                                model.suppid = new channelwithdraw().GetSupplier(model.BankCode);
-                                if (model.suppid > 0)
+                                model.Suppid = new ChannelWithdraw().GetSupplier(model.BankCode);
+                                if (model.Suppid > 0)
                                 {
                                     //重新取一遍
-                                    model.paytime = DateTime.Now;
-                                    model.status = SettledStatus.已支付;
-                                    model.id = settledResult;
+                                    model.PayTime = DateTime.Now;
+                                    model.Status = SettledStatusEnum.已支付;
+                                    model.ID = settledResult;
                                     if (SettledFactory.Pay(model) == 0)
                                     {
                                         //结算不需要审核，在点 结算后直接调用接口进行支付。
-                                        KuaiCard.ETAPI.Withdraw.InitDistribution(model);
+                                        OriginalStudio.ETAPI.Withdraw.InitDistribution(model);
                                         System.Threading.Thread.Sleep(500);
                                     }
                                 }

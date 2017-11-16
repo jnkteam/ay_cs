@@ -8,7 +8,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AssemblyName>WebUI</AssemblyName>
     <OutputType>Library</OutputType>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Aiyang_web\bin\</OutputPath>
+    <OutputPath>..\Output\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,9 +43,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Data" />
     <Reference Include="System" />
-    <Reference Include="KuaiCard.Cache" />
     <Reference Include="System.Xml" />
-    <Reference Include="Newtonsoft.Json.Net20" />
     <Reference Include="System.Drawing" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Global.cs" />
@@ -72,9 +70,6 @@
     <Compile Include="KuaiCard\WebUI\Manage\Console\CleanUpData.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\Console_Order_ResetOrder.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderPrint.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -84,6 +79,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\PingAn\CreateSubMerchant.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\SettledmodeEnum.cs" />
     <Compile Include="KuaiCard\WebUI\Manage\StatCharts\DayOrdersChart.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -97,9 +93,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Settled\IncreaseAmts.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\CardOrderList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\NewsList.cs">
@@ -187,7 +180,6 @@
     <Compile Include="KuaiCard\WebUI\User\Service\chartDataSource.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\withdrawal.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\withdrawalbatch.cs" />
-    <Compile Include="KuaiCard\WebUI\User\Service\withdrawalzft.cs" />
     <Compile Include="KuaiCard\WebUI\User\UserLogin.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -209,7 +201,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\merchant\ajax\phonevalid1.cs" />
-    <Compile Include="KuaiCard\WebUI\merchant\ajax\GetCardFaceValue.cs" />
     <Compile Include="KuaiCard\WebUI\merchant\ajax\emailb.cs" />
     <Compile Include="KuaiCard\WebUI\emailForm.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -262,9 +253,6 @@
     <Compile Include="agent_stat.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\agent\Order\CardOrderShow.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\agent\Default.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -296,9 +284,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\DebugInfos.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\CardReportList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\BankReportList.cs">
@@ -364,12 +349,6 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\UnFreeze.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\Console_Order_DebugInfoShow.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Jubao\List.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\CodeMappingList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -377,9 +356,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\webservice\checkuser.cs" />
-    <Compile Include="KuaiCard\WebUI\User\withdrawal\post.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\upload2.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\sendtixianemail.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\sendMail.cs" />
@@ -395,7 +371,6 @@
     <Compile Include="KuaiCard\WebUI\User\message\content.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\CardSellOld.cs" />
     <Compile Include="KuaiCard\WebUI\Index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -451,13 +426,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\register\ajaxcheckmobile.cs" />
-    <Compile Include="KuaiCard\WebUI\business\Order\CardOrderShow.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Business\Default.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\agent\Order\CardReportList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\agent\Order\BankOrderList.cs">
@@ -485,9 +454,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\usersOrderIncomes.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\SmsReportList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\wxkmadmin_Md5.cs">
@@ -524,7 +490,6 @@
     <Compile Include="KuaiCard\WebUI\service.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\OrderJson.cs" />
     <Compile Include="KuaiCard\WebUI\getPassword.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -541,9 +506,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Manage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Jubao\ItemModi.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebMasterPage.cs">
@@ -567,12 +529,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\business\Questions.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\business\Order\SmsOrderShow.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\business\Order\CardReportList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Business\User\ManageLoginLog.cs">
@@ -614,15 +570,6 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\Freeze.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\business\Order\Console_Order_ResetOrder.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\changeorde.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\CardOrderShow.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\ManageEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -644,10 +591,7 @@
     <Compile Include="KuaiCard\WebUI\pubInfo.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\web\Merchant\Ajax\smartcardsell.cs" />
     <Compile Include="KuaiCard\WebUI\merchant\ajax\mailcheckreceive.cs" />
-    <Compile Include="KuaiCard\WebUI\merchant\ajax\GetCardSupplier.cs" />
-    <Compile Include="KuaiCard\WebUI\merchant\ajax\DPI3.cs" />
     <Compile Include="KuaiCard\WebUI\helper.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -691,9 +635,6 @@
     <Compile Include="KuaiCard\WebUI\Manage\Reviewname.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\SmsOrderShow.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -716,9 +657,6 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\merchant\ajax\PayAcct1.cs" />
     <Compile Include="KuaiCard\WebUI\business\User\UserIdImgLists.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\business\Order\CardOrderList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\agent\Index.cs">
@@ -755,12 +693,6 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\register\sendMobileCode.cs" />
     <Compile Include="KuaiCard\WebUI\register\reg.cs" />
-    <Compile Include="KuaiCard\WebUI\business\Order\SmsReportList.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\business\Order\SmsOrderList.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Business\ChangePwd.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -768,9 +700,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\agent\Top.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\agent\Order\CardOrderList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistsInfo.cs">
@@ -805,7 +734,6 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\merchant\ajax\userinfo.cs" />
     <Compile Include="KuaiCard\WebUI\Merchant\ajax\cleanupcardcontent.cs" />
-    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\CardSell.cs" />
     <Compile Include="KuaiCard\WebUI\business\User\PromUserList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -866,18 +794,11 @@
     <Compile Include="KuaiCard\WebUI\User\Pincard\card\index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\user\ordercard\index.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Merchant\Ajax\OrderJsonResult.cs" />
     <Compile Include="KuaiCard\WebUI\IpList.cs" />
     <Compile Include="KuaiCard\WebUI\business\SMSLogList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Settled\IncreaseAmtEdit.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\SmsOrderList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\web\console\Manage\Salesman.cs">
@@ -925,11 +846,7 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\setread.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\realname.cs" />
-    <Compile Include="KuaiCard\WebUI\User\ordercard\view.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\merchant\ajax\replenish.cs" />
-    <Compile Include="KuaiCard\WebUI\merchant\ajax\ordersearch1.cs" />
     <Compile Include="KuaiCard\WebUI\merchant\ajax\getdaxie.cs" />
     <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport7.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -947,7 +864,6 @@
     <Compile Include="KuaiCard\web\UserCtrls\header.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\merchant\ajax\DPI1.cs" />
     <Compile Include="KuaiCard\WebUI\Manage\APIConfig.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -961,34 +877,47 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DBAccess\DBAccess.csproj">
-      <Project>{AFC87E10-538D-4068-9428-62F4FC94F2CC}</Project>
-      <Name>DBAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Aywl.BLL\Aywl.BLL.csproj">
-      <Project>{D77B7D1C-894E-4449-B8CA-A3FF31E39401}</Project>
-      <Name>KuaiCard.BLL</Name>
+      <Project>{cd71bed8-e92e-434c-a0d3-ec26cd240f29}</Project>
+      <Name>Aywl.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Cache\Aywl.Cache.csproj">
+      <Project>{6fedd60e-713b-42b6-8004-757e5b352a4d}</Project>
+      <Name>Aywl.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.DBAccess\Aywl.DBAccess.csproj">
+      <Project>{e5a6069e-1c86-44f1-9185-56e565b1ab46}</Project>
+      <Name>Aywl.DBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Lib\Aywl.Lib.csproj">
+      <Project>{467ff2a1-aa89-4d80-95d4-c3fd1b64e71d}</Project>
+      <Name>Aywl.Lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aywl.Model\Aywl.Model.csproj">
-      <Project>{EA23ECFA-7392-4BD3-849F-F03144CFCDD8}</Project>
-      <Name>KuaiCard.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aywl.SysConfig\Aywl.SysConfig.csproj">
-      <Project>{170588BA-4FE1-4C40-85F1-C9654C7D3B3D}</Project>
-      <Name>KuaiCard.SysConfig</Name>
+      <Project>{4768644c-a02e-4d57-b4c4-4d432d87eb47}</Project>
+      <Name>Aywl.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aywl.WebComponents2.0\Aywl.WebComponents.csproj">
-      <Project>{257C046C-345F-44DB-ADBD-877F74CB4B0A}</Project>
-      <Name>KuaiCard.WebComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aywl.lib\Aywl.Lib.csproj">
-      <Project>{D8703E4F-9C28-4266-9B1C-676871306C68}</Project>
-      <Name>KuaiCardLib</Name>
+      <Project>{257c046c-345f-44db-adbd-877f74cb4b0a}</Project>
+      <Name>Aywl.WebComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KuaiCard\WebUI\User\forget\GetByMail.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.BLL.dll" />
+    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.Cache.dll" />
+    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.Lib.dll" />
+    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.Model.dll" />
+    <Analyzer Include="..\Output\AspNetPager.dll" />
+    <Analyzer Include="..\Output\Aspose.Cells.dll" />
+    <Analyzer Include="..\Output\Newtonsoft.Json.dll" />
+    <Analyzer Include="D:\创意工厂\聚合支付系统\对接代码\Output2\Newtonsoft.Json.Net20.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="KuaiCard\web\Merchant\Ajax\" />
   </ItemGroup>
 </Project>

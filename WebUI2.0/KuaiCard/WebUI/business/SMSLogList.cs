@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business
+﻿namespace OriginalStudio.WebUI.business
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -12,6 +12,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.SMS;
 
     public class SMSLogList : BusinessPageBase
     {

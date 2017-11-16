@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.User;
@@ -7,6 +7,7 @@
     using System.Web.SessionState;
     using System.IO;
     using System.Drawing;
+    using OriginalStudio.Model.Enum;
 
     public class realname : IHttpHandler, IReadOnlySessionState, IRequiresSessionState
     {
@@ -14,7 +15,7 @@
 
         public void ProcessRequest(HttpContext context)
         {
-            //KuaiCardLib.Logging.LogHelper.Write("realname0");
+            //OriginalStudio.Lib.Logging.LogHelper.Write("realname0");
 
             try
             {
@@ -26,7 +27,7 @@
                     context.Response.Write(s);
                     return;
                 }
-                //KuaiCardLib.Logging.LogHelper.Write("realname1");
+                //OriginalStudio.Lib.Logging.LogHelper.Write("realname1");
                 string str2 = context.Request["auth_Name2"];
                 string str3 = context.Request["attachments1"];
                 string str4 = context.Request["attachments2"];
@@ -49,7 +50,7 @@
                 }
                 else
                 {
-                    //KuaiCardLib.Logging.LogHelper.Write("str2" + str2);
+                    //OriginalStudio.Lib.Logging.LogHelper.Write("str2" + str2);
 
                     this.currentUser.full_name = str2;
                     this.currentUser.versoPic = str4;
@@ -90,7 +91,7 @@
                                 imgInfo.status = IdImageStatus.审核中;
                             }
                         }
-                        new KuaiCard.BLL.User.usersIdImage().Add(imgInfo);
+                        new OriginalStudio.BLL.User.usersIdImage().Add(imgInfo);
 
                         //=====16.12.5把图片字节流写入数据库=========
 
@@ -101,14 +102,14 @@
                         s = "{\"result\":\"false\",\"text\":\"提交失败，请联系管理人员\",\"ok\":\"true\"}";
                     }
                 }
-                //KuaiCardLib.Logging.LogHelper.Write("s:" + s);
+                //OriginalStudio.Lib.Logging.LogHelper.Write("s:" + s);
                 context.Response.ContentType = "application/json";
                 context.Response.Write(s);
 
             }
             catch (Exception err)
             {
-                KuaiCardLib.Logging.LogHelper.Write("实名认证realname错误:" + err.Message.ToString());
+                OriginalStudio.Lib.Logging.LogHelper.Write("实名认证realname错误:" + err.Message.ToString());
             }
         }
 

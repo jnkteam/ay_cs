@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -7,6 +7,7 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class SupplierEdit : ManagePageBase
     {
@@ -146,8 +147,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManageFactory.CheckSecondPwd();
-            this.setPower();
+            //ManageFactory.CheckSecondPwd();
+            //this.setPower();
             if (!base.IsPostBack)
             {
                 this.ShowInfo();
@@ -220,7 +221,7 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = SysSupplierFactory.GetModel(this.ItemInfoId);
+                        this._ItemInfo = null;  // SysSupplierFactory.GetSupplierModelById(this.ItemInfoId);
                     }
                     else
                     {

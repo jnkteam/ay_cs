@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -32,10 +32,10 @@
                 int result = 0;
                 if (int.TryParse(str3, out result))
                 {
-                    IMSG model = IMSGFactory.GetModel(result);
+                    IMSG model = new IMSG();// IMSGFactory.GetModel(result);
                     model.ID = result;
                     model.isRead = true;
-                    if (IMSGFactory.Update(model))
+                    if (false)  //IMSGFactory.Update(model))
                     {
                         s = "{result:true, text:'标记成功', time:1.5, reload:true}";
                     }

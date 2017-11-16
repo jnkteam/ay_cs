@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -29,7 +29,7 @@
             HttpPostedFile file = context.Request.Files[0];
             string str2 = context.Request["fileUp2"];   //反面
             string str3 = context.Request["fileUp1"];   //正面
-            //KuaiCardLib.Logging.LogHelper.Write("文件名:" + file.FileName);
+            //OriginalStudio.Lib.Logging.LogHelper.Write("文件名:" + file.FileName);
             if (file != null)
             {
                 try

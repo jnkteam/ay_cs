@@ -14,20 +14,20 @@
     {
         private readonly OriginalStudio.DAL.Withdraw.channelwithdraw dal = new OriginalStudio.DAL.Withdraw.channelwithdraw();
 
-        public int Add(OriginalStudio.Model.Withdraw.channelwithdraw model)
+        public int Add(OriginalStudio.Model.Withdraw.ChannelWithdraw model)
         {
             return this.dal.Add(model);
         }
 
-        public List<OriginalStudio.Model.Withdraw.channelwithdraw> DataTableToList(DataTable dt)
+        public List<OriginalStudio.Model.Withdraw.ChannelWithdraw> DataTableToList(DataTable dt)
         {
-            List<OriginalStudio.Model.Withdraw.channelwithdraw> list = new List<OriginalStudio.Model.Withdraw.channelwithdraw>();
+            List<OriginalStudio.Model.Withdraw.ChannelWithdraw> list = new List<OriginalStudio.Model.Withdraw.ChannelWithdraw>();
             int count = dt.Rows.Count;
             if (count > 0)
             {
                 for (int i = 0; i < count; i++)
                 {
-                    OriginalStudio.Model.Withdraw.channelwithdraw item = this.dal.DataRowToModel(dt.Rows[i]);
+                    OriginalStudio.Model.Withdraw.ChannelWithdraw item = this.dal.DataRowToModel(dt.Rows[i]);
                     if (item != null)
                     {
                         list.Add(item);
@@ -67,12 +67,12 @@
             return this.dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw GetModel(int id)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw GetModel(int id)
         {
             return this.dal.GetModel(id);
         }
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw GetModelByBankName(string bankName)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw GetModelByBankName(string bankName)
         {
             try
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        public OriginalStudio.Model.Withdraw.channelwithdraw GetModelByBankCode(string bankCode)
+        public OriginalStudio.Model.Withdraw.ChannelWithdraw GetModelByBankCode(string bankCode)
         {
             try
             {
@@ -97,7 +97,7 @@
             }
         }
 
-        public List<OriginalStudio.Model.Withdraw.channelwithdraw> GetModelList(string strWhere)
+        public List<OriginalStudio.Model.Withdraw.ChannelWithdraw> GetModelList(string strWhere)
         {
             DataSet list = this.dal.GetList(strWhere);
             return this.DataTableToList(list.Tables[0]);
@@ -126,7 +126,7 @@
             }
         }
 
-        public bool Update(OriginalStudio.Model.Withdraw.channelwithdraw model)
+        public bool Update(OriginalStudio.Model.Withdraw.ChannelWithdraw model)
         {
             return this.dal.Update(model);
         }

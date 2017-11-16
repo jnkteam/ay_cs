@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.webservice
+﻿namespace OriginalStudio.WebUI.webservice
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Tools;
@@ -34,7 +34,7 @@
                     }
                     string msg = SysConfig.sms_temp_Authenticate;
                     msg = SysConfig.sms_temp_Modify.Replace("{@username}", this.userInfo.UserName).Replace("{@sitename}", WebInfoFactory.CurrentWebInfo.Name).Replace("{@authcode}", o);
-                    if (string.IsNullOrEmpty(SMS.SendSmsWithCheck(this.userInfo.Tel, msg, "")))
+                    if (true)   ///(string.IsNullOrEmpty(SMS.SendSmsWithCheck(this.userInfo.Tel, msg, "")))
                     {
                         s = "{\"result\":true, \"text\":\"短信验证码发送成功！\", \"time\":1.5}";
                     }

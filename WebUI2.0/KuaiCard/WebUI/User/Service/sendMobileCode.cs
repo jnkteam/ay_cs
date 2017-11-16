@@ -1,10 +1,11 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Tools;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Cache;
     using OriginalStudio.Model;
+    using OriginalStudio.OKXR;
     using OriginalStudio.WebComponents;
     using OriginalStudio.WebComponents.Template;
     using System;
@@ -49,7 +50,7 @@
                             str3 = SysConfig.sms_temp_Modify.Replace("{@username}", UserFactory.CurrentMember.UserName)
                                                                                     .Replace("{@sitename}", WebInfoFactory.CurrentWebInfo.Name)
                                                                                     .Replace("{@authcode}", str2);
-                            if (string.IsNullOrEmpty(SMS.SendSmsWithCheck(UserFactory.CurrentMember.Tel, str3, "")))
+                            if (string.IsNullOrEmpty(BLL.Tools.SMS.SendSmsWithCheck(UserFactory.CurrentMember.Tel, str3, "")))
                             {
                                 s = "短信效验码已发送，请注意查收！";
                                 str7 = "true";
@@ -109,7 +110,7 @@
                         str3 = SysConfig.sms_caiwu_tocash2.Replace("{@username}", UserFactory.CurrentMember.UserName)
                                                                                 .Replace("{@sitename}", WebInfoFactory.CurrentWebInfo.Name)
                                                                                 .Replace("{@authcode}", str2);
-                        if (string.IsNullOrEmpty(SMS.SendSmsWithCheck(UserFactory.CurrentMember.Tel, str3, "")))
+                        if (string.IsNullOrEmpty(BLL.Tools.SMS.SendSmsWithCheck(UserFactory.CurrentMember.Tel, str3, "")))
                         {
                             s = "短信效验码已发送，请注意查收！";
                             str7 = "true";
@@ -142,7 +143,7 @@
                         str3 = SysConfig.sms_temp_Modify.Replace("{@username}", UserFactory.CurrentMember.UserName)
                                                                                 .Replace("{@sitename}", WebInfoFactory.CurrentWebInfo.Name)
                                                                                 .Replace("{@authcode}", str2);
-                        if (string.IsNullOrEmpty(SMS.SendSmsWithCheck(UserFactory.CurrentMember.Tel, str3, "")))
+                        if (string.IsNullOrEmpty(BLL.Tools.SMS.SendSmsWithCheck(UserFactory.CurrentMember.Tel, str3, "")))
                         {
                             s = "短信效验码已发送，请注意查收！";
                             str7 = "true";

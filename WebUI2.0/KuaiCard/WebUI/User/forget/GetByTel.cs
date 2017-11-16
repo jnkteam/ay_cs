@@ -7,7 +7,7 @@ using OriginalStudio.Cache;
 using OriginalStudio.BLL.Tools;
 using OriginalStudio.BLL.User;
 
-namespace KuaiCard.WebUI.User.Forget
+namespace OriginalStudio.WebUI.User.Forget
 {
     public class GetByTel : PageBase
     {
@@ -20,27 +20,27 @@ namespace KuaiCard.WebUI.User.Forget
             //记录找回用户名
             if (!IsPostBack)
             {
-                string ens = KuaiCardLib.Web.WebBase.GetQueryStringString("us", "");
+                string ens = OriginalStudio.Lib.Web.WebBase.GetQueryStringString("us", "");
                 if (ens == "")
                 {
                     this.AlertAndRedirect("用户名为空!");
                     this.Response.Redirect("~/User/forget/account.aspx");
                 }
-                string UserName = KuaiCardLib.Security.Cryptography.DESDecryptString(ens, "aywl");
+                string UserName = OriginalStudio.Lib.Security.Cryptography.DESDecryptString(ens, "aywl");
                 if (UserName == "")
                 {
                     this.AlertAndRedirect("用户名为空!");
                     this.Response.Redirect("~/User/forget/account.aspx");
                 }
 
-                KuaiCard.Model.User.UserInfo currentUser = KuaiCard.BLL.User.UserFactory.GetModelByName(UserName);
+                OriginalStudio.Model.User.UserInfo currentUser = OriginalStudio.BLL.User.UserFactory.GetModelByName(UserName);
                 if (currentUser == null || currentUser.UserName == "")
                 {
                     this.AlertAndRedirect("用户信息不存在!");
                     this.Response.Redirect("~/User/forget/account.aspx");
                 };
 
-                gUserPhone = KuaiCardLib.Text.Strings.Mark(currentUser.Tel);
+                gUserPhone = OriginalStudio.Lib.Text.Strings.Mark(currentUser.Tel);
 
                 if (true)       // if (currentUser.IsEmailPass == 1)
                 {
@@ -69,9 +69,9 @@ namespace KuaiCard.WebUI.User.Forget
                 return;
             }
 
-            string ens = KuaiCardLib.Web.WebBase.GetQueryStringString("us", "");
-            string UserName = KuaiCardLib.Security.Cryptography.DESDecryptString(ens, "aywl");
-            KuaiCard.Model.User.UserInfo currentUser = KuaiCard.BLL.User.UserFactory.GetModelByName(UserName);
+            string ens = OriginalStudio.Lib.Web.WebBase.GetQueryStringString("us", "");
+            string UserName = OriginalStudio.Lib.Security.Cryptography.DESDecryptString(ens, "aywl");
+            OriginalStudio.Model.User.UserInfo currentUser = OriginalStudio.BLL.User.UserFactory.GetModelByName(UserName);
 
             string objId = "PHONE_VALID_" + currentUser.Tel;
             string valid_code = (string)WebCache.GetCacheService().RetrieveObject(objId);

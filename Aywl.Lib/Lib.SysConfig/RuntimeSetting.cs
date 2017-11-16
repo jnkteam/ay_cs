@@ -191,55 +191,10 @@
                 return config;
             }
         }
+
         #endregion
-    }
-}
 
-
-/*
- 
-        public static bool CheckUrlReferrer
-        {
-            get
-            {
-                string config = ConfigHelper.GetConfig(SettingGroup, "CheckUrlReferrer");
-                return (string.IsNullOrEmpty(config) || (config == "1"));
-            }
-        }
-
-
-        public static string ConnectString
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "ConnectString");
-            }
-        }
-
-        public static string CSSDomain
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "CSSDomain");
-            }
-        }
-
-        public static double DeductSafetyTime
-        {
-            get
-            {
-                try
-                {
-                    return double.Parse(ConfigHelper.GetConfig(SettingGroup, "DeductSafetyTime"));
-                }
-                catch
-                {
-                    return 0.0;
-                }
-            }
-        }
-
-
+        #region 短信配置
 
         public static string HostName
         {
@@ -264,40 +219,6 @@
                 return ConfigHelper.GetConfig(SettingGroup, "JXTURL");
             }
         }
-
-
-        public static int MaxDayToCashTimes
-        {
-            get
-            {
-                try
-                {
-                    return int.Parse(ConfigHelper.GetConfig(SettingGroup, "MaxDayToCashTimes"));
-                }
-                catch
-                {
-                    return 1;
-                }
-            }
-        }
-
-
-        public static string OrderSmsStrategyAssembly
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "OrderSmsStrategyAssembly");
-            }
-        }
-
-        public static string OrderSmsStrategyClass
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "OrderSmsStrategyClass");
-            }
-        }
-
 
 
         public static string SMPWD
@@ -371,6 +292,105 @@
                 return ConfigHelper.GetConfig(SettingGroup, "SMUID");
             }
         }
+
+        #endregion
+
+        /// <summary>
+        /// 网站用户名称
+        /// </summary>
+        public static string SiteUser
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "SiteUser").ToLower();
+            }
+        }
+    }
+}
+
+
+/*
+ 
+        public static bool CheckUrlReferrer
+        {
+            get
+            {
+                string config = ConfigHelper.GetConfig(SettingGroup, "CheckUrlReferrer");
+                return (string.IsNullOrEmpty(config) || (config == "1"));
+            }
+        }
+
+
+        public static string ConnectString
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "ConnectString");
+            }
+        }
+
+        public static string CSSDomain
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "CSSDomain");
+            }
+        }
+
+        public static double DeductSafetyTime
+        {
+            get
+            {
+                try
+                {
+                    return double.Parse(ConfigHelper.GetConfig(SettingGroup, "DeductSafetyTime"));
+                }
+                catch
+                {
+                    return 0.0;
+                }
+            }
+        }
+
+
+
+        
+
+        public static int MaxDayToCashTimes
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(ConfigHelper.GetConfig(SettingGroup, "MaxDayToCashTimes"));
+                }
+                catch
+                {
+                    return 1;
+                }
+            }
+        }
+
+
+        public static string OrderSmsStrategyAssembly
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "OrderSmsStrategyAssembly");
+            }
+        }
+
+        public static string OrderSmsStrategyClass
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "OrderSmsStrategyClass");
+            }
+        }
+
+
+
+        
 
         public static string SqlDataUser
         {
@@ -452,15 +472,6 @@
             }
         }
 
-        /// <summary>
-        /// 网站用户名称
-        /// </summary>
-        public static string SiteUser
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "SiteUser").ToLower();
-            }
-        }
+
  */
 

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -118,7 +118,7 @@
                         }
                         break;
                 }
-                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.Member, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
+                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.会员, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
                 if (flag)
                 {
                     row["usermodestatus"] = "right";

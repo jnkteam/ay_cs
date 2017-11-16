@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.withdrawal
+﻿namespace OriginalStudio.WebUI.User.withdrawal
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -73,7 +73,7 @@
                 this.Response.Redirect("~/User/", true);
             }
 
-            DataSet list = UserPayBankApp.GetList("userid=" + base.currentUser.ID);
+            DataSet list = null;// UserPayBankApp.GetList("userid=" + base.currentUser.ID);
             if (list != null)
             {
                 //提现银行卡列表
@@ -110,7 +110,7 @@
 
                  */
 
-                DataSet ds = KuaiCard.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
+                DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
                                                             base.currentUser.ID, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));

@@ -4,7 +4,7 @@ using System.Text;
 using OriginalStudio.WebComponents.Web;
 using System.Web.UI.WebControls;
 
-namespace KuaiCard.WebUI.User.Forget
+namespace OriginalStudio.WebUI.User.Forget
 {
     public class Account : PageBase
     {
@@ -40,7 +40,7 @@ namespace KuaiCard.WebUI.User.Forget
             }
 
             //记录找回用户名
-            string ens = KuaiCardLib.Security.Cryptography.DESEncryptString(userName, "aywl");
+            string ens = OriginalStudio.Lib.Security.Cryptography.DESEncryptString(userName, "aywl");
             //this.Session["forget_username"] = userName;
 
             this.Response.Redirect("selectmode.aspx?us=" + ens);

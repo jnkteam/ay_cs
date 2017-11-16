@@ -1,7 +1,9 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.News;
+    using OriginalStudio.BLL.Supplier;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Cache;
     using OriginalStudio.Model;
@@ -118,7 +120,7 @@
                     table.Rows.Add(row);
                 }
             }
-            objId = KuaiCard.BLL.Channel.Channel.CHANEL_CACHEKEY;
+            objId = OriginalStudio.BLL.Channel.Channel.CHANEL_CACHEKEY;
             row = table.NewRow();
             if (WebCache.GetCacheService().RetrieveObject(objId) != null)
             {

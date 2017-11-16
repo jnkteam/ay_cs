@@ -5,7 +5,7 @@ using OriginalStudio.WebComponents.Web;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
-namespace KuaiCard.WebUI.User.Forget
+namespace OriginalStudio.WebUI.User.Forget
 {
     public class SetPwd : PageBase
     {
@@ -20,13 +20,13 @@ namespace KuaiCard.WebUI.User.Forget
         {
             if (!this.IsPostBack)
             {
-                string ens = KuaiCardLib.Web.WebBase.GetQueryStringString("us", "");
+                string ens = OriginalStudio.Lib.Web.WebBase.GetQueryStringString("us", "");
                 if (ens == "")
                 {
                     this.AlertAndRedirect("用户名为空!");
                     return;
                 }
-                gUserName = KuaiCardLib.Security.Cryptography.DESDecryptString(ens, "aywl");
+                gUserName = OriginalStudio.Lib.Security.Cryptography.DESDecryptString(ens, "aywl");
                 if (gUserName == "")
                 {
                     this.AlertAndRedirect("用户名为空!");
@@ -64,7 +64,7 @@ namespace KuaiCard.WebUI.User.Forget
             }
 
             //更新密码
-            KuaiCard.BLL.User.UserFactory.ChangeUserPassword(this.gUserName, this.txtPwd1.Value.Trim());
+            OriginalStudio.BLL.User.UserFactory.ChangeUserPassword(this.gUserName, this.txtPwd1.Value.Trim());
             this.AlertAndRedirect("密码修改成功!");
             //跳转
             this.Response.Redirect("success.html");

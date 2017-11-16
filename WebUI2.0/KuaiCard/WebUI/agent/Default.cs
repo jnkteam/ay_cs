@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.agent
+﻿namespace OriginalStudio.WebUI.agent
 {
     using System;
     using System.Web.UI;

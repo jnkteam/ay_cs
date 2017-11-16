@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.web.UserCtrls
+﻿namespace OriginalStudio.web.UserCtrls
 {
     using System;
     using System.Web.UI;

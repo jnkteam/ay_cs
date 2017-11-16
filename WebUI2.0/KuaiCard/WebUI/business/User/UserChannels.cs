@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business.User
+﻿namespace OriginalStudio.WebUI.business.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -59,7 +59,7 @@
 
         private void LoadData()
         {
-            DataTable table = KuaiCard.BLL.Channel.ChannelType.GetList(new bool?(true)).Tables[0];
+            DataTable table = OriginalStudio.BLL.Channel.ChannelType.GetList(new bool?(true)).Tables[0];
             if (!table.Columns.Contains("payrate"))
             {
                 table.Columns.Add("payrate", typeof(double));
@@ -118,7 +118,7 @@
                         }
                         break;
                 }
-                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.Member, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
+                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.会员, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
                 if (flag)
                 {
                     row["usermodestatus"] = "right";

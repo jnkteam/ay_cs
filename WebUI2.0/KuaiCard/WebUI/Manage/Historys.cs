@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -12,6 +12,9 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Supplier;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.Model.Settled;
 
     public class Historys : ManagePageBase
     {
@@ -81,22 +84,22 @@
             {
                 table.Columns.Add("StatusText");
                 foreach (DataRow row in table.Rows)
-                {
-                    switch (((SettledStatus) row["Status"]))
+                {                    
+                    switch (((SettledStatusEnum) row["Status"]))
                     {
-                        case SettledStatus.审核中:
+                        case SettledStatusEnum.审核中:
                             row["StatusText"] = "<font color='#66CC00'>审核中</font>";
                             break;
 
-                        case SettledStatus.支付中:
+                        case SettledStatusEnum.支付中:
                             row["StatusText"] = "<a href=\"Pay.aspx?id=" + row["ID"].ToString() + "\">进行支付</a>";
                             break;
 
-                        case SettledStatus.无效:
+                        case SettledStatusEnum.无效:
                             row["StatusText"] = "<font color='red'>无效申请</font>";
                             break;
 
-                        case SettledStatus.已支付:
+                        case SettledStatusEnum.已支付:
                             row["StatusText"] = "<font color='blue'>已支付</font>";
                             break;
                     }
@@ -118,7 +121,7 @@
                     dataTable.Columns.Add("sName", typeof(string));
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        row["sName"] = Enum.GetName(typeof(SettledStatus), row["status"]);
+                        row["sName"] = Enum.GetName(typeof(SettledStatusEnum), row["status"]);
                         row["PayeeBank"] = SettledFactory.GetSettleBankName(row["PayeeBank"].ToString());
                     }
                     dataTable.AcceptChanges();
@@ -201,9 +204,9 @@
                 this.txtStimeBox.Text = DateTime.Now.ToString("yyyy-MM-01");
                 this.txtEtimeBox.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 this.ddlStatusList.Items.Add(new ListItem("--状态--", ""));
-                foreach (int num in Enum.GetValues(typeof(SettledStatus)))
+                foreach (int num in Enum.GetValues(typeof(SettledStatusEnum)))
                 {
-                    string text = Enum.GetName(typeof(SettledStatus), num);
+                    string text = Enum.GetName(typeof(SettledStatusEnum), num);
                     this.ddlStatusList.Items.Add(new ListItem(text, num.ToString()));
                 }
                 this.ddlStatusList.SelectedValue = 8.ToString();

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -14,6 +14,9 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.BLL.Supplier;
 
     public class Pays : ManagePageBase
     {
@@ -71,21 +74,21 @@
                 table.Columns.Add("StatusText");
                 foreach (DataRow row in table.Rows)
                 {
-                    switch (((SettledStatus) row["Status"]))
+                    switch (((SettledStatusEnum) row["Status"]))
                     {
-                        case SettledStatus.审核中:
+                        case SettledStatusEnum.审核中:
                             row["StatusText"] = "<font color='#66CC00'>审核中</font>";
                             break;
 
-                        case SettledStatus.支付中:
+                        case SettledStatusEnum.支付中:
                             row["StatusText"] = "<a href=\"Pay.aspx?action=modi&ID=" + row["ID"].ToString() + "\">修改</a>&nbsp;&nbsp;<a href=\"Pay.aspx?action=pay&ID=" + row["ID"].ToString() + "\">进行支付</a>";
                             break;
 
-                        case SettledStatus.无效:
+                        case SettledStatusEnum.无效:
                             row["StatusText"] = "<font color='red'>无效申请</font>";
                             break;
 
-                        case SettledStatus.已支付:
+                        case SettledStatusEnum.已支付:
                             row["StatusText"] = "<font color='blue'>已支付</font>";
                             break;
                     }
@@ -162,7 +165,7 @@
                         dataTable.Columns.Add("sName", typeof(string));
                         foreach (DataRow row2 in dataTable.Rows)
                         {
-                            row2["sName"] = Enum.GetName(typeof(SettledStatus), row2["status"]);
+                            row2["sName"] = Enum.GetName(typeof(SettledStatusEnum), row2["status"]);
                             row2["PayeeBank"] = SettledFactory.GetSettleBankName(row2["PayeeBank"].ToString());
                         }
                         dataTable.AcceptChanges();

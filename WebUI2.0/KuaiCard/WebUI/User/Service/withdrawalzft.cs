@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -265,11 +265,11 @@
                                     //重新取一遍
                                     model.paytime = DateTime.Now;
                                     model.status = SettledStatus.已支付;
-                                    model.id = settledResult;
+                                    model.ID = settledResult;
                                     if (SettledFactory.Pay(model) == 0)
                                     {
                                         //结算不需要审核，在点 结算后直接调用接口进行支付。
-                                        KuaiCard.ETAPI.Withdraw.InitDistribution(model);
+                                        OriginalStudio.ETAPI.Withdraw.InitDistribution(model);
                                         msg = "提现申请已经处理，请及时检查是否入账！";
                                         result = "ok";
                                         ico = "error";

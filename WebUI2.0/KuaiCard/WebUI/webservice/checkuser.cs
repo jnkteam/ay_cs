@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.webservice
+﻿namespace OriginalStudio.WebUI.webservice
 {
     using OriginalStudio.BLL.User;
     using System;

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.verify
+﻿namespace OriginalStudio.WebUI.User.verify
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.WebComponents.Web;
@@ -17,7 +17,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataSet list = UserPayBankApp.GetList("userid=" + base.currentUser.ID);
+            DataSet list = null;// UserPayBankApp.GetList("userid=" + base.currentUser.ID);
             this.rptList.DataSource = list.Tables[0];
             this.rptList.DataBind();
 

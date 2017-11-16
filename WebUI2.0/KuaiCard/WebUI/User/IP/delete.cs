@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.IP
+﻿namespace OriginalStudio.WebUI.User.IP
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;
@@ -16,16 +16,16 @@
         {
             if (!this.IsPostBack)
             {
-                string id = KuaiCardLib.Web.WebBase.GetQueryStringString("id", "");
-                string ip = KuaiCardLib.Web.WebBase.GetQueryStringString("ip", "");
+                string id = OriginalStudio.Lib.Web.WebBase.GetQueryStringString("id", "");
+                string ip = OriginalStudio.Lib.Web.WebBase.GetQueryStringString("ip", "");
 
                 if (id == "" || ip == "")
                 {
                     this.Response.Redirect("~/user/ip/List.aspx");
                 }
 
-                id = KuaiCardLib.Security.Cryptography.DESDecryptString(id, "aywl");
-                ip = KuaiCardLib.Security.Cryptography.DESDecryptString(ip, "aywl");
+                id = OriginalStudio.Lib.Security.Cryptography.DESDecryptString(id, "aywl");
+                ip = OriginalStudio.Lib.Security.Cryptography.DESDecryptString(ip, "aywl");
 
                 if (id == "" || ip == "")
                 {

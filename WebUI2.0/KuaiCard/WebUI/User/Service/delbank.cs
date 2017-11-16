@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL.User;
     using System;
@@ -28,7 +28,7 @@
             int id = 0;
             if (Int32.TryParse(str, out id))
             {
-                if (UserPayBankApp.Delete(id))
+                if (false) // UserPayBankApp.Delete(id))
                 {
                     this.msg = "删除提现银行信息成功";
                     this.results = "true";

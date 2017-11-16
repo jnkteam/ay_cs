@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.withdrawal
+﻿namespace OriginalStudio.WebUI.User.withdrawal
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -218,14 +218,14 @@
                                 if (modelByUser.vaiInterface == 1)
                                 {
                                     //2017.2.10 增加 自动代付功能。参考BankForUser.cs文件。后台代付代码。
-                                    model.status = SettledStatus.付款接口支付中;
-                                    model.suppid = new channelwithdraw().GetSupplier(model.BankCode);
+                                    model.Status = SettledStatus.付款接口支付中;
+                                    model.Suppid = new channelwithdraw().GetSupplier(model.BankCode);
                                     //自动结算。2017.2.10add
-                                    model.id = settledResult;
+                                    model.ID = settledResult;
                                     if (settledResult > 0)
                                     {
                                         //结算不需要审核，在点 结算后直接调用接口进行支付。
-                                        KuaiCard.ETAPI.Withdraw.InitDistribution(model);
+                                        OriginalStudio.ETAPI.Withdraw.InitDistribution(model);
                                         closecashReason = "{result:true,text:'提现申请已经处理，请及时检查是否入账！',time:2,url:'/user/withdrawal/'}";
                                     }
                                 }   //@@@@@@@@@@@@@@@@@@@@@@

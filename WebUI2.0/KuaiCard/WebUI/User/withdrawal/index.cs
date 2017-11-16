@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.withdrawal
+﻿namespace OriginalStudio.WebUI.User.withdrawal
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -72,7 +72,7 @@
             this.getnm = base.currentUser.UserName;
             try
             {
-                this.getmsgcount = IMSGFactory.GetUserMsgCount(base.currentUser.ID);
+                this.getmsgcount = 0;   // IMSGFactory.GetUserMsgCount(base.currentUser.ID);
             }
             catch
             {
@@ -110,7 +110,7 @@
             this.CanSettlesInFront = (this.currentUser.settles_type == 0) || (this.currentUser.settles_type == 2);
 
 
-            DataSet list = UserPayBankApp.GetList("userid=" + base.currentUser.ID);
+            DataSet list = null;// UserPayBankApp.GetList("userid=" + base.currentUser.ID);
             if (list != null)
             {
                 foreach (DataRow row in list.Tables[0].Rows)
@@ -139,7 +139,7 @@
 
                  */
 
-                DataSet ds = KuaiCard.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
+                DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
                                                             base.currentUser.ID, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));

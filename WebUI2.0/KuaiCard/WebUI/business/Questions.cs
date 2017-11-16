@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business
+﻿namespace OriginalStudio.WebUI.business
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -18,7 +18,7 @@
 
         private void BindView()
         {
-            DataSet list = new Question().GetList(string.Empty);
+            DataSet list = new DataSet();   // Question().GetList(string.Empty);
             this.GridView1.DataSource = list;
             this.GridView1.DataBind();
         }

@@ -1,6 +1,7 @@
-﻿namespace KuaiCard.WebUI
+﻿namespace OriginalStudio.WebUI
 {
     using OriginalStudio.BLL;
+    using OriginalStudio.BLL.News;
     using OriginalStudio.Lib.Data;
     using OriginalStudio.Lib.Web;
     using System;

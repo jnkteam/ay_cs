@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -12,11 +12,11 @@
 
     public class TransferschemeModi : ManagePageBase
     {
-        public KuaiCard.Model.Settled.transferscheme _ItemInfo = null;
+        public OriginalStudio.Model.Settled.TransferScheme _ItemInfo = null;
         protected Button btnAdd;
         protected HtmlForm form1;
         protected RadioButtonList rblisdefault;
-        protected KuaiCard.BLL.Settled.transferscheme tsBLL = new KuaiCard.BLL.Settled.transferscheme();
+        protected OriginalStudio.BLL.Settled.TransferScheme tsBLL = new OriginalStudio.BLL.Settled.TransferScheme();
         protected TextBox txtchargeleastofeach;
         protected TextBox txtchargemostofeach;
         protected TextBox txtchargerate;
@@ -163,7 +163,7 @@
             }
         }
 
-        public KuaiCard.Model.Settled.transferscheme model
+        public OriginalStudio.Model.Settled.TransferScheme model
         {
             get
             {
@@ -173,7 +173,7 @@
                 }
                 if (this._ItemInfo == null)
                 {
-                    this._ItemInfo = new KuaiCard.Model.Settled.transferscheme();
+                    this._ItemInfo = new OriginalStudio.Model.Settled.TransferScheme();
                 }
                 return this._ItemInfo;
             }

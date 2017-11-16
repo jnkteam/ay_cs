@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.Order
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -6,7 +6,7 @@
     using OriginalStudio.Model;
     using OriginalStudio.Model.Order;
     using OriginalStudio.WebComponents.Web;
-    using KuaiCard.WebUI;
+    using OriginalStudio.WebUI;
     using OriginalStudio.Lib.TimeControl;
     using OriginalStudio.Lib.Web;
     using System;
@@ -54,7 +54,7 @@
         {
             try
             {
-                return KuaiCard.BLL.Channel.Channel.GetModelByCode(code).modeName;
+                return OriginalStudio.BLL.Channel.Channel.GetModelByCode(code).modeName;
             }
             catch
             {
@@ -108,7 +108,7 @@
         {
             if (this.Id > 0L)
             {
-                OrderBankInfo model = new OrderBank().GetModel(this.Id);
+                OrderBankInfo model = new OrderBank().GetOrderbankModel(this.Id);
                 if (model != null)
                 {
                     if (base.currentManage.isSuperAdmin <= 0)
@@ -118,8 +118,8 @@
                     this.lblorderid.Text = model.orderid;
                     this.lblordertype.Text = model.ordertype.ToString();
                     this.lbluserid.Text = model.userid.ToString() + " (" + this.getuserName(model.userid) + ")";
-                    this.lbltypeId.Text = this.getChannelTypeName(model.typeId);
-                    this.lblpaymodeId.Text = this.getChannelName(model.paymodeId);
+                    this.lbltypeId.Text = this.getChannelTypeName(model.channeltypeId);
+                    this.lblpaymodeId.Text = this.getChannelName(model.channelcode);
                     this.lbluserorder.Text = model.userorder;
                     this.lblrefervalue.Text = model.refervalue.ToString("f2");
                     if (model.realvalue.HasValue)

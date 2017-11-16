@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -113,7 +113,7 @@
                 bool flag = false;
                 if (this.isUpdate)
                 {
-                    if (KuaiCard.BLL.Settled.TocashScheme.Update(this.model))
+                    if (OriginalStudio.BLL.Settled.TocashScheme.Update(this.model))
                     {
                         flag = true;
                     }
@@ -121,7 +121,7 @@
                 else
                 {
                     this.model.type = 1;
-                    if (KuaiCard.BLL.Settled.TocashScheme.Add(this.model) > 0)
+                    if (OriginalStudio.BLL.Settled.TocashScheme.Add(this.model) > 0)
                     {
                         flag = true;
                     }
@@ -215,7 +215,7 @@
                 {
                     if (this.isUpdate)
                     {
-                        this._ItemInfo = KuaiCard.BLL.Settled.TocashScheme.GetModel(this.ItemInfoId);
+                        this._ItemInfo = OriginalStudio.BLL.Settled.TocashScheme.GetModel(this.ItemInfoId);
                     }
                     else
                     {

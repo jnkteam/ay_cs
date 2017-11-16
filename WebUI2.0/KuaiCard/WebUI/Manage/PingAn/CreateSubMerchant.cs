@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.PingAn
+﻿namespace OriginalStudio.WebUI.Manage.PingAn
 {
     using OriginalStudio.BLL;
     using OriginalStudio.WebComponents.Web;

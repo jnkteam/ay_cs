@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.Order
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -11,6 +11,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Supplier;
 
     public class BankReportList : ManagePageBase
     {
@@ -248,7 +249,7 @@
             }
             catch (Exception err)
             {
-                KuaiCardLib.Logging.LogHelper.Write("BankReportList页面错误：" + err.Message.ToString());
+                OriginalStudio.Lib.Logging.LogHelper.Write("BankReportList页面错误：" + err.Message.ToString());
             }
         }
 

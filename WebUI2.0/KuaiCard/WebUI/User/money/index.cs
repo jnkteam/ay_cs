@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.money
+﻿namespace OriginalStudio.WebUI.User.money
 {
     using OriginalStudio.BLL.Order;
     using OriginalStudio.WebComponents.Web;

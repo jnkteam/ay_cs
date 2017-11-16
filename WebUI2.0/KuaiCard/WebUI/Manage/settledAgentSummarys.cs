@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Withdraw;
@@ -14,6 +14,8 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.BLL.Settled;
 
     public class settledAgentSummarys : ManagePageBase
     {
@@ -90,7 +92,7 @@
                     List<SettledInfo> list = SettledFactory.DataTableToList(listWithdrawByApi);
                     foreach (SettledInfo info in list)
                     {
-                        KuaiCard.ETAPI.Withdraw.InitDistribution(info);
+                        OriginalStudio.ETAPI.Withdraw.InitDistribution(info);
                     }
                 }
                 base.AlertAndRedirect("审核成功!");
@@ -116,7 +118,7 @@
                         List<SettledInfo> list = SettledFactory.DataTableToList(withdrawListByApi);
                         foreach (SettledInfo info in list)
                         {
-                            KuaiCard.ETAPI.Withdraw.InitDistribution(info);
+                            OriginalStudio.ETAPI.Withdraw.InitDistribution(info);
                         }
                     }
                     base.AlertAndRedirect("审核成功!");
@@ -193,9 +195,9 @@
                     if (((status != -1) && SettledFactory.Audit(int.Parse(str), status)) && (status == 2))
                     {
                         SettledInfo model = SettledFactory.GetModel(int.Parse(str));
-                        if (model.status == SettledStatus.付款接口支付中)
+                        if (model.Status ==  SettledStatusEnum.付款接口支付中)
                         {
-                            KuaiCard.ETAPI.Withdraw.InitDistribution(model);
+                            OriginalStudio.ETAPI.Withdraw.InitDistribution(model);
                         }
                     }
                 }

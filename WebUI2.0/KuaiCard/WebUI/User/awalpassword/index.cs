@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.awalpassword
+﻿namespace OriginalStudio.WebUI.User.awalpassword
 {
     using OriginalStudio.WebComponents.Web;
     using System;

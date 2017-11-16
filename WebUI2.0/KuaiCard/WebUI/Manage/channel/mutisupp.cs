@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.channel
+﻿namespace OriginalStudio.WebUI.Manage.channel
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;

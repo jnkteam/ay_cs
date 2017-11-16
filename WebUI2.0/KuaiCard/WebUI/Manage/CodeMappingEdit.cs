@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -10,6 +10,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class CodeMappingEdit : ManagePageBase
     {
@@ -37,7 +38,7 @@
             if (!base.IsPostBack)
             {
                 this.ddlpmode.Items.Add(new ListItem("---全部通道---", ""));
-                DataTable table = KuaiCard.BLL.Channel.Channel.GetList(0x66).Tables[0];
+                DataTable table = OriginalStudio.BLL.Channel.Channel.GetList(0x66).Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
                     this.ddlpmode.Items.Add(new ListItem(row["modeName"].ToString(), row["code"].ToString()));

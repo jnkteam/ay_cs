@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User
+﻿namespace OriginalStudio.WebUI.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -11,6 +11,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.News;
 
     public class Index : UserPageBase
     {
@@ -68,7 +69,7 @@
 
         private void InitForm()
         {
-            this.bankcoe = UserPayBankApp.GetIsRead(base.currentUser.ID);
+            this.bankcoe = 0;// UserPayBankApp.GetIsRead(base.currentUser.ID);
             this.getnid = base.currentUser.ID.ToString();
             this.getnm = base.currentUser.UserName;
             this.litbalance.Text = ((base.balance - base.unpayment) - base.Freeze).ToString("f2");
@@ -97,7 +98,7 @@
                 this.classemail.Attributes["class"] = "color_fei";
                 this.classemail.InnerText = "未绑定";
                 this.linemail.InnerText = "绑定";
-                if (KuaiCard.SysConfig.RuntimeSetting.SiteUser.ToLower() == "zft")
+                if (OriginalStudio.Lib.SysConfig.RuntimeSetting.SiteUser.ToLower() == "zft")
                     this.linemail.Attributes["href"] = "/user/email/";
                 else
                     this.linemail.Attributes["href"] = "/user/validate/set.aspx";
@@ -114,7 +115,7 @@
                 this.classshouji.Attributes["class"] = "color_fei";
                 this.classshouji.InnerText = "未绑定";
                 this.linshouji.InnerText = "绑定";
-                if (KuaiCard.SysConfig.RuntimeSetting.SiteUser.ToLower() == "zft")
+                if (OriginalStudio.Lib.SysConfig.RuntimeSetting.SiteUser.ToLower() == "zft")
                     this.linshouji.Attributes["href"] = "/user/mobile/";
                 else
                     this.linshouji.Attributes["href"] = "/user/validate/tel.aspx";
@@ -192,21 +193,6 @@
                 searchParams.Add(new SearchParam("etime", minValue.ToString()));
             }
             orderby = string.Empty;
-            OrderCard card = new OrderCard();
-            DataTable table3 = card.PageSearch(searchParams, 20, 1, orderby).Tables[2];
-            if ((table3 != null) && (table3.Rows.Count > 0))
-            {
-                try
-                {
-                    this.totalrefervalue2 = Convert.ToDecimal(table3.Rows[0]["refervalue"]).ToString("f0");
-                    this.totalrealvalue2 = Convert.ToDecimal(table3.Rows[0]["realvalue"]).ToString("f0");
-                    this.totalordertotal2 = Convert.ToDecimal(table3.Rows[0]["ordtotal"]).ToString("f0");
-                    this.totalsuccordertotal2 = Convert.ToDecimal(table3.Rows[0]["succordtotal"]).ToString("f0");
-                }
-                catch
-                {
-                }
-            }
             this.totalordertotal = (Convert.ToDouble(this.totalordertotal1) + Convert.ToDouble(this.totalordertotal2)).ToString();
             this.totalsuccordertotal = (Convert.ToDouble(this.totalsuccordertotal1) + Convert.ToDouble(this.totalsuccordertotal2)).ToString();
             this.totalrefervalue = (Convert.ToDouble(this.totalrefervalue1) + Convert.ToDouble(this.totalrefervalue2)).ToString();

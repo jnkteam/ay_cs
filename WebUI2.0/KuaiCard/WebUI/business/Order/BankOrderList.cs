@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business.Order
+﻿namespace OriginalStudio.WebUI.business.Order
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -13,6 +13,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Supplier;
 
     public class BankOrderList : BusinessPageBase
     {

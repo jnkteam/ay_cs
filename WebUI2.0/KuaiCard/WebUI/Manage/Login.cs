@@ -1,9 +1,9 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
     using OriginalStudio.WebComponents.Web;
-    using KuaiCard.WebUI;
+    using OriginalStudio.WebUI;
     using OriginalStudio.Lib;
     using OriginalStudio.Lib.Configuration;
     using OriginalStudio.Lib.Security;
@@ -34,7 +34,7 @@
                 {
                     string str = XRequest.GetString("UserNameBox");
                     string str2 = Cryptography.MD5(XRequest.GetString("pas"));
-                    KuaiCard.Model.Manage manage = new KuaiCard.Model.Manage();
+                    OriginalStudio.Model.Manage manage = new OriginalStudio.Model.Manage();
                     manage.username = str;
                     manage.password = str2;
                     manage.lastLoginTime = new DateTime?(DateTime.Now);

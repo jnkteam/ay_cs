@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.News
+﻿namespace OriginalStudio.WebUI.News
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -12,6 +12,7 @@
     using System.Data;
     using System.Collections.Generic;
     using OriginalStudio.Lib.Data;
+    using OriginalStudio.BLL.News;
 
     public class NewsList : System.Web.UI.Page
 	{

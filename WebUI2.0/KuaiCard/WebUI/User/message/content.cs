@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.message
+﻿namespace OriginalStudio.WebUI.User.message
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -25,7 +25,7 @@
                 if (!this.ItemInfo.isRead)
                 {
                     this.ItemInfo.isRead = true;
-                    IMSGFactory.Update(this.ItemInfo);
+                    //IMSGFactory.Update(this.ItemInfo);
                 }
             }
         }
@@ -44,7 +44,7 @@
             {
                 if ((this._item == null) && (this.msgId > 0))
                 {
-                    this._item = IMSGFactory.GetModel(this.msgId);
+                    this._item = new IMSG();    // IMSGFactory.GetModel(this.msgId);
                 }
                 return this._item;
             }

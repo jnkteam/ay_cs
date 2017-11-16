@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -13,6 +13,8 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.Model.Settled;
 
     public class SettledList : ManagePageBase
     {
@@ -67,21 +69,21 @@
                 table.Columns.Add("StatusText");
                 foreach (DataRow row in table.Rows)
                 {
-                    switch (((SettledStatus) row["Status"]))
+                    switch (((SettledStatusEnum) row["Status"]))
                     {
-                        case SettledStatus.审核中:
+                        case SettledStatusEnum.审核中:
                             row["StatusText"] = "<font color='#66CC00'>审核中</font>";
                             break;
 
-                        case SettledStatus.支付中:
+                        case SettledStatusEnum.支付中:
                             row["StatusText"] = "<a href=\"Settled.aspx?action=modi&ID=" + row["ID"].ToString() + "\">修改</a>&nbsp;&nbsp;<a href=\"Settled.aspx?action=pay&ID=" + row["ID"].ToString() + "\">进行支付</a>";
                             break;
 
-                        case SettledStatus.无效:
+                        case SettledStatusEnum.无效:
                             row["StatusText"] = "<font color='red'>无效申请</font>";
                             break;
 
-                        case SettledStatus.已支付:
+                        case SettledStatusEnum.已支付:
                             row["StatusText"] = "<font color='blue'>已支付</font>";
                             break;
                     }
@@ -157,9 +159,9 @@
             if (!base.IsPostBack)
             {
                 this.StatusList.Items.Add(new ListItem("—状态—", ""));
-                foreach (int num in Enum.GetValues(typeof(SettledStatus)))
+                foreach (int num in Enum.GetValues(typeof(SettledStatusEnum)))
                 {
-                    string name = Enum.GetName(typeof(SettledStatus), num);
+                    string name = Enum.GetName(typeof(SettledStatusEnum), num);
                     this.StatusList.Items.Add(new ListItem(name, num.ToString()));
                 }
                 this.StatusList.SelectedValue = 2.ToString();

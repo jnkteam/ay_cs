@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.register
+﻿namespace OriginalStudio.WebUI.register
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;

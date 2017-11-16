@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.merchant.ajax
+﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.User;
@@ -6,6 +6,8 @@
     using OriginalStudio.Lib.Web;
     using System;
     using System.Web;
+    using OriginalStudio.BLL.Email;
+    using OriginalStudio.Model.Email;
 
     public class mailcheckreceive : IHttpHandler
     {

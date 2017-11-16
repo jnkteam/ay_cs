@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.message
+﻿namespace OriginalStudio.WebUI.User.message
 {
     using OriginalStudio.BLL;
     using OriginalStudio.WebComponents.Web;
@@ -25,7 +25,7 @@
         {
             List<SearchParam> searchParams = new List<SearchParam>();
             searchParams.Add(new SearchParam("msg_to", base.UserId));
-            DataSet set = IMSGFactory.PageSearch(searchParams, this.PagerAll.PageSize, this.PagerAll.CurrentPageIndex, string.Empty);
+            DataSet set = new DataSet();    // IMSGFactory.PageSearch(searchParams, this.PagerAll.PageSize, this.PagerAll.CurrentPageIndex, string.Empty);
             this.PagerAll.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.msg_data.DataSource = set.Tables[1];
             this.msg_data.DataBind();
@@ -34,7 +34,7 @@
             {
                 foreach (DataRow row in table.Rows)
                 {
-                    if (IMSGFactory.IsRead(int.Parse(row["id"].ToString())))
+                    if (false)  //IMSGFactory.IsRead(int.Parse(row["id"].ToString())))
                     {
                         this.classa = "";
                     }
@@ -74,7 +74,7 @@
             List<SearchParam> searchParams = new List<SearchParam>();
             searchParams.Add(new SearchParam("msg_to", base.UserId));
             searchParams.Add(new SearchParam("IsRead", 0));
-            DataSet set = IMSGFactory.PageSearch(searchParams, this.PagerUnRead.PageSize, this.PagerUnRead.CurrentPageIndex, string.Empty);
+            DataSet set = new DataSet();    // IMSGFactory.PageSearch(searchParams, this.PagerUnRead.PageSize, this.PagerUnRead.CurrentPageIndex, string.Empty);
             this.PagerUnRead.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.msg_unread_data.DataSource = set.Tables[1];
             this.msg_unread_data.DataBind();
@@ -94,7 +94,7 @@
             List<SearchParam> searchParams = new List<SearchParam>();
             searchParams.Add(new SearchParam("msg_to", base.UserId));
             searchParams.Add(new SearchParam("IsRead", 1));
-            DataSet set = IMSGFactory.PageSearch(searchParams, this.PagerRead.PageSize, this.PagerRead.CurrentPageIndex, string.Empty);
+            DataSet set = new DataSet();// IMSGFactory.PageSearch(searchParams, this.PagerRead.PageSize, this.PagerRead.CurrentPageIndex, string.Empty);
             this.PagerRead.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.msg_read_data.DataSource = set.Tables[1];
             this.msg_read_data.DataBind();

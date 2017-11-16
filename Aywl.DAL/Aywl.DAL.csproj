@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\Order\Helper.cs" />
     <Compile Include="DAL\Settled\Settled.cs">
       <SubType>Code</SubType>
     </Compile>

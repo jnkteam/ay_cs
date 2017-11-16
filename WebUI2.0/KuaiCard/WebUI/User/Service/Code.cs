@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.Service
+﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -37,7 +37,7 @@
             string imgCode = context.Request["imgcode"];        //验证码参数，有的传递，使用前判断是否为空null
 
             //2017.8.18 增加使用用户判断条件
-            string siteuser = KuaiCard.SysConfig.RuntimeSetting.SiteUser;
+            string siteuser = OriginalStudio.Lib.SysConfig.RuntimeSetting.SiteUser;
 
             if (String.IsNullOrEmpty(reqName) == false)
             {
@@ -282,7 +282,7 @@
                     //产生随机密钥
                     long tick = DateTime.Now.Ticks;
                     Random random = new Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
-                    string tmp = KuaiCardLib.Security.Cryptography.MD5(random.Next(100000000).ToString("00000000"));
+                    string tmp = OriginalStudio.Lib.Security.Cryptography.MD5(random.Next(100000000).ToString("00000000"));
                     msg = tmp; //返回的密钥
                     result = "ok";
                     ico = "success";

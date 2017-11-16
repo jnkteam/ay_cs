@@ -5,7 +5,7 @@ using OriginalStudio.WebComponents.Web;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace KuaiCard.WebUI.Manage.Channel
+namespace OriginalStudio.WebUI.Manage.Channel
 {
 	public class Tfb :  ManagePageBase
 	{

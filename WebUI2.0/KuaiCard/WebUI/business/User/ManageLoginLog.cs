@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Business.User
+﻿namespace OriginalStudio.WebUI.Business.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;

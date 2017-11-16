@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.webservice
+﻿namespace OriginalStudio.WebUI.webservice
 {
     using OriginalStudio.Cache;
     using OriginalStudio.Lib.Security;

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;
@@ -40,7 +40,7 @@
                     int result = 0;
                     if (int.TryParse(str2, out result))
                     {
-                        UserPayBankApp.Delete(result);
+                        //UserPayBankApp.Delete(result);
                     }
                 }
                 base.AlertAndRedirect("操作成功", "UserPayAccts.aspx");
@@ -74,7 +74,7 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            DataSet set = UserPayBankApp.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = new DataSet();    // UserPayBankApp.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.rptApps.DataSource = set.Tables[1];
             this.rptApps.DataBind();
@@ -104,7 +104,7 @@
 
         protected void rptApps_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            UserPayBankAppInfo model = UserPayBankApp.GetModel(int.Parse(e.CommandArgument.ToString()));
+            UserPayBankAppInfo model = new UserPayBankAppInfo();// UserPayBankApp.GetModel(int.Parse(e.CommandArgument.ToString()));
             if (e.CommandName == "pass")
             {
                 model.status = AcctChangeEnum.审核成功;
@@ -115,7 +115,7 @@
             }
             model.SureTime = new DateTime?(DateTime.Now);
             model.SureUser = new int?(base.currentManage.id);
-            if (UserPayBankApp.Check(model))
+            if (false)  //UserPayBankApp.Check(model))
             {
                 base.AlertAndRedirect("操作成功", "UserPayAccts.aspx");
             }

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Withdraw
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL.Withdraw;
     using OriginalStudio.Model.Withdraw;
@@ -39,8 +39,8 @@
 
         private void ShowInfo(int id)
         {
-            KuaiCard.BLL.Withdraw.settledAgentNotify notify = new KuaiCard.BLL.Withdraw.settledAgentNotify();
-            KuaiCard.Model.Withdraw.settledAgentNotify model = notify.GetModel(id);
+            OriginalStudio.BLL.Withdraw.settledAgentNotify notify = new OriginalStudio.BLL.Withdraw.settledAgentNotify();
+            OriginalStudio.Model.Withdraw.settledAgentNotify model = notify.GetModel(id);
             this.lblid.Text = model.id.ToString();
             this.lblnotify_id.Text = model.notify_id;
             this.lbluserid.Text = model.userid.ToString();

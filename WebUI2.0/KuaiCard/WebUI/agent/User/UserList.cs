@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.agent.User
+﻿namespace OriginalStudio.WebUI.agent.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;

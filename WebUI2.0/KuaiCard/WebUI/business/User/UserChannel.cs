@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.business.User
+﻿namespace OriginalStudio.WebUI.business.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
@@ -13,6 +13,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Supplier;
 
     public class UserChannel : BusinessPageBase
     {
@@ -166,7 +167,7 @@
                         row["suppid"] = model.suppid.Value;
                     }
                 }
-                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.Member, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
+                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.会员, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
             }
             this.rpt_paymode.DataSource = table;
             this.rpt_paymode.DataBind();

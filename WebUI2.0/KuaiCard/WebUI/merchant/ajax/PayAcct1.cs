@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.merchant.ajax
+﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.User;
@@ -70,14 +70,14 @@
                     model.AddTime = new DateTime?(DateTime.Now);
                     model.userid = this.currentUser.ID;
                     model.status = AcctChangeEnum.审核成功;
-                    int num2 = UserPayBankApp.Add(model);
+                    int num2 = 0;// UserPayBankApp.Add(model);
                     if (num2 > 0)
                     {
                         model.id = num2;
                         model.status = AcctChangeEnum.审核成功;
                         model.SureTime = new DateTime?(DateTime.Now);
                         model.SureUser = 0;
-                        UserPayBankApp.Check(model);
+                        //UserPayBankApp.Check(model);
                         str = "true";
                     }
                     else

@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.Manage.Withdraw
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Withdraw;
@@ -13,8 +13,8 @@
 
     public class AgentDistsInfo : ManagePageBase
     {
-        private KuaiCard.Model.Withdraw.settledAgent _model = null;
-        private KuaiCard.BLL.Withdraw.settledAgent bll = new KuaiCard.BLL.Withdraw.settledAgent();
+        private OriginalStudio.Model.Withdraw.settledAgent _model = null;
+        private OriginalStudio.BLL.Withdraw.settledAgent bll = new OriginalStudio.BLL.Withdraw.settledAgent();
         protected Button btn_cancel;
         protected Button btnAudits;
         protected Button btnpayfail;
@@ -162,7 +162,7 @@
             }
         }
 
-        public KuaiCard.Model.Withdraw.settledAgent model
+        public OriginalStudio.Model.Withdraw.settledAgent model
         {
             get
             {

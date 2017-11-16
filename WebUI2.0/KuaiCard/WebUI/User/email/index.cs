@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.email
+﻿namespace OriginalStudio.WebUI.User.email
 {
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;
@@ -13,7 +13,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gUserEmail = KuaiCardLib.Text.Strings.Mark(base.currentUser.Email);
+            gUserEmail = OriginalStudio.Lib.Text.Strings.Mark(base.currentUser.Email);
             gEmailPass = base.currentUser.IsEmailPass == 1;
         }
     }

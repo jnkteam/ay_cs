@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI.User.realname
+﻿namespace OriginalStudio.WebUI.User.realname
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;

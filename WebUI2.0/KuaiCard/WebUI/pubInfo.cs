@@ -1,4 +1,4 @@
-﻿namespace KuaiCard.WebUI
+﻿namespace OriginalStudio.WebUI
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -7,6 +7,8 @@
     using System.Collections.Generic;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using OriginalStudio.Model.News;
+    using OriginalStudio.BLL.News;
 
     public class pubInfo : Page
     {

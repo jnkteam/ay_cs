@@ -4,7 +4,7 @@ using System.Text;
 using OriginalStudio.WebComponents.Web;
 using System.Web.UI.WebControls;
 
-namespace KuaiCard.WebUI.User.Forget
+namespace OriginalStudio.WebUI.User.Forget
 {
     public class SelectMode : PageBase
     {
@@ -13,7 +13,7 @@ namespace KuaiCard.WebUI.User.Forget
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string ens = KuaiCardLib.Web.WebBase.GetQueryStringString("us", "");
+            string ens = OriginalStudio.Lib.Web.WebBase.GetQueryStringString("us", "");
             if (ens == "")
             {
                 this.AlertAndRedirect("用户名为空!");

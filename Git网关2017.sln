@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.IMessaging", "Aywl.IMe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.WebComponents", "Aywl.WebComponents2.0\Aywl.WebComponents.csproj", "{257C046C-345F-44DB-ADBD-877F74CB4B0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI2.0\WebUI.csproj", "{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,12 @@ Global
 		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Release|Any CPU.ActiveCfg = Release|x86
 		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Release|x86.ActiveCfg = Release|x86
 		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Release|x86.Build.0 = Release|x86
+		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Debug|x86.ActiveCfg = Debug|x86
+		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Debug|x86.Build.0 = Debug|x86
+		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Release|Any CPU.ActiveCfg = Release|x86
+		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Release|x86.ActiveCfg = Release|x86
+		{9576CDF2-ACAB-4B77-AD90-75C70D8E8A67}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

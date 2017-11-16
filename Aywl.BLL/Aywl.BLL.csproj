@@ -99,6 +99,7 @@
     <Compile Include="Sys\Transaction\YeePay\HmacMD5.cs" />
     <Compile Include="Tools\db.cs" />
     <Compile Include="User\MchUserPayRateFactory.cs" />
+    <Compile Include="User\UserAccessTime.cs" />
     <Compile Include="User\UserFactory.cs" />
     <Compile Include="User\userHost.cs" />
     <Compile Include="User\UsersAmt.cs" />

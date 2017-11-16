@@ -116,6 +116,7 @@
     <Compile Include="Enum\noRefCheckStatusEnum.cs" />
     <Compile Include="User\PayhSubmerchant.cs" />
     <Compile Include="User\PromotionUserInfo.cs" />
+    <Compile Include="User\UserAccessTimeInfo.cs" />
     <Compile Include="User\UserFromPartners.cs" />
     <Compile Include="User\userHostInfo.cs" />
     <Compile Include="User\userHostStatus.cs" />

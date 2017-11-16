@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.SQLServerDAL", "Aywl.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.IMessaging", "Aywl.IMessaging\Aywl.IMessaging.csproj", "{28A955EC-48D9-446A-A023-D733FADFC524}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aywl.WebComponents", "Aywl.WebComponents2.0\Aywl.WebComponents.csproj", "{257C046C-345F-44DB-ADBD-877F74CB4B0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,12 @@ Global
 		{28A955EC-48D9-446A-A023-D733FADFC524}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28A955EC-48D9-446A-A023-D733FADFC524}.Release|x86.ActiveCfg = Release|Any CPU
 		{28A955EC-48D9-446A-A023-D733FADFC524}.Release|x86.Build.0 = Release|Any CPU
+		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Debug|x86.ActiveCfg = Debug|x86
+		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Debug|x86.Build.0 = Debug|x86
+		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Release|Any CPU.ActiveCfg = Release|x86
+		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Release|x86.ActiveCfg = Release|x86
+		{257C046C-345F-44DB-ADBD-877F74CB4B0A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

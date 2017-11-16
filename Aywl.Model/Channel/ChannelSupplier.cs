@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// 作废！！！
+    /// </summary>
     [Serializable]
     public class ChannelSupplier
     {

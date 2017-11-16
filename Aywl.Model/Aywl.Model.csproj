@@ -71,7 +71,6 @@
     <Compile Include="Channel\ChannelTypeInfo.cs" />
     <Compile Include="Channel\ChannelTypeUserInfo.cs" />
     <Compile Include="Channel\CodeMappingInfo.cs" />
-    <Compile Include="Channel\EnumChannelType.cs" />
     <Compile Include="Channel\OpenEnum.cs" />
     <Compile Include="CPAInfo.cs" />
     <Compile Include="Settled\Distribution.cs" />

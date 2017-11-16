@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage.Withdraw
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;

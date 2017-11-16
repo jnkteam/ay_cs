@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;

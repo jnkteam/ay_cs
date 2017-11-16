@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.webservice
 {
-    using KuaiCard.Cache;
-    using KuaiCardLib.Security;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Lib.Security;
     using System;
     using System.Web;
     using System.Web.SessionState;

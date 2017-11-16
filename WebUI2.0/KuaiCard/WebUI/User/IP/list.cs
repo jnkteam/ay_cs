@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.User.IP
 {
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web;
     using System.Web.UI.WebControls;
-    using KuaiCard.BLL.User;
+    using OriginalStudio.BLL.User;
 
     public class list : UserPageBase
     {

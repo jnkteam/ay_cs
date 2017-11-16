@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.agent
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Order;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.TimeControl;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Order;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.TimeControl;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

@@ -1,16 +1,15 @@
 ﻿namespace KuaiCard.WebUI.User
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model.User;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.Lib.Configuration;
+    using OriginalStudio.Lib.Web;
     using System;
-    using System.Web.UI;
+   
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
-    using System.Text.RegularExpressions;
+   
 
     public class UserLogin : System.Web.UI.Page
 	{
@@ -18,15 +17,28 @@
         protected HtmlInputPassword j_password;
         protected HtmlInputText j_username;
         protected HtmlInputText j_captcha_response;
+        private static readonly string _group = "runtimeSettings";
+
+        string tmp = ConfigHelper.GetConfig(SettingGroup, "ConnectString");
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            //Response.Write("con:"+ tmp);
+           
             if (base.IsPostBack)
             {
                 this.SignIn();
             }
         }
-
+        public static string SettingGroup
+        {
+            get
+            {
+                return _group;
+            }
+        }
         private void SignIn()
         {
             string str = this.j_username.Value.Trim();
@@ -54,11 +66,13 @@
             }
             else
             {
-                UserInfo userinfo = new UserInfo();
-                userinfo.UserName = str;
-                userinfo.Password = str2;
-                userinfo.LastLoginIp = ServerVariables.TrueIP;
-                userinfo.LastLoginTime = DateTime.Now;
+                UserInfo userinfo = new UserInfo()
+                {
+                    UserName = str,
+                    Password = str2,
+                    LastLoginIp = ServerVariables.TrueIP,
+                    LastLoginTime = DateTime.Now
+                };
                 userinfo.LastLoginAddress = WebUtility.GetIPAddress(userinfo.LastLoginIp);
                 userinfo.LastLoginRemark = WebUtility.GetIPAddressInfo(userinfo.LastLoginIp);
                 userinfo.login_mac = "";// GetCustomerMac(ServerVariables.TrueIP);

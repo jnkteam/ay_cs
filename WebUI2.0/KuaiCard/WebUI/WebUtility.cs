@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCardLib.Security;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Lib.Security;
     using System;
     using System.Data;
     using System.Web.UI;
@@ -55,7 +55,7 @@
         {
             ddl.Items.Clear();
             string where = "isbank =1";
-            DataTable table = SupplierFactory.GetList(where).Tables[0];
+            DataTable table = SysSupplierFactory.GetList(where).Tables[0];
             ddl.Items.Add(new ListItem("--请选择--", "0"));
             if (table != null)
             {
@@ -84,7 +84,7 @@
         {
             ddl.Items.Clear();
             string where = "iscard =1";
-            DataTable table = SupplierFactory.GetList(where).Tables[0];
+            DataTable table = SysSupplierFactory.GetList(where).Tables[0];
             ddl.Items.Add(new ListItem("--请选择--", "0"));
             if (table != null)
             {
@@ -99,7 +99,7 @@
         {
             ddl.Items.Clear();
             string where = "issms =1";
-            DataTable table = SupplierFactory.GetList(where).Tables[0];
+            DataTable table = SysSupplierFactory.GetList(where).Tables[0];
             ddl.Items.Add(new ListItem("--请选择--", "0"));
             if (table != null)
             {
@@ -114,7 +114,7 @@
         {
             ddl.Items.Clear();
             string where = "issx =1";
-            DataTable table = SupplierFactory.GetList(where).Tables[0];
+            DataTable table = SysSupplierFactory.GetList(where).Tables[0];
             ddl.Items.Add(new ListItem("--请选择--", "0"));
             if (table != null)
             {
@@ -176,7 +176,7 @@
                 {
                     return string.Empty;
                 }
-                return SupplierFactory.GetModelByCode(int.Parse(obj.ToString())).name;
+                return SysSupplierFactory.GetSupplierModelByCode(int.Parse(obj.ToString())).SupplierName;
             }
             catch
             {

@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
     using Aspose.Cells;
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -142,7 +142,7 @@
                     string name = Enum.GetName(typeof(SettledmodeEnum), num);
                     this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
                 }
-                DataTable table = SupplierFactory.GetList("isdistribution=1").Tables[0];
+                DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
                 foreach (DataRow row in table.Rows)

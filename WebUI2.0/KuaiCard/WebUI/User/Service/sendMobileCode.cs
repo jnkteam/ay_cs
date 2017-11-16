@@ -1,12 +1,12 @@
 ﻿namespace KuaiCard.WebUI.User.Service
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Tools;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Cache;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents;
-    using KuaiCard.WebComponents.Template;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents;
+    using OriginalStudio.WebComponents.Template;
     using System;
     using System.Text;
     using System.Web;

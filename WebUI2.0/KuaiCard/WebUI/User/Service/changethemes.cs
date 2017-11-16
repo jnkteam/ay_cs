@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.User.Service
 {
-    using KuaiCard.Model.Json;
-    using KuaiCard.WebComponents;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.Model.Json;
+    using OriginalStudio.WebComponents;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Text;
     using System.Text.RegularExpressions;

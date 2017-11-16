@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.WebComponents;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.WebComponents;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Text;
     using System.Web.UI.HtmlControls;

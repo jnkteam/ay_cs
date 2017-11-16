@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.Manage.Jubao
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
     using KuaiCard.WebUI;
-    using KuaiCardLib.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

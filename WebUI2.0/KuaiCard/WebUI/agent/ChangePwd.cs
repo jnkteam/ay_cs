@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.agent
 {
-    using KuaiCard.BLL.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Security;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Security;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

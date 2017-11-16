@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Order;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Order;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -69,7 +69,7 @@
                 this.EtimeBox.Text = DateTime.Today.AddDays(1.0).ToString("yyyy-MM-dd");
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.EtimeBox.Attributes.Add("onFocus", "WdatePicker()");
-                DataTable table = SupplierFactory.GetList(string.Empty).Tables[0];
+                DataTable table = SysSupplierFactory.GetList(string.Empty).Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table.Rows)
                 {

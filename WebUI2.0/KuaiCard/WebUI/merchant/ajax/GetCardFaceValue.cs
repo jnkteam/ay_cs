@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.merchant.ajax
 {
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.Model.User;
-    using KuaiCardLib.ExceptionHandling;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.Lib.ExceptionHandling;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web;

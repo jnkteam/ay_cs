@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.agent
 {
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Web.UI.HtmlControls;
 

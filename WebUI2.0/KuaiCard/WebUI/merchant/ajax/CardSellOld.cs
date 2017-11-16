@@ -1,16 +1,16 @@
 ﻿namespace KuaiCard.WebUI.Merchant.Ajax
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.BLL.User;
-    using KuaiCard.ETAPI;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.Model.Order;
-    using KuaiCard.Model.User;
-    using KuaiCard.SysConfig;
-    using KuaiCardLib.ExceptionHandling;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.ETAPI;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.Model.Order;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.Lib.SysConfig;
+    using OriginalStudio.Lib.ExceptionHandling;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Threading;
     using System.Web;
@@ -30,7 +30,7 @@
                     int millisecondsTimeout = 0;
                     try
                     {
-                        millisecondsTimeout = Convert.ToInt32(decimal.Round(RuntimeSetting.xiaoka_time_interval * 0x3e8, 0));
+                        millisecondsTimeout = Convert.ToInt32(decimal.Round(RuntimeSetting.Xiaoka_time_interval * 0x3e8, 0));
                     }
                     catch
                     {

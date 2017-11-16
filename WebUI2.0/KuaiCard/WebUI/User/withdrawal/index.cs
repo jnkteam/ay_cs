@@ -1,16 +1,16 @@
 ﻿namespace KuaiCard.WebUI.User.withdrawal
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
-    using KuaiCard.Model.User;
+    using OriginalStudio.Model.User;
 
     public class index : UserPageBase
     {

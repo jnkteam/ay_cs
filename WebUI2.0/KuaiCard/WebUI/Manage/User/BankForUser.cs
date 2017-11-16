@@ -1,16 +1,16 @@
 ﻿namespace KuaiCard.WebUI.Manage.User
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.BLL.User;
-    using KuaiCard.BLL.Withdraw;
-    using KuaiCard.ETAPI;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.ETAPI;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;

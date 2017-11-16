@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.Business
 {
-    using KuaiCard.BLL;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Security;
+    using OriginalStudio.BLL;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Security;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

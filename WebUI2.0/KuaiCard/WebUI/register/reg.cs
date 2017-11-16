@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.register
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Cache;
-    using KuaiCard.Model.User;
-    using KuaiCardLib.Security;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.Lib.Security;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web;
 

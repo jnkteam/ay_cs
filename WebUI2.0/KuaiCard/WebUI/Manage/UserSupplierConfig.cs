@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -84,7 +84,7 @@
 
             if (this.ItemModel.ID == 0)
             {
-                if (KuaiCard.BLL.SupplierFactory.SaveUserSupplierInfo(this.ItemModel) > 0)
+                if (KuaiCard.BLL.SysSupplierFactory.SaveUserSupplierInfo(this.ItemModel) > 0)
                 {
                     base.AlertAndRedirect("保存成功！", "UserSupplierConfig.aspx?userid=" + this.ItemModel.UserID.ToString());
                 }
@@ -93,7 +93,7 @@
                     base.AlertAndRedirect("保存失败！");
                 }
             }
-            else if (KuaiCard.BLL.SupplierFactory.UpdateUserSupplierInfo(this.ItemModel) > 0)
+            else if (KuaiCard.BLL.SysSupplierFactory.UpdateUserSupplierInfo(this.ItemModel) > 0)
             {
                 this.hidID.Value = "";
                 base.AlertAndRedirect("更新成功！", "UserSupplierConfig.aspx?userid=" + this.ItemModel.UserID.ToString());
@@ -131,7 +131,7 @@
             int p_id = KuaiCardLib.Web.WebBase.GetQueryStringInt32("id", 0);
             if (p_cmd == "edit" && p_id > 0)
             {
-                DataSet ds = KuaiCard.BLL.SupplierFactory.GetUserSupplierList(this.UserID);
+                DataSet ds = KuaiCard.BLL.SysSupplierFactory.GetUserSupplierList(this.UserID);
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     DataRow[] dr = ds.Tables[0].Select("id = " + p_id.ToString());
@@ -173,7 +173,7 @@
             this.txtUserID.Text = userInfo.ID.ToString();
             this.txtUserName.Text = userInfo.UserName;
 
-            DataTable table2 = SupplierFactory.GetList(string.Empty).Tables[0];
+            DataTable table2 = SysSupplierFactory.GetList(string.Empty).Tables[0];
             foreach (DataRow row in table2.Rows)
             {
                 this.ddlsupp.Items.Add(new ListItem(row["name"].ToString() + "【" + row["code"].ToString() + "】", row["code"].ToString()));
@@ -182,7 +182,7 @@
 
         public void LoadList()
         {
-            this.rptList.DataSource = KuaiCard.BLL.SupplierFactory.GetUserSupplierList(this.UserID);
+            this.rptList.DataSource = KuaiCard.BLL.SysSupplierFactory.GetUserSupplierList(this.UserID);
             this.rptList.DataBind();
         }
 
@@ -194,7 +194,7 @@
                 if (!string.IsNullOrEmpty(id))
                 {
                     //删除服务商通道设置
-                    KuaiCard.BLL.SupplierFactory.DeleteUserSupplierInfo(Convert.ToInt32(id));
+                    KuaiCard.BLL.SysSupplierFactory.DeleteUserSupplierInfo(Convert.ToInt32(id));
                     base.AlertAndRedirect("删除成功！", "UserSupplierConfig.aspx?userid=" + this.UserID.ToString());
                 }
             }

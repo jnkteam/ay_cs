@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.User.profile
 {
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Web.UI.WebControls;
 

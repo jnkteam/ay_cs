@@ -1,13 +1,13 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
     using Aspose.Cells;
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.SysConfig;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Lib.SysConfig;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -15,6 +15,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.BLL.Supplier;
 
     public class BankOrderList : ManagePageBase
     {
@@ -158,7 +159,7 @@
             {
                 return string.Empty;
             }
-            return SupplierFactory.GetModelByCode(int.Parse(obj.ToString())).name;
+            return SysSupplierFactory.GetSupplierModelByCode(int.Parse(obj.ToString())).SupplierName;
         }
 
         private void InitForm()
@@ -200,7 +201,7 @@
                 this.txtSuppOrder.Text = this.supporderid;
             }
             string where = "isbank=1";
-            DataTable table = SupplierFactory.GetList(where).Tables[0];
+            DataTable table = SysSupplierFactory.GetList(where).Tables[0];
             this.ddlsupp.Items.Add(new ListItem("--接口商--", ""));
             foreach (DataRow row in table.Rows)
             {
@@ -313,6 +314,75 @@
             this.LoadData();
         }
 
+        //增加数据 状态样式 方法
+        protected string getStatusStyle(string status) {
+
+            string statusCss = string.Empty;
+            switch (status)
+            {
+                case "1":
+                    statusCss = "<a title='处理中' style='color:darkorange' href='javascript:void(0)'> <i class='fa   fa-hourglass-end'></i></a>";
+                    break;
+
+                case "2":
+                    
+                    statusCss = "<a title='已完成' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
+                    break;
+                    
+                case "4":
+
+                    statusCss = "<a title='失败'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    break;
+
+                case "8":
+                    statusCss = "<a title='扣量' style='color:#00c0ef' href='javascript:void(0)'> <i class='fa    fa-plus-circle'></i></a>";
+                    break;
+                default:
+                    statusCss = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
+
+                    break;
+            }
+
+
+            return statusCss;
+        }
+
+
+
+        //增加数据 状态样式 方法
+        protected string getNotifystatStatusStyle(string status)
+        {
+
+            string statusCss = string.Empty;
+            switch (status)
+            {
+                case "1":
+                    statusCss = "<a title='处理中' style='color:darkorange' href='javascript:void(0)'> <i class='fa   fa-hourglass-end'></i></a>";
+                    break;
+
+                case "2":
+
+                    statusCss = "<a title='已完成' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
+                    break;
+
+                case "4":
+
+                    statusCss = "<a title='失败'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    break;
+
+                
+                default:
+                    statusCss = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
+
+                    break;
+            }
+
+
+            return statusCss;
+        }
+
+
+
         protected void rptOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string url = string.Concat(new object[] { 
@@ -383,6 +453,7 @@
         {
             HtmlTableCell cell;
             HtmlTableCell cell2;
+           
             if ((e.Item.ItemType == ListItemType.Header) && !base.isSuperAdmin)
             {
                 cell = e.Item.FindControl("th_profits") as HtmlTableCell;
@@ -423,6 +494,7 @@
                         button2.Visible = true;
                         button3.Visible = false;
                         button4.Visible = false;
+                        
                         break;
 
                     case "2":
@@ -445,13 +517,15 @@
                         {
                             button3.Text = "不能";
                         }
-                        break;
+                           
+                            break;
                     }
                     case "4":
                         button.Visible = true;
                         button2.Visible = false;
                         button3.Visible = false;
                         button4.Visible = false;
+                        
                         break;
 
                     case "8":

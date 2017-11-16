@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.User.Service
 {
-    using KuaiCard.BLL.User;
-    using KuaiCardLib.Security;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Lib.Security;
     using System;
     using System.Web;
     using System.Web.SessionState;

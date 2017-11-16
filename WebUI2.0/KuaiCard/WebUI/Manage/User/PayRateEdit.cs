@@ -1,12 +1,12 @@
 ﻿namespace KuaiCard.WebUI.Manage.User
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Payment;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Payment;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Text;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Payment;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Payment;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Text;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
@@ -283,7 +283,7 @@
                 {
                     if (PayRateFactory.Update(this.model))
                     {
-                        base.AlertAndRedirect("修改成功", "PayRate.aspx");
+                        base.AlertAndRedirect("修改成功");
                     }
                     else
                     {
@@ -292,7 +292,7 @@
                 }
                 else if (PayRateFactory.Add(this.model) > 0)
                 {
-                    base.AlertAndRedirect("新增成功", "PayRate.aspx");
+                    base.AlertAndRedirect("新增成功");
                 }
                 else
                 {

@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.User.Service
 {
-    using KuaiCard.BLL.User;
+    using OriginalStudio.BLL.User;
     using System;
     using System.Web;
     using System.Web.SessionState;

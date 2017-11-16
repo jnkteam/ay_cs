@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.User.cashcoupon
 {
-    using KuaiCard.BLL;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
+    using OriginalStudio.BLL;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
     using System;
     using System.Collections.Generic;
     using System.Data;

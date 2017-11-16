@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.agent
 {
-    using KuaiCard.BLL;
+    using OriginalStudio.BLL;
     using System;
     using System.Web;
     using System.Web.UI;

@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
@@ -125,18 +125,18 @@
             this.ItemInfo.queryCardUrl = str4;
             if (!this.isUpdate)
             {
-                if (SupplierFactory.Add(this.ItemInfo) > 0)
+                if (SysSupplierFactory.Add(this.ItemInfo) > 0)
                 {
-                    base.AlertAndRedirect("保存成功！", "SupplierList.aspx");
+                    base.AlertAndRedirect("保存成功！");
                 }
                 else
                 {
                     base.AlertAndRedirect("保存失败！");
                 }
             }
-            else if (SupplierFactory.Update(this.ItemInfo))
+            else if (SysSupplierFactory.Update(this.ItemInfo))
             {
-                base.AlertAndRedirect("更新成功！", "SupplierList.aspx");
+                base.AlertAndRedirect("更新成功！");
             }
             else
             {
@@ -220,7 +220,7 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = SupplierFactory.GetModel(this.ItemInfoId);
+                        this._ItemInfo = SysSupplierFactory.GetModel(this.ItemInfoId);
                     }
                     else
                     {

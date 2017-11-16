@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.Manage.Template
 {
-    using KuaiCard.BLL;
+    using OriginalStudio.BLL;
     using System;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;

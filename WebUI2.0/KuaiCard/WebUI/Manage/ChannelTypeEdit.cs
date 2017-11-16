@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Text;
@@ -141,7 +141,7 @@
             {
                 str = str + " and iswx=1";
             }
-            DataTable table = SupplierFactory.GetList("release=1").Tables[0];
+            DataTable table = SysSupplierFactory.GetList("release=1").Tables[0];
             table.Columns.Add("weight", typeof(int));
             foreach (DataRow row in table.Rows)
             {
@@ -258,7 +258,7 @@
                 {
                     where = where + "iswx=1";
                 }
-                DataTable table = SupplierFactory.GetList(where).Tables[0];
+                DataTable table = SysSupplierFactory.GetList(where).Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table.Rows)
                 {

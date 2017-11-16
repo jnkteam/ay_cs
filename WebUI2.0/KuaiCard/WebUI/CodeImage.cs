@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI
 {
-    using KuaiCard.WebComponents;
+    using OriginalStudio.WebComponents;
     using System;
     using System.Drawing;
     using System.Drawing.Imaging;
@@ -21,10 +21,12 @@
 
             context.Response.Expires = 0;
             context.Response.CacheControl = "no-cache";
-            VerifyImage image = new VerifyImage();
-            image.Width = 70;
-            image.Height = 0x16;
-            image.TextLength = 4;
+            VerifyImage image = new VerifyImage()
+            {
+                Width = 70,
+                Height = 0x16,
+                TextLength = 4
+            };
             VerifyImage image2 = image;
             context.Response.ClearContent();
             context.Response.ContentType = "image/jpeg";

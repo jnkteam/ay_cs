@@ -6,9 +6,9 @@
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
 
     public class DayOrdersChart : ManagePageBase
     {

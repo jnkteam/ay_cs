@@ -1,6 +1,6 @@
-﻿using KuaiCard.BLL.User;
-using KuaiCard.Model.User;
-using KuaiCardLib.Web;
+﻿using OriginalStudio.BLL.User;
+using OriginalStudio.Model.User;
+using OriginalStudio.Lib.Web;
 using System;
 using System.Web.UI;
 

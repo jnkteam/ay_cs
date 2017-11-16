@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Withdraw;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Withdraw;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Withdraw;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Data;
     using System.Web.UI;
@@ -73,7 +73,7 @@
 
         private void SupBind(DropDownList ddl, string dfval)
         {
-            DataTable table = SupplierFactory.GetList("isdistribution=1").Tables[0];
+            DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
             ddl.Items.Add(new ListItem("--请选择--", "0"));
             foreach (DataRow row in table.Rows)
             {

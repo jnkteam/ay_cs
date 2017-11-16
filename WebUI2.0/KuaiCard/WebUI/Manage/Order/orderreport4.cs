@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Order;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Order;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -44,8 +44,16 @@
             {
             }
             DataSet set = Dal.AgentStat2(minValue, result, this.Pager1.CurrentPageIndex - 1, this.Pager1.PageSize, orderby);
-            this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0]["C"]);
-            this.rep_report.DataSource = set.Tables[1];
+            
+            try
+            {
+                this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0]["C"]);
+                this.rep_report.DataSource = set.Tables[1];
+            }
+            catch {
+                this.Pager1.RecordCount = 0;
+            }
+            
             this.rep_report.DataBind();
         }
 

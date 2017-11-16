@@ -1,13 +1,14 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Web;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
@@ -81,13 +82,14 @@
                     repeater.DataSource = rowArray;
                     repeater.DataBind();
                 }
+                string urlPram = HttpContext.Current.Request.Url.Query;
                 if (flag)
                 {
-                    literal.Text = "<a onclick=\"return confirm('你确定要关闭发送短信功能吗?')\" href=\"?cmd=close&ID=" + str2 + "\" style=\"color:Green;\">关闭</a>";
+                    literal.Text = "<a onclick=\"return confirm('你确定要关闭发送短信功能吗?')\" href=\""+urlPram+"&cmd=close&ID=" + str2 + "\" style=\"color:Green;\">关闭</a>";
                 }
                 else
                 {
-                    literal.Text = "<a onclick=\"return confirm('你确定要开启发送短信功能吗?')\" href=\"?cmd=open&ID=" + str2 + "\" style=\"color:Green;\">开启</a>";
+                    literal.Text = "<a onclick=\"return confirm('你确定要开启发送短信功能吗?')\" href=\"" + urlPram + "&cmd=open&ID=" + str2 + "\" style=\"color:Green;\">开启</a>";
                 }
             }
         }

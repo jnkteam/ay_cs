@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.User.Service
 {
-    using KuaiCard.BLL.User;
+    using OriginalStudio.BLL.User;
     using System;
     using System.Web;
     using System.Web.SessionState;
-    using KuaiCard.Model.User;
+    using OriginalStudio.Model.User;
 
     public class password2 : IHttpHandler, IReadOnlySessionState, IRequiresSessionState
     {

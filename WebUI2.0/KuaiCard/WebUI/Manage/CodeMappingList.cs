@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -35,7 +35,7 @@
             if (!base.IsPostBack)
             {
                 this.ddlSupp.Items.Add(new ListItem("---选择接口商---", ""));
-                DataTable table = SupplierFactory.GetList("isbank=1 and code<>100 and code <> 101").Tables[0];
+                DataTable table = SysSupplierFactory.GetList("isbank=1 and code<>100 and code <> 101").Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
                     this.ddlSupp.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));

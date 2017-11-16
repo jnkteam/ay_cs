@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.merchant.ajax
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model.Order;
-    using KuaiCardLib.Data;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model.Order;
+    using OriginalStudio.Lib.Data;
     using System;
     using System.Collections.Generic;
     using System.Data;

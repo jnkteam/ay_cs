@@ -1,18 +1,18 @@
 ﻿namespace KuaiCard.WebUI.Manage.User
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
     using KuaiCard.WebUI;
-    using KuaiCardLib.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using System.Data;
-    using KuaiCard.BLL.Payment;
-    using KuaiCard.Model.Payment;
+    using OriginalStudio.BLL.Payment;
+    using OriginalStudio.Model.Payment;
 
     public class UserInfoPrint : ManagePageBase
     {

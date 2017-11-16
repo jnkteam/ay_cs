@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Text;
     using System.Web.UI.HtmlControls;

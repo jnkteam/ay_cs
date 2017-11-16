@@ -9,8 +9,8 @@
     using OriginalStudio.Lib.Text;
     using System;
     using System.Web;
-    using KuaiCard.Model.User;
-    using KuaiCard.BLL.User;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.BLL.User;
 
     public class AgentPageBase : PageBase
     {

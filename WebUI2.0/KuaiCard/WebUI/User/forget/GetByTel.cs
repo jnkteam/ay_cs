@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using KuaiCard.WebComponents.Web;
+using OriginalStudio.WebComponents.Web;
 using System.Web.UI.WebControls;
-using KuaiCard.Cache;
-using KuaiCard.BLL.Tools;
-using KuaiCard.BLL.User;
+using OriginalStudio.Cache;
+using OriginalStudio.BLL.Tools;
+using OriginalStudio.BLL.User;
 
 namespace KuaiCard.WebUI.User.Forget
 {

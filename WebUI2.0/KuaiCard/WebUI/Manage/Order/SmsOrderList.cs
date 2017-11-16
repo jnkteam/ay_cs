@@ -1,12 +1,12 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.SysConfig;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Lib.SysConfig;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -84,7 +84,7 @@
             {
                 return string.Empty;
             }
-            return SupplierFactory.GetModelByCode(int.Parse(obj.ToString())).name;
+            return SysSupplierFactory.GetSupplierModelByCode(int.Parse(obj.ToString())).SupplierName;
         }
 
         private void InitForm()

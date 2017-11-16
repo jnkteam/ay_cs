@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI
 {
-    using KuaiCard.WebComponents.ScheduledTask;
-    using KuaiCardLib.ExceptionHandling;
-    using KuaiCardLib.Web;
+    using OriginalStudio.WebComponents.ScheduledTask;
+    using OriginalStudio.Lib.ExceptionHandling;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Data.SqlClient;

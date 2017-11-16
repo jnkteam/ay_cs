@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.User.password
 {
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.WebComponents.Web;
     using System;
 
     public class index : UserPageBase

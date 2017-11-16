@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage.channel
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI;
@@ -47,7 +47,7 @@
                     }
                 }
             }
-            base.AlertAndRedirect("设置成功", "ChannelTypeList.aspx");
+            base.AlertAndRedirect("设置成功");
         }
 
         private void LoadData()

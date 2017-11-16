@@ -1,12 +1,12 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Order;
-    using KuaiCard.ETAPI;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Order;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Order;
+    using OriginalStudio.ETAPI;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Order;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -66,7 +66,7 @@
             if (!base.IsPostBack)
             {
                 this.txtOrder.Text = this.OrderId;
-                DataTable table = SupplierFactory.GetList(string.Empty).Tables[0];
+                DataTable table = SysSupplierFactory.GetList(string.Empty).Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
                     this.ddlSupp.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));

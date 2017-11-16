@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.register
 {
-    using KuaiCard.Cache;
+    using OriginalStudio.Cache;
     using System;
     using System.Web;
     using System.Web.SessionState;

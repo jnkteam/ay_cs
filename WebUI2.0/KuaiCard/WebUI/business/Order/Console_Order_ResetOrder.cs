@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.business.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -70,7 +70,7 @@
             {
                 this.txtOrder.Text = this.OrderId;
                 this.rblOrdClass.SelectedValue = this.oclass.ToString();
-                DataTable table = SupplierFactory.GetList(string.Empty).Tables[0];
+                DataTable table = SysSupplierFactory.GetList(string.Empty).Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
                     this.ddlSupp.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));

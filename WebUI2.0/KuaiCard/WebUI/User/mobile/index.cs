@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.User.mobile
 {
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Text;
-    using KuaiCardLib.Web;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Text;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web;
     using System.Web.UI.WebControls;

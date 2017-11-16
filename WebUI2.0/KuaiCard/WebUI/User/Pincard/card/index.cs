@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.User.Pincard.card
 {
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;

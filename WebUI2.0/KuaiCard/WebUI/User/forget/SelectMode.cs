@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using KuaiCard.WebComponents.Web;
+using OriginalStudio.WebComponents.Web;
 using System.Web.UI.WebControls;
 
 namespace KuaiCard.WebUI.User.Forget

@@ -1,19 +1,19 @@
 ﻿namespace KuaiCard.WebUI.User.Service
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Cache;
-    using KuaiCard.Model;
-    using KuaiCard.Model.User;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.User;
     using System;
     using System.Web;
     using System.Web.SessionState;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.BLL.Settled;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.BLL.Settled;
     using System.Data;
-    using KuaiCardLib.TimeControl;
-    using KuaiCard.BLL.Withdraw;
-    using KuaiCard.BLL.Tools;
+    using OriginalStudio.Lib.TimeControl;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.BLL.Tools;
 
     public class withdrawalbatch : IHttpHandler, IReadOnlySessionState, IRequiresSessionState
     {

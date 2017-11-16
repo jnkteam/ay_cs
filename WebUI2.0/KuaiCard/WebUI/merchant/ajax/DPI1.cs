@@ -1,12 +1,12 @@
 ﻿namespace KuaiCard.WebUI.merchant.ajax
 {
-    using KuaiCard.BLL.basedata;
-    using KuaiCard.BLL.Tools;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model.basedata;
-    using KuaiCard.Model.User;
-    using KuaiCardLib.Text;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL.basedata;
+    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model.basedata;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.Lib.Text;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Text.RegularExpressions;
     using System.Web;

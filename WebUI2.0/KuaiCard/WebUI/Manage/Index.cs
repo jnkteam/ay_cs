@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.TimeControl;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.TimeControl;
     using System;
     using System.Web.UI.HtmlControls;
 

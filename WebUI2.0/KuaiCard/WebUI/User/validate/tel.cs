@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.User.validate
 {
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.WebComponents.Web;
     using System;
 
     public class tel : UserPageBase

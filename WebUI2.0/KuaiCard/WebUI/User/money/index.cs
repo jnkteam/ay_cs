@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.User.money
 {
-    using KuaiCard.BLL.Order;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
+    using OriginalStudio.BLL.Order;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
     using System;
     using System.Collections.Generic;
     using System.Data;

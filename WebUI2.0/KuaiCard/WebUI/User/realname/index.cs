@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.User.realname
 {
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Text;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Text;
     using System;
     using System.Web;
     using System.Web.UI.HtmlControls;

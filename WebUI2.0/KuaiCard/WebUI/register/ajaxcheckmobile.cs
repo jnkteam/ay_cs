@@ -1,6 +1,6 @@
 ﻿namespace KuaiCard.WebUI.register
 {
-    using KuaiCard.BLL.User;
+    using OriginalStudio.BLL.User;
     using System;
     using System.Web;
 

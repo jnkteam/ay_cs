@@ -1,13 +1,13 @@
 ﻿namespace KuaiCard.WebUI.Manage.Settled
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

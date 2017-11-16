@@ -1,17 +1,17 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.BLL.Tools;
-    using KuaiCard.BLL.User;
-    using KuaiCard.ETAPI;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.ExceptionHandling;
-    using KuaiCardLib.TimeControl;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.ETAPI;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.ExceptionHandling;
+    using OriginalStudio.Lib.TimeControl;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -137,7 +137,7 @@
             this.setPower();
             if (!base.IsPostBack)
             {
-                DataTable table = SupplierFactory.GetList("isdistribution=1").Tables[0];
+                DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
                 foreach (DataRow row in table.Rows)
                 {

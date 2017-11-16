@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.Business
 {
-    using KuaiCard.BLL;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.TimeControl;
+    using OriginalStudio.BLL;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.TimeControl;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

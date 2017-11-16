@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.User.verify
 {
-    using KuaiCard.BLL.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Text;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Text;
     using System;
     using System.Data;
     using System.Web.UI.WebControls;

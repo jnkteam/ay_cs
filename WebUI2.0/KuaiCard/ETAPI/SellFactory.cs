@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.ETAPI
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Sys;
-    using KuaiCard.Model;
-    using KuaiCard.SysConfig;
-    using KuaiCardLib.ExceptionHandling;
-    using KuaiCardLib.Security;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Sys;
+    using OriginalStudio.Model;
+    using OriginalStudio.Lib.SysConfig;
+    using OriginalStudio.Lib.ExceptionHandling;
+    using OriginalStudio.Lib.Security;
     using System;
     using System.Web;
 

@@ -1,14 +1,14 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Order;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Order;
+    using OriginalStudio.WebComponents.Web;
     using KuaiCard.WebUI;
-    using KuaiCardLib.TimeControl;
-    using KuaiCardLib.Web;
+    using OriginalStudio.Lib.TimeControl;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;

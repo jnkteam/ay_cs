@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.merchant.ajax
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Tools;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Cache;
-    using KuaiCardLib;
-    using KuaiCardLib.Text;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Lib;
+    using OriginalStudio.Lib.Text;
     using System;
     using System.Web;
     using System.Web.SessionState;

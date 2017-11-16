@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -43,7 +43,7 @@
                     this.ddlpmode.Items.Add(new ListItem(row["modeName"].ToString(), row["code"].ToString()));
                 }
                 string where = "isbank=1";
-                DataTable table2 = SupplierFactory.GetList(where).Tables[0];
+                DataTable table2 = SysSupplierFactory.GetList(where).Tables[0];
                 this.ddlsupp.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table2.Rows)
                 {

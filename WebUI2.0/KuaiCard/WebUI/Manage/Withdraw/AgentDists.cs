@@ -1,14 +1,14 @@
 ﻿namespace KuaiCard.WebUI.Manage.Withdraw
 {
     using Aspose.Cells;
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Withdraw;
-    using KuaiCard.ETAPI;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Withdraw;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.ETAPI;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Withdraw;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -227,7 +227,7 @@
                 {
                     this.ddlpayment_status.SelectedValue = this.payment_status.ToString();
                 }
-                DataTable table = SupplierFactory.GetList("isdistribution=1").Tables[0];
+                DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
                 foreach (DataRow row in table.Rows)

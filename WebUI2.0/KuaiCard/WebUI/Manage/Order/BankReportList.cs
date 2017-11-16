@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.Manage.Order
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Data;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Data;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -45,7 +45,7 @@
             {
                 return string.Empty;
             }
-            return SupplierFactory.GetModelByCode(int.Parse(obj.ToString())).name;
+            return SysSupplierFactory.GetSupplierModelByCode(int.Parse(obj.ToString())).SupplierName;
         }
 
         private void InitForm()
@@ -97,6 +97,78 @@
                 this.ddlmange.SelectedValue = this.MID.ToString();
             }
         }
+
+
+        //增加数据 状态样式 方法
+        protected string getStatusStyle(string status)
+        {
+
+            string statusCss = string.Empty;
+            switch (status)
+            {
+                case "1":
+                    statusCss = "<a title='处理中' style='color:darkorange' href='javascript:void(0)'> <i class='fa   fa-hourglass-end'></i></a>";
+                    break;
+
+                case "2":
+
+                    statusCss = "<a title='已完成' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
+                    break;
+
+                case "4":
+
+                    statusCss = "<a title='失败'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    break;
+
+                case "8":
+                    statusCss = "<a title='扣量' style='color:#00c0ef' href='javascript:void(0)'> <i class='fa    fa-plus-circle'></i></a>";
+                    break;
+                default:
+                    statusCss = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
+
+                    break;
+            }
+
+
+            return statusCss;
+        }
+
+
+
+        //增加数据 状态样式 方法
+        protected string getNotifystatStatusStyle(string status)
+        {
+
+            string statusCss = string.Empty;
+            switch (status)
+            {
+                case "1":
+                    statusCss = "<a title='处理中' style='color:darkorange' href='javascript:void(0)'> <i class='fa   fa-hourglass-end'></i></a>";
+                    break;
+
+                case "2":
+
+                    statusCss = "<a title='已完成' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
+                    break;
+
+                case "4":
+
+                    statusCss = "<a title='失败'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    break;
+
+
+                default:
+                    statusCss = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
+
+                    break;
+            }
+
+
+            return statusCss;
+        }
+
+
+
 
         private void LoadData()
         {

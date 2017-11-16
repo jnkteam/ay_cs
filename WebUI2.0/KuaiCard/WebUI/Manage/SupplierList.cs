@@ -1,8 +1,8 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
@@ -21,7 +21,7 @@
         private void LoadData()
         {
             string where = "release = 1";
-            this.GVSupplier.DataSource = SupplierFactory.GetList(where);
+            this.GVSupplier.DataSource = SysSupplierFactory.GetList(where);
             this.GVSupplier.DataBind();
         }
 

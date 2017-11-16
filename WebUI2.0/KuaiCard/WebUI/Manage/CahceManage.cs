@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Cache;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -172,7 +172,7 @@
             }
             foreach (string str2 in this.suppList)
             {
-                objId = string.Format(SupplierFactory.CACHE_KEY, str2);
+                objId = string.Format(SysSupplierFactory.CACHE_KEY, str2);
                 row = table.NewRow();
                 if (WebCache.GetCacheService().RetrieveObject(objId) != null)
                 {

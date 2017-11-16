@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.User
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.User;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.User;
     using System;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;

@@ -1,12 +1,12 @@
 ﻿namespace KuaiCard.WebUI.webservice
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents;
-    using KuaiCardLib.Security;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents;
+    using OriginalStudio.Lib.Security;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Text;
     using System.Web;

@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.WebUI.News
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model.User;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
@@ -11,7 +11,7 @@
     using Wuqi.Webdiyer;
     using System.Data;
     using System.Collections.Generic;
-    using KuaiCardLib.Data;
+    using OriginalStudio.Lib.Data;
 
     public class NewsList : System.Web.UI.Page
 	{

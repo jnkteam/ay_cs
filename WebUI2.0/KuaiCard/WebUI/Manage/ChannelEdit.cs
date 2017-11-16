@@ -1,11 +1,11 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -72,7 +72,7 @@
             {
                 if (KuaiCard.BLL.Channel.Channel.Add(this.model) > 0)
                 {
-                    base.AlertAndRedirect("保存成功！", url);
+                    base.AlertAndRedirect("保存成功！");
                 }
                 else
                 {
@@ -117,7 +117,7 @@
                 {
                     this.ddlType.Items.Add(new ListItem(row["modetypename"].ToString(), row["typeId"].ToString()));
                 }
-                DataTable table2 = SupplierFactory.GetList(string.Empty).Tables[0];
+                DataTable table2 = SysSupplierFactory.GetList(string.Empty).Tables[0];
                 this.ddlTypeSupp.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table2.Rows)
                 {

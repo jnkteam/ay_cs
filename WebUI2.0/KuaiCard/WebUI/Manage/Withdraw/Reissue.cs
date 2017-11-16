@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.Manage.Withdraw
 {
-    using KuaiCard.BLL;
-    using KuaiCard.ETAPI;
-    using KuaiCard.Model;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.ETAPI;
+    using OriginalStudio.Model;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -67,7 +67,7 @@
             ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
-                DataTable table = SupplierFactory.GetList("isdistribution=1").Tables[0];
+                DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
                 foreach (DataRow row in table.Rows)

@@ -1,9 +1,9 @@
 ﻿namespace KuaiCard.ETAPI
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Withdraw;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Withdraw;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Withdraw;
     using System;
 
     public class Withdraw

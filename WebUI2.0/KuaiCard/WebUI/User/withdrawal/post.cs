@@ -1,20 +1,20 @@
 ﻿namespace KuaiCard.WebUI.User.withdrawal
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.BLL.Tools;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Cache;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.TimeControl;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Cache;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.TimeControl;
     using System;
     using System.Data;
     using System.Web;
-    using KuaiCard.BLL.Withdraw;
-    using KuaiCardLib.Configuration;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.Lib.Configuration;
 
     public class post : UserPageBase
     {

@@ -1,14 +1,14 @@
 ﻿namespace KuaiCard.WebUI.Manage.User
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Channel;
-    using KuaiCard.BLL.Payment;
-    using KuaiCard.BLL.User;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Channel;
-    using KuaiCard.Model.Payment;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.Payment;
+    using OriginalStudio.BLL.User;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Channel;
+    using OriginalStudio.Model.Payment;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;
@@ -30,7 +30,7 @@
         private void bind(DropDownList ddlctrl, int suppId)
         {
             string where = "";
-            DataTable table = SupplierFactory.GetList(where).Tables[0];
+            DataTable table = SysSupplierFactory.GetList(where).Tables[0];
             ddlctrl.Items.Add(new ListItem("--默认--", "0"));
             foreach (DataRow row in table.Rows)
             {

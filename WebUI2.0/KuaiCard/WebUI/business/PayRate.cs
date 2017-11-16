@@ -1,13 +1,13 @@
 ﻿namespace KuaiCard.WebUI.business
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Payment;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Payment;
-    using KuaiCard.Model.User;
-    using KuaiCard.WebComponents.Web;
-    using KuaiCardLib.Text;
-    using KuaiCardLib.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Payment;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.WebComponents.Web;
+    using OriginalStudio.Lib.Text;
+    using OriginalStudio.Lib.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;

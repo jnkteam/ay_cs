@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.Manage
 {
-    using KuaiCard.BLL;
-    using KuaiCard.SysConfig;
+    using OriginalStudio.BLL;
+    using OriginalStudio.Lib.SysConfig;
     using System;
     using System.Web;
     using System.Web.UI;

@@ -1,10 +1,10 @@
 ﻿namespace KuaiCard.WebUI.User.realname
 {
-    using KuaiCard.BLL;
-    using KuaiCard.BLL.Settled;
-    using KuaiCard.Model;
-    using KuaiCard.Model.Settled;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.Model;
+    using OriginalStudio.Model.Settled;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Web;
     using System.Web.UI.HtmlControls;

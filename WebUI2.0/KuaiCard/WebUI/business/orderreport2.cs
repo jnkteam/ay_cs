@@ -1,7 +1,7 @@
 ﻿namespace KuaiCard.WebUI.business
 {
-    using KuaiCard.BLL.Order;
-    using KuaiCard.WebComponents.Web;
+    using OriginalStudio.BLL.Order;
+    using OriginalStudio.WebComponents.Web;
     using System;
     using System.Data;
     using System.Web.UI.HtmlControls;

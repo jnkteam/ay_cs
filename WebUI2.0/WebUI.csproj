@@ -8,7 +8,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AssemblyName>WebUI</AssemblyName>
     <OutputType>Library</OutputType>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -478,9 +478,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\password.cs" />
-    <Compile Include="KuaiCard\WebUI\User\Pincard\index.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\Pincard\index.cs" />
     <Compile Include="KuaiCard\WebUI\User\mobile\index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -791,9 +789,7 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\UserAgent.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\amt.cs" />
-    <Compile Include="KuaiCard\WebUI\User\Pincard\card\index.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="KuaiCard\WebUI\User\Pincard\card\index.cs" />
     <Compile Include="KuaiCard\WebUI\IpList.cs" />
     <Compile Include="KuaiCard\WebUI\business\SMSLogList.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -908,14 +904,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.BLL.dll" />
-    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.Cache.dll" />
-    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.Lib.dll" />
-    <Analyzer Include="..\..\新网关2017网关\Output\Aywl.Model.dll" />
+    <Analyzer Include="..\Output\Aywl.BLL.dll" />
+    <Analyzer Include="..\Output\Aywl.Cache.dll" />
+    <Analyzer Include="..\Output\Aywl.Lib.dll" />
+    <Analyzer Include="..\Output\Aywl.Model.dll" />
     <Analyzer Include="..\Output\AspNetPager.dll" />
     <Analyzer Include="..\Output\Aspose.Cells.dll" />
     <Analyzer Include="..\Output\Newtonsoft.Json.dll" />
-    <Analyzer Include="D:\创意工厂\聚合支付系统\对接代码\Output2\Newtonsoft.Json.Net20.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="KuaiCard\web\Merchant\Ajax\" />

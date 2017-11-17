@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4768644C-A02E-4D57-B4C4-4D432D87EB47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OriginalStudio.Model</RootNamespace>
+    <AssemblyName>Aywl.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="basedata\identitycard.cs" />
+    <Compile Include="Channel\SysChannelInfo.cs" />
+    <Compile Include="Channel\SysChannelTypeInfo.cs" />
+    <Compile Include="Channel\SysChannelTypeOpenEnum.cs" />
+    <Compile Include="Email\EmailCheckInfo.cs" />
+    <Compile Include="Email\EmailCheckStatus.cs" />
+    <Compile Include="Email\EmailCheckType.cs" />
+    <Compile Include="FeedBack\feedbackInfo.cs" />
+    <Compile Include="FeedBack\feedbackstatus.cs" />
+    <Compile Include="FeedBack\feedbacktype.cs" />
+    <Compile Include="Json\AjaxResult.cs" />
+    <Compile Include="News\NewsInfo.cs" />
+    <Compile Include="News\NewsType.cs" />
+    <Compile Include="SMS\phoneValid.cs" />
+    <Compile Include="SMS\PhoneValidLog.cs" />
+    <Compile Include="User\MchUserChannelType.cs" />
+    <Compile Include="Manage\ManageRole.cs" />
+    <Compile Include="Enum\AppTypeEnum.cs" />
+    <Compile Include="APP\apprecharge.cs" />
+    <Compile Include="APP\APPRechargeInfo.cs" />
+    <Compile Include="APP\EntrustInfo.cs" />
+    <Compile Include="APP\RechargeInfo.cs" />
+    <Compile Include="APP\TransferInfo.cs" />
+    <Compile Include="CallBackInfo.cs" />
+    <Compile Include="Channel\ChannelClassEnum.cs" />
+    <Compile Include="Channel\ChannelInfo.cs" />
+    <Compile Include="Channel\ChannelSupplier.cs" />
+    <Compile Include="Channel\ChannelTypeEnum.cs" />
+    <Compile Include="Channel\ChannelTypeInfo.cs" />
+    <Compile Include="Channel\ChannelTypeUserInfo.cs" />
+    <Compile Include="Channel\CodeMappingInfo.cs" />
+    <Compile Include="Channel\OpenEnum.cs" />
+    <Compile Include="CPAInfo.cs" />
+    <Compile Include="Settled\Distribution.cs" />
+    <Compile Include="IMSG.cs" />
+    <Compile Include="Order\callbackInfo.cs" />
+    <Compile Include="Order\OrderBankInfo.cs" />
+    <Compile Include="Order\OrderBankNotifyQueue.cs" />
+    <Compile Include="Order\OrderBase.cs" />
+    <Compile Include="Enum\OrderNofityStatusEnum.cs" />
+    <Compile Include="Order\OrderNotify.cs" />
+    <Compile Include="Enum\OrderStatusEnum.cs" />
+    <Compile Include="Enum\OrderTypeEnum.cs" />
+    <Compile Include="PayListInfo.cs" />
+    <Compile Include="Payment\OrderConvern.cs" />
+    <Compile Include="Payment\PayPriceConver.cs" />
+    <Compile Include="Payment\PayRate.cs" />
+    <Compile Include="Payment\RateTypeEnum.cs" />
+    <Compile Include="PayStatus.cs" />
+    <Compile Include="Product\ProductInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PTypeConf.cs" />
+    <Compile Include="Settled\SettledInfo.cs" />
+    <Compile Include="Enum\SettledModeEnum.cs" />
+    <Compile Include="Enum\SettledStatusEnum.cs" />
+    <Compile Include="Enum\AmtFreezeInfoStatus.cs" />
+    <Compile Include="Settled\AmtunFreezeMode.cs" />
+    <Compile Include="Settled\IncreaseAmtInfo.cs" />
+    <Compile Include="Settled\optypeenum.cs" />
+    <Compile Include="Settled\TocashSchemeInfo.cs" />
+    <Compile Include="Settled\Transfer.cs" />
+    <Compile Include="Settled\TransferScheme.cs" />
+    <Compile Include="Settled\UsersAmtFreezeInfo.cs" />
+    <Compile Include="ShowStyleEnum.cs" />
+    <Compile Include="SinglePage.cs" />
+    <Compile Include="SiteType.cs" />
+    <Compile Include="SMS\MobileSmslog.cs" />
+    <Compile Include="Supplier\SupplierInfo.cs" />
+    <Compile Include="Supplier\SupplierPayRateInfo.cs" />
+    <Compile Include="Supplier\SysSupplierInfo.cs" />
+    <Compile Include="Payment\SysPayrateInfo.cs" />
+    <Compile Include="Supplier\SysSupplierPayRateInfo.cs" />
+    <Compile Include="Sys\debuginfo.cs" />
+    <Compile Include="Sys\debugtypeenum.cs" />
+    <Compile Include="Sys\SmsComInfo.cs" />
+    <Compile Include="Sys\SoftRegistrationInfo.cs" />
+    <Compile Include="Supplier\UserSupplierInfo.cs" />
+    <Compile Include="Enum\AcctChangeEnum.cs" />
+    <Compile Include="User\MchUserBaseInfo.cs" />
+    <Compile Include="Enum\IdImageStatus.cs" />
+    <Compile Include="Manage\Manage.cs" />
+    <Compile Include="User\MchUserPayRateInfo.cs" />
+    <Compile Include="Enum\noRefCheckStatusEnum.cs" />
+    <Compile Include="User\PayhSubmerchant.cs" />
+    <Compile Include="User\PromotionUserInfo.cs" />
+    <Compile Include="User\QuestionInfo.cs" />
+    <Compile Include="User\UserAccessTimeInfo.cs" />
+    <Compile Include="User\UserFromPartners.cs" />
+    <Compile Include="User\userHostInfo.cs" />
+    <Compile Include="Enum\userHostStatus.cs" />
+    <Compile Include="User\UserInfo.cs" />
+    <Compile Include="Enum\UserLevelEnum.cs" />
+    <Compile Include="User\UserLoginLog.cs" />
+    <Compile Include="User\UserPayBankAppInfo.cs" />
+    <Compile Include="User\UserPayLimit.cs" />
+    <Compile Include="User\UsersAmtInfo.cs" />
+    <Compile Include="User\usersettingInfo.cs" />
+    <Compile Include="User\usersIdImageInfo.cs" />
+    <Compile Include="User\userspaybank.cs" />
+    <Compile Include="Enum\UserStatusEnum.cs" />
+    <Compile Include="User\UsersUpdateLog.cs" />
+    <Compile Include="Enum\UserTypeEnum.cs" />
+    <Compile Include="WebInfo.cs" />
+    <Compile Include="Withdraw\ChannelWithdraw.cs" />
+    <Compile Include="Withdraw\settledAgent.cs" />
+    <Compile Include="Withdraw\settledAgentNotify.cs" />
+    <Compile Include="Withdraw\settledAgentSummary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aywl.Lib\Aywl.Lib.csproj">
+      <Project>{467FF2A1-AA89-4D80-95D4-C3FD1B64E71D}</Project>
+      <Name>Aywl.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

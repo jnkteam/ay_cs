@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// 作废！！！！
+    /// </summary>
     public enum ChannelTypeEnum
     {
         在线支付 = 1,

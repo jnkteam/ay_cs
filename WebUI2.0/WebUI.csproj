@@ -478,7 +478,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\password.cs" />
-    <Compile Include="KuaiCard\WebUI\User\Pincard\index.cs" />
+    
     <Compile Include="KuaiCard\WebUI\User\mobile\index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -789,7 +789,7 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\UserAgent.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\amt.cs" />
-    <Compile Include="KuaiCard\WebUI\User\Pincard\card\index.cs" />
+    
     <Compile Include="KuaiCard\WebUI\IpList.cs" />
     <Compile Include="KuaiCard\WebUI\business\SMSLogList.cs">
       <SubType>ASPXCodeBehind</SubType>

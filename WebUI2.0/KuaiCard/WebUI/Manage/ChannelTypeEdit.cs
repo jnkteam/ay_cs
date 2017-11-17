@@ -114,34 +114,27 @@
         private void LoadData()
         {
             string str = "release=1";
-            if (this.ItemInfo.Class == ChannelClassEnum.在线支付)
+            if (this.ItemInfo.Class == ChannelClassEnum.网银)
             {
-                str = str + " and isbank=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.充值卡)
-            {
-                str = str + "and iscard=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.声讯)
-            {
-                str = str + "and issx=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.短信)
-            {
-                str = str + " and issms=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.手机网银)
-            {
-                str = str + " and iswap=1";
+                str = str + " and IsBank=1";
             }
             else if (this.ItemInfo.Class == ChannelClassEnum.支付宝)
             {
-                str = str + " and isali=1";
+                str = str + "and IsAlipay=1";
             }
             else if (this.ItemInfo.Class == ChannelClassEnum.微信)
             {
-                str = str + " and iswx=1";
+                str = str + "and IsWeiXin=1";
             }
+            else if (this.ItemInfo.Class == ChannelClassEnum.QQ)
+            {
+                str = str + " and IsQQ=1";
+            }
+            else if (this.ItemInfo.Class == ChannelClassEnum.京东)
+            {
+                str = str + " and IsJD=1";
+            }
+           
             DataTable table = SysSupplierFactory.GetList("release=1").Tables[0];
             table.Columns.Add("weight", typeof(int));
             foreach (DataRow row in table.Rows)
@@ -231,34 +224,34 @@
                 this.tr_runmode_1.Visible = this.ItemInfo.runmode == 1;
                 this.tr_runmode_0.Visible = this.ItemInfo.runmode == 0;
                 string where = string.Empty;
-                if (this.ItemInfo.Class == ChannelClassEnum.在线支付)
+
+
+
+                if (this.ItemInfo.Class == ChannelClassEnum.网银)
                 {
-                    where = where + "isbank=1";
-                }
-                else if (this.ItemInfo.Class == ChannelClassEnum.充值卡)
-                {
-                    where = where + "iscard=1";
-                }
-                else if (this.ItemInfo.Class == ChannelClassEnum.声讯)
-                {
-                    where = where + "issx=1";
-                }
-                else if (this.ItemInfo.Class == ChannelClassEnum.短信)
-                {
-                    where = where + "issms=1";
-                }
-                else if (this.ItemInfo.Class == ChannelClassEnum.手机网银)
-                {
-                    where = where + "iswap=1";
+                    where = where + " and IsBank=1";
                 }
                 else if (this.ItemInfo.Class == ChannelClassEnum.支付宝)
                 {
-                    where = where + "isali=1";
+                    where = where + "and IsAlipay=1";
                 }
                 else if (this.ItemInfo.Class == ChannelClassEnum.微信)
                 {
-                    where = where + "iswx=1";
+                    where = where + "and IsWeiXin=1";
                 }
+                else if (this.ItemInfo.Class == ChannelClassEnum.QQ)
+                {
+                    where = where + " and IsQQ=1";
+                }
+                else if (this.ItemInfo.Class == ChannelClassEnum.京东)
+                {
+                    where = where + " and IsJD=1";
+                }
+
+
+
+
+
                 DataTable table = SysSupplierFactory.GetList(where).Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table.Rows)

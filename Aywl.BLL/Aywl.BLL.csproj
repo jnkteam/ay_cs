@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExMenuFactory.cs" />
     <Compile Include="Api\PayBank20.cs" />
     <Compile Include="APP\apprecharge.cs" />
     <Compile Include="APP\entrust.cs" />

@@ -5,6 +5,8 @@
     using OriginalStudio.Lib.SysConfig;
     using System;
     using System.Web;
+    using OriginalStudio.Lib.Configuration;
+    using OriginalStudio.Lib.TimeControl;
 
     public class ManagePageBase : PageBase
     {
@@ -15,11 +17,28 @@
         /// <summary>
         /// 默认主题
         /// </summary>
-        protected string DefaultThemes = ""; 
+        protected string DefaultThemes = "";
 
+        public string ADMIN_URI = ConfigHelper.GetConfig("runtimeSettings", "ADMIN_URI");
+        public string username = string.Empty;
+        public string loginip = string.Empty;
+        public string logintime = string.Empty;
+        public string treeView = string.Empty;
         public void checkLogin()
         {
             string str = string.Format("/{0}/Login.aspx", RuntimeSetting.ManagePagePath);
+            try
+            {
+                this.username = ManageFactory.CurrentManage.username;
+                this.loginip = ManageFactory.CurrentManage.lastLoginIp;
+                this.logintime = FormatConvertor.DateTimeToTimeString(ManageFactory.CurrentManage.lastLoginTime.Value);
+                this.treeView = ExMenuFactory.getTreeView(0);
+            }
+            catch
+            {
+
+            }
+
             if ((DateTime.Now < this.sDate) || (DateTime.Now > this.eDate))
             {
                 HttpContext.Current.Response.Write(string.Format("\r\n<SCRIPT LANGUAGE='javascript'><!--\r\nalert('试用过期请联系管理员');top.location.href=\"{0}\";\r\n//--></SCRIPT>", str));

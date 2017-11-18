@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScpClient, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Output\ScpClient.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -131,7 +127,7 @@
     <Compile Include="User\UserFactory.cs" />
     <Compile Include="User\userHost.cs" />
     <Compile Include="User\UserLoginLogFactory.cs" />
-    <Compile Include="User\UsersAmt.cs" />
+    <Compile Include="User\MchUsersAmt.cs" />
     <Compile Include="User\usersetting.cs" />
     <Compile Include="User\usersIdImage.cs" />
     <Compile Include="User\usersOrderIncome.cs" />

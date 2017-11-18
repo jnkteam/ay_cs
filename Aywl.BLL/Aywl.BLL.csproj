@@ -180,6 +180,10 @@
       <Project>{e28110c1-e206-4b6e-bc2b-983683facc5c}</Project>
       <Name>Aywl.MSMQMessaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Aywl.SQLServerDAL\Aywl.SQLServerDAL.csproj">
+      <Project>{7e15e9d2-d904-4917-a61b-de56183e306f}</Project>
+      <Name>Aywl.SQLServerDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

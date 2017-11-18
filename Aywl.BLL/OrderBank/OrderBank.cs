@@ -1,11 +1,7 @@
 ﻿namespace OriginalStudio.BLL
 {
-    using OriginalStudio.BLL.Channel;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Cache;
-    using OriginalStudio.IBLLStrategy;
-    using OriginalStudio.IDAL;
-    using OriginalStudio.IMessaging;
     using OriginalStudio.Model.Channel;
     using OriginalStudio.Model.Order;
     using OriginalStudio.Model.User;
@@ -14,14 +10,10 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading;
     using System.Web;
     using OriginalStudio.Lib.Data;
-    using OriginalStudio.BLL.MessagingFactory;
-    using System.IO;
     using System.Transactions;
     using OriginalStudio.BLL.PayRate;
     using OriginalStudio.Model;
@@ -31,18 +23,25 @@
 
     public class OrderBank
     {
-        private static readonly OriginalStudio.IDAL.IOrderBank orderDal = OriginalStudio.BLL.OrderBankAccess.CreateOrderBank();
-        private static readonly IOrderBankStrategy orderInsertStrategy = LoadInsertStrategy();      //KuaiCard.BLL.OrderBankSynchronous
-        private static readonly OriginalStudio.IMessaging.IOrderBank orderQueue = QueueAccess.CreateBankOrder();
+        private static readonly IDAL.IOrderBank orderDal = LoadeOrderBankStrategy();
+        private static readonly IBLLStrategy.IOrderBankStrategy orderInsertStrategy = LoadInsertStrategy();
+        private static readonly IMessaging.IOrderBank orderQueue = LoadeQueueAccessStrategy();
 
         #region 加载操作对象
-        
-        private static IOrderBankStrategy LoadInsertStrategy()
+
+        private static IDAL.IOrderBank LoadeOrderBankStrategy()
         {
-            string orderStrategyAssembly = RuntimeSetting.OrderStrategyAssembly;        //Aywl.BLL
-            string orderStrategyClass = RuntimeSetting.OrderStrategyClass;          //OriginalStudio.BLL.OrderBankSynchronous
+            return new OriginalStudio.SQLServerDAL.OrderBank();
+        }
+
+        private static IBLLStrategy.IOrderBankStrategy LoadInsertStrategy()
+        {
             return new OriginalStudio.BLL.OrderBankSynchronous();
-            //return (IOrderBankStrategy)Assembly.Load(orderStrategyAssembly).CreateInstance(orderStrategyClass);
+        }
+
+        private static IMessaging.IOrderBank LoadeQueueAccessStrategy()
+        {
+            return new OriginalStudio.MSMQMessaging.OrderBank();
         }
 
         #endregion
@@ -631,7 +630,7 @@
         /// <returns></returns>
         public OrderBankInfo ReceiveFromQueue(int timeout)
         {
-            return orderQueue.Receive(timeout);
+            return null;    // orderQueue.Receive(timeout);
         }
 
         #endregion

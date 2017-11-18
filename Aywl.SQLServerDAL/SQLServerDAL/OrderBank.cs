@@ -15,7 +15,7 @@
 
     public class OrderBank : IOrderBank
     {
-        internal const string FIELDS = "[id]\r\n      ,[orderid]\r\n      ,[ordertype]\r\n      ,[userid]\r\n      ,[typeId]\r\n      ,[paymodeId]\r\n      ,[userorder]\r\n      ,[refervalue]\r\n      ,[realvalue]\r\n      ,[notifyurl]\r\n      ,[againNotifyUrl]\r\n      ,[notifycount]\r\n      ,[notifystat]\r\n      ,[notifycontext]\r\n      ,[returnurl]\r\n      ,[attach]\r\n      ,[payerip]\r\n      ,[clientip]\r\n      ,[referUrl]\r\n      ,[addtime]\r\n      ,[supplierID]\r\n      ,[supplierOrder]\r\n      ,[status]\r\n      ,[completetime]\r\n      ,[payRate]\r\n      ,[supplierRate]\r\n      ,[promRate]\r\n      ,[payAmt]\r\n      ,[promAmt]\r\n      ,[supplierAmt]\r\n      ,[profits]\r\n      ,[server]\r\n      ,[modetypename]\r\n      ,[modeName],[commission],[notifytime],[version]\r\n      ,cus_subject,cus_price,cus_quantity,cus_description,cus_field1,cus_field2,cus_field3,cus_field4,cus_field5,agentid";
+        internal const string FIELDS = "";//"[id]\r\n      ,[orderid]\r\n      ,[ordertype]\r\n      ,[userid]\r\n      ,[typeId]\r\n      ,[paymodeId]\r\n      ,[userorder]\r\n      ,[refervalue]\r\n      ,[realvalue]\r\n      ,[notifyurl]\r\n      ,[againNotifyUrl]\r\n      ,[notifycount]\r\n      ,[notifystat]\r\n      ,[notifycontext]\r\n      ,[returnurl]\r\n      ,[attach]\r\n      ,[payerip]\r\n      ,[clientip]\r\n      ,[referUrl]\r\n      ,[addtime]\r\n      ,[supplierID]\r\n      ,[supplierOrder]\r\n      ,[status]\r\n      ,[completetime]\r\n      ,[payRate]\r\n      ,[supplierRate]\r\n      ,[promRate]\r\n      ,[payAmt]\r\n      ,[promAmt]\r\n      ,[supplierAmt]\r\n      ,[profits]\r\n      ,[server]\r\n      ,[modetypename]\r\n      ,[modeName],[commission],[notifytime],[version]\r\n      ,cus_subject,cus_price,cus_quantity,cus_description,cus_field1,cus_field2,cus_field3,cus_field4,cus_field5,agentid";
         internal const string SQL_TABLE = "v_orderbank_list";
 
         private static string BuilderWhere(List<SearchParam> param, List<SqlParameter> paramList)
@@ -579,6 +579,28 @@
             {
                 OriginalStudio.Lib.Logging.LogHelper.Write("OrderBank.AdminPageSearch错误：" + exception.Message.ToString());
                 //ExceptionHandler.HandleException(exception);
+                return set;
+            }
+        }
+
+        public DataSet AdminPageSearch(List<SearchParam> searchParams, int pageSize, int pageIndex)
+        {
+            DataSet set = new DataSet();
+            try
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@serach_Where", SqlDbType.VarChar, 4000),
+                    new SqlParameter("@serach_PageIndex", SqlDbType.Int, 10),
+                    new SqlParameter("@serach_PageSize", SqlDbType.Int, 10)
+                };
+                commandParameters[0].Value = searchParams;
+                commandParameters[1].Value = pageIndex;
+                commandParameters[2].Value = pageSize;
+                return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_orderbank_admin_search", commandParameters);
+            }
+            catch (Exception exception)
+            {
+                OriginalStudio.Lib.Logging.LogHelper.Write("OrderBank.AdminPageSearch错误：" + exception.Message.ToString());
                 return set;
             }
         }

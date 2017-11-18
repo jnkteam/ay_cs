@@ -14,7 +14,7 @@
 
     public class AgentPageBase : PageBase
     {
-        public UsersAmtInfo _currentUserAmt = null;
+        public MchUsersAmtInfo _currentUserAmt = null;
 
         public void checkLogin()
         {
@@ -25,7 +25,7 @@
             }
             else
             {
-                UserAccessTimeInfo model = new UserAccessTimeInfo();
+                MchUserAccessTimeInfo model = new MchUserAccessTimeInfo();
                 model.userid = this.UserId;
                 model.lastAccesstime = DateTime.Now;
                 UserAccessTime.Add(model);
@@ -97,13 +97,13 @@
             }
         }
 
-        public UsersAmtInfo currentUserAmt
+        public MchUsersAmtInfo currentUserAmt
         {
             get
             {
                 if ((this._currentUserAmt == null) && (this.UserId > 0))
                 {
-                    this._currentUserAmt = UsersAmt.GetModel(this.UserId);
+                    this._currentUserAmt = MchUsersAmt.GetModel(this.UserId);
                 }
                 return this._currentUserAmt;
             }

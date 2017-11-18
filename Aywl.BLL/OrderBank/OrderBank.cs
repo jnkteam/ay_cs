@@ -771,6 +771,18 @@
             return orderDal.AdminPageSearch(searchParams, pageSize, page, orderby);
         }
 
+        /// <summary>
+        /// 管理员后台查询订单。参考proc_orderbank_admin_search
+        /// </summary>
+        /// <param name="searchParams"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns>DataSet[0]：订单明细；DataSet[1]：总页数、总记录数</returns>
+        public DataSet AdminPageSearch(List<SearchParam> searchParams, int pageSize, int pageIndex)
+        {
+            return orderDal.AdminPageSearch(searchParams, pageSize, pageIndex);
+        }
+
         #endregion
 
         #region 订单查询API

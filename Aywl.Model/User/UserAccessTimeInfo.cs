@@ -3,7 +3,7 @@
     using System;
 
     [Serializable]
-    public class UserAccessTimeInfo
+    public class MchUserAccessTimeInfo
     {        
         private DateTime _lastaccesstime = DateTime.MinValue;
         private int _userid;

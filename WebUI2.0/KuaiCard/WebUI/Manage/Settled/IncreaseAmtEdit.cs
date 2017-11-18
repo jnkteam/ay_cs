@@ -51,7 +51,7 @@
             if (this.userId > 0)
             {
                 string s = string.Empty;
-                UsersAmtInfo model = UsersAmt.GetModel(this.userId);
+                MchUsersAmtInfo model = MchUsersAmt.GetModel(this.userId);
                 if (model == null)
                 {
                     s = "用户不存在!";

@@ -14,7 +14,7 @@
     public class UserPageBase : PageBase
     {
         private UserInfo _currentUser = null;
-        public UsersAmtInfo _currentUserAmt = null;
+        public MchUsersAmtInfo _currentUserAmt = null;
 
         /// <summary>
         /// 是否可以前台结算。2017.2.13增加
@@ -30,7 +30,7 @@
             }
             else
             {
-                UserAccessTimeInfo model = new UserAccessTimeInfo();
+                MchUserAccessTimeInfo model = new MchUserAccessTimeInfo();
                 model.userid = this.UserId;
                 model.lastAccesstime = DateTime.Now;
                 UserAccessTime.Add(model);
@@ -120,13 +120,13 @@
         /// <summary>
         /// 账户总金额
         /// </summary>
-        public UsersAmtInfo currentUserAmt
+        public MchUsersAmtInfo currentUserAmt
         {
             get
             {
                 if ((this._currentUserAmt == null) && (this.UserId > 0))
                 {
-                    this._currentUserAmt = UsersAmt.GetModel(this.UserId);
+                    this._currentUserAmt = MchUsersAmt.GetModel(this.UserId);
                 }
                 return this._currentUserAmt;
             }

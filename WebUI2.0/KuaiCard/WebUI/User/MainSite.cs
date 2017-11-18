@@ -12,7 +12,7 @@
     public class MainSite : MasterPage
     {
         private UserInfo _currentUser = null;
-        public UsersAmtInfo _currentUserAmt = null;
+        public MchUsersAmtInfo _currentUserAmt = null;
         private WebInfo _webinfo = null;
         protected ContentPlaceHolder MainContentPlaceHolder;
         protected HtmlForm form1;
@@ -124,13 +124,13 @@
             }
         }
 
-        public UsersAmtInfo currentUserAmt
+        public MchUsersAmtInfo currentUserAmt
         {
             get
             {
                 if ((this._currentUserAmt == null) && (this.UserId > 0))
                 {
-                    this._currentUserAmt = UsersAmt.GetModel(this.UserId);
+                    this._currentUserAmt = MchUsersAmt.GetModel(this.UserId);
                 }
                 return this._currentUserAmt;
             }

@@ -359,18 +359,18 @@
             }
         }
 
-        private UsersAmtInfo _currentUserAmt = null;
+        private MchUsersAmtInfo _currentUserAmt = null;
 
         /// <summary>
         /// 账户总金额
         /// </summary>
-        private UsersAmtInfo currentUserAmt
+        private MchUsersAmtInfo currentUserAmt
         {
             get
             {
                 if ((this._currentUserAmt == null) && (this.UserId > 0))
                 {
-                    this._currentUserAmt = UsersAmt.GetModel(this.UserId);
+                    this._currentUserAmt = MchUsersAmt.GetModel(this.UserId);
                 }
                 return this._currentUserAmt;
             }

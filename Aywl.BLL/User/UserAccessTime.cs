@@ -15,7 +15,7 @@
         internal const string SQL_FIELDS = "[id],[userid],[siteip],[sitetype],[hostName],[hostUrl],[status],[desc],[username]";
         internal const string SQL_TABLE = "V_userhost";
 
-        public static bool Add(UserAccessTimeInfo model)
+        public static bool Add(MchUserAccessTimeInfo model)
         {
             try
             {
@@ -112,7 +112,7 @@
             }
         }
 
-        public static UserAccessTimeInfo GetModel(int userId)
+        public static MchUserAccessTimeInfo GetModel(int userId)
         {
             try
             {
@@ -123,13 +123,13 @@
             catch (Exception exception)
             {
                 ExceptionHandler.HandleException(exception);
-                return new UserAccessTimeInfo();
+                return new MchUserAccessTimeInfo();
             }
         }
 
-        public static UserAccessTimeInfo GetModelFromDs(DataSet ds)
+        public static MchUserAccessTimeInfo GetModelFromDs(DataSet ds)
         {
-            UserAccessTimeInfo info = new UserAccessTimeInfo();
+            MchUserAccessTimeInfo info = new MchUserAccessTimeInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0]["userid"].ToString() != "")

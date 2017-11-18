@@ -10,9 +10,9 @@
     using System.Data.SqlClient;
     using System.Text;
 
-    public class UsersAmt
+    public class MchUsersAmt
     {
-        internal const string SQL_TABLE = "usersAmt";
+        internal const string SQL_TABLE = "mch_userAmt";
         internal const string SQL_TABLE_FIELD = "[id]\r\n      ,[userId]\r\n      ,[Integral]\r\n      ,[Freeze]\r\n      ,[balance]\r\n      ,[payment]\r\n      ,[unpayment],[Freeze],(ISNULL([balance],0)-ISNULL([unpayment],0)-ISNULL([Freeze],0)) as enableAmt";
 
         private static string BuilderWhere(List<SearchParam> param, List<SqlParameter> paramList)
@@ -52,50 +52,50 @@
             return builder.ToString();
         }
 
-        public static UsersAmtInfo GetModel(int userId)
+        public static MchUsersAmtInfo GetModel(int userId)
         {
             SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userId", SqlDbType.Int, 10) };
             commandParameters[0].Value = userId;
-            UsersAmtInfo info = new UsersAmtInfo();
-            return GetModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_usersAmt_GetModel", commandParameters));
+            MchUsersAmtInfo info = new MchUsersAmtInfo();
+            return GetModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userAmt_GetModel", commandParameters));
         }
 
-        public static UsersAmtInfo GetModelFromDs(DataSet ds)
+        public static MchUsersAmtInfo GetModelFromDs(DataSet ds)
         {
-            UsersAmtInfo info = new UsersAmtInfo();
+            MchUsersAmtInfo info = new MchUsersAmtInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0]["id"].ToString() != "")
                 {
-                    info.id = int.Parse(ds.Tables[0].Rows[0]["id"].ToString());
+                    info.ID = int.Parse(ds.Tables[0].Rows[0]["id"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["userId"].ToString() != "")
                 {
-                    info.userId = int.Parse(ds.Tables[0].Rows[0]["userId"].ToString());
+                    info.UserID = int.Parse(ds.Tables[0].Rows[0]["userId"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["Integral"].ToString() != "")
                 {
-                    info.Integral = new int?(int.Parse(ds.Tables[0].Rows[0]["Integral"].ToString()));
+                    info.Integral = Int64.Parse(ds.Tables[0].Rows[0]["Integral"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["balance"].ToString() != "")
                 {
-                    info.balance = new decimal?(decimal.Parse(ds.Tables[0].Rows[0]["balance"].ToString()));
+                    info.Balance = decimal.Parse(ds.Tables[0].Rows[0]["balance"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["payment"].ToString() != "")
                 {
-                    info.payment = new decimal?(decimal.Parse(ds.Tables[0].Rows[0]["payment"].ToString()));
+                    info.Payment = decimal.Parse(ds.Tables[0].Rows[0]["payment"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["unpayment"].ToString() != "")
                 {
-                    info.unpayment = new decimal?(decimal.Parse(ds.Tables[0].Rows[0]["unpayment"].ToString()));
+                    info.UnPayment = decimal.Parse(ds.Tables[0].Rows[0]["unpayment"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["Freeze"].ToString() != "")
                 {
-                    info.Freeze = new decimal?(decimal.Parse(ds.Tables[0].Rows[0]["Freeze"].ToString()));
+                    info.Freeze = decimal.Parse(ds.Tables[0].Rows[0]["Freeze"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["enableAmt"].ToString() != "")
                 {
-                    info.enableAmt = decimal.Parse(ds.Tables[0].Rows[0]["enableAmt"].ToString());
+                    info.EnableAmt = decimal.Parse(ds.Tables[0].Rows[0]["enableAmt"].ToString());
                 }
                 return info;
             }
@@ -107,7 +107,7 @@
             DataSet set = new DataSet();
             try
             {
-                string tables = "usersAmt";
+                string tables = "mch_userAmt";
                 string key = "[id]";
                 if (string.IsNullOrEmpty(orderby))
                 {

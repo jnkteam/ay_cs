@@ -18,6 +18,8 @@
         DataSet PageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby);
         DataSet UserPageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby);
         DataSet AdminPageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby);
+
+        DataSet AdminPageSearch(List<SearchParam> searchParams, int pageSize, int pageIndex);
         bool ReDeduct(string orderid);
     }
 }

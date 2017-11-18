@@ -41,7 +41,8 @@
         {
             string orderStrategyAssembly = RuntimeSetting.OrderStrategyAssembly;        //Aywl.BLL
             string orderStrategyClass = RuntimeSetting.OrderStrategyClass;          //OriginalStudio.BLL.OrderBankSynchronous
-            return (IOrderBankStrategy)Assembly.Load(orderStrategyAssembly).CreateInstance(orderStrategyClass);
+            return new OriginalStudio.BLL.OrderBankSynchronous();
+            //return (IOrderBankStrategy)Assembly.Load(orderStrategyAssembly).CreateInstance(orderStrategyClass);
         }
 
         #endregion

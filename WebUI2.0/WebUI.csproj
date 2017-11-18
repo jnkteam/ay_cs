@@ -250,9 +250,6 @@
     <Compile Include="KuaiCard\web\Agent\User\UserPayRateEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="agent_stat.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\agent\Default.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -320,9 +317,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Business\Logout.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Business_Contact.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistsSchemes.cs">
@@ -478,7 +472,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\password.cs" />
-    
     <Compile Include="KuaiCard\WebUI\User\mobile\index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -489,9 +482,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\getPassword.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Business_stat.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\business\Order\BankReportList.cs">
@@ -612,9 +602,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\agent\Login.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="agent_Contact.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\agent\ChangePwd.cs">
@@ -789,7 +776,6 @@
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\Service\UserAgent.cs" />
     <Compile Include="KuaiCard\WebUI\User\Service\amt.cs" />
-    
     <Compile Include="KuaiCard\WebUI\IpList.cs" />
     <Compile Include="KuaiCard\WebUI\business\SMSLogList.cs">
       <SubType>ASPXCodeBehind</SubType>

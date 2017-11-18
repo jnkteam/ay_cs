@@ -270,8 +270,6 @@
            
             string orderby = string.Empty;
             DataSet set = new OrderBank().AdminPageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
-            Response.Write(set);
-            /*
            this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
            this.rptOrders.DataSource = set.Tables[1];
            this.rptOrders.DataBind();
@@ -299,7 +297,7 @@
                    this.TotalProfit = Convert.ToDecimal(table.Rows[0]["profits"]).ToString("f2");  //平台利润：0.00 
                }
            }
-           */
+           
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -312,7 +310,7 @@
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.EtimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.InitForm();
-                this.LoadData();
+                //this.LoadData();
             }
         }
 

@@ -1,10 +1,8 @@
-using System;
 using System.Web;
-using OriginalStudio.Lib;
 
 namespace OriginalStudio.Lib.Utils
 {
-	public class Request
+    public class Request
 	{
 		public static string GetCurrentFullHost()
 		{
@@ -37,12 +35,12 @@ namespace OriginalStudio.Lib.Utils
 
 		public static float GetFormFloat(string strName, float defValue)
 		{
-			return OriginalStudio.Lib.Utility.StrToFloat(HttpContext.Current.Request.Form[strName], defValue);
+			return Utils.StrToFloat(HttpContext.Current.Request.Form[strName], defValue);
 		}
 
 		public static int GetFormInt(string strName, int defValue)
 		{
-			return Utility.StrToInt(HttpContext.Current.Request.Form[strName], defValue);
+			return Utils.StrToInt(HttpContext.Current.Request.Form[strName], defValue);
 		}
 
 		public static string GetFormString(string strName)
@@ -92,7 +90,7 @@ namespace OriginalStudio.Lib.Utils
 				ip = HttpContext.Current.Request.UserHostAddress;
 			}
 			string result;
-			if (ip == null || !(ip != string.Empty) || !Utility.IsIP(ip))
+			if (ip == null || !(ip != string.Empty) || !Utils.IsIP(ip))
 			{
 				result = "0.0.0.0";
 			}
@@ -119,12 +117,12 @@ namespace OriginalStudio.Lib.Utils
 
 		public static float GetQueryFloat(string strName, float defValue)
 		{
-			return Utility.StrToFloat(HttpContext.Current.Request.QueryString[strName], defValue);
+			return Utils.StrToFloat(HttpContext.Current.Request.QueryString[strName], defValue);
 		}
 
 		public static int GetQueryInt(string strName, int defValue)
 		{
-			return Utility.StrToInt(HttpContext.Current.Request.QueryString[strName], defValue);
+			return Utils.StrToInt(HttpContext.Current.Request.QueryString[strName], defValue);
 		}
 
 		public static string GetQueryString(string strName)

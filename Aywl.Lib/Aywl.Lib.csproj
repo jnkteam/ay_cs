@@ -94,7 +94,6 @@
     <Compile Include="Lib\Json.cs" />
     <Compile Include="Lib\PageData.cs" />
     <Compile Include="Lib\SqlKey.cs" />
-    <Compile Include="Lib\Utility.cs" />
     <Compile Include="Lib\XRequest.cs" />
     <Compile Include="MemcachedLib\CRCTool.cs" />
     <Compile Include="MemcachedLib\HashingAlgorithm.cs" />

@@ -32,7 +32,7 @@ namespace OriginalStudio.Lib.Security
 			string result;
 			try
 			{
-				decryptKey = Utility.GetSubString(decryptKey, 32, "");
+				decryptKey = Utils.Utils.GetSubString(decryptKey, 32, "");
 				decryptKey = decryptKey.PadRight(32, ' ');
 				ICryptoTransform decryptor = new RijndaelManaged
 				{
@@ -119,7 +119,7 @@ namespace OriginalStudio.Lib.Security
 
 		public static string Encode(string encryptString, string encryptKey)
 		{
-			encryptKey = Utility.GetSubString(encryptKey, 32, "");
+			encryptKey = Utils.Utils.GetSubString(encryptKey, 32, "");
 			encryptKey = encryptKey.PadRight(32, ' ');
 			ICryptoTransform encryptor = new RijndaelManaged
 			{

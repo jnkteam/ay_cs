@@ -18,11 +18,12 @@ namespace OriginalStudio.Lib.Utils
     {
         private static FileVersionInfo AssemblyFileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 
-        private static Regex RegexBr = new Regex("(\\r\\n)", RegexOptions.IgnoreCase);
-
         public static Regex RegexFont = new Regex("<font color=\".*?\">([\\s\\S]+?)</font>", Utils.GetRegexCompiledOptions());
 
         private static string TemplateCookieName = string.Format("dnttemplateid_{0}_{1}_{2}", Utils.AssemblyFileVersion.FileMajorPart, Utils.AssemblyFileVersion.FileMinorPart, Utils.AssemblyFileVersion.FileBuildPart);
+
+        [DllImport("dbgHelp", SetLastError = true)]
+        private static extern bool MakeSureDirectoryPathExists(string name);
 
         public static string[] Monthes
         {
@@ -106,13 +107,27 @@ namespace OriginalStudio.Lib.Utils
 
         public static string ClearBR(string str)
         {
-            Match match = Utils.RegexBr.Match(str);
+            Match match = new Regex("(\\r\\n)", RegexOptions.IgnoreCase).Match(str);
             while (match.Success)
             {
                 str = str.Replace(match.Groups[0].ToString(), "");
                 match = match.NextMatch();
             }
             return str;
+        }
+
+        public static string ClearHtml(string strHtml)
+        {
+            if (strHtml != "")
+            {
+                Match match = new Regex("<\\/?[^>]*>", RegexOptions.IgnoreCase).Match(strHtml);
+                while (match.Success)
+                {
+                    strHtml = strHtml.Replace(match.Groups[0].ToString(), "");
+                    match = match.NextMatch();
+                }
+            }
+            return strHtml;
         }
 
         public static string ClearLastChar(string str)
@@ -279,28 +294,6 @@ namespace OriginalStudio.Lib.Utils
 				dt.Month,
 				"-"
 			});
-        }
-
-        public static string Get_Https(string a_strUrl, int timeout)
-        {
-            string result;
-            try
-            {
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(a_strUrl);
-                httpWebRequest.Timeout = timeout;
-                StreamReader streamReader = new StreamReader(httpWebRequest.GetResponse().GetResponseStream(), Encoding.Default);
-                StringBuilder stringBuilder = new StringBuilder();
-                while (-1 != streamReader.Peek())
-                {
-                    stringBuilder.Append(streamReader.ReadLine());
-                }
-                result = stringBuilder.ToString();
-            }
-            catch (Exception ex_5D)
-            {
-                result = "true";
-            }
-            return result;
         }
 
         public static string GetAssemblyCopyright()
@@ -1162,9 +1155,6 @@ namespace OriginalStudio.Lib.Utils
         {
             return Regex.IsMatch(strEmail, "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
         }
-
-        [DllImport("dbgHelp", SetLastError = true)]
-        private static extern bool MakeSureDirectoryPathExists(string name);
 
         public static string mashSQL(string str)
         {

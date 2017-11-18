@@ -11,7 +11,7 @@
         private DateTime _addtime;
         private decimal _amount;
         private AppTypeEnum _appType;
-        private decimal? _charges = 0;
+        private decimal _charges = 0;
         private int _id;
         private string _BankCode = "";
         private string _Payeeaddress = string.Empty;
@@ -24,7 +24,7 @@
         private SettledStatusEnum _status = SettledStatusEnum.审核中;
         private int _suppid = 0;
         private int _suppstatus;
-        private decimal? _tax = 0;
+        private decimal _tax = 0;
         private int _userid;
 
         public string Account
@@ -75,7 +75,7 @@
             }
         }
 
-        public decimal? Charges
+        public decimal Charges
         {
             get
             {
@@ -219,7 +219,7 @@
             }
         }
 
-        public decimal? Tax
+        public decimal Tax
         {
             get
             {

@@ -16,7 +16,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.userid = base.currentUser.ID.ToString();
+            this.userid = base.CurrentUser.ID.ToString();
         }
     }
 }

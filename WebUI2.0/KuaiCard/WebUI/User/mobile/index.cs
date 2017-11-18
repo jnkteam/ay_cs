@@ -13,7 +13,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gUserTel = Strings.Mark(base.currentUser.Tel);
+            gUserTel = Strings.Mark(base.CurrentUser.Tel);
         }
     }
 }

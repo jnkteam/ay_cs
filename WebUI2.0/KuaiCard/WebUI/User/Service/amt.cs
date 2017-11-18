@@ -20,7 +20,7 @@
             }
             else
             {
-                string str2 = ((this.balance - this.unpayment) - this.Freeze).ToString("f2");
+                string str2 = ((this.balance - this.Unpayment) - this.Freeze).ToString("f2");
                 if ((str2 == "") || (str2 == null))
                 {
                     s = "{\"result\":\"no\",\"ico\":\"error\"}";
@@ -39,9 +39,9 @@
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.balance.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.balance.Value;
+                    num = this.currentUserAmt.Balance;
                 }
                 return num;
             }
@@ -76,9 +76,9 @@
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.Freeze.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.Freeze.Value;
+                    num = this.currentUserAmt.Freeze;
                 }
                 return num;
             }
@@ -92,14 +92,14 @@
             }
         }
 
-        public decimal unpayment
+        public decimal Unpayment
         {
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.unpayment.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.unpayment.Value;
+                    num = this.currentUserAmt.UnPayment;
                 }
                 return num;
             }

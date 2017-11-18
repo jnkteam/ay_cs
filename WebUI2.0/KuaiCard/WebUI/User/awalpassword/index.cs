@@ -13,9 +13,9 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.gUserID = base.currentUser.ID.ToString();
+            this.gUserID = base.CurrentUser.ID.ToString();
 
-            if ((base.currentUser.Password2 == "") || (base.currentUser.Password2 == null))
+            if ((base.CurrentUser.Password2 == "") || (base.CurrentUser.Password2 == null))
                 this.gUpdateMode = false;
             else
                 this.gUpdateMode = true;

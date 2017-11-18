@@ -11,7 +11,7 @@
         {
             if (!base.IsPostBack)
             {
-                this.username = base.currentUser.UserName;
+                this.username = base.CurrentUser.UserName;
             }
         }
     }

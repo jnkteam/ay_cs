@@ -58,7 +58,7 @@
                 }
                 else
                 {
-                    s = ((model.balance.Value - model.Freeze.Value) - model.unpayment.Value).ToString("f2");
+                    s = ((model.Balance - model.Freeze) - model.UnPayment).ToString("f2");
                 }
                 base.Response.Write(s);
                 base.Response.End();

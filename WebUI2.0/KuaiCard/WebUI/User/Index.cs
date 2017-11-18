@@ -70,13 +70,13 @@
         private void InitForm()
         {
             this.bankcoe = 0;// UserPayBankApp.GetIsRead(base.currentUser.ID);
-            this.getnid = base.currentUser.ID.ToString();
-            this.getnm = base.currentUser.UserName;
-            this.litbalance.Text = ((base.balance - base.unpayment) - base.Freeze).ToString("f2");
+            this.getnid = base.CurrentUser.ID.ToString();
+            this.getnm = base.CurrentUser.UserName;
+            this.litbalance.Text = ((base.Balance - base.Unpayment) - base.Freeze).ToString("f2");
 
-            if (base.currentUser.manageId.HasValue)
+            if (base.CurrentUser.manageId.HasValue)
             {
-                Manage model = ManageFactory.GetModel(int.Parse(base.currentUser.manageId.ToString()));
+                Manage model = ManageFactory.GetModel(int.Parse(base.CurrentUser.manageId.ToString()));
                 if (model != null)
                 {
                     this.businessname = model.relname;
@@ -85,8 +85,8 @@
                     this.businessid = "800" + model.id.ToString();
                 }
             }
-            this.litEmai.Text = Strings.Mark(base.currentUser.Email);
-            if (base.currentUser.IsEmailPass == 1)
+            this.litEmai.Text = Strings.Mark(base.CurrentUser.Email);
+            if (base.CurrentUser.IsEmailPass == 1)
             {
                 this.classemail.Attributes["class"] = "color_ju";
                 this.classemail.InnerText = "已绑定";
@@ -103,7 +103,7 @@
                 else
                     this.linemail.Attributes["href"] = "/user/validate/set.aspx";
             }
-            if (base.currentUser.IsPhonePass == 1)
+            if (base.CurrentUser.IsPhonePass == 1)
             {
                 this.classshouji.Attributes["class"] = "color_ju";
                 this.classshouji.InnerText = "已绑定";
@@ -120,7 +120,7 @@
                 else
                     this.linshouji.Attributes["href"] = "/user/validate/tel.aspx";
             }
-            if (!string.IsNullOrEmpty(base.currentUser.Password2))
+            if (!string.IsNullOrEmpty(base.CurrentUser.Password2))
             {
                 this.classtixian.Attributes["class"] = "color_ju";
                 this.classtixian.InnerText = "已设置";
@@ -133,9 +133,9 @@
                 this.lintixian.InnerText = "设置";
             }
 
-            gblnRealName = base.currentUser.IsRealNamePass == 1;
-            this.LitUserName.Text = gblnRealName ? base.currentUser.full_name : "平台商户";
-            this.LitLleixing = base.currentUser.accoutType == 1?"企业":"个人";
+            gblnRealName = base.CurrentUser.IsRealNamePass == 1;
+            this.LitUserName.Text = gblnRealName ? base.CurrentUser.full_name : "平台商户";
+            this.LitLleixing = base.CurrentUser.accoutType == 1?"企业":"个人";
 
             DataTable table = NewsFactory.GetNewsList(2, 4, 0);
             if ((table != null) && (table.Rows.Count > 0))
@@ -200,20 +200,20 @@
             this.totalsuccorderpayamt = (Convert.ToDouble(this.totalpayamt1)).ToString();
             
             //绑定IP
-            this.gblnBindIP = UserFactory.GetUserBindIp(base.currentUser.ID).Tables[0].Rows.Count > 0;
+            this.gblnBindIP = UserFactory.GetUserBindIp(base.CurrentUser.ID).Tables[0].Rows.Count > 0;
 
             this.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.currentUser == null)
+            if (this.CurrentUser == null)
             {
                 //session过期，直接跳出
                 this.Response.Redirect("~/User/loginout.aspx", true);
             }
 
-            if (base.currentUser.IsPhonePass == 1)
+            if (base.CurrentUser.IsPhonePass == 1)
             {
                 this.shouji = "user/mobile/";
             }
@@ -221,7 +221,7 @@
             {
                 this.shouji = "user/validate/Tel.aspx";
             }
-            if (base.currentUser.IsEmailPass == 1)
+            if (base.CurrentUser.IsEmailPass == 1)
             {
                 this.youxiang = "user/email/";
             }

@@ -12,7 +12,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.useremail.Text = base.currentUser.Email;
+            this.useremail.Text = base.CurrentUser.Email;
             if (base.IsPostBack)
             {
                 string formString = WebBase.GetFormString("a", "");

@@ -16,8 +16,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.shouji = Strings.Mark(base.currentUser.Tel);
-            this.email = Strings.Mark(base.currentUser.Email);
+            this.shouji = Strings.Mark(base.CurrentUser.Tel);
+            this.email = Strings.Mark(base.CurrentUser.Email);
             if (SysConfig.radioButtonshouji)
             {
                 this.usertext.Text = this.usertext.Text + " <li> <a id='#mobile' class='selected' name=\"mobile\"><span>短信验证</span></a></li>";

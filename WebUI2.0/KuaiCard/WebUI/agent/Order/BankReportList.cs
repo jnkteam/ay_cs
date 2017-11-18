@@ -105,7 +105,7 @@
             searchParams.Add(new SearchParam("ordertype", 1));
             searchParams.Add(new SearchParam("status", "<>", 1));
             int result = 0;
-            searchParams.Add(new SearchParam("agentid", base.currentUser.ID));
+            searchParams.Add(new SearchParam("agentid", base.CurrentUser.ID));
             if (!string.IsNullOrEmpty(this.txtOrderId.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("orderId_like", this.txtOrderId.Text));

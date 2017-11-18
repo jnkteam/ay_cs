@@ -19,19 +19,19 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.currentUser == null)
+            if (this.CurrentUser == null)
             {
                 //session过期，直接跳出
                 this.Response.Redirect("~/User/loginout.aspx", true);
             }
 
-            this.UserLastLoginTime = this.currentUser.LastLoginTime.ToString("yyyy-MM-dd HH:mm:ss");
-            this.UserLastLoginIp = this.currentUser.LastLoginIp;
-            this.UserBalance = ((this.balance - this.unpayment) - this.Freeze).ToString("f2");
-            this.mUserFullName = this.currentUser.full_name;
-            if (this.currentUser.IsRealNamePass == 1)
+            this.UserLastLoginTime = this.CurrentUser.LastLoginTime.ToString("yyyy-MM-dd HH:mm:ss");
+            this.UserLastLoginIp = this.CurrentUser.LastLoginIp;
+            this.UserBalance = ((this.Balance - this.Unpayment) - this.Freeze).ToString("f2");
+            this.mUserFullName = this.CurrentUser.full_name;
+            if (this.CurrentUser.IsRealNamePass == 1)
             {
-                this.UserName = this.currentUser.UserName;
+                this.UserName = this.CurrentUser.UserName;
             }
             else
             {
@@ -44,8 +44,8 @@
             string callBackurl = "http://www.zhifoopay.com/user/recharge/notify.aspx";
 
             string str;
-            string str2 = currentUser.ID.ToString();
-            string str3 = currentUser.APIKey;
+            string str2 = CurrentUser.ID.ToString();
+            string str3 = CurrentUser.APIKey;
             //网银支付，支付宝，微信，财付通
             string str4 = Request.Form["bankName"];        //通道代码
             if (string.IsNullOrEmpty(str4))

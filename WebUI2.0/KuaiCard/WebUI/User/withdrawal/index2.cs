@@ -67,7 +67,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.currentUser.settles_type == 1)
+            if (this.CurrentUser.settles_type == 1)
             {
                 //接口方式，不允许通过前台操作
                 this.Response.Redirect("~/User/", true);
@@ -111,7 +111,7 @@
                  */
 
                 DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
-                                                            base.currentUser.ID, 
+                                                            base.CurrentUser.ID, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));
                 if (ds != null)
@@ -154,11 +154,11 @@
                     {
                         d += base.TodayIncomeweixin;
                     }
-                    if (((base.balance - base.unpayment) - base.Freeze) - d < 0)
-                        this.balancea = ((base.balance - base.unpayment) - base.Freeze).ToString("f2");
+                    if (((base.Balance - base.Unpayment) - base.Freeze) - d < 0)
+                        this.balancea = ((base.Balance - base.Unpayment) - base.Freeze).ToString("f2");
                     else
-                        this.balancea = (((base.balance - base.unpayment) - base.Freeze) - d).ToString("f2");
-                    this.zongyue = ((base.balance - base.unpayment) - base.Freeze).ToString("f2");
+                        this.balancea = (((base.Balance - base.Unpayment) - base.Freeze) - d).ToString("f2");
+                    this.zongyue = ((base.Balance - base.Unpayment) - base.Freeze).ToString("f2");
                     glimitTodayIncome = decimal.Round(d, 2).ToString();
                     //=====原来的方式=====
                 }

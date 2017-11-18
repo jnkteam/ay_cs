@@ -21,7 +21,7 @@
         private void BindData()
         {
             //绑定
-            this.rptIPList.DataSource = UserFactory.GetUserBindIp(this.currentUser.ID).Tables[0];
+            this.rptIPList.DataSource = UserFactory.GetUserBindIp(this.CurrentUser.ID).Tables[0];
             this.rptIPList.DataBind(); 
         }
 

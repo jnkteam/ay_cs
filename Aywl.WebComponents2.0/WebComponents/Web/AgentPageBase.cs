@@ -76,20 +76,20 @@
             this.checkLogin();
         }
 
-        public decimal balance
+        public decimal Balance
         {
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.balance.HasValue)
+                if (this.CurrentUserAmt != null)
                 {
-                    num = this.currentUserAmt.balance.Value;
+                    num = this.CurrentUserAmt.Balance;
                 }
                 return num;
             }
         }
 
-        public UserInfo currentUser
+        public UserInfo CurrentUser
         {
             get
             {
@@ -97,7 +97,7 @@
             }
         }
 
-        public MchUsersAmtInfo currentUserAmt
+        public MchUsersAmtInfo CurrentUserAmt
         {
             get
             {
@@ -109,14 +109,14 @@
             }
         }
 
-        public decimal enableAmt
+        public decimal EnableAmt
         {
             get
             {
                 decimal enableAmt = 0M;
-                if (this.currentUserAmt != null)
+                if (this.CurrentUserAmt != null)
                 {
-                    enableAmt = this.currentUserAmt.enableAmt;
+                    enableAmt = this.CurrentUserAmt.EnableAmt;
                 }
                 return enableAmt;
             }
@@ -127,9 +127,9 @@
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.Freeze.HasValue)
+                if (this.CurrentUserAmt != null)
                 {
-                    num = this.currentUserAmt.Freeze.Value;
+                    num = this.CurrentUserAmt.Freeze;
                 }
                 return num;
             }
@@ -147,7 +147,7 @@
         {
             get
             {
-                return (this.currentUser != null);
+                return (this.CurrentUser != null);
             }
         }
 
@@ -155,7 +155,7 @@
         {
             get
             {
-                return this.currentUser.Settles;
+                return this.CurrentUser.Settles;
             }
         }
 
@@ -167,14 +167,14 @@
             }
         }
 
-        public decimal unpayment
+        public decimal Unpayment
         {
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.unpayment.HasValue)
+                if (this.CurrentUserAmt != null)
                 {
-                    num = this.currentUserAmt.unpayment.Value;
+                    num = this.CurrentUserAmt.UnPayment;
                 }
                 return num;
             }
@@ -192,7 +192,7 @@
         {
             get
             {
-                return this.currentUser.ID;
+                return this.CurrentUser.ID;
             }
         }
 
@@ -200,7 +200,7 @@
         {
             get
             {
-                return Strings.ReplaceString(this.currentUser.Account, 4, "*");
+                return Strings.ReplaceString(this.CurrentUser.Account, 4, "*");
             }
         }
 
@@ -208,7 +208,7 @@
         {
             get
             {
-                return Strings.Mark(this.currentUser.Email, '@');
+                return Strings.Mark(this.CurrentUser.Email, '@');
             }
         }
 
@@ -216,7 +216,7 @@
         {
             get
             {
-                return Strings.Mark(this.currentUser.IdCard);
+                return Strings.Mark(this.CurrentUser.IdCard);
             }
         }
 
@@ -224,7 +224,7 @@
         {
             get
             {
-                return Strings.Mark(this.currentUser.Tel);
+                return Strings.Mark(this.CurrentUser.Tel);
             }
         }
 

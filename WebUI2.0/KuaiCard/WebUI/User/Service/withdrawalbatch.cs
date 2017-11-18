@@ -124,7 +124,7 @@
                 {
                     todayIncome += this.TodayIncomeweixin;
                 }
-                canGetMoney = ((this.balance - this.Unpayment) - this.Freeze) - todayIncome;
+                canGetMoney = ((this.Balance - this.Unpayment) - this.Freeze) - todayIncome;
 
                 bool phoneValid = this.currentUser.IsPhonePass == 1;
                 if (phoneValid)
@@ -391,14 +391,14 @@
             }
         }
 
-        private decimal balance
+        private decimal Balance
         {
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.balance.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.balance.Value;
+                    num = this.currentUserAmt.Balance;
                 }
                 return num;
             }
@@ -504,9 +504,9 @@
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.unpayment.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.unpayment.Value;
+                    num = this.currentUserAmt.UnPayment;
                 }
                 return num;
             }
@@ -520,9 +520,9 @@
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.Freeze.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.Freeze.Value;
+                    num = this.currentUserAmt.Freeze;
                 }
                 return num;
             }

@@ -8,8 +8,6 @@
     using OriginalStudio.Lib.Text;
     using System;
     using System.Web;
-    using OriginalStudio.Model.User;
-    using OriginalStudio.BLL.User;
 
     public class UserPageBase : PageBase
     {
@@ -21,7 +19,7 @@
         /// </summary>
         public bool CanSettlesInFront = false;
 
-        public void checkLogin()
+        public void CheckLogin()
         {
             if (!this.IsLogin)
             {
@@ -86,23 +84,23 @@
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            this.checkLogin();
+            this.CheckLogin();
         }
 
-        public decimal balance
+        public decimal Balance
         {
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.balance.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.balance.Value;
+                    num = this.currentUserAmt.Balance;
                 }
                 return num;
             }
         }
 
-        public UserInfo currentUser
+        public UserInfo CurrentUser
         {
             get
             {
@@ -140,9 +138,9 @@
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.Freeze.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.Freeze.Value;
+                    num = this.currentUserAmt.Freeze;
                 }
                 return num;
             }
@@ -152,7 +150,7 @@
         {
             get
             {
-                return (this.currentUser != null);
+                return (this.CurrentUser != null);
             }
         }
 
@@ -163,7 +161,7 @@
         {
             get
             {
-                return this.currentUser.Settles;
+                return this.CurrentUser.Settles;
             }
         }
 
@@ -262,14 +260,14 @@
         /// <summary>
         /// 未结算金额。
         /// </summary>
-        public decimal unpayment
+        public decimal Unpayment
         {
             get
             {
                 decimal num = 0M;
-                if ((this.currentUserAmt != null) && this.currentUserAmt.unpayment.HasValue)
+                if (this.currentUserAmt != null)
                 {
-                    num = this.currentUserAmt.unpayment.Value;
+                    num = this.currentUserAmt.UnPayment;
                 }
                 return num;
             }
@@ -287,11 +285,11 @@
         {
             get
             {
-                if (this.currentUser == null)
+                if (this.CurrentUser == null)
                 {
                     return 0;
                 }
-                return this.currentUser.ID;
+                return this.CurrentUser.ID;
             }
         }
 
@@ -299,7 +297,7 @@
         {
             get
             {
-                return Strings.ReplaceString(this.currentUser.Account, 4, "*");
+                return Strings.ReplaceString(this.CurrentUser.Account, 4, "*");
             }
         }
 
@@ -307,7 +305,7 @@
         {
             get
             {
-                return Strings.Mark(this.currentUser.Email, '@');
+                return Strings.Mark(this.CurrentUser.Email, '@');
             }
         }
 
@@ -315,11 +313,11 @@
         {
             get
             {
-                if (string.IsNullOrEmpty(this.currentUser.IdCard) || (this.currentUser.IdCard.Length < 4))
+                if (string.IsNullOrEmpty(this.CurrentUser.IdCard) || (this.CurrentUser.IdCard.Length < 4))
                 {
                     return string.Empty;
                 }
-                return Strings.ReplaceString(this.currentUser.IdCard, 3, (this.currentUser.IdCard.Length - 3) - 4, "*");
+                return Strings.ReplaceString(this.CurrentUser.IdCard, 3, (this.CurrentUser.IdCard.Length - 3) - 4, "*");
             }
         }
 
@@ -327,7 +325,7 @@
         {
             get
             {
-                return Strings.Mark(this.currentUser.IdCard);
+                return Strings.Mark(this.CurrentUser.IdCard);
             }
         }
 
@@ -335,7 +333,7 @@
         {
             get
             {
-                return Strings.Mark(this.currentUser.Tel);
+                return Strings.Mark(this.CurrentUser.Tel);
             }
         }
 

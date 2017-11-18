@@ -18,7 +18,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.PhoneValid = base.currentUser.IsPhonePass == 1;
+            this.PhoneValid = base.CurrentUser.IsPhonePass == 1;
 
             this.DataBind();
         }

@@ -35,7 +35,7 @@
                 this.gID = id;
                 this.gDeleteIP = ip;
 
-                this.gUserEmail = base.currentUser.Email;
+                this.gUserEmail = base.CurrentUser.Email;
             }
         }
     }

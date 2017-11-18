@@ -68,8 +68,8 @@
 
         private void InitForm()
         {
-            this.getnid = base.currentUser.ID.ToString();
-            this.getnm = base.currentUser.UserName;
+            this.getnid = base.CurrentUser.ID.ToString();
+            this.getnm = base.CurrentUser.UserName;
             try
             {
                 this.getmsgcount = 0;   // IMSGFactory.GetUserMsgCount(base.currentUser.ID);
@@ -81,33 +81,33 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.currentUser == null)
+            if (this.CurrentUser == null)
             {
                 //session过期，直接跳出
                 this.Response.Redirect("~/User/loginout.aspx", true);
             }
 
-            if (this.currentUser.settles_type == 1)
+            if (this.CurrentUser.settles_type == 1)
             {
                 //接口方式，不允许通过前台操作
                 this.Response.Redirect("~/User/", true);
             }
 
-            this.UserLastLoginTime = this.currentUser.LastLoginTime.ToString("yyyy-MM-dd HH:mm:ss");
-            this.UserLastLoginIp = this.currentUser.LastLoginIp;
-            this.UserBalance = ((this.balance - this.unpayment) - this.Freeze).ToString("f2");
-            this.UserDefaultThemes = this.currentUser.default_themes;
-            this.mUserFullName = this.currentUser.full_name;
-            if (this.currentUser.IsRealNamePass == 1)
+            this.UserLastLoginTime = this.CurrentUser.LastLoginTime.ToString("yyyy-MM-dd HH:mm:ss");
+            this.UserLastLoginIp = this.CurrentUser.LastLoginIp;
+            this.UserBalance = ((this.Balance - this.Unpayment) - this.Freeze).ToString("f2");
+            this.UserDefaultThemes = this.CurrentUser.default_themes;
+            this.mUserFullName = this.CurrentUser.full_name;
+            if (this.CurrentUser.IsRealNamePass == 1)
             {
-                this.UserName = this.currentUser.UserName;
+                this.UserName = this.CurrentUser.UserName;
             }
             else
             {
                 this.UserName = "平台商户";
             }
 
-            this.CanSettlesInFront = (this.currentUser.settles_type == 0) || (this.currentUser.settles_type == 2);
+            this.CanSettlesInFront = (this.CurrentUser.settles_type == 0) || (this.CurrentUser.settles_type == 2);
 
 
             DataSet list = null;// UserPayBankApp.GetList("userid=" + base.currentUser.ID);
@@ -140,7 +140,7 @@
                  */
 
                 DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
-                                                            base.currentUser.ID, 
+                                                            base.CurrentUser.ID, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));
                 if (ds != null)
@@ -183,11 +183,11 @@
                     {
                         d += base.TodayIncomeweixin;
                     }
-                    if (((base.balance - base.unpayment) - base.Freeze) - d < 0)
-                        this.balancea = ((base.balance - base.unpayment) - base.Freeze).ToString("f2");
+                    if (((base.Balance - base.Unpayment) - base.Freeze) - d < 0)
+                        this.balancea = ((base.Balance - base.Unpayment) - base.Freeze).ToString("f2");
                     else
-                        this.balancea = (((base.balance - base.unpayment) - base.Freeze) - d).ToString("f2");
-                    this.zongyue = ((base.balance - base.unpayment) - base.Freeze).ToString("f2");
+                        this.balancea = (((base.Balance - base.Unpayment) - base.Freeze) - d).ToString("f2");
+                    this.zongyue = ((base.Balance - base.Unpayment) - base.Freeze).ToString("f2");
                     this.litTodayIncome.Text = decimal.Round(d, 2).ToString();
                     //=====原来的方式=====
                 }

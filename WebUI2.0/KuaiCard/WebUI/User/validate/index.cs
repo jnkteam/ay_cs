@@ -20,21 +20,21 @@
             {
                 this.sign = "modifyShouji";
                 this.yzname = "手机";
-                this.yznameid.Text = Strings.Mark(base.currentUser.Tel);
+                this.yznameid.Text = Strings.Mark(base.CurrentUser.Tel);
                 this.sendtime.Value = "mobile";
             }
             if (this.username == "mobilecode")
             {
                 this.sign = "mobilecode";
                 this.yzname = "手机";
-                this.yznameid.Text = Strings.Mark(base.currentUser.Tel);
+                this.yznameid.Text = Strings.Mark(base.CurrentUser.Tel);
                 this.sendtime.Value = "mobilecode";
             }
             if (this.username == "email")
             {
                 this.sign = "modifyEmail";
                 this.yzname = "邮箱";
-                this.yznameid.Text = Strings.Mark(base.currentUser.Email);
+                this.yznameid.Text = Strings.Mark(base.CurrentUser.Email);
             }
         }
 
@@ -46,7 +46,7 @@
             }
             else
             {
-                this.userid.Value = base.currentUser.ID.ToString();
+                this.userid.Value = base.CurrentUser.ID.ToString();
                 if (!base.IsPostBack)
                 {
                     this.InitForm();

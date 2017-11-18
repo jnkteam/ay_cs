@@ -29,7 +29,7 @@
             {
                 try
                 {
-                    this.litlinks.Text = "?agent=" + base.currentUser.ID.ToString();
+                    this.litlinks.Text = "?agent=" + base.CurrentUser.ID.ToString();
                     this.userscount = PromotionUserFactory.GetUserNum(base.UserId).ToString();
                     DateTime today = DateTime.Today;
                     DateTime edt = DateTime.Today.AddDays(1.0);
@@ -44,14 +44,14 @@
                     this.yeartotalAmt = Dal.GetAgentTotalAmt(base.UserId, today, edt).ToString("f2");
                     try
                     {
-                        this.balance = ((base.currentUserAmt.balance.Value - base.currentUserAmt.Freeze.Value) - base.currentUserAmt.unpayment.Value).ToString("f2");
+                        this.balance = ((base.CurrentUserAmt.Balance - base.CurrentUserAmt.Freeze) - base.CurrentUserAmt.UnPayment).ToString("f2");
                     }
                     catch
                     {
                     }
-                    this.loginip = base.currentUser.LastLoginIp;
-                    this.logintime = FormatConvertor.DateTimeToTimeString(base.currentUser.LastLoginTime);
-                    this.username = base.currentUser.UserName;
+                    this.loginip = base.CurrentUser.LastLoginIp;
+                    this.logintime = FormatConvertor.DateTimeToTimeString(base.CurrentUser.LastLoginTime);
+                    this.username = base.CurrentUser.UserName;
                 }
                 catch
                 {

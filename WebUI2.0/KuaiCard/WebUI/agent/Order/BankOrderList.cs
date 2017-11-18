@@ -121,7 +121,7 @@
         {
             List<SearchParam> searchParams = new List<SearchParam>();
             int result = 0;
-            searchParams.Add(new SearchParam("agentid", base.currentUser.ID));
+            searchParams.Add(new SearchParam("agentid", base.CurrentUser.ID));
             if (!string.IsNullOrEmpty(this.txtOrderId.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("orderId_like", this.txtOrderId.Text));

@@ -13,8 +13,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gUserEmail = OriginalStudio.Lib.Text.Strings.Mark(base.currentUser.Email);
-            gEmailPass = base.currentUser.IsEmailPass == 1;
+            gUserEmail = OriginalStudio.Lib.Text.Strings.Mark(base.CurrentUser.Email);
+            gEmailPass = base.CurrentUser.IsEmailPass == 1;
         }
     }
 }

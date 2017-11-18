@@ -25,31 +25,31 @@
         {
             if (!base.IsPostBack)
             {
-                if (base.currentUser.IsRealNamePass == 0)
+                if (base.CurrentUser.IsRealNamePass == 0)
                 {
                     HttpContext.Current.Response.Redirect("/user/realname/add.aspx");
                 }
                 else
                 {
-                    this.id = base.currentUser.ID.ToString();
-                    this.name = base.currentUser.full_name;
-                    this.zhengmian = base.currentUser.frontPic;     //"/Upload" + 
-                    this.fanmian = base.currentUser.versoPic;       //"/Upload" + 
-                    this.shenfenzhenghao = Strings.Mark(base.currentUser.IdCard);
-                    this.shijan = base.currentUser.msn;
-                    this.img1.Attributes["href"] = base.currentUser.frontPic;
-                    this.img2.Attributes["href"] = base.currentUser.versoPic;
-                    if (base.currentUser.IsRealNamePass == 1)
+                    this.id = base.CurrentUser.ID.ToString();
+                    this.name = base.CurrentUser.full_name;
+                    this.zhengmian = base.CurrentUser.frontPic;     //"/Upload" + 
+                    this.fanmian = base.CurrentUser.versoPic;       //"/Upload" + 
+                    this.shenfenzhenghao = Strings.Mark(base.CurrentUser.IdCard);
+                    this.shijan = base.CurrentUser.msn;
+                    this.img1.Attributes["href"] = base.CurrentUser.frontPic;
+                    this.img2.Attributes["href"] = base.CurrentUser.versoPic;
+                    if (base.CurrentUser.IsRealNamePass == 1)
                     {
                         this.zhuangtai = "已认证";
                         this.img.Text = "<img src=\"/skin/user/images/auditok.png\" />";
                     }
-                    if (base.currentUser.IsRealNamePass == 2)
+                    if (base.CurrentUser.IsRealNamePass == 2)
                     {
                         this.zhuangtai = "审核中";
                         this.img.Text = "<img src=\"/skin/user/images/auditing.png\" />";
                     }
-                    if (base.currentUser.IsRealNamePass == 3)
+                    if (base.CurrentUser.IsRealNamePass == 3)
                     {
                         this.zhuangtai = "审核失败";
                         this.img.Text = "<img src=\"/skin/user/images/auditing.png\" />";

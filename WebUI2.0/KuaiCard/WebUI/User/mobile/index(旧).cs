@@ -13,7 +13,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.usertel.Text = Strings.Mark(base.currentUser.Tel);
+            this.usertel.Text = Strings.Mark(base.CurrentUser.Tel);
             if (base.IsPostBack)
             {
                 string formString = WebBase.GetFormString("a", "");

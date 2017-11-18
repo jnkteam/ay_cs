@@ -11,8 +11,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.userid.Text = base.currentUser.ID.ToString();
-            this.userkey.Text = base.currentUser.APIKey;
+            this.userid.Text = base.CurrentUser.ID.ToString();
+            this.userkey.Text = base.CurrentUser.APIKey;
         }
     }
 }

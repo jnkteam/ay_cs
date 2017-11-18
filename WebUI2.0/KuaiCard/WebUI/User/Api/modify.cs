@@ -11,8 +11,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gUserID = base.currentUser.ID.ToString();
-            gUserKey = base.currentUser.APIKey;
+            gUserID = base.CurrentUser.ID.ToString();
+            gUserKey = base.CurrentUser.APIKey;
 
         }
     }

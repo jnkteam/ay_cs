@@ -35,7 +35,7 @@
                 {
                     this.lblMessage.Text = "二次密码不一致";
                 }
-                else if (Cryptography.MD5(str) != base.currentUser.Password)
+                else if (Cryptography.MD5(str) != base.CurrentUser.Password)
                 {
                     this.lblMessage.Text = "旧密码输入错误！请重试。";
                 }

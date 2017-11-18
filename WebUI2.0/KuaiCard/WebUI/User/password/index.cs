@@ -9,7 +9,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.id = base.currentUser.ID.ToString();
+            this.id = base.CurrentUser.ID.ToString();
         }
     }
 }

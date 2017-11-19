@@ -41,12 +41,12 @@
             model.bankBranch = itemInfo.PayeeAddress;
             model.bankAccountName = itemInfo.PayeeName;
             model.bankAccount = itemInfo.Account;
-            if (itemInfo.Charges.HasValue)
+            if (itemInfo.Charges > 0)
             {
                 //费用
                 OriginalStudio.Model.Settled.Distribution distribution2 = model;
                 decimal amount = itemInfo.Amount;
-                decimal num2 = itemInfo.Charges.Value;
+                decimal num2 = itemInfo.Charges;
                 decimal num3 = amount - num2;
                 distribution2.amount = num3;
             }
@@ -55,7 +55,7 @@
                 model.amount = itemInfo.Amount;
             }
             OriginalStudio.Model.Settled.Distribution distribution3 = model;
-            decimal num4 = itemInfo.Charges.Value;
+            decimal num4 = itemInfo.Charges;
             distribution3.charges = num4;
             model.balance2 = 0;
 

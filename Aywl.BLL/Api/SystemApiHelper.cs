@@ -83,7 +83,7 @@
             if ((orderinfo != null) && !string.IsNullOrEmpty(notifyurl))
             {
                 string opstate;
-                MchUserBaseInfo baseModel = MchUserFactory.GetUserBaseInfo(orderinfo.userid);
+                MchUserBaseInfo baseModel = MchUserFactory.GetUserBaseByUserID(orderinfo.userid);
                 if (baseModel == null)
                 {
                     return notifyurl;

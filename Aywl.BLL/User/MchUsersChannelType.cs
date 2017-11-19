@@ -10,6 +10,7 @@
     using System.Data.SqlClient;
     using System.Text;
     using OriginalStudio.BLL.Sys;
+    using OriginalStudio.Lib.Utils;
 
     /// <summary>
     /// 商户自定义通道操作对象。
@@ -69,9 +70,6 @@
                 }
                 if ((o == null) || !iscache)
                 {
-                    //IDictionary<string, object> parameters = new Dictionary<string, object>();
-                    //parameters.Add("userId", userId);
-                    //SqlDependency dependency = DataBase.AddSqlDependency(objId, SQL_TABLE, SQL_TABLE_FIELD, "[userId]=@userId", parameters);
                     StringBuilder builder = new StringBuilder();
                     builder.Append("select [id],[TypeID],[SupplierCode],[UserId],[UserIsOpen],[SysIsOpen],[AddTime],[UpdateTime]");
                     builder.Append(" FROM [mch_userChannelType] ");
@@ -155,24 +153,28 @@
 
         #region 操作
 
-        public static int Add(ChannelTypeUserInfo model)
+        /// <summary>
+        /// 修改商户通道设置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>增加成功>0；失败=0</returns>
+        public static int Add(MchUserChannelType model)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@typeId", SqlDbType.Int, 10), new SqlParameter("@userId", SqlDbType.Int, 10), new SqlParameter("@userIsOpen", SqlDbType.Bit, 1), new SqlParameter("@sysIsOpen", SqlDbType.Bit, 1), new SqlParameter("@addTime", SqlDbType.DateTime), new SqlParameter("@updateTime", SqlDbType.DateTime) };
-                commandParameters[0].Value = model.typeId;
-                commandParameters[1].Value = model.userId;
-                commandParameters[2].Value = model.userIsOpen;
-                commandParameters[3].Value = model.sysIsOpen;
-                commandParameters[4].Value = model.addTime;
-                commandParameters[5].Value = model.updateTime;
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_channeltypeusers_add", commandParameters);
-                if (obj2 == null)
-                {
-                    return 0;
-                }
-                ClearCache(model.userId);
-                return Convert.ToInt32(obj2);
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@typeId", SqlDbType.Int, 10),
+                    new SqlParameter("@userId", SqlDbType.Int, 10),
+                    new SqlParameter("@userIsOpen", SqlDbType.Bit, 1),
+                    new SqlParameter("@sysIsOpen", SqlDbType.Bit, 1)
+                };
+                commandParameters[0].Value = model.TypeID;
+                commandParameters[1].Value = model.UserId;
+                commandParameters[2].Value = model.UserIsOpen;
+                commandParameters[3].Value = model.SysIsOpen;
+                String R = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_channeltype_add", commandParameters).ToString();
+
+                return Utils.StrToInt(R, 0);
             }
             catch (Exception exception)
             {
@@ -181,23 +183,25 @@
             }
         }
 
-        public static int AddSupp(ChannelTypeUserInfo model)
+        /// <summary>
+        /// 设置商户通道类型供应商
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static int AddSupp(MchUserChannelType model)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@typeId", SqlDbType.Int, 10), new SqlParameter("@userId", SqlDbType.Int, 10), new SqlParameter("@suppid", SqlDbType.Int, 10), new SqlParameter("@addTime", SqlDbType.DateTime), new SqlParameter("@updateTime", SqlDbType.DateTime) };
-                commandParameters[0].Value = model.typeId;
-                commandParameters[1].Value = model.userId;
-                commandParameters[2].Value = model.suppid;
-                commandParameters[3].Value = model.addTime;
-                commandParameters[4].Value = model.updateTime;
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_channeltypeusers_addsuppid", commandParameters);
-                if (obj2 == null)
-                {
-                    return 0;
-                }
-                ClearCache(model.userId);
-                return Convert.ToInt32(obj2);
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@typeid", SqlDbType.Int, 10),
+                    new SqlParameter("@suppliercode", SqlDbType.Int, 10),
+                    new SqlParameter("@userid", SqlDbType.Int, 10)
+                };
+                commandParameters[0].Value = model.TypeID;
+                commandParameters[1].Value = model.SupplierCode;
+                commandParameters[2].Value = model.UserId;
+                String R = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_channeltype_editsuppid", commandParameters).ToString();
+                return Utils.StrToInt(R, 0);
             }
             catch (Exception exception)
             {
@@ -206,18 +210,22 @@
             }
         }
         
-        public static int Exists(int userid)
+        /// <summary>
+        /// 商户是否独立的供应商通道。
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>存在=1；不存在=0</returns>
+        public static int Exists(int userID)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userId", SqlDbType.Int, 10) };
-                commandParameters[0].Value = userid;
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_channeltypeusers_exists", commandParameters);
-                if ((obj2 == null) || (obj2 == DBNull.Value))
-                {
-                    return 0;
-                }
-                return Convert.ToInt32(obj2);
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userId", SqlDbType.Int, 10)
+                };
+                commandParameters[0].Value = userID;
+                string R = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_channeltype_exists", commandParameters).ToString();
+
+                return Utils.StrToInt(R, 0);
             }
             catch (Exception exception)
             {
@@ -226,20 +234,23 @@
             }
         }
 
-        public static bool Setting(int userId, int isOpen)
+        /// <summary>
+        /// 批量设置商户通道
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="isOpen"></param>
+        /// <returns>成功True；不成功False</returns>
+        public static bool BatchSettingSupp(int userId, int sysIsOpen)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userId", SqlDbType.Int, 10), new SqlParameter("@isOpen", SqlDbType.TinyInt), new SqlParameter("@addtime", SqlDbType.DateTime) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userId", SqlDbType.Int, 10),
+                    new SqlParameter("@sysIsOpen", SqlDbType.TinyInt)
+                };
                 commandParameters[0].Value = userId;
-                commandParameters[1].Value = isOpen;
-                commandParameters[2].Value = DateTime.Now;
-                bool flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channeltypeusers_Setting", commandParameters) > 0;
-                if (flag)
-                {
-                    ClearCache(userId);
-                }
-                return flag;
+                commandParameters[1].Value = sysIsOpen;
+                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_channeltype_setting", commandParameters) > 0;
             }
             catch (Exception exception)
             {

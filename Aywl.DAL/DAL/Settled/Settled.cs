@@ -416,11 +416,11 @@
                 }
                 if ((row["tax"] != null) && (row["tax"].ToString() != ""))
                 {
-                    info.Tax = new decimal?(decimal.Parse(row["tax"].ToString()));
+                    info.Tax = decimal.Parse(row["tax"].ToString());
                 }
                 if ((row["charges"] != null) && (row["charges"].ToString() != ""))
                 {
-                    info.Charges = new decimal?(decimal.Parse(row["charges"].ToString()));
+                    info.Charges = decimal.Parse(row["charges"].ToString());
                 }
                 if ((row["apptype"] != null) && (row["apptype"].ToString() != ""))
                 {
@@ -638,12 +638,12 @@
             object obj8 = dataReader["tax"];
             if ((obj8 != null) && (obj8 != DBNull.Value))
             {
-                info.Tax = new decimal?((decimal) obj8);
+                info.Tax = (decimal) obj8;
             }
             object obj9 = dataReader["charges"];
             if ((obj9 != null) && (obj9 != DBNull.Value))
             {
-                info.Charges = new decimal?((decimal) obj9);
+                info.Charges = (decimal) obj9;
             }
             object obj10 = dataReader["payeeName"];
             if ((obj10 != null) && (obj10 != DBNull.Value))

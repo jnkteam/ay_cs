@@ -13,7 +13,7 @@
     public class MchUsersAmt
     {
         internal const string SQL_TABLE = "mch_userAmt";
-        internal const string SQL_TABLE_FIELD = "[id]\r\n      ,[userId]\r\n      ,[Integral]\r\n      ,[Freeze]\r\n      ,[balance]\r\n      ,[payment]\r\n      ,[unpayment],[Freeze],(ISNULL([balance],0)-ISNULL([unpayment],0)-ISNULL([Freeze],0)) as enableAmt";
+        internal const string SQL_TABLE_FIELD = "[ID],[UserID],[Integral],[Freeze],[Balance],[Payment],[UnPayment],[unpayment2],(ISNULL([balance],0)-ISNULL([unpayment],0)-ISNULL([Freeze],0)) as enableAmt";
 
         private static string BuilderWhere(List<SearchParam> param, List<SqlParameter> paramList)
         {
@@ -54,7 +54,9 @@
 
         public static MchUsersAmtInfo GetModel(int userId)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userId", SqlDbType.Int, 10) };
+            SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@userId", SqlDbType.Int, 10)
+            };
             commandParameters[0].Value = userId;
             MchUsersAmtInfo info = new MchUsersAmtInfo();
             return GetModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userAmt_GetModel", commandParameters));

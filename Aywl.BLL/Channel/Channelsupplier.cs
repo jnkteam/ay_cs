@@ -7,6 +7,9 @@
     using System.Data.SqlClient;
     using System.Text;
 
+    /// <summary>
+    /// 旧对象，新版作废
+    /// </summary>
     public class Channelsupplier
     {
         public bool Add(ChannelSupplier model)

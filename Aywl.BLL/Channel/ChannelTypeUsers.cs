@@ -11,6 +11,9 @@
     using System.Text;
     using OriginalStudio.BLL.Sys;
 
+    /// <summary>
+    /// 旧对象，新版作废
+    /// </summary>
     public class ChannelTypeUsers
     {
         public static string ChannelTypeUsers_CACHEKEY = (Constant.Cache_Mark + "CHANNEL_TYPE_USER_{0}");
@@ -78,7 +81,9 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userId", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userId", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = userid;
                 object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_channeltypeusers_exists", commandParameters);
                 if ((obj2 == null) || (obj2 == DBNull.Value))
@@ -231,7 +236,11 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userId", SqlDbType.Int, 10), new SqlParameter("@isOpen", SqlDbType.TinyInt), new SqlParameter("@addtime", SqlDbType.DateTime) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userId", SqlDbType.Int, 10),
+                    new SqlParameter("@isOpen", SqlDbType.TinyInt),
+                    new SqlParameter("@addtime", SqlDbType.DateTime)
+                };
                 commandParameters[0].Value = userId;
                 commandParameters[1].Value = isOpen;
                 commandParameters[2].Value = DateTime.Now;

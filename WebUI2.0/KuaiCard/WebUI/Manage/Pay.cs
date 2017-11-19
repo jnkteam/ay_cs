@@ -51,8 +51,8 @@
             {
                 decimal num = decimal.Parse(this.TaxBox.Text.Trim());
                 decimal num2 = decimal.Parse(this.ChargesBox.Text.Trim());
-                this.ItemInfo.Tax = new decimal?(num);
-                this.ItemInfo.Charges = new decimal?(num2);
+                this.ItemInfo.Tax = num;
+                this.ItemInfo.Charges = num2;
                 this.ItemInfo.PayTime = DateTime.Now;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
                 {
@@ -86,8 +86,8 @@
                 decimal num = decimal.Parse(this.TaxBox.Text.Trim());
                 decimal num2 = decimal.Parse(this.ChargesBox.Text.Trim());
                 this.ItemInfo.PayTime = DateTime.Now;
-                this.ItemInfo.Tax = new decimal?(num);
-                this.ItemInfo.Charges = new decimal?(num2);
+                this.ItemInfo.Tax = num;
+                this.ItemInfo.Charges = num2;
                 this.ItemInfo.Status =  SettledStatusEnum.已支付;
                 this.ItemInfo.AppType = AppTypeEnum.t0;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
@@ -153,9 +153,9 @@
                     this.lblBank.Text = SettledFactory.GetSettleBankName(this.ItemInfo.PayeeBank);
                     this.lblPayeeaddress.Text = this.ItemInfo.PayeeAddress;
                     this.lblAccount.Text = this.ItemInfo.Account;
-                    if (this.ItemInfo.Charges.HasValue)
+                    if (this.ItemInfo.Charges > 0)
                     {
-                        this.ChargesBox.Text = this.ItemInfo.Charges.Value.ToString("f2");
+                        this.ChargesBox.Text = this.ItemInfo.Charges.ToString("f2");
                     }
                     else
                     {

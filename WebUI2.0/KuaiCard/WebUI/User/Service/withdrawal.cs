@@ -208,12 +208,12 @@
                     else
                         model.AppType = AppTypeEnum.t1;      //T+1到张
                     //=============================
-                    model.Charges = new decimal?(modelByUser.chargerate * checkResult);
+                    model.Charges = modelByUser.chargerate * checkResult;
                     decimal? charges = model.Charges;
                     decimal chargeleastofeach = modelByUser.chargeleastofeach;
                     if ((charges.GetValueOrDefault() < chargeleastofeach) && charges.HasValue)
                     {
-                        model.Charges = new decimal?(modelByUser.chargeleastofeach);
+                        model.Charges = modelByUser.chargeleastofeach;
                     }
                     else
                     {
@@ -221,7 +221,7 @@
                         chargeleastofeach = modelByUser.chargemostofeach;
                         if ((charges.GetValueOrDefault() > chargeleastofeach) && charges.HasValue)
                         {
-                            model.Charges = new decimal?(modelByUser.chargemostofeach);
+                            model.Charges = modelByUser.chargemostofeach;
                         }
                     }
                     if (DateTime.Now.Hour > 16)

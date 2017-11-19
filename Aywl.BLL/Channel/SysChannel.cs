@@ -410,7 +410,18 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@code", SqlDbType.VarChar, 10), new SqlParameter("@typeId", SqlDbType.Int, 10), new SqlParameter("@supplier", SqlDbType.Int, 10), new SqlParameter("@modeName", SqlDbType.VarChar, 50), new SqlParameter("@modeEnName", SqlDbType.VarChar, 50), new SqlParameter("@faceValue", SqlDbType.Int, 10), new SqlParameter("@isOpen", SqlDbType.TinyInt, 1), new SqlParameter("@addtime", SqlDbType.DateTime), new SqlParameter("@sort", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10),
+                    new SqlParameter("@code", SqlDbType.VarChar, 10),
+                    new SqlParameter("@typeId", SqlDbType.Int, 10),
+                    new SqlParameter("@supplier", SqlDbType.Int, 10),
+                    new SqlParameter("@modeName", SqlDbType.VarChar, 50),
+                    new SqlParameter("@modeEnName", SqlDbType.VarChar, 50),
+                    new SqlParameter("@faceValue", SqlDbType.Int, 10),
+                    new SqlParameter("@isOpen", SqlDbType.TinyInt, 1),
+                    new SqlParameter("@addtime", SqlDbType.DateTime),
+                    new SqlParameter("@sort", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Direction = ParameterDirection.Output;
                 commandParameters[1].Value = model.code;
                 commandParameters[2].Value = model.typeId;

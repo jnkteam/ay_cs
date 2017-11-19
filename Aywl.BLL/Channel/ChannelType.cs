@@ -11,6 +11,9 @@
     using System.Text.RegularExpressions;
     using OriginalStudio.BLL.Sys;
 
+    /// <summary>
+    /// 旧对象，新版作废
+    /// </summary>
     public class ChannelType
     {
         public static string CHANNELTYPE_CACHEKEY = (Constant.Cache_Mark + "SYS_CHANNEL_TYPE");

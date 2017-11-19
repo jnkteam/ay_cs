@@ -356,7 +356,7 @@
                     {
                         //SysConfig.isOpenDeduct，系统表sysconfig内定义
                         //自动扣量后，状态直接为 已支付
-                        MchUserBaseInfo cacheUserBaseInfo = MchUserFactory.GetCacheUserBaseInfo(order.userid);
+                        MchUserBaseInfo cacheUserBaseInfo = MchUserFactory.GetUserBaseByUserID(order.userid, true);
                         if ((cacheUserBaseInfo != null) && (new Random(Guid.NewGuid().GetHashCode()).Next(1, 1000) <= cacheUserBaseInfo.CPSDrate))
                         {
                             order.status = 8;   //扣量 = 8,

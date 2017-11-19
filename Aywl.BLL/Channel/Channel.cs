@@ -14,6 +14,9 @@
     using System.Text;
     using OriginalStudio.BLL.Sys;
 
+    /// <summary>
+    /// 旧对象，新版作废
+    /// </summary>
     public class Channel
     {
         public static string CHANEL_CACHEKEY = (Constant.Cache_Mark + "CHANNELS");

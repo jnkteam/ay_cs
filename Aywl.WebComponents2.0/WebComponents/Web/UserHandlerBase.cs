@@ -10,21 +10,8 @@
 
     public class UserHandlerBase : IHttpHandler, IRequiresSessionState
     {
-        private UserInfo _currentUser = null;
+        private MchUserBaseInfo _currentUser = null;
         private WebInfo _webinfo = null;
-
-        public string GetValue(string param)
-        {
-            string str = string.Empty;
-            try
-            {
-                str = (HttpContext.Current.Request.Form[param] == null) ? ((HttpContext.Current.Request.QueryString[param] == null) ? "" : HttpContext.Current.Request.QueryString[param]) : HttpContext.Current.Request.Form[param];
-            }
-            catch (Exception)
-            {
-            }
-            return str;
-        }
 
         public virtual void OnLoad(HttpContext context)
         {
@@ -45,13 +32,13 @@
             this.OnLoad(context);
         }
 
-        public UserInfo CurrentUser
+        public MchUserBaseInfo CurrentUser
         {
             get
             {
                 if (this._currentUser == null)
                 {
-                    this._currentUser = UserFactory.CurrentMember;
+                    this._currentUser = MchUserFactory.CurrentMember;
                 }
                 return this._currentUser;
             }

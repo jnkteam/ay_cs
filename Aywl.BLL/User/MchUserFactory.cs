@@ -53,7 +53,7 @@
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
-        public static MchUserBaseInfo GetBaseModelFromDs(DataSet ds)
+        private static MchUserBaseInfo GetUserModelFromDs(DataSet ds)
         {
             MchUserBaseInfo modle = new MchUserBaseInfo();
             if (ds.Tables[0].Rows.Count == 0) return modle;
@@ -72,16 +72,18 @@
             modle.Phone = Convert.ToString(dr["phone"]);
             modle.EMail = Convert.ToString(dr["email"]);
             modle.QQ = Convert.ToString(dr["qq"]);
-            modle.IsPhone = Utils.StrToInt(dr["isphone"].ToString(), 0);
-            modle.IsEmail = Utils.StrToInt(dr["isemail"].ToString(), 0);
-            modle.IsRealName = Utils.StrToInt(dr["isrealname"].ToString(), 0);
+            modle.IsPhone = Utils.StrToInt(dr["isphone"].ToString(), 0) == 1;
+            modle.IsEmail = Utils.StrToInt(dr["isemail"].ToString(), 0) == 1;
+            modle.IsRealName = Utils.StrToInt(dr["isrealname"].ToString(), 0) == 1;
             modle.WithdrawSchemeID = Utils.StrToInt(dr["withdrawschemeid"].ToString(), 0);
             modle.PayRateID = Utils.StrToInt(dr["payrateid"].ToString(), 0);
             modle.MaxDayWithdrawTimes = Utils.StrToInt(dr["maxdaywithdrawtimes"].ToString(), 0);
             modle.FirstLoginIP = Convert.ToString(dr["firstloginip"]);
             modle.FirstLoginMac = Convert.ToString(dr["firstloginmac"]);
+            modle.FirstLoginTime = Utils.StrToDateTime(dr["firstlogintime"]);
             modle.LastLoginIP = Convert.ToString(dr["lastloginip"]);
             modle.LastLoginMAC = Convert.ToString(dr["lastloginmac"]);
+            modle.LastLoginTime = Utils.StrToDateTime(dr["lastlogintime"]);
             modle.SessionID = Convert.ToString(dr["sessionid"]);
             modle.Status = Utils.StrToInt(dr["status"].ToString(), 0);
             modle.AddTime = String.IsNullOrEmpty(dr["AddTime"].ToString()) ? DateTime.Now : Convert.ToDateTime(dr["AddTime"].ToString());
@@ -99,220 +101,227 @@
             modle.UserType = (UserTypeEnum)(Utils.StrToInt(dr["usertype"].ToString(), 0));
             modle.UserLevel = (UserLevelEnum)(Utils.StrToInt(dr["userlevel"].ToString(), 0));
 
-            return modle;
-        }
+            modle.ChannelTypeID = Utils.StrToInt(dr["ChannelTypeID"], 0);
+            modle.MinMoney = Utils.StrToDecimal(dr["MinMoney"].ToString(), 0);
+            modle.MaxMoney = Utils.StrToDecimal(dr["MaxMoney"].ToString(), 0);
 
-        /// <summary>
-        /// Ds转详细信息对象
-        /// </summary>
-        /// <param name="ds"></param>
-        /// <returns></returns>
-        public static MchUserBaseInfo GetModelFromDs(DataSet ds)
-        {
-            MchUserBaseInfo modle = new MchUserBaseInfo();
-            if (ds.Tables[0].Rows.Count == 0) return modle;
-            DataRow dr = ds.Tables[0].Rows[0];
+            modle.Integral = Utils.StrToLong(dr["integral"].ToString(), 0);
+            modle.Freeze = Utils.StrToDecimal(dr["freeze"].ToString(), 0);
+            modle.Balance = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.Payment = Utils.StrToDecimal(dr["Payment"].ToString(), 0);
+            modle.UnPayment = Utils.StrToDecimal(dr["UnPayment"].ToString(), 0);
+            modle.UnPayment2 = Utils.StrToDecimal(dr["unpayment2"].ToString(), 0);
+            modle.EnableAmt = Utils.StrToDecimal(dr["enableAmt"].ToString(), 0);
 
-            modle.UserID = Convert.ToInt32(dr["userid"]);
-            modle.ClassID = Utils.StrToInt(dr["classid"].ToString(), 0);
-            modle.UserName = Convert.ToString(dr["username"]);
-            modle.UserPwd = Convert.ToString(dr["userpwd"]);
-            modle.UserPayPwd = Convert.ToString(dr["userpaypwd"]);
-            modle.MerchantName = Convert.ToString(dr["merchantname"]);
-            modle.ApiKey = Convert.ToString(dr["apikey"]);
-            modle.ContactName = Convert.ToString(dr["contactname"]);
-            modle.IDCard = Convert.ToString(dr["idcard"]);
-            modle.Phone = Convert.ToString(dr["phone"]);
-            modle.EMail = Convert.ToString(dr["email"]);
-            modle.QQ = Convert.ToString(dr["qq"]);
-            modle.IsPhone = Utils.StrToInt(dr["isphone"].ToString(), 0);
-            modle.IsEmail = Utils.StrToInt(dr["isemail"].ToString(), 0);
-            modle.IsRealName = Utils.StrToInt(dr["isrealname"].ToString(), 0);
-            modle.WithdrawSchemeID = Utils.StrToInt(dr["withdrawschemeid"].ToString(), 0);
-            modle.PayRateID = Utils.StrToInt(dr["payrateid"].ToString(), 0);
-            modle.MaxDayWithdrawTimes = Utils.StrToInt(dr["maxdaywithdrawtimes"].ToString(), 0);
-            modle.FirstLoginIP = Convert.ToString(dr["firstloginip"]);
-            modle.FirstLoginMac = Convert.ToString(dr["firstloginmac"]);
-            modle.LastLoginIP = Convert.ToString(dr["lastloginip"]);
-            modle.LastLoginMAC = Convert.ToString(dr["lastloginmac"]);
-            modle.SessionID = Convert.ToString(dr["sessionid"]);
-            modle.Status = Utils.StrToInt(dr["status"].ToString(), 0);
-            modle.AddTime = String.IsNullOrEmpty(dr["AddTime"].ToString()) ? DateTime.Now : Convert.ToDateTime(dr["AddTime"].ToString());
-            modle.Company = Convert.ToString(dr["company"]);
-            modle.LinkMan = Convert.ToString(dr["linkman"]);
-            modle.WithdrawType = Utils.StrToInt(dr["withdrawtype"].ToString(), 0);
-            modle.RandomProduct = Utils.StrToInt(dr["randomproduct"].ToString(), 0);
-            modle.ManageId = Utils.StrToInt(dr["manageid"].ToString(), 0);
-            modle.SiteUrl = Convert.ToString(dr["siteurl"]);
-            modle.FrontPic = Convert.ToString(dr["frontpic"]);
-            modle.VersoPic = Convert.ToString(dr["versopic"]);
-            modle.DefaultThemes = Convert.ToString(dr["defaultthemes"]);
-            modle.IsDebug = Utils.StrToInt(dr["isdebug"].ToString(), 0);
-            modle.AgentID = Utils.StrToInt(dr["agentid"].ToString(), 0);
-            modle.UserType = (UserTypeEnum)(Utils.StrToInt(dr["usertype"].ToString(), 0));
-            modle.UserLevel = (UserLevelEnum)(Utils.StrToInt(dr["userlevel"].ToString(), 0));
+            modle.SchemeneType = Utils.StrToInt(dr["SchemeneType"].ToString(), 0); ;
+            modle.SchemeName = Convert.ToString(dr["schemename"]);
+            modle.SingleMinAmtLimit = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.SingleMaxAmtLimit = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.DailyMaxTimes = Utils.StrToInt(dr["dailymaxtimes"],0);
+            modle.DailyMaxAmt = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.ChargeRate = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.SingleMinCharge = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.SingleMaxCharge = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.IsTranApi = Utils.StrToInt(dr["istranapi"]);
+            modle.IsDefault = Utils.StrToInt(dr["IsDefault"].ToString(), 0);
+            modle.IsSys = Utils.StrToInt(dr["IsSys"].ToString(), 0);
+            modle.BankDetentionDays = Utils.StrToInt(dr["bankdetentiondays"]);
+            modle.QQDetentionDays = Utils.StrToInt(dr["qqdetentiondays"]);
+            modle.JDDetentionDays = Utils.StrToInt(dr["jddetentiondays"]);
+            modle.IsTranRequiredAudit = Utils.StrToInt(dr["jddetentiondays"]);
+            modle.AlipayDetentionDays = Utils.StrToInt(dr["alipaydetentiondays"]);
+            modle.WeiXinDetentionDays = Utils.StrToInt(dr["weixindetentiondays"]);
+            modle.OtherDetentionDays = Utils.StrToInt(dr["otherdetentiondays"]);
 
             return modle;
         }
 
         /// <summary>
-        /// 获取用户基本信息
+        /// 根据userID获取用户信息。
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public static MchUserBaseInfo GetUserBaseInfo(int uid)
-        {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                new SqlParameter("@id", SqlDbType.Int, 10) 
-            };
-            commandParameters[0].Value = uid;
-            return GetBaseModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userbase_get", commandParameters));
-        }
-        
-        /// <summary>
-        /// 获取缓存用户基本信息
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <returns></returns>
-        public static MchUserBaseInfo GetCacheUserBaseInfo(int uid)
+        public static MchUserBaseInfo GetUserBaseByUserID(int userID, Boolean fromCache = false)
         {
             MchUserBaseInfo o = new MchUserBaseInfo();
-            string objId = string.Format(USER_CACHE_KEY, uid);
-            o = (MchUserBaseInfo)WebCache.GetCacheService().RetrieveObject(objId);
+            if (fromCache)
+            {
+                string objId = string.Format(USER_CACHE_KEY, userID);
+                o = (MchUserBaseInfo)WebCache.GetCacheService().RetrieveObject(objId);
+            }
             if (o == null)
             {
-                //IDictionary<string, object> parameters = new Dictionary<string, object>();
-                //parameters.Add("id", uid);
-                //SqlDependency dependency = DataBase.AddSqlDependency(objId, "userbase", "[id],[pwd2],[full_name],[userName],[password],[CPSDrate],[CVSNrate],[email],[qq],[tel],[idCard],[settles],[status],[regTime],[company],[linkMan],[agentId],[siteName],[siteUrl],[userType],[userLevel],[maxdaytocashTimes],[apiaccount],[apikey],[updatetime],[DESC],isRealNamePass,isEmailPass,isPhonePass,[classid],[isdebug],[frontPic],[versoPic],[settles_type],[bank_limit],[wx_limit],[ali_limit],[qq_limit],[random_subject],[service_channel]", "[id]=@id", parameters);
-                o = GetUserBaseInfo(uid);
-                WebCache.GetCacheService().AddObject(objId, o);
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@UserID", SqlDbType.Int, 10)
+                };
+                commandParameters[0].Value = userID;
+                return GetUserModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_getByUserID", commandParameters));
             }
             return o;
         }
 
         /// <summary>
-        /// 获取用户详细信息
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <returns></returns>
-        public static MchUserBaseInfo GetUserInfo(int uid)
-        {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                new SqlParameter("@id", SqlDbType.Int, 10) 
-            };
-            commandParameters[0].Value = uid;
-            return GetModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_get", commandParameters));
-        }
-
-        /// <summary>
-        /// 获取缓存用户详细信息
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <returns></returns>
-        public static MchUserBaseInfo GetCacheUserInfo(int uid)
-        {
-            MchUserBaseInfo o = new MchUserBaseInfo();
-            string objId = string.Format(USER_CACHE_KEY, uid);
-            o = (MchUserBaseInfo)WebCache.GetCacheService().RetrieveObject(objId);
-            if (o == null)
-            {
-                //IDictionary<string, object> parameters = new Dictionary<string, object>();
-                //parameters.Add("id", uid);
-                //SqlDependency dependency = DataBase.AddSqlDependency(objId, "userbase", "[id],[pwd2],[full_name],[userName],[password],[CPSDrate],[CVSNrate],[email],[qq],[tel],[idCard],[settles],[status],[regTime],[company],[linkMan],[agentId],[siteName],[siteUrl],[userType],[userLevel],[maxdaytocashTimes],[apiaccount],[apikey],[updatetime],[DESC],isRealNamePass,isEmailPass,isPhonePass,[classid],[isdebug],[frontPic],[versoPic],[settles_type],[bank_limit],[wx_limit],[ali_limit],[qq_limit],[random_subject],[service_channel],[default_themes]", "[id]=@id", parameters);
-                //SqlDependency dependency2 = DataBase.AddSqlDependency(objId, "userspaybank", "[userid],[pmode],[account],[payeeName],[payeeBank],[bankProvince],[bankCity],[bankAddress],[status],[accoutType]", "[userid]=@id", parameters);
-                o = GetUserInfo(uid);
-                WebCache.GetCacheService().AddObject(objId, o);
-            }
-            return o;
-        }
-
-        /// <summary>
-        /// 根据用户名获取用户信息。
+        /// 根据userName获取用户信息。
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public static MchUserBaseInfo GetModelByName(string userName)
+        public static MchUserBaseInfo GetUserBaseByUserName(string userName, Boolean fromCache = false)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userName", SqlDbType.VarChar, 20) };
-            commandParameters[0].Value = userName;
-            return GetModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_users_getbyname", commandParameters));
+            MchUserBaseInfo o = new MchUserBaseInfo();
+            if (fromCache)
+            {
+                string objId = string.Format(USER_CACHE_KEY, userName);
+                o = (MchUserBaseInfo)WebCache.GetCacheService().RetrieveObject(objId);
+            }
+            if (o == null)
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@userName", SqlDbType.VarChar, 20)
+                };
+                commandParameters[0].Value = userName;
+                return GetUserModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_users_getbyname", commandParameters));
+            }
+            return o;
         }
 
+        /// <summary>
+        /// 根据sessionID获取用户信息
+        /// </summary>
+        /// <param name="sessionID"></param>
+        /// <param name="fromCache"></param>
+        /// <returns></returns>
+        public static MchUserBaseInfo GetUserBaseBySessionID(string sessionID, Boolean fromCache = false)
+        {
+            MchUserBaseInfo o = new MchUserBaseInfo();
+            if (fromCache)
+            {
+                string objId = string.Format(USER_CACHE_KEY, sessionID);
+                o = (MchUserBaseInfo)WebCache.GetCacheService().RetrieveObject(objId);
+            }
+            if (o == null)
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@sessionID", SqlDbType.VarChar, 100)
+                };
+                commandParameters[0].Value = sessionID;
+                return GetUserModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_getBySessionID", commandParameters));
+            }
+            return o;
+        }
+
+        /// <summary>
+        /// 根据merchantName获取用户信息
+        /// </summary>
+        /// <param name="merchantName"></param>
+        /// <param name="fromCache"></param>
+        /// <returns></returns>
+        public static MchUserBaseInfo GetUserBaseByMerchantName(string merchantName, Boolean fromCache = false)
+        {
+            MchUserBaseInfo o = new MchUserBaseInfo();
+            if (fromCache)
+            {
+                string objId = string.Format(USER_CACHE_KEY, merchantName);
+                o = (MchUserBaseInfo)WebCache.GetCacheService().RetrieveObject(objId);
+            }
+            if (o == null)
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@merchantName", SqlDbType.VarChar, 100)
+                };
+                commandParameters[0].Value = merchantName;
+                return GetUserModelFromDs(DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_getByMerchantName", commandParameters));
+            }
+            return o;
+        }
+        
         public static MchUserBaseInfo GetPromSuperior(int userId)
         {
             string commandText = "SELECT u.* FROM userbase u inner JOIN PromotionUser pu ON u.id = pu.PID\r\nWHERE pu.RegId = @RegId";
             SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@RegId", SqlDbType.Int, 10) };
             commandParameters[0].Value = userId;
-            return GetBaseModelFromDs(DataBase.ExecuteDataset(CommandType.Text, commandText, commandParameters));
+            return GetUserModelFromDs(DataBase.ExecuteDataset(CommandType.Text, commandText, commandParameters));
         }
 
         #endregion
 
-        public static Int32 Add(UserInfo _userinfo)
+        #region 增删改
+
+        public static Int32 Add(MchUserBaseInfo userInfo)
         {
             try
             {
-                SqlParameter parameter = DataBase.MakeOutParam("@id", SqlDbType.Int, 10);
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    parameter, 
-                    DataBase.MakeInParam("@userName", SqlDbType.VarChar, 50, _userinfo.UserName), 
-                    DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, _userinfo.Password), 
-                    DataBase.MakeInParam("@cpsdrate", SqlDbType.Int, 10, _userinfo.CPSDrate), 
-                    DataBase.MakeInParam("@cvsnrate", SqlDbType.Int, 10, _userinfo.CVSNrate), 
-                    DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, _userinfo.Email), 
-                    DataBase.MakeInParam("@qq", SqlDbType.VarChar, 50, _userinfo.QQ), 
-                    DataBase.MakeInParam("@tel", SqlDbType.VarChar, 50, _userinfo.Tel), 
-                    DataBase.MakeInParam("@idCard", SqlDbType.VarChar, 50, _userinfo.IdCard), 
-                    DataBase.MakeInParam("@account", SqlDbType.VarChar, 50, _userinfo.Account), 
-                    DataBase.MakeInParam("@payeeName", SqlDbType.VarChar, 50, _userinfo.PayeeName), 
-                    DataBase.MakeInParam("@payeeBank", SqlDbType.VarChar, 50, _userinfo.PayeeBank), 
-                    DataBase.MakeInParam("@bankProvince", SqlDbType.VarChar, 50, _userinfo.BankProvince), 
-                    DataBase.MakeInParam("@bankCity", SqlDbType.VarChar, 50, _userinfo.BankCity), 
-                    DataBase.MakeInParam("@bankAddress", SqlDbType.VarChar, 50, _userinfo.BankAddress), 
-                    DataBase.MakeInParam("@status", SqlDbType.TinyInt, 1, _userinfo.Status), 
-                    DataBase.MakeInParam("@lastloginip", SqlDbType.VarChar, 50, _userinfo.LastLoginIp), 
-                    DataBase.MakeInParam("@lastlogintime", SqlDbType.DateTime, 8, _userinfo.LastLoginTime), 
-                    DataBase.MakeInParam("@regtime", SqlDbType.DateTime, 8, _userinfo.RegTime), 
-                    DataBase.MakeInParam("@agentId", SqlDbType.Int, 10, _userinfo.AgentId), 
-                    DataBase.MakeInParam("@siteName", SqlDbType.VarChar, 50, _userinfo.SiteName), 
-                    DataBase.MakeInParam("@siteUrl", SqlDbType.VarChar, 100, _userinfo.SiteUrl), 
-                    DataBase.MakeInParam("@userType", SqlDbType.Int, 10, (int) _userinfo.UserType), 
-                    DataBase.MakeInParam("@userLevel", SqlDbType.Int, 10, (int) _userinfo.UserLevel), 
-                    DataBase.MakeInParam("@maxdaytocashTimes", SqlDbType.Int, 10, _userinfo.MaxDayToCashTimes), 
-                    DataBase.MakeInParam("@apiaccount", SqlDbType.BigInt, 8, _userinfo.APIAccount), 
-                    DataBase.MakeInParam("@apikey", SqlDbType.VarChar, 50, _userinfo.APIKey), 
-                    DataBase.MakeInParam("@pmode", SqlDbType.TinyInt, 1, _userinfo.PMode), 
-                    DataBase.MakeInParam("@settles", SqlDbType.TinyInt, 1, _userinfo.Settles), 
-                    DataBase.MakeInParam("@DESC", SqlDbType.VarChar, 0xfa0, _userinfo.Desc), 
-                    DataBase.MakeInParam("@manageId", SqlDbType.Int, 10, _userinfo.manageId), 
-                    DataBase.MakeInParam("@question", SqlDbType.NVarChar, 150, _userinfo.question), 
-                    DataBase.MakeInParam("@answer", SqlDbType.NVarChar, 100, _userinfo.answer), 
-                    DataBase.MakeInParam("@full_name", SqlDbType.NVarChar, 100, _userinfo.full_name), 
-                    DataBase.MakeInParam("@classid", SqlDbType.TinyInt, 1, _userinfo.classid), 
-                    DataBase.MakeInParam("@pwd2", SqlDbType.NVarChar, 50, _userinfo.Password2), 
-                    DataBase.MakeInParam("@linkman", SqlDbType.NVarChar, 50, _userinfo.LinkMan), 
-                    DataBase.MakeInParam("@isdebug", SqlDbType.TinyInt, 1, _userinfo.isdebug), 
-                    DataBase.MakeInParam("@idCardtype", SqlDbType.TinyInt, 1, _userinfo.IdCardType), 
-                    DataBase.MakeInParam("@msn", SqlDbType.VarChar, 30, _userinfo.msn), 
-                    DataBase.MakeInParam("@fax", SqlDbType.VarChar, 20, _userinfo.fax), 
-                    DataBase.MakeInParam("@province", SqlDbType.VarChar, 20, _userinfo.province), 
-                    DataBase.MakeInParam("@city", SqlDbType.VarChar, 20, _userinfo.city), 
-                    DataBase.MakeInParam("@zip", SqlDbType.VarChar, 8, _userinfo.zip), 
-                    DataBase.MakeInParam("@field1", SqlDbType.NVarChar, 50, _userinfo.field1), 
-                    DataBase.MakeInParam("@isagentDistribution", SqlDbType.TinyInt, 1, _userinfo.isagentDistribution), 
-                    DataBase.MakeInParam("@cardversion", SqlDbType.TinyInt, 1, _userinfo.cardversion),
-                    DataBase.MakeInParam("@settles_type", SqlDbType.TinyInt, 1, _userinfo.settles_type),
-                    DataBase.MakeInParam("@bank_limit", SqlDbType.Decimal, 18, _userinfo.bank_limit),
-                    DataBase.MakeInParam("@wx_limit", SqlDbType.Decimal, 18, _userinfo.wx_limit),
-                    DataBase.MakeInParam("@ali_limit", SqlDbType.Decimal, 18, _userinfo.ali_limit),
-                    DataBase.MakeInParam("@qq_limit", SqlDbType.Decimal, 18, _userinfo.qq_limit),
-                    DataBase.MakeInParam("@random_subject", SqlDbType.TinyInt, 1, _userinfo.random_subject),
-                    DataBase.MakeInParam("@service_channel", SqlDbType.TinyInt, 1, _userinfo.service_channel)
-                 };
-                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_add", commandParameters) > 0)
+                SqlParameter[] commandParameters = {
+                    new SqlParameter("@userid",SqlDbType.Int),
+                    new SqlParameter("@classid",SqlDbType.Int),
+                    new SqlParameter("@username",SqlDbType.VarChar,100),
+                    new SqlParameter("@userpwd",SqlDbType.VarChar,100),
+                    new SqlParameter("@userpaypwd",SqlDbType.VarChar,100),
+                    new SqlParameter("@merchantname",SqlDbType.VarChar,100),
+                    new SqlParameter("@apikey",SqlDbType.VarChar,100),
+                    new SqlParameter("@contactname",SqlDbType.VarChar,100),
+                    new SqlParameter("@idcard",SqlDbType.VarChar,100),
+                    new SqlParameter("@phone",SqlDbType.VarChar,100),
+                    new SqlParameter("@email",SqlDbType.VarChar,100),
+                    new SqlParameter("@qq",SqlDbType.VarChar,100),
+                    new SqlParameter("@isphone",SqlDbType.Int),
+                    new SqlParameter("@isemail",SqlDbType.Int),
+                    new SqlParameter("@isrealname",SqlDbType.Int),
+                    new SqlParameter("@withdrawschemeid",SqlDbType.Int),
+                    new SqlParameter("@payrateid",SqlDbType.Int),
+                    new SqlParameter("@maxdaywithdrawtimes",SqlDbType.Int),
+                    new SqlParameter("@status",SqlDbType.Int),
+                    new SqlParameter("@company",SqlDbType.VarChar,100),
+                    new SqlParameter("@linkman",SqlDbType.VarChar,100),
+                    new SqlParameter("@withdrawtype",SqlDbType.Int),
+                    new SqlParameter("@randomproduct",SqlDbType.Int),
+                    new SqlParameter("@manageid",SqlDbType.Int),
+                    new SqlParameter("@siteurl",SqlDbType.VarChar,100),
+                    new SqlParameter("@frontpic",SqlDbType.VarChar,100),
+                    new SqlParameter("@versopic",SqlDbType.VarChar,100),
+                    new SqlParameter("@defaultthemes",SqlDbType.VarChar,100),
+                    new SqlParameter("@isdebug",SqlDbType.Int),
+                    new SqlParameter("@agentid",SqlDbType.Int),
+                    new SqlParameter("@cpsdrate",SqlDbType.Int),
+                    new SqlParameter("@usertype",SqlDbType.Int),
+                    new SqlParameter("@userlevel",SqlDbType.Int)
+                };
+                commandParameters[0].Direction = ParameterDirection.InputOutput;
+                commandParameters[1].Value = userInfo.ClassID;
+                commandParameters[2].Value = userInfo.UserName;
+                commandParameters[3].Value = userInfo.UserPwd;
+                commandParameters[4].Value = userInfo.UserPayPwd;
+                commandParameters[5].Value = userInfo.MerchantName;
+                commandParameters[6].Value = userInfo.ApiKey;
+                commandParameters[7].Value = userInfo.ContactName;
+                commandParameters[8].Value = userInfo.IDCard;
+                commandParameters[9].Value = userInfo.Phone;
+                commandParameters[10].Value = userInfo.EMail;
+                commandParameters[11].Value = userInfo.QQ;
+                commandParameters[12].Value = userInfo.IsPhone;
+                commandParameters[13].Value = userInfo.IsEmail;
+                commandParameters[14].Value = userInfo.IsRealName;
+                commandParameters[15].Value = userInfo.WithdrawSchemeID;
+                commandParameters[16].Value = userInfo.PayRateID;
+                commandParameters[17].Value = userInfo.MaxDayWithdrawTimes;
+                commandParameters[18].Value = userInfo.Status;
+                commandParameters[19].Value = userInfo.Company;
+                commandParameters[20].Value = userInfo.LinkMan;
+                commandParameters[21].Value = userInfo.WithdrawType;
+                commandParameters[22].Value = userInfo.RandomProduct;
+                commandParameters[23].Value = userInfo.ManageId;
+                commandParameters[24].Value = userInfo.SiteUrl;
+                commandParameters[25].Value = userInfo.FrontPic;
+                commandParameters[26].Value = userInfo.VersoPic;
+                commandParameters[27].Value = userInfo.DefaultThemes;
+                commandParameters[28].Value = userInfo.IsDebug;
+                commandParameters[29].Value = userInfo.AgentID;
+                commandParameters[30].Value = userInfo.CPSDrate;
+                commandParameters[31].Value = userInfo.UserType;
+                commandParameters[32].Value = userInfo.UserLevel;
+
+                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_add", commandParameters) > 0)
                 {
-                    _userinfo.ID = Convert.ToInt32(parameter.Value);
-                    return _userinfo.ID;
+                    return Convert.ToInt32(commandParameters[0].Value);
                 }
                 return 0;
             }
@@ -322,6 +331,376 @@
                 return 0;
             }
         }
+
+        public static bool Del(int userId)
+        {
+            try
+            {
+                bool flag = false;
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@id", SqlDbType.Int, 10, userId)
+                };
+                flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_del", commandParameters) > 0;
+                ClearCache(userId);
+                return flag;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 暂时未弄好！！！！
+        /// </summary>
+        /// <param name="_userinfo"></param>
+        /// <param name="changeList"></param>
+        /// <returns></returns>
+        public static bool Update(UserInfo _userinfo, List<UsersUpdateLog> changeList)
+        {
+            bool flag2;
+            SqlParameter[] parameterArray = new SqlParameter[] {
+                DataBase.MakeInParam("@id", SqlDbType.Int, 10, _userinfo.ID),
+                DataBase.MakeInParam("@userName", SqlDbType.VarChar, 50, _userinfo.UserName),
+                DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, _userinfo.Password),
+                DataBase.MakeInParam("@cpsdrate", SqlDbType.Int, 10, _userinfo.CPSDrate),
+                DataBase.MakeInParam("@cvsnrate", SqlDbType.Int, 10, _userinfo.CVSNrate),
+                DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, _userinfo.Email),
+                DataBase.MakeInParam("@qq", SqlDbType.VarChar, 50, _userinfo.QQ),
+                DataBase.MakeInParam("@tel", SqlDbType.VarChar, 50, _userinfo.Tel),
+                DataBase.MakeInParam("@idCard", SqlDbType.VarChar, 50, _userinfo.IdCard),
+                DataBase.MakeInParam("@account", SqlDbType.VarChar, 50, _userinfo.Account),
+                DataBase.MakeInParam("@payeeName", SqlDbType.VarChar, 50, _userinfo.PayeeName),
+                DataBase.MakeInParam("@payeeBank", SqlDbType.VarChar, 50, _userinfo.PayeeBank),
+                DataBase.MakeInParam("@bankProvince", SqlDbType.VarChar, 50, _userinfo.BankProvince),
+                DataBase.MakeInParam("@bankCity", SqlDbType.VarChar, 50, _userinfo.BankCity),
+                DataBase.MakeInParam("@bankAddress", SqlDbType.VarChar, 50, _userinfo.BankAddress),
+                DataBase.MakeInParam("@status", SqlDbType.TinyInt, 1, _userinfo.Status),
+                DataBase.MakeInParam("@agentId", SqlDbType.Int, 10, _userinfo.AgentId),
+                DataBase.MakeInParam("@siteName", SqlDbType.VarChar, 50, _userinfo.SiteName),
+                DataBase.MakeInParam("@siteUrl", SqlDbType.VarChar, 100, _userinfo.SiteUrl),
+                DataBase.MakeInParam("@userType", SqlDbType.Int, 10, (int) _userinfo.UserType),
+                DataBase.MakeInParam("@userLevel", SqlDbType.Int, 10, (int) _userinfo.UserLevel),
+                DataBase.MakeInParam("@maxdaytocashTimes", SqlDbType.Int, 10, _userinfo.MaxDayToCashTimes),
+                DataBase.MakeInParam("@apiaccount", SqlDbType.BigInt, 8, _userinfo.APIAccount),
+                DataBase.MakeInParam("@apikey", SqlDbType.VarChar, 50, _userinfo.APIKey),
+                DataBase.MakeInParam("@DESC", SqlDbType.VarChar, 0xfa0, _userinfo.Desc),
+                DataBase.MakeInParam("@pmode", SqlDbType.Int, 10, _userinfo.PMode),
+                DataBase.MakeInParam("@updatetime", SqlDbType.DateTime, 8, DateTime.Now),
+                DataBase.MakeInParam("@manageId", SqlDbType.Int, 10, _userinfo.manageId),
+                DataBase.MakeInParam("@isRealNamePass", SqlDbType.TinyInt, 1, _userinfo.IsRealNamePass),
+                DataBase.MakeInParam("@isEmailPass", SqlDbType.TinyInt, 1, _userinfo.IsEmailPass),
+                DataBase.MakeInParam("@isPhonePass", SqlDbType.TinyInt, 1, _userinfo.IsPhonePass),
+                DataBase.MakeInParam("@smsNotifyUrl", SqlDbType.NVarChar, 0xff, _userinfo.smsNotifyUrl),
+                DataBase.MakeInParam("@full_name", SqlDbType.NVarChar, 50, _userinfo.full_name),
+                DataBase.MakeInParam("@male", SqlDbType.NVarChar, 4, _userinfo.male),
+                DataBase.MakeInParam("@addtress", SqlDbType.NVarChar, 30, _userinfo.addtress),
+                DataBase.MakeInParam("@question", SqlDbType.NVarChar, 150, _userinfo.question),
+                DataBase.MakeInParam("@answer", SqlDbType.NVarChar, 100, _userinfo.answer),
+                DataBase.MakeInParam("@pwd2", SqlDbType.NVarChar, 50, _userinfo.Password2),
+                DataBase.MakeInParam("@linkman", SqlDbType.NVarChar, 50, _userinfo.LinkMan),
+                DataBase.MakeInParam("@classid", SqlDbType.TinyInt, 1, _userinfo.classid),
+                DataBase.MakeInParam("@settles", SqlDbType.TinyInt, 1, _userinfo.Settles),
+                DataBase.MakeInParam("@isdebug", SqlDbType.TinyInt, 1, _userinfo.isdebug),
+                DataBase.MakeInParam("@idCardtype", SqlDbType.TinyInt, 1, _userinfo.IdCardType),
+                DataBase.MakeInParam("@msn", SqlDbType.VarChar, 30, _userinfo.msn),
+                DataBase.MakeInParam("@fax", SqlDbType.VarChar, 20, _userinfo.fax),
+                DataBase.MakeInParam("@province", SqlDbType.VarChar, 20, _userinfo.province),
+                DataBase.MakeInParam("@city", SqlDbType.VarChar, 20, _userinfo.city),
+                DataBase.MakeInParam("@zip", SqlDbType.VarChar, 8, _userinfo.zip),
+                DataBase.MakeInParam("@field1", SqlDbType.NVarChar, 50, _userinfo.field1),
+                DataBase.MakeInParam("@accoutType", SqlDbType.TinyInt, 1, _userinfo.accoutType),
+                DataBase.MakeInParam("@BankCode", SqlDbType.VarChar, 50, _userinfo.BankCode),
+                DataBase.MakeInParam("@provinceCode", SqlDbType.VarChar, 50, _userinfo.provinceCode),
+                DataBase.MakeInParam("@cityCode", SqlDbType.VarChar, 50, _userinfo.cityCode),
+                DataBase.MakeInParam("@isagentDistribution", SqlDbType.TinyInt, 1, _userinfo.isagentDistribution),
+                DataBase.MakeInParam("@agentDistscheme", SqlDbType.Int, 10, _userinfo.agentDistscheme),
+                DataBase.MakeInParam("@cardversion", SqlDbType.TinyInt, 1, _userinfo.cardversion),
+                DataBase.MakeInParam("@versoPic", SqlDbType.VarChar, 500, _userinfo.versoPic),
+                DataBase.MakeInParam("@frontPic", SqlDbType.VarChar, 500, _userinfo.frontPic),
+                DataBase.MakeInParam("@settles_type", SqlDbType.VarChar, 500, _userinfo.settles_type),
+                DataBase.MakeInParam("@bank_limit", SqlDbType.Decimal, 18, _userinfo.bank_limit),
+                DataBase.MakeInParam("@wx_limit", SqlDbType.Decimal, 18, _userinfo.wx_limit),
+                DataBase.MakeInParam("@ali_limit", SqlDbType.Decimal, 18, _userinfo.ali_limit),
+                DataBase.MakeInParam("@qq_limit", SqlDbType.Decimal, 18, _userinfo.qq_limit),
+                DataBase.MakeInParam("@random_subject", SqlDbType.TinyInt, 1, _userinfo.random_subject),
+                DataBase.MakeInParam("@service_channel", SqlDbType.TinyInt, 1, _userinfo.service_channel)
+             };
+            using (SqlConnection connection = new SqlConnection(DataBase.ConnectionString))
+            {
+                connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
+                {
+                    if (changeList != null)
+                    {
+                        foreach (UsersUpdateLog log in changeList)
+                        {
+                            SqlParameter[] parameterArray2 = new SqlParameter[] {
+                                new SqlParameter("@userid", SqlDbType.Int, 10),
+                                new SqlParameter("@field", SqlDbType.VarChar, 20),
+                                new SqlParameter("@oldValue", SqlDbType.VarChar, 100),
+                                new SqlParameter("@newvalue", SqlDbType.VarChar, 100),
+                                new SqlParameter("@Addtime", SqlDbType.DateTime),
+                                new SqlParameter("@editor", SqlDbType.VarChar, 50),
+                                new SqlParameter("@oIp", SqlDbType.VarChar, 50),
+                                new SqlParameter("@desc", SqlDbType.VarChar, 0xfa0)
+                            };
+                            parameterArray2[0].Value = log.userid;
+                            parameterArray2[1].Value = log.field;
+                            parameterArray2[2].Value = log.oldValue;
+                            parameterArray2[3].Value = log.newvalue;
+                            parameterArray2[4].Value = log.Addtime;
+                            parameterArray2[5].Value = log.Editor;
+                            parameterArray2[6].Value = log.OIp;
+                            parameterArray2[7].Value = log.Desc;
+                            if (DataBase.ExecuteNonQuery(transaction, "proc_usersupdate_add", (object[])parameterArray2) < 0)
+                            {
+                                transaction.Rollback();
+                                connection.Close();
+                                return false;
+                            }
+                        }
+                    }
+                    if (DataBase.ExecuteNonQuery(transaction, "proc_users_Update", (object[])parameterArray) > 0)
+                    {
+                        HttpContext.Current.Items["{FD7BE212-8537-427f-9EF6-1D1AABCA8EA3}"] = null;
+                        transaction.Commit();
+                        connection.Close();
+                        ClearCache(_userinfo.ID);
+                        return true;
+                    }
+                    transaction.Rollback();
+                    connection.Close();
+                    flag2 = false;
+                }
+                catch (Exception exception)
+                {
+                    transaction.Rollback();
+                    ExceptionHandler.HandleException(exception);
+                    flag2 = false;
+                }
+                finally
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Dispose();
+                    }
+                }
+            }
+            return flag2;
+        }
+
+        public static bool Update1(UserInfo _userinfo)
+        {
+            SqlParameter[] commandParameters = new SqlParameter[] {
+                DataBase.MakeInParam("@id", SqlDbType.Int, 10, _userinfo.ID),
+                DataBase.MakeInParam("@userName", SqlDbType.VarChar, 50, _userinfo.UserName),
+                DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, _userinfo.Password),
+                DataBase.MakeInParam("@cpsdrate", SqlDbType.Int, 10, _userinfo.CPSDrate),
+                DataBase.MakeInParam("@cvsnrate", SqlDbType.Int, 10, _userinfo.CVSNrate),
+                DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, _userinfo.Email),
+                DataBase.MakeInParam("@qq", SqlDbType.VarChar, 50, _userinfo.QQ),
+                DataBase.MakeInParam("@tel", SqlDbType.VarChar, 50, _userinfo.Tel),
+                DataBase.MakeInParam("@idCard", SqlDbType.VarChar, 50, _userinfo.IdCard),
+                DataBase.MakeInParam("@account", SqlDbType.VarChar, 50, _userinfo.Account),
+                DataBase.MakeInParam("@payeeName", SqlDbType.VarChar, 50, _userinfo.PayeeName),
+                DataBase.MakeInParam("@payeeBank", SqlDbType.VarChar, 50, _userinfo.PayeeBank),
+                DataBase.MakeInParam("@bankProvince", SqlDbType.VarChar, 50, _userinfo.BankProvince),
+                DataBase.MakeInParam("@bankCity", SqlDbType.VarChar, 50, _userinfo.BankCity),
+                DataBase.MakeInParam("@bankAddress", SqlDbType.VarChar, 50, _userinfo.BankAddress),
+                DataBase.MakeInParam("@status", SqlDbType.TinyInt, 1, _userinfo.Status),
+                DataBase.MakeInParam("@agentId", SqlDbType.Int, 10, _userinfo.AgentId),
+                DataBase.MakeInParam("@siteName", SqlDbType.VarChar, 50, _userinfo.SiteName),
+                DataBase.MakeInParam("@siteUrl", SqlDbType.VarChar, 100, _userinfo.SiteUrl),
+                DataBase.MakeInParam("@userType", SqlDbType.Int, 10, (int) _userinfo.UserType),
+                DataBase.MakeInParam("@userLevel", SqlDbType.Int, 10, (int) _userinfo.UserLevel),
+                DataBase.MakeInParam("@maxdaytocashTimes", SqlDbType.Int, 10, _userinfo.MaxDayToCashTimes),
+                DataBase.MakeInParam("@apiaccount", SqlDbType.BigInt, 8, _userinfo.APIAccount),
+                DataBase.MakeInParam("@apikey", SqlDbType.VarChar, 50, _userinfo.APIKey),
+                DataBase.MakeInParam("@DESC", SqlDbType.VarChar, 0xfa0, _userinfo.Desc),
+                DataBase.MakeInParam("@pmode", SqlDbType.Int, 10, _userinfo.PMode),
+                DataBase.MakeInParam("@updatetime", SqlDbType.DateTime, 8, DateTime.Now),
+                DataBase.MakeInParam("@manageId", SqlDbType.Int, 10, _userinfo.manageId),
+                DataBase.MakeInParam("@isRealNamePass", SqlDbType.TinyInt, 1, _userinfo.IsRealNamePass),
+                DataBase.MakeInParam("@isEmailPass", SqlDbType.TinyInt, 1, _userinfo.IsEmailPass),
+                DataBase.MakeInParam("@isPhonePass", SqlDbType.TinyInt, 1, _userinfo.IsPhonePass),
+                DataBase.MakeInParam("@smsNotifyUrl", SqlDbType.NVarChar, 0xff, _userinfo.smsNotifyUrl),
+                DataBase.MakeInParam("@full_name", SqlDbType.NVarChar, 50, _userinfo.full_name),
+                DataBase.MakeInParam("@male", SqlDbType.NVarChar, 4, _userinfo.male),
+                DataBase.MakeInParam("@addtress", SqlDbType.NVarChar, 30, _userinfo.addtress),
+                DataBase.MakeInParam("@question", SqlDbType.NVarChar, 150, _userinfo.question),
+                DataBase.MakeInParam("@answer", SqlDbType.NVarChar, 100, _userinfo.answer),
+                DataBase.MakeInParam("@pwd2", SqlDbType.NVarChar, 50, _userinfo.Password2),
+                DataBase.MakeInParam("@linkman", SqlDbType.NVarChar, 50, _userinfo.LinkMan),
+                DataBase.MakeInParam("@classid", SqlDbType.TinyInt, 1, _userinfo.classid),
+                DataBase.MakeInParam("@settles", SqlDbType.TinyInt, 1, _userinfo.Settles),
+                DataBase.MakeInParam("@isdebug", SqlDbType.TinyInt, 1, _userinfo.isdebug),
+                DataBase.MakeInParam("@idCardtype", SqlDbType.TinyInt, 1, _userinfo.IdCardType),
+                DataBase.MakeInParam("@msn", SqlDbType.VarChar, 30, _userinfo.msn),
+                DataBase.MakeInParam("@fax", SqlDbType.VarChar, 20, _userinfo.fax),
+                DataBase.MakeInParam("@province", SqlDbType.VarChar, 20, _userinfo.province),
+                DataBase.MakeInParam("@city", SqlDbType.VarChar, 20, _userinfo.city),
+                DataBase.MakeInParam("@zip", SqlDbType.VarChar, 8, _userinfo.zip),
+                DataBase.MakeInParam("@field1", SqlDbType.NVarChar, 50, _userinfo.field1),
+                DataBase.MakeInParam("@accoutType", SqlDbType.TinyInt, 1, _userinfo.accoutType),
+                DataBase.MakeInParam("@BankCode", SqlDbType.VarChar, 50, _userinfo.BankCode),
+                DataBase.MakeInParam("@provinceCode", SqlDbType.VarChar, 50, _userinfo.provinceCode),
+                DataBase.MakeInParam("@cityCode", SqlDbType.VarChar, 50, _userinfo.cityCode),
+                DataBase.MakeInParam("@isagentDistribution", SqlDbType.TinyInt, 1, _userinfo.isagentDistribution),
+                DataBase.MakeInParam("@agentDistscheme", SqlDbType.Int, 10, _userinfo.agentDistscheme),
+                DataBase.MakeInParam("@cardversion", SqlDbType.TinyInt, 1, _userinfo.cardversion),
+                DataBase.MakeInParam("@versoPic", SqlDbType.VarChar, 500, _userinfo.versoPic),
+                DataBase.MakeInParam("@frontPic", SqlDbType.VarChar, 500, _userinfo.frontPic),
+                DataBase.MakeInParam("@settles_type", SqlDbType.TinyInt, 1, _userinfo.settles_type),
+                DataBase.MakeInParam("@bank_limit", SqlDbType.Decimal, 18, _userinfo.bank_limit),
+                DataBase.MakeInParam("@wx_limit", SqlDbType.Decimal, 18, _userinfo.wx_limit),
+                DataBase.MakeInParam("@ali_limit", SqlDbType.Decimal, 18, _userinfo.ali_limit),
+                DataBase.MakeInParam("@qq_limit", SqlDbType.Decimal, 18, _userinfo.qq_limit),
+                DataBase.MakeInParam("@random_subject", SqlDbType.TinyInt, 1, _userinfo.random_subject),
+                DataBase.MakeInParam("@service_channel", SqlDbType.TinyInt, 1, _userinfo.service_channel)
+             };
+            return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_Update", commandParameters) > 0);
+        }
+
+        #endregion
+
+        #region 用户登录注销
+
+        public static string SignIn(MchUserBaseInfo userinfo)
+        {
+            string userloginMsgForUnCheck = string.Empty;
+            try
+            {
+                if (((userinfo == null) || string.IsNullOrEmpty(userinfo.UserName)) || string.IsNullOrEmpty(userinfo.UserPwd))
+                {
+                    return "请输入账号密码";
+                }
+                userloginMsgForUnCheck = "用户名或者密码错误,请重新输入!";
+                string sessionID = Guid.NewGuid().ToString("b");
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@username", SqlDbType.VarChar, 50, userinfo.UserName),
+                    DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, userinfo.UserPwd),
+                    DataBase.MakeInParam("@loginip", SqlDbType.VarChar, 50, userinfo.LastLoginIP),
+                    DataBase.MakeInParam("@logintime", SqlDbType.DateTime, 8, DateTime.Now),
+                    DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, sessionID),
+                    DataBase.MakeInParam("@address", SqlDbType.VarChar, 20, userinfo.LastLoginAddress),
+                    DataBase.MakeInParam("@remark", SqlDbType.VarChar, 100, userinfo.LastLoginRemark),
+                    DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, userinfo.EMail),
+                    DataBase.MakeInParam("@loginType", SqlDbType.TinyInt, 1, userinfo.LoginType),
+                    DataBase.MakeInParam("@login_mac", SqlDbType.VarChar, 100, userinfo.LastLoginMAC),
+                };
+                SqlDataReader reader = DataBase.ExecuteReader(CommandType.StoredProcedure, "proc_mch_user_Login", commandParameters);
+                if (reader.Read())
+                {
+                    if (reader["status"] != DBNull.Value)
+                    {
+                        userinfo.Status = (int)reader["status"];
+                        if (userinfo.Status == 1)
+                        {
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForUnCheck", "登录失败！");
+                        }
+                        else if (userinfo.Status == 2)
+                        {
+                            userinfo.UserID = (int)reader["userId"];
+                            userinfo.UserType = (UserTypeEnum)Convert.ToInt32(reader["userType"]);
+                            userinfo.IsEmail = reader["isEmailPass"].ToString() == "1";
+                            userloginMsgForUnCheck = "登录成功";
+                            HttpContext.Current.Session[USER_LOGIN_SESSIONID] = sessionID;
+                            HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID] = userinfo.UserID;
+                        }
+                        else if (userinfo.Status == 4)
+                        {
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForLock", "登录失败！");//.UserloginMsgForlock;
+                        }
+                        else if (userinfo.Status == 8)
+                        {
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForCheckFail", "登录失败！"); //UserloginMsgForCheckfail;
+                        }
+                        else if (userinfo.Status == 16)
+                        {
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginLimitIPCheckFail", "登录失败！");
+                        }
+                    }
+                    reader.Dispose();
+                }
+                return userloginMsgForUnCheck;
+            }
+            catch (Exception exception)
+            {
+                userloginMsgForUnCheck = "登录失败";
+                ExceptionHandler.HandleException(exception);
+                return userloginMsgForUnCheck;
+            }
+        }
+
+        public static void SignOut()
+        {
+            HttpContext.Current.Items[USER_CONTEXT_KEY] = null;
+            HttpContext.Current.Session["{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}"] = null;
+        }
+
+        /// <summary>
+        /// 获取当前登录用户
+        /// </summary>
+        public static MchUserBaseInfo CurrentMember
+        {
+            get
+            {
+                if (HttpContext.Current != null)
+                {
+                    if (HttpContext.Current.Items[USER_CONTEXT_KEY] == null)
+                    {
+                        int current = GetCurrent();
+                        if (current <= 0)
+                            return null;
+                        HttpContext.Current.Items[USER_CONTEXT_KEY] = GetUserBaseByUserID(current);
+                    }
+                    return (HttpContext.Current.Items[USER_CONTEXT_KEY] as MchUserBaseInfo);
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取Session中UserID。
+        /// </summary>
+        /// <returns></returns>
+        public static int GetCurrent()
+        {
+            try
+            {
+                object cuSession = HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID];
+                if (cuSession != null)
+                {
+                    return Convert.ToInt32(cuSession);
+                }
+                object cuSessionID = HttpContext.Current.Session[USER_LOGIN_SESSIONID];
+                if (cuSessionID != null)
+                {
+                    SqlParameter[] commandParameters = new SqlParameter[] {
+                         new SqlParameter("@sessionId", SqlDbType.VarChar, 100)
+                    };
+                    commandParameters[0].Value = cuSessionID;
+                    object userID = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_users_getIdBySession", commandParameters);
+                    if (userID != DBNull.Value)
+                    {
+                        return Convert.ToInt32(userID);
+                    }
+                }
+                return 0;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return 0;
+            }
+        }
+
+        #endregion
+
+        #region 查询
 
         private static string BuilderUpdateLogWhere(List<SearchParam> param, List<SqlParameter> paramList)
         {
@@ -514,22 +893,71 @@
             return builder.ToString();
         }
 
-        public static bool CheckUserOrderId(int userid, string OrderId)
+        public static DataSet PageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                DataBase.MakeInParam("@orderNo", SqlDbType.VarChar, 30, OrderId), 
-                DataBase.MakeInParam("@userid", SqlDbType.Int, 10, userid) 
-            };
-            return Convert.ToBoolean(DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_usersorderid_check", commandParameters));
+            DataSet set = new DataSet();
+            try
+            {
+                string tables = "v_mch_user_detail";
+                string key = "[userid]";
+                if (string.IsNullOrEmpty(orderby))
+                    orderby = "userid desc";
+                List<SqlParameter> paramList = new List<SqlParameter>();
+                string wheres = BuilderWhere(searchParams, paramList);
+                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" +
+                            SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false);
+                return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return set;
+            }
         }
 
-        public static bool chkAgent(int agentid)
+        public static DataSet UpdateLogPageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby)
+        {
+            DataSet set = new DataSet();
+            try
+            {
+                string tables = "usersupdate";
+                string key = "[id]";
+                string columns = "id,\r\nuserid,\r\nfield,\r\noldValue,\r\nnewvalue,\r\nAddtime,\r\neditor,\r\noIp";
+                if (string.IsNullOrEmpty(orderby))
+                {
+                    orderby = "Addtime desc";
+                }
+                List<SqlParameter> paramList = new List<SqlParameter>();
+                string wheres = BuilderUpdateLogWhere(searchParams, paramList);
+                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + SqlHelper.GetPageSelectSQL(columns, tables, wheres, orderby, key, pageSize, page, false);
+                return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return set;
+            }
+        }
+
+        #endregion
+
+        #region 检查账号是否存在
+
+        /// <summary>
+        /// 根据UserName检查是否存在
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>True存在；False不存在</returns>
+        public static bool CheckExistsByUserName(int userName)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@agentid", SqlDbType.Int, 10) };
-                commandParameters[0].Value = agentid;
-                return Convert.ToBoolean(DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_user_chkagent", commandParameters));
+                bool flag = false;
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@userName", SqlDbType.VarChar, 50, userName)
+                };
+                flag = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_ExistsByUserName", commandParameters).ToString() == "1";
+                return flag;
             }
             catch (Exception exception)
             {
@@ -538,18 +966,38 @@
             }
         }
 
-        public static bool Del(int userId)
+        /// <summary>
+        /// 根据MerchantName检查是否存在
+        /// </summary>
+        /// <param name="merchantName"></param>
+        /// <returns>True存在；False不存在</returns>
+        public static bool CheckExistsByMerchantName(string merchantName)
         {
             try
             {
                 bool flag = false;
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@id", SqlDbType.Int, 10, userId) };
-                flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_del", commandParameters) > 0;
-                if (flag)
-                {
-                    ClearCache(userId);
-                }
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@merchantName", SqlDbType.VarChar, 50, merchantName)
+                };
+                flag = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_ExistsByMerchantName", commandParameters).ToString() == "1";
                 return flag;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
+            }
+        }
+
+        #endregion
+
+        public static bool chkAgent(int agentid)
+        {
+            try
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@agentid", SqlDbType.Int, 10) };
+                commandParameters[0].Value = agentid;
+                return Convert.ToBoolean(DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_user_chkagent", commandParameters));
             }
             catch (Exception exception)
             {
@@ -593,46 +1041,6 @@
             }
         }
 
-        public static bool Exists(int userId)
-        {
-            try
-            {
-                bool flag = false;
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@userId", SqlDbType.Int, 10, userId) };
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_users_ExistsId", commandParameters);
-                if ((obj2 != null) && (obj2 != DBNull.Value))
-                {
-                    flag = Convert.ToBoolean(obj2);
-                }
-                return flag;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return false;
-            }
-        }
-
-        public static bool Exists(string username)
-        {
-            try
-            {
-                bool flag = false;
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@userName", SqlDbType.NVarChar, 50, username) };
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_users_Exists", commandParameters);
-                if ((obj2 != null) && (obj2 != DBNull.Value))
-                {
-                    flag = Convert.ToBoolean(obj2);
-                }
-                return flag;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return false;
-            }
-        }
-
         public static DataTable getAgentList()
         {
             try
@@ -643,136 +1051,6 @@
             catch
             {
                 return null;
-            }
-        }
-
-
-        public static string GetClassViewName(int classid)
-        {
-            string str = string.Empty;
-            if (classid == 0)
-            {
-                return "个人";
-            }
-            if (classid == 1)
-            {
-                str = "企业";
-            }
-            return str;
-        }
-
-        public static string GetClassViewName(object obj)
-        {
-            if ((obj == null) || (obj == DBNull.Value))
-            {
-                return string.Empty;
-            }
-            return GetClassViewName(Convert.ToInt32(obj));
-        }
-
-        public static int GetCurrent()
-        {
-            try
-            {
-                object obj2 = HttpContext.Current.Session["{2A1FA22C-201B-471c-B668-2FCC1C4A121A}"];
-                if (obj2 != null)
-                {
-                    return Convert.ToInt32(obj2);
-                }
-                object obj3 = HttpContext.Current.Session["{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}"];
-                if (obj3 != null)
-                {
-                    SqlParameter[] commandParameters = new SqlParameter[] { 
-                        DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, obj3) 
-                    };
-                    object obj4 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_users_getIdBySession", commandParameters);
-                    if (obj4 != DBNull.Value)
-                    {
-                        return Convert.ToInt32(obj4);
-                    }
-                }
-                return 0;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return 0;
-            }
-        }
-
-        /// <summary>
-        /// 获取商户代理ID
-        /// </summary>
-        /// <param name="userid"></param>
-        /// <returns></returns>
-        public static int GetAgentID(int userid)
-        {
-            try
-            {
-                string commandText = "SELECT agentid FROM mch_userbase with(nolock) WHERE userid=@userid ";
-                SqlParameter[] commandParameters = new SqlParameter[] 
-                { 
-                    new SqlParameter("@userid", SqlDbType.Int, 10) 
-                };
-                commandParameters[0].Value = userid;
-                return Utils.StrToInt(DataBase.ExecuteScalar(CommandType.Text, commandText, commandParameters), 0);
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return 0;
-            }
-        }
-
-        public static string GetUserApiKey(int userId)
-        {
-            try
-            {
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@user_id", SqlDbType.Int, 10, userId) };
-                return DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_users_getApiKey", commandParameters).ToString();
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return string.Empty;
-            }
-        }
-
-        public static int GetUserIdBySession(string _sessionId)
-        {
-            try
-            {
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, _sessionId) };
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_users_getIdBySession", commandParameters);
-                if (obj2 != DBNull.Value)
-                {
-                    return Convert.ToInt32(obj2);
-                }
-                return 0;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return 0;
-            }
-        }
-
-        public static int GetUserIdByToken(string token)
-        {
-            try
-            {
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@token", SqlDbType.VarChar, 100, token) };
-                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_users_getIdByToken", commandParameters);
-                if (obj2 != DBNull.Value)
-                {
-                    return Convert.ToInt32(obj2);
-                }
-                return 0;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return 0;
             }
         }
 
@@ -790,30 +1068,6 @@
                 list.Add(reader.GetInt32(0));
             }
             return list;
-        }
-
-        public static DataSet PageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby)
-        {
-            DataSet set = new DataSet();
-            try
-            {
-                string tables = "V_Users";
-                string key = "[id]";
-                if (string.IsNullOrEmpty(orderby))
-                {
-                    orderby = "id desc";
-                }
-                List<SqlParameter> paramList = new List<SqlParameter>();
-                string wheres = BuilderWhere(searchParams, paramList);
-                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + 
-                            SqlHelper.GetPageSelectSQL("[id]\r\n      ,[userName]\r\n      ,[password]\r\n      ,[CPSDrate]\r\n      ,[CVSNrate]\r\n      ,[email]\r\n      ,[qq]\r\n      ,[tel]\r\n      ,[idCard]\r\n      ,[settles]\r\n      ,[status]\r\n      ,[regTime]\r\n      ,[company]\r\n      ,[linkMan]\r\n      ,[agentId]\r\n      ,[siteName]\r\n      ,[siteUrl]\r\n      ,[userType]\r\n      ,[userLevel]\r\n      ,[maxdaytocashTimes]\r\n      ,[apiaccount]\r\n      ,[apikey]\r\n      ,[lastLoginIp]\r\n      ,[lastLoginTime]\r\n      ,[sessionId]\r\n      ,[updatetime]\r\n      ,[DESC]\r\n      ,[userid]\r\n      ,[pmode]\r\n      ,[account]\r\n      ,[payeeName]\r\n      ,[payeeBank]\r\n      ,[bankProvince]\r\n      ,[bankCity]\r\n      ,[bankAddress]\r\n      ,[Integral]\r\n      ,[balance]\r\n      ,[payment]\r\n      ,[unpayment]\r\n      ,[enableAmt]\r\n      ,[manageId]\r\n      ,[isRealNamePass]\r\n      ,[isPhonePass]\r\n      ,[isEmailPass]\r\n      ,[question]\r\n      ,[answer]\r\n      ,[smsNotifyUrl]\r\n      ,[full_name]\r\n      ,[classid]\r\n      ,[Freeze]\r\n      ,[schemename]\r\n      ,[idCardtype]\r\n      ,[msn]\r\n      ,[fax]\r\n      ,[province]\r\n      ,[city]\r\n      ,[zip]\r\n      ,[field1],[levName],[frontPic],[versoPic]", tables, wheres, orderby, key, pageSize, page, false);
-                return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return set;
-            }
         }
 
         public static UserInfo ReaderBind(IDataReader dataReader)
@@ -963,334 +1217,6 @@
             return info;
         }
 
-        public static string SignIn(UserInfo userinfo)
-        {
-            string userloginMsgForUnCheck = string.Empty;
-            try
-            {
-                if (((userinfo == null) || string.IsNullOrEmpty(userinfo.UserName)) || string.IsNullOrEmpty(userinfo.Password))
-                {
-                    return "请输入账号密码";
-                }
-                userloginMsgForUnCheck = "用户名或者密码错误,请重新输入!";
-                string str2 = Guid.NewGuid().ToString("b");
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    DataBase.MakeInParam("@username", SqlDbType.VarChar, 50, userinfo.UserName), 
-                    DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, userinfo.Password), 
-                    DataBase.MakeInParam("@loginip", SqlDbType.VarChar, 50, userinfo.LastLoginIp), 
-                    DataBase.MakeInParam("@logintime", SqlDbType.DateTime, 8, DateTime.Now), 
-                    DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, str2), 
-                    DataBase.MakeInParam("@address", SqlDbType.VarChar, 20, userinfo.LastLoginAddress), 
-                    DataBase.MakeInParam("@remark", SqlDbType.VarChar, 100, userinfo.LastLoginRemark), 
-                    DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, userinfo.Email), 
-                    DataBase.MakeInParam("@loginType", SqlDbType.TinyInt, 1, userinfo.loginType),
-                    DataBase.MakeInParam("@login_mac", SqlDbType.VarChar, 100, userinfo.login_mac), 
-                };
-                SqlDataReader reader = DataBase.ExecuteReader(CommandType.StoredProcedure, "proc_users_Login", commandParameters);
-                if (reader.Read())
-                {
-                    if (reader["status"] != DBNull.Value)
-                    {
-                        userinfo.Status = (int) reader["status"];
-                        if (userinfo.Status == 1)
-                        {
-                            userloginMsgForUnCheck = SysConfig.UserloginMsgForUnCheck;
-                        }
-                        else if (userinfo.Status == 2)
-                        {
-                            userinfo.ID = (int) reader["userId"];
-                            userinfo.UserType = (UserTypeEnum) Convert.ToInt32(reader["userType"]);
-                            userinfo.IsEmailPass = Convert.ToInt32(reader["isEmailPass"]);
-                            userloginMsgForUnCheck = "登录成功";
-                            HttpContext.Current.Session["{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}"] = str2;
-                            if (userinfo.LastLoginRemark == "客户端登录")
-                            {
-                                HttpContext.Current.Session["{2A1FA22C-201B-471c-B668-2FCC1C4A121A}"] = userinfo.ID;
-                            }
-                        }
-                        else if (userinfo.Status == 4)
-                        {
-                            userloginMsgForUnCheck = SysConfig.UserloginMsgForlock;
-                        }
-                        else if (userinfo.Status == 8)
-                        {
-                            userloginMsgForUnCheck = SysConfig.UserloginMsgForCheckfail;
-                        }
-                        else if (userinfo.Status == 16)
-                        {
-                            userloginMsgForUnCheck = SysConfig.UserloginLimitIPCheckfail;
-                        }
-                    }
-                    reader.Dispose();
-                }
-                return userloginMsgForUnCheck;
-            }
-            catch (Exception exception)
-            {
-                userloginMsgForUnCheck = "登录失败";
-                ExceptionHandler.HandleException(exception);
-                return userloginMsgForUnCheck;
-            }
-        }
-
-        public static void SignOut()
-        {
-            HttpContext.Current.Items["{FD7BE212-8537-427f-9EF6-1D1AABCA8EA3}"] = null;
-            HttpContext.Current.Session["{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}"] = null;
-        }
-
-        public static bool Update(UserInfo _userinfo, List<UsersUpdateLog> changeList)
-        {
-            bool flag2;
-            SqlParameter[] parameterArray = new SqlParameter[] { 
-                DataBase.MakeInParam("@id", SqlDbType.Int, 10, _userinfo.ID), 
-                DataBase.MakeInParam("@userName", SqlDbType.VarChar, 50, _userinfo.UserName), 
-                DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, _userinfo.Password), 
-                DataBase.MakeInParam("@cpsdrate", SqlDbType.Int, 10, _userinfo.CPSDrate), 
-                DataBase.MakeInParam("@cvsnrate", SqlDbType.Int, 10, _userinfo.CVSNrate), 
-                DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, _userinfo.Email), 
-                DataBase.MakeInParam("@qq", SqlDbType.VarChar, 50, _userinfo.QQ), 
-                DataBase.MakeInParam("@tel", SqlDbType.VarChar, 50, _userinfo.Tel), 
-                DataBase.MakeInParam("@idCard", SqlDbType.VarChar, 50, _userinfo.IdCard), 
-                DataBase.MakeInParam("@account", SqlDbType.VarChar, 50, _userinfo.Account), 
-                DataBase.MakeInParam("@payeeName", SqlDbType.VarChar, 50, _userinfo.PayeeName), 
-                DataBase.MakeInParam("@payeeBank", SqlDbType.VarChar, 50, _userinfo.PayeeBank), 
-                DataBase.MakeInParam("@bankProvince", SqlDbType.VarChar, 50, _userinfo.BankProvince), 
-                DataBase.MakeInParam("@bankCity", SqlDbType.VarChar, 50, _userinfo.BankCity), 
-                DataBase.MakeInParam("@bankAddress", SqlDbType.VarChar, 50, _userinfo.BankAddress), 
-                DataBase.MakeInParam("@status", SqlDbType.TinyInt, 1, _userinfo.Status), 
-                DataBase.MakeInParam("@agentId", SqlDbType.Int, 10, _userinfo.AgentId), 
-                DataBase.MakeInParam("@siteName", SqlDbType.VarChar, 50, _userinfo.SiteName), 
-                DataBase.MakeInParam("@siteUrl", SqlDbType.VarChar, 100, _userinfo.SiteUrl), 
-                DataBase.MakeInParam("@userType", SqlDbType.Int, 10, (int) _userinfo.UserType), 
-                DataBase.MakeInParam("@userLevel", SqlDbType.Int, 10, (int) _userinfo.UserLevel), 
-                DataBase.MakeInParam("@maxdaytocashTimes", SqlDbType.Int, 10, _userinfo.MaxDayToCashTimes), 
-                DataBase.MakeInParam("@apiaccount", SqlDbType.BigInt, 8, _userinfo.APIAccount), 
-                DataBase.MakeInParam("@apikey", SqlDbType.VarChar, 50, _userinfo.APIKey), 
-                DataBase.MakeInParam("@DESC", SqlDbType.VarChar, 0xfa0, _userinfo.Desc), 
-                DataBase.MakeInParam("@pmode", SqlDbType.Int, 10, _userinfo.PMode), 
-                DataBase.MakeInParam("@updatetime", SqlDbType.DateTime, 8, DateTime.Now), 
-                DataBase.MakeInParam("@manageId", SqlDbType.Int, 10, _userinfo.manageId), 
-                DataBase.MakeInParam("@isRealNamePass", SqlDbType.TinyInt, 1, _userinfo.IsRealNamePass), 
-                DataBase.MakeInParam("@isEmailPass", SqlDbType.TinyInt, 1, _userinfo.IsEmailPass), 
-                DataBase.MakeInParam("@isPhonePass", SqlDbType.TinyInt, 1, _userinfo.IsPhonePass), 
-                DataBase.MakeInParam("@smsNotifyUrl", SqlDbType.NVarChar, 0xff, _userinfo.smsNotifyUrl), 
-                DataBase.MakeInParam("@full_name", SqlDbType.NVarChar, 50, _userinfo.full_name), 
-                DataBase.MakeInParam("@male", SqlDbType.NVarChar, 4, _userinfo.male), 
-                DataBase.MakeInParam("@addtress", SqlDbType.NVarChar, 30, _userinfo.addtress), 
-                DataBase.MakeInParam("@question", SqlDbType.NVarChar, 150, _userinfo.question), 
-                DataBase.MakeInParam("@answer", SqlDbType.NVarChar, 100, _userinfo.answer), 
-                DataBase.MakeInParam("@pwd2", SqlDbType.NVarChar, 50, _userinfo.Password2), 
-                DataBase.MakeInParam("@linkman", SqlDbType.NVarChar, 50, _userinfo.LinkMan), 
-                DataBase.MakeInParam("@classid", SqlDbType.TinyInt, 1, _userinfo.classid), 
-                DataBase.MakeInParam("@settles", SqlDbType.TinyInt, 1, _userinfo.Settles), 
-                DataBase.MakeInParam("@isdebug", SqlDbType.TinyInt, 1, _userinfo.isdebug), 
-                DataBase.MakeInParam("@idCardtype", SqlDbType.TinyInt, 1, _userinfo.IdCardType), 
-                DataBase.MakeInParam("@msn", SqlDbType.VarChar, 30, _userinfo.msn), 
-                DataBase.MakeInParam("@fax", SqlDbType.VarChar, 20, _userinfo.fax), 
-                DataBase.MakeInParam("@province", SqlDbType.VarChar, 20, _userinfo.province), 
-                DataBase.MakeInParam("@city", SqlDbType.VarChar, 20, _userinfo.city), 
-                DataBase.MakeInParam("@zip", SqlDbType.VarChar, 8, _userinfo.zip), 
-                DataBase.MakeInParam("@field1", SqlDbType.NVarChar, 50, _userinfo.field1), 
-                DataBase.MakeInParam("@accoutType", SqlDbType.TinyInt, 1, _userinfo.accoutType), 
-                DataBase.MakeInParam("@BankCode", SqlDbType.VarChar, 50, _userinfo.BankCode), 
-                DataBase.MakeInParam("@provinceCode", SqlDbType.VarChar, 50, _userinfo.provinceCode), 
-                DataBase.MakeInParam("@cityCode", SqlDbType.VarChar, 50, _userinfo.cityCode), 
-                DataBase.MakeInParam("@isagentDistribution", SqlDbType.TinyInt, 1, _userinfo.isagentDistribution), 
-                DataBase.MakeInParam("@agentDistscheme", SqlDbType.Int, 10, _userinfo.agentDistscheme), 
-                DataBase.MakeInParam("@cardversion", SqlDbType.TinyInt, 1, _userinfo.cardversion), 
-                DataBase.MakeInParam("@versoPic", SqlDbType.VarChar, 500, _userinfo.versoPic), 
-                DataBase.MakeInParam("@frontPic", SqlDbType.VarChar, 500, _userinfo.frontPic),
-                DataBase.MakeInParam("@settles_type", SqlDbType.VarChar, 500, _userinfo.settles_type),
-                DataBase.MakeInParam("@bank_limit", SqlDbType.Decimal, 18, _userinfo.bank_limit),
-                DataBase.MakeInParam("@wx_limit", SqlDbType.Decimal, 18, _userinfo.wx_limit),
-                DataBase.MakeInParam("@ali_limit", SqlDbType.Decimal, 18, _userinfo.ali_limit),
-                DataBase.MakeInParam("@qq_limit", SqlDbType.Decimal, 18, _userinfo.qq_limit),
-                DataBase.MakeInParam("@random_subject", SqlDbType.TinyInt, 1, _userinfo.random_subject),
-                DataBase.MakeInParam("@service_channel", SqlDbType.TinyInt, 1, _userinfo.service_channel)
-             };
-            using (SqlConnection connection = new SqlConnection(DataBase.ConnectionString))
-            {
-                connection.Open();
-                SqlTransaction transaction = connection.BeginTransaction();
-                try
-                {
-                    if (changeList != null)
-                    {
-                        foreach (UsersUpdateLog log in changeList)
-                        {
-                            SqlParameter[] parameterArray2 = new SqlParameter[] { 
-                                new SqlParameter("@userid", SqlDbType.Int, 10), 
-                                new SqlParameter("@field", SqlDbType.VarChar, 20), 
-                                new SqlParameter("@oldValue", SqlDbType.VarChar, 100), 
-                                new SqlParameter("@newvalue", SqlDbType.VarChar, 100), 
-                                new SqlParameter("@Addtime", SqlDbType.DateTime), 
-                                new SqlParameter("@editor", SqlDbType.VarChar, 50), 
-                                new SqlParameter("@oIp", SqlDbType.VarChar, 50), 
-                                new SqlParameter("@desc", SqlDbType.VarChar, 0xfa0) 
-                            };
-                            parameterArray2[0].Value = log.userid;
-                            parameterArray2[1].Value = log.field;
-                            parameterArray2[2].Value = log.oldValue;
-                            parameterArray2[3].Value = log.newvalue;
-                            parameterArray2[4].Value = log.Addtime;
-                            parameterArray2[5].Value = log.Editor;
-                            parameterArray2[6].Value = log.OIp;
-                            parameterArray2[7].Value = log.Desc;
-                            if (DataBase.ExecuteNonQuery(transaction, "proc_usersupdate_add", (object[]) parameterArray2) < 0)
-                            {
-                                transaction.Rollback();
-                                connection.Close();
-                                return false;
-                            }
-                        }
-                    }
-                    if (DataBase.ExecuteNonQuery(transaction, "proc_users_Update", (object[]) parameterArray) > 0)
-                    {
-                        HttpContext.Current.Items["{FD7BE212-8537-427f-9EF6-1D1AABCA8EA3}"] = null;
-                        transaction.Commit();
-                        connection.Close();
-                        ClearCache(_userinfo.ID);
-                        return true;
-                    }
-                    transaction.Rollback();
-                    connection.Close();
-                    flag2 = false;
-                }
-                catch (Exception exception)
-                {
-                    transaction.Rollback();
-                    ExceptionHandler.HandleException(exception);
-                    flag2 = false;
-                }
-                finally
-                {
-                    if (transaction != null)
-                    {
-                        transaction.Dispose();
-                    }
-                }
-            }
-            return flag2;
-        }
-
-        public static bool Update1(UserInfo _userinfo)
-        {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                DataBase.MakeInParam("@id", SqlDbType.Int, 10, _userinfo.ID), 
-                DataBase.MakeInParam("@userName", SqlDbType.VarChar, 50, _userinfo.UserName), 
-                DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, _userinfo.Password), 
-                DataBase.MakeInParam("@cpsdrate", SqlDbType.Int, 10, _userinfo.CPSDrate), 
-                DataBase.MakeInParam("@cvsnrate", SqlDbType.Int, 10, _userinfo.CVSNrate), 
-                DataBase.MakeInParam("@email", SqlDbType.VarChar, 50, _userinfo.Email), 
-                DataBase.MakeInParam("@qq", SqlDbType.VarChar, 50, _userinfo.QQ), 
-                DataBase.MakeInParam("@tel", SqlDbType.VarChar, 50, _userinfo.Tel), 
-                DataBase.MakeInParam("@idCard", SqlDbType.VarChar, 50, _userinfo.IdCard), 
-                DataBase.MakeInParam("@account", SqlDbType.VarChar, 50, _userinfo.Account), 
-                DataBase.MakeInParam("@payeeName", SqlDbType.VarChar, 50, _userinfo.PayeeName), 
-                DataBase.MakeInParam("@payeeBank", SqlDbType.VarChar, 50, _userinfo.PayeeBank), 
-                DataBase.MakeInParam("@bankProvince", SqlDbType.VarChar, 50, _userinfo.BankProvince), 
-                DataBase.MakeInParam("@bankCity", SqlDbType.VarChar, 50, _userinfo.BankCity), 
-                DataBase.MakeInParam("@bankAddress", SqlDbType.VarChar, 50, _userinfo.BankAddress), 
-                DataBase.MakeInParam("@status", SqlDbType.TinyInt, 1, _userinfo.Status), 
-                DataBase.MakeInParam("@agentId", SqlDbType.Int, 10, _userinfo.AgentId), 
-                DataBase.MakeInParam("@siteName", SqlDbType.VarChar, 50, _userinfo.SiteName), 
-                DataBase.MakeInParam("@siteUrl", SqlDbType.VarChar, 100, _userinfo.SiteUrl), 
-                DataBase.MakeInParam("@userType", SqlDbType.Int, 10, (int) _userinfo.UserType), 
-                DataBase.MakeInParam("@userLevel", SqlDbType.Int, 10, (int) _userinfo.UserLevel), 
-                DataBase.MakeInParam("@maxdaytocashTimes", SqlDbType.Int, 10, _userinfo.MaxDayToCashTimes), 
-                DataBase.MakeInParam("@apiaccount", SqlDbType.BigInt, 8, _userinfo.APIAccount), 
-                DataBase.MakeInParam("@apikey", SqlDbType.VarChar, 50, _userinfo.APIKey), 
-                DataBase.MakeInParam("@DESC", SqlDbType.VarChar, 0xfa0, _userinfo.Desc), 
-                DataBase.MakeInParam("@pmode", SqlDbType.Int, 10, _userinfo.PMode), 
-                DataBase.MakeInParam("@updatetime", SqlDbType.DateTime, 8, DateTime.Now), 
-                DataBase.MakeInParam("@manageId", SqlDbType.Int, 10, _userinfo.manageId), 
-                DataBase.MakeInParam("@isRealNamePass", SqlDbType.TinyInt, 1, _userinfo.IsRealNamePass), 
-                DataBase.MakeInParam("@isEmailPass", SqlDbType.TinyInt, 1, _userinfo.IsEmailPass), 
-                DataBase.MakeInParam("@isPhonePass", SqlDbType.TinyInt, 1, _userinfo.IsPhonePass), 
-                DataBase.MakeInParam("@smsNotifyUrl", SqlDbType.NVarChar, 0xff, _userinfo.smsNotifyUrl), 
-                DataBase.MakeInParam("@full_name", SqlDbType.NVarChar, 50, _userinfo.full_name), 
-                DataBase.MakeInParam("@male", SqlDbType.NVarChar, 4, _userinfo.male), 
-                DataBase.MakeInParam("@addtress", SqlDbType.NVarChar, 30, _userinfo.addtress), 
-                DataBase.MakeInParam("@question", SqlDbType.NVarChar, 150, _userinfo.question), 
-                DataBase.MakeInParam("@answer", SqlDbType.NVarChar, 100, _userinfo.answer), 
-                DataBase.MakeInParam("@pwd2", SqlDbType.NVarChar, 50, _userinfo.Password2), 
-                DataBase.MakeInParam("@linkman", SqlDbType.NVarChar, 50, _userinfo.LinkMan), 
-                DataBase.MakeInParam("@classid", SqlDbType.TinyInt, 1, _userinfo.classid), 
-                DataBase.MakeInParam("@settles", SqlDbType.TinyInt, 1, _userinfo.Settles), 
-                DataBase.MakeInParam("@isdebug", SqlDbType.TinyInt, 1, _userinfo.isdebug), 
-                DataBase.MakeInParam("@idCardtype", SqlDbType.TinyInt, 1, _userinfo.IdCardType),
-                DataBase.MakeInParam("@msn", SqlDbType.VarChar, 30, _userinfo.msn), 
-                DataBase.MakeInParam("@fax", SqlDbType.VarChar, 20, _userinfo.fax), 
-                DataBase.MakeInParam("@province", SqlDbType.VarChar, 20, _userinfo.province), 
-                DataBase.MakeInParam("@city", SqlDbType.VarChar, 20, _userinfo.city), 
-                DataBase.MakeInParam("@zip", SqlDbType.VarChar, 8, _userinfo.zip), 
-                DataBase.MakeInParam("@field1", SqlDbType.NVarChar, 50, _userinfo.field1), 
-                DataBase.MakeInParam("@accoutType", SqlDbType.TinyInt, 1, _userinfo.accoutType), 
-                DataBase.MakeInParam("@BankCode", SqlDbType.VarChar, 50, _userinfo.BankCode), 
-                DataBase.MakeInParam("@provinceCode", SqlDbType.VarChar, 50, _userinfo.provinceCode), 
-                DataBase.MakeInParam("@cityCode", SqlDbType.VarChar, 50, _userinfo.cityCode), 
-                DataBase.MakeInParam("@isagentDistribution", SqlDbType.TinyInt, 1, _userinfo.isagentDistribution), 
-                DataBase.MakeInParam("@agentDistscheme", SqlDbType.Int, 10, _userinfo.agentDistscheme), 
-                DataBase.MakeInParam("@cardversion", SqlDbType.TinyInt, 1, _userinfo.cardversion), 
-                DataBase.MakeInParam("@versoPic", SqlDbType.VarChar, 500, _userinfo.versoPic), 
-                DataBase.MakeInParam("@frontPic", SqlDbType.VarChar, 500, _userinfo.frontPic),
-                DataBase.MakeInParam("@settles_type", SqlDbType.TinyInt, 1, _userinfo.settles_type),
-                DataBase.MakeInParam("@bank_limit", SqlDbType.Decimal, 18, _userinfo.bank_limit),
-                DataBase.MakeInParam("@wx_limit", SqlDbType.Decimal, 18, _userinfo.wx_limit),
-                DataBase.MakeInParam("@ali_limit", SqlDbType.Decimal, 18, _userinfo.ali_limit),
-                DataBase.MakeInParam("@qq_limit", SqlDbType.Decimal, 18, _userinfo.qq_limit),
-                DataBase.MakeInParam("@random_subject", SqlDbType.TinyInt, 1, _userinfo.random_subject),
-                DataBase.MakeInParam("@service_channel", SqlDbType.TinyInt, 1, _userinfo.service_channel)
-             };
-            return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_Update", commandParameters) > 0);
-        }
-
-        public static DataSet UpdateLogPageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby)
-        {
-            DataSet set = new DataSet();
-            try
-            {
-                string tables = "usersupdate";
-                string key = "[id]";
-                string columns = "id,\r\nuserid,\r\nfield,\r\noldValue,\r\nnewvalue,\r\nAddtime,\r\neditor,\r\noIp";
-                if (string.IsNullOrEmpty(orderby))
-                {
-                    orderby = "Addtime desc";
-                }
-                List<SqlParameter> paramList = new List<SqlParameter>();
-                string wheres = BuilderUpdateLogWhere(searchParams, paramList);
-                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + SqlHelper.GetPageSelectSQL(columns, tables, wheres, orderby, key, pageSize, page, false);
-                return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return set;
-            }
-        }
-
-        public static UserInfo CurrentMember
-        {
-            get
-            {
-                if (HttpContext.Current != null)
-                {
-                    if (HttpContext.Current.Items["{FD7BE212-8537-427f-9EF6-1D1AABCA8EA3}"] == null)
-                    {
-                        int current = GetCurrent();
-                        if (current <= 0)
-                        {
-                            return null;
-                        }
-                        HttpContext.Current.Items["{FD7BE212-8537-427f-9EF6-1D1AABCA8EA3}"] = GetCacheUserInfo(current);
-                    }
-                    return (HttpContext.Current.Items["{FD7BE212-8537-427f-9EF6-1D1AABCA8EA3}"] as UserInfo);
-                }
-                return null;
-            }
-        }
-
         public decimal TotalBalance
         {
             get
@@ -1323,25 +1249,7 @@
             }
         }
 
-        public static DataSet GetUserFirstLogin(int userId)
-        {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                new SqlParameter("@id", SqlDbType.Int, 10) 
-            };
-            commandParameters[0].Value = userId;
-            UserInfo info = new UserInfo();
-            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_users_get_first_login", commandParameters);
-        }
-
-        public static int ChangeUserDefaultThemes(int userId, string defaultThemes)
-        {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                DataBase.MakeInParam("@id", SqlDbType.Int, 10, userId), 
-                DataBase.MakeInParam("@default_themes", SqlDbType.VarChar, 50, defaultThemes), 
-             };
-
-            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_changethemes", commandParameters);
-        }
+        #region 商户图表数据源
 
         public static DataSet GetUserDayOrderChartSource(int userId)
         {
@@ -1353,6 +1261,10 @@
             return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_users_getdayorderchart", commandParameters);
 
         }
+
+        #endregion
+
+        #region 修改商户信息
 
         public static int ChangeUserPassword(string userName, string passWord)
         {
@@ -1383,6 +1295,20 @@
 
             return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_updateApiKey", commandParameters);
         }
+
+        public static int ChangeUserDefaultThemes(int userId, string defaultThemes)
+        {
+            SqlParameter[] commandParameters = new SqlParameter[] { 
+                DataBase.MakeInParam("@id", SqlDbType.Int, 10, userId), 
+                DataBase.MakeInParam("@default_themes", SqlDbType.VarChar, 50, defaultThemes), 
+             };
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_changethemes", commandParameters);
+        }
+
+        #endregion
+
+        #region 商户IP绑定删除
 
         /// <summary>
         /// 用户绑定ip.
@@ -1436,10 +1362,6 @@
 
             return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_bindip_delete", commandParameters);
         }
-
-        #region 支付回调
-
-
         #endregion
     }
 }

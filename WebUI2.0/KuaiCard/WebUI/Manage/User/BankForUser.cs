@@ -379,12 +379,12 @@
             info2.PayeeName = model.PayeeName;      //商户收款姓名
             info2.Account = model.Account;                  //商户收款账号
             TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
-            info2.Charges = new decimal?(modelByUser.chargerate * settleAmt);
+            info2.Charges = modelByUser.chargerate * settleAmt;
             decimal? charges = info2.Charges;
             decimal chargeleastofeach = modelByUser.chargeleastofeach;
-            if ((charges.GetValueOrDefault() < chargeleastofeach) && charges.HasValue)
+            if ((charges.GetValueOrDefault() < chargeleastofeach) && charges > 0)
             {
-                info2.Charges = new decimal?(modelByUser.chargeleastofeach);
+                info2.Charges = modelByUser.chargeleastofeach;
             }
             else
             {
@@ -392,7 +392,7 @@
                 chargeleastofeach = modelByUser.chargemostofeach;
                 if ((charges.GetValueOrDefault() > chargeleastofeach) && charges.HasValue)
                 {
-                    info2.Charges = new decimal?(modelByUser.chargemostofeach);
+                    info2.Charges = modelByUser.chargemostofeach;
                 }
             }
             if (DateTime.Now.Hour > 16)

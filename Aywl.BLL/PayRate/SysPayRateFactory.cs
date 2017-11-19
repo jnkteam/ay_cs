@@ -36,7 +36,7 @@
         public static decimal GetUserChannelTypePayRate(int userId, int channelTypeId)
         {
             //select PayrateXML.query('(/PayRate/ChannelType[@ID="22"])').value('(/ChannelType/@Rate)[1]','nvarchar(max)') from mch_userPayRate;
-            MchUserBaseInfo cacheUserBaseInfo = MchUserFactory.GetCacheUserBaseInfo(userId);
+            MchUserBaseInfo cacheUserBaseInfo = MchUserFactory.GetUserBaseByUserID(userId);
             if (cacheUserBaseInfo == null)
             {
                 return 0M;

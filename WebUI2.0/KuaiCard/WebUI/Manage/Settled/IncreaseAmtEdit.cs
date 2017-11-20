@@ -96,7 +96,7 @@
                         this.model.mangeId = new int?(base.ManageId);
                         this.model.mangeName = base.currentManage.username;
                         this.model.status = 1;
-                        this.model.optype = (optypeenum) int.Parse(this.rbl_optype.SelectedValue);
+                        this.model.optype = (SettleTypeEnum) int.Parse(this.rbl_optype.SelectedValue);
                         this.model.desc = text;
                         if (!this.isUpdate)
                         {

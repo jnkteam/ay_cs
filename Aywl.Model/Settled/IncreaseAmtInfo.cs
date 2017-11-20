@@ -10,7 +10,7 @@
         private decimal? _increaseamt;
         private int? _mangeid;
         private string _mangename;
-        private optypeenum _optype;
+        private SettleTypeEnum _optype;
         private int? _status;
         private int? _userid;
 
@@ -86,7 +86,7 @@
             }
         }
 
-        public optypeenum optype
+        public SettleTypeEnum optype
         {
             get
             {

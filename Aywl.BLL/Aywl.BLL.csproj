@@ -141,6 +141,7 @@
     <Compile Include="Withdraw\settledAgentNotify.cs" />
     <Compile Include="Withdraw\settledAgentSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Withdraw\WithdrawSchemeFactory.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

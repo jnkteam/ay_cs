@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.BLL.PayRate
 {
     using DBAccess;
-    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.PayRate;
     using System;
     using System.Data;
     using System.Data.SqlClient;

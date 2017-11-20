@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using OriginalStudio.DBAccess;
 using OriginalStudio.Lib.Utils;
+using OriginalStudio.Lib.ExceptionHandling;
 
 namespace OriginalStudio.BLL.BLL.User
 {
@@ -26,7 +27,7 @@ namespace OriginalStudio.BLL.BLL.User
                 new SqlParameter("@userid", SqlDbType.Int, 10) 
             };
             commandParameters[0].Value = userid;
-            DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_usersetting_GetModel", commandParameters);
+            DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userpayrate_GetModel", commandParameters);
 
             MchUserPayRateInfo modle = new MchUserPayRateInfo();
 
@@ -59,32 +60,37 @@ namespace OriginalStudio.BLL.BLL.User
             return string.IsNullOrEmpty(tmp) ? 0 : Utils.StrToDecimal(tmp);
         }
 
-        public static bool Insert(MchUserPayRateInfo model)
+        /// <summary>
+        /// 增加或修改商户通道费率
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static bool EditUserChannelPayRate(MchUserPayRateInfo model)
         {
-            return false;
-            //try
-            //{
-            //    SqlParameter[] commandParameters = new SqlParameter[] { 
-            //        new SqlParameter("@userid", SqlDbType.Int, 10), 
-            //        new SqlParameter("@defaultpay", SqlDbType.Int, 10), 
-            //        new SqlParameter("@payrate", SqlDbType.VarChar, 1000), 
-            //        new SqlParameter("@special", SqlDbType.Int, 10), 
-            //        new SqlParameter("@istransfer", SqlDbType.TinyInt, 1), 
-            //        new SqlParameter("@isRequireAgentDistAudit", SqlDbType.TinyInt, 1) 
-            //    };
-            //    commandParameters[0].Value = model.userid;
-            //    commandParameters[1].Value = model.defaultpay;
-            //    commandParameters[2].Value = model.payrate;
-            //    commandParameters[3].Value = model.special;
-            //    commandParameters[4].Value = model.istransfer;
-            //    commandParameters[5].Value = model.isRequireAgentDistAudit;
-            //    return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_usersetting_Insert", commandParameters) > 0);
-            //}
-            //catch (Exception exception)
-            //{
-            //    ExceptionHandler.HandleException(exception);
-            //    return false;
-            //}
+            try
+            {
+                SqlParameter[] parameters = {
+                    new SqlParameter("@userid",SqlDbType.Int),
+                    new SqlParameter("@defaultpay",SqlDbType.Int),
+                    new SqlParameter("@payratexml",SqlDbType.VarChar,4000),
+                    new SqlParameter("@special",SqlDbType.Int),
+                    new SqlParameter("@istransfer",SqlDbType.Bit),
+                    new SqlParameter("@isRequireAgentDistAudit",SqlDbType.Bit)
+                };
+                parameters[0].Value = model.UserID;
+                parameters[1].Value = model.DefaultPay;
+                parameters[2].Value = model.PayrateXML;
+                parameters[3].Value = model.Special;
+                parameters[4].Value = model.Istransfer;
+                parameters[5].Value = model.IsRequireAgentDistAudit;
+
+                return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_userpayrate_Edit", parameters) > 0);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
+            }
         }
 
     }

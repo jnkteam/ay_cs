@@ -88,7 +88,7 @@
     <Compile Include="Payment\OrderConvern.cs" />
     <Compile Include="Payment\PayPriceConver.cs" />
     <Compile Include="Payment\PayRate.cs" />
-    <Compile Include="Payment\RateTypeEnum.cs" />
+    <Compile Include="PayRate\RateTypeEnum.cs" />
     <Compile Include="PayStatus.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="Supplier\SupplierInfo.cs" />
     <Compile Include="Supplier\SupplierPayRateInfo.cs" />
     <Compile Include="Supplier\SysSupplierInfo.cs" />
-    <Compile Include="Payment\SysPayrateInfo.cs" />
+    <Compile Include="PayRate\SysPayrateInfo.cs" />
     <Compile Include="Supplier\SysSupplierPayRateInfo.cs" />
     <Compile Include="Sys\debuginfo.cs" />
     <Compile Include="Sys\debugtypeenum.cs" />

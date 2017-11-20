@@ -3,7 +3,7 @@
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
     using OriginalStudio.Model;
-    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.PayRate;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Text;
     using OriginalStudio.Lib.Web;

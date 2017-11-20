@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.Model.Payment
+﻿namespace OriginalStudio.Model.PayRate
 {
     using System;
 

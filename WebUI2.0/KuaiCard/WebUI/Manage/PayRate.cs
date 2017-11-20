@@ -3,7 +3,7 @@
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
     using OriginalStudio.Model;
-    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.PayRate;
     using OriginalStudio.Model.User;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Text;
@@ -15,7 +15,7 @@
 
     public class PayRate : ManagePageBase
     {
-        public OriginalStudio.Model.Payment.PayRate _model = null;
+        public OriginalStudio.Model.PayRate.PayRate _model = null;
         protected Button btn_save;
         protected HtmlForm form1;
         protected Repeater repRate;
@@ -311,7 +311,7 @@
             }
         }
 
-        public OriginalStudio.Model.Payment.PayRate model
+        public OriginalStudio.Model.PayRate.PayRate model
         {
             get
             {

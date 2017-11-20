@@ -64,7 +64,7 @@
         {
             get
             {
-                return ((this.CurrentUser == null) ? 0 : this.CurrentUser.ID);
+                return ((this.CurrentUser == null) ? 0 : this.CurrentUser.UserID);
             }
         }
 

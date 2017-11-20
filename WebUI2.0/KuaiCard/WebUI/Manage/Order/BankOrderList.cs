@@ -16,6 +16,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
     using OriginalStudio.BLL.Supplier;
+    using OriginalStudio.BLL.Channel;
 
     public class BankOrderList : ManagePageBase
     {
@@ -207,6 +208,16 @@
             {
                 this.ddlsupp.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
             }
+            //通道类型
+            DataTable channelTypeTable = SysChannelType.GetList(true).Tables[0];
+            this.ddlChannelType.Items.Add(new ListItem("--通道类型--", ""));
+            foreach (DataRow row1 in channelTypeTable.Rows)
+            {
+                this.ddlChannelType.Items.Add(new ListItem(row1["TypeName"].ToString(), row1["TypeID"].ToString()));
+            }
+
+
+
             this.ddlmange.Items.Add("--请选择业务员--");
             DataTable table2 = ManageFactory.GetList(" status =1").Tables[0];
             foreach (DataRow row in table2.Rows)
@@ -318,75 +329,6 @@
         {
             this.LoadData();
         }
-
-        //增加数据 状态样式 方法
-        protected string getStatusStyle(string status) {
-
-            string statusCss = string.Empty;
-            switch (status)
-            {
-                case "1":
-                    statusCss = "<a title='处理中' style='color:darkorange' href='javascript:void(0)'> <i class='fa   fa-hourglass-end'></i></a>";
-                    break;
-
-                case "2":
-                    
-                    statusCss = "<a title='已完成' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
-                    break;
-                    
-                case "4":
-
-                    statusCss = "<a title='失败'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
-                    break;
-
-                case "8":
-                    statusCss = "<a title='扣量' style='color:#00c0ef' href='javascript:void(0)'> <i class='fa    fa-plus-circle'></i></a>";
-                    break;
-                default:
-                    statusCss = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
-
-                    break;
-            }
-
-
-            return statusCss;
-        }
-
-
-
-        //增加数据 状态样式 方法
-        protected string getNotifystatStatusStyle(string status)
-        {
-
-            string statusCss = string.Empty;
-            switch (status)
-            {
-                case "1":
-                    statusCss = "<a title='处理中' style='color:darkorange' href='javascript:void(0)'> <i class='fa   fa-hourglass-end'></i></a>";
-                    break;
-
-                case "2":
-
-                    statusCss = "<a title='已完成' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
-                    break;
-
-                case "4":
-
-                    statusCss = "<a title='失败'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
-                    break;
-
-                
-                default:
-                    statusCss = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
-
-                    break;
-            }
-
-
-            return statusCss;
-        }
-
-
 
         protected void rptOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {

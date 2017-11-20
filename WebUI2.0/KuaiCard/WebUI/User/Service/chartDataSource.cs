@@ -27,7 +27,7 @@
             {
                 try
                 {
-                    int userid = this.CurrentUser.ID;
+                    int userid = this.CurrentUser.UserID;
                     DataSet ds = OriginalStudio.BLL.User.UserFactory.GetUserDayOrderChartSource(userid);
 
                     if (ds != null && ds.Tables.Count > 0)

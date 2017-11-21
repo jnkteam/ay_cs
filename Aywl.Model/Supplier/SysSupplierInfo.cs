@@ -51,7 +51,7 @@
 
         #region 公开属性
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取ID
         /// </summary>
         public System.Int32 ID
         {
@@ -60,7 +60,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取服务商代码(自定义，不可更改)
         /// </summary>
         public System.Int32 SupplierCode
         {
@@ -69,7 +69,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取服务商名称
         /// </summary>
         public System.String SupplierName
         {
@@ -78,7 +78,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取Logo（这个界面去掉）
         /// </summary>
         public System.String LogoUrl
         {
@@ -87,7 +87,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否支持网银
         /// </summary>
         public System.Boolean IsBank
         {
@@ -96,7 +96,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否支持Alipay
         /// </summary>
         public System.Boolean IsAlipay
         {
@@ -105,7 +105,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否支持QQ
         /// </summary>
         public System.Boolean IsQQ
         {
@@ -114,7 +114,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否支持微信
         /// </summary>
         public System.Boolean IsWeiXin
         {
@@ -123,7 +123,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否支持京东
         /// </summary>
         public System.Boolean IsJD
         {
@@ -132,7 +132,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取服务商ID
         /// </summary>
         public System.String PUserID
         {
@@ -141,7 +141,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取服务商密钥
         /// </summary>
         public System.String PUserKey
         {
@@ -150,7 +150,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取服务商商户名称
         /// </summary>
         public System.String PUserName
         {
@@ -159,7 +159,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取服务商备用参数1
         /// </summary>
         public System.String PUserParm1
         {
@@ -168,7 +168,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取备用参数2
         /// </summary>
         public System.String PUserParm2
         {
@@ -177,7 +177,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取备用参数3
         /// </summary>
         public System.String PUserParm3
         {
@@ -186,7 +186,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取备用参数4
         /// </summary>
         public System.String PUserParm4
         {
@@ -195,7 +195,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否使用
         /// </summary>
         public System.Boolean Active
         {
@@ -204,7 +204,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取启用调试日志
         /// </summary>
         public System.Boolean IsDebug
         {
@@ -213,7 +213,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取网关提交地址
         /// </summary>
         public System.String BankPostUrl
         {
@@ -222,7 +222,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取同步通知地址
         /// </summary>
         public System.String BankNotifyUrl
         {
@@ -231,7 +231,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取异步通知地址
         /// </summary>
         public System.String BankReturnUrl
         {
@@ -240,7 +240,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取订单查询地址
         /// </summary>
         public System.String BankSearchUrl
         {
@@ -249,7 +249,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取支付成功跳转地址
         /// </summary>
         public System.String BankJumUrl
         {
@@ -258,7 +258,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取代付网关
         /// </summary>
         public System.String DistributionUrl
         {
@@ -267,7 +267,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取代付异步通知地址
         /// </summary>
         public System.String DistributionNotifyUrl
         {
@@ -276,7 +276,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取代付查询地址
         /// </summary>
         public System.String DistributionSearchUrl
         {
@@ -285,7 +285,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取备注
         /// </summary>
         public System.String SpDesc
         {
@@ -294,7 +294,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取排序
         /// </summary>
         public System.Int32 ListOrder
         {
@@ -303,7 +303,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否支持代付
         /// </summary>
         public System.Boolean IsDistribution
         {

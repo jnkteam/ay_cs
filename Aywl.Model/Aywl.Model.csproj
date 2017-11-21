@@ -54,6 +54,7 @@
     <Compile Include="Json\AjaxResult.cs" />
     <Compile Include="News\NewsInfo.cs" />
     <Compile Include="News\NewsType.cs" />
+    <Compile Include="PayRate\SysPayrateInfo.cs" />
     <Compile Include="SMS\phoneValid.cs" />
     <Compile Include="SMS\PhoneValidLog.cs" />
     <Compile Include="User\MchUserChannelType.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Supplier\SupplierInfo.cs" />
     <Compile Include="Supplier\SupplierPayRateInfo.cs" />
     <Compile Include="Supplier\SysSupplierInfo.cs" />
-    <Compile Include="PayRate\SysPayrateInfo.cs" />
     <Compile Include="Supplier\SysSupplierPayRateInfo.cs" />
     <Compile Include="Sys\debuginfo.cs" />
     <Compile Include="Sys\debugtypeenum.cs" />

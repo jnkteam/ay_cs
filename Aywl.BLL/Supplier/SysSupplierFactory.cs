@@ -309,93 +309,73 @@
 
         #region 增删改
         
-        public static int Add(SupplierInfo model)
+        public static int Add(SysSupplierInfo model)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    new SqlParameter("@id", SqlDbType.Int, 10), 
-                    new SqlParameter("@code", SqlDbType.Int, 10), 
-                    new SqlParameter("@name", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@logourl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@isbank", SqlDbType.Bit, 1), 
-                    new SqlParameter("@iscard", SqlDbType.Bit, 1), 
-                    new SqlParameter("@issms", SqlDbType.Bit, 1), 
-                    new SqlParameter("@issx", SqlDbType.Bit, 1), 
-                    new SqlParameter("@puserid", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@pusername", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@puserid1", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey1", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid2", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey2", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid3", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey3", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid4", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey4", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid5", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey5", SqlDbType.VarChar, 2000),
-                    new SqlParameter("@purl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@pbakurl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@postBankUrl", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@postCardUrl", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@postSMSUrl", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@desc", SqlDbType.NVarChar, 0x7d0), 
-                    new SqlParameter("@sort", SqlDbType.Int, 10), 
-                    new SqlParameter("@release", SqlDbType.Bit, 1), 
-                    new SqlParameter("@issys", SqlDbType.Bit, 1), 
-                    new SqlParameter("@pcardbakurl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@name1", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@jumpUrl", SqlDbType.NVarChar, 0xff), 
-                    new SqlParameter("@isdistribution", SqlDbType.Bit, 1), 
-                    new SqlParameter("@distributionUrl", SqlDbType.VarChar, 0xff), 
-                    new SqlParameter("@queryCardUrl", SqlDbType.VarChar, 0xff), 
-                    new SqlParameter("@iswap", SqlDbType.Bit, 1), 
-                    new SqlParameter("@isali", SqlDbType.Bit, 1), 
-                    new SqlParameter("@iswx", SqlDbType.Bit, 1)
-                 };
-                commandParameters[0].Direction = ParameterDirection.Output;
-                commandParameters[1].Value = model.code;
-                commandParameters[2].Value = model.name;
-                commandParameters[3].Value = model.logourl;
-                commandParameters[4].Value = model.isbank;
-                commandParameters[5].Value = model.iscard;
-                commandParameters[6].Value = model.issms;
-                commandParameters[7].Value = model.issx;
-                commandParameters[8].Value = model.puserid;
-                commandParameters[9].Value = model.puserkey;
-                commandParameters[10].Value = model.pusername;
-                commandParameters[11].Value = model.puserid1;
-                commandParameters[12].Value = model.puserkey1;
-                commandParameters[13].Value = model.puserid2;
-                commandParameters[14].Value = model.puserkey2;
-                commandParameters[15].Value = model.puserid3;
-                commandParameters[0x10].Value = model.puserkey3;
-                commandParameters[0x11].Value = model.puserid4;
-                commandParameters[0x12].Value = model.puserkey4;
-                commandParameters[0x13].Value = model.puserid5;
-                commandParameters[20].Value = model.puserkey5;
-                commandParameters[0x15].Value = model.purl;
-                commandParameters[0x16].Value = model.pbakurl;
-                commandParameters[0x17].Value = model.postBankUrl;
-                commandParameters[0x18].Value = model.postCardUrl;
-                commandParameters[0x19].Value = model.postSMSUrl;
-                commandParameters[0x1a].Value = model.desc;
-                commandParameters[0x1b].Value = model.sort;
-                commandParameters[0x1c].Value = model.release;
-                commandParameters[0x1d].Value = model.issys;
-                commandParameters[30].Value = model.pcardbakurl;
-                commandParameters[0x1f].Value = model.name1;
-                commandParameters[0x20].Value = model.jumpUrl;
-                commandParameters[0x21].Value = model.isdistribution;
-                commandParameters[0x22].Value = model.distributionUrl;
-                commandParameters[0x23].Value = model.queryCardUrl;
-                commandParameters[0x24].Value = model.iswap;
-                commandParameters[0x25].Value = model.isali;
-                commandParameters[0x26].Value = model.iswx;
-                int num = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_supplier_add", commandParameters);
-                ClearCache(model.code.Value);
-                return (int) commandParameters[0].Value;
+                SqlParameter[] parameters = {
+                    new SqlParameter("@id",SqlDbType.Int),
+                    new SqlParameter("@suppliercode",SqlDbType.Int),
+                    new SqlParameter("@suppliername",SqlDbType.VarChar,50),
+                    new SqlParameter("@logourl",SqlDbType.VarChar,100),
+                    new SqlParameter("@isbank",SqlDbType.Int),
+                    new SqlParameter("@isalipay",SqlDbType.Int),
+                    new SqlParameter("@isqq",SqlDbType.Int),
+                    new SqlParameter("@isweixin",SqlDbType.Int),
+                    new SqlParameter("@isjd",SqlDbType.Int),
+                    new SqlParameter("@puserid",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserkey",SqlDbType.VarChar,200),
+                    new SqlParameter("@pusername",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm1",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm2",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm3",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm4",SqlDbType.VarChar,200),
+                    new SqlParameter("@isdebug",SqlDbType.Int),
+                    new SqlParameter("@bankposturl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@banknotifyurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@bankreturnurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@banksearchurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@bankjumurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@distributionurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@distributionnotifyurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@distributionsearchurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@spdesc",SqlDbType.NVarChar,4000),
+                    new SqlParameter("@listorder",SqlDbType.Int),
+                    new SqlParameter("@isdistribution",SqlDbType.Int),
+                    new SqlParameter("@active",SqlDbType.Int)
+                };
+                parameters[0].Direction = ParameterDirection.InputOutput;
+                parameters[1].Value = model.SupplierCode;
+                parameters[2].Value = model.SupplierName;
+                parameters[3].Value = model.LogoUrl;
+                parameters[4].Value = model.IsBank;
+                parameters[5].Value = model.IsAlipay;
+                parameters[6].Value = model.IsQQ;
+                parameters[7].Value = model.IsWeiXin;
+                parameters[8].Value = model.IsJD;
+                parameters[9].Value = model.PUserID;
+                parameters[10].Value = model.PUserKey;
+                parameters[11].Value = model.PUserName;
+                parameters[12].Value = model.PUserParm1;
+                parameters[13].Value = model.PUserParm2;
+                parameters[14].Value = model.PUserParm3;
+                parameters[15].Value = model.PUserParm4;
+                parameters[16].Value = model.IsDebug;
+                parameters[17].Value = model.BankPostUrl;
+                parameters[18].Value = model.BankNotifyUrl;
+                parameters[19].Value = model.BankReturnUrl;
+                parameters[20].Value = model.BankSearchUrl;
+                parameters[21].Value = model.BankJumUrl;
+                parameters[22].Value = model.DistributionUrl;
+                parameters[23].Value = model.DistributionNotifyUrl;
+                parameters[24].Value = model.DistributionSearchUrl;
+                parameters[25].Value = model.SpDesc;
+                parameters[26].Value = model.ListOrder;
+                parameters[27].Value = model.IsDistribution;
+                parameters[28].Value = model.Active;
+
+                int num = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_supplier_add", parameters);
+                return (int)parameters[0].Value;
             }
             catch (Exception exception)
             {
@@ -404,95 +384,73 @@
             }
         }
 
-        public static bool Update(SupplierInfo model)
+        public static bool Update(SysSupplierInfo model)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    new SqlParameter("@id", SqlDbType.Int, 10), 
-                    new SqlParameter("@code", SqlDbType.Int, 10), 
-                    new SqlParameter("@name", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@logourl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@isbank", SqlDbType.Bit, 1), 
-                    new SqlParameter("@iscard", SqlDbType.Bit, 1), 
-                    new SqlParameter("@issms", SqlDbType.Bit, 1), 
-                    new SqlParameter("@issx", SqlDbType.Bit, 1), 
-                    new SqlParameter("@puserid", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@pusername", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@puserid1", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey1", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid2", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey2", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid3", SqlDbType.VarChar, 1000), 
-                    new SqlParameter("@puserkey3", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid4", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey4", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@puserid5", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@puserkey5", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@purl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@pbakurl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@postBankUrl", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@postCardUrl", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@postSMSUrl", SqlDbType.VarChar, 2000), 
-                    new SqlParameter("@desc", SqlDbType.NVarChar, 0x7d0), 
-                    new SqlParameter("@sort", SqlDbType.Int, 10), 
-                    new SqlParameter("@release", SqlDbType.Bit, 1), 
-                    new SqlParameter("@issys", SqlDbType.Bit, 1), 
-                    new SqlParameter("@pcardbakurl", SqlDbType.VarChar, 50), 
-                    new SqlParameter("@name1", SqlDbType.VarChar, 100), 
-                    new SqlParameter("@jumpUrl", SqlDbType.NVarChar, 0xff), 
-                    new SqlParameter("@isdistribution", SqlDbType.Bit, 1), 
-                    new SqlParameter("@distributionUrl", SqlDbType.VarChar, 0xff), 
-                    new SqlParameter("@queryCardUrl", SqlDbType.VarChar, 0xff), 
-                    new SqlParameter("@iswap", SqlDbType.Bit, 1), 
-                    new SqlParameter("@isali", SqlDbType.Bit, 1), 
-                    new SqlParameter("@iswx", SqlDbType.Bit, 1)
-                 };
-                commandParameters[0].Value = model.id;
-                commandParameters[1].Value = model.code;
-                commandParameters[2].Value = model.name;
-                commandParameters[3].Value = model.logourl;
-                commandParameters[4].Value = model.isbank;
-                commandParameters[5].Value = model.iscard;
-                commandParameters[6].Value = model.issms;
-                commandParameters[7].Value = model.issx;
-                commandParameters[8].Value = model.puserid;
-                commandParameters[9].Value = model.puserkey;
-                commandParameters[10].Value = model.pusername;
-                commandParameters[11].Value = model.puserid1;
-                commandParameters[12].Value = model.puserkey1;
-                commandParameters[13].Value = model.puserid2;
-                commandParameters[14].Value = model.puserkey2;
-                commandParameters[15].Value = model.puserid3;
-                commandParameters[0x10].Value = model.puserkey3;
-                commandParameters[0x11].Value = model.puserid4;
-                commandParameters[0x12].Value = model.puserkey4;
-                commandParameters[0x13].Value = model.puserid5;
-                commandParameters[20].Value = model.puserkey5;
-                commandParameters[0x15].Value = model.purl;
-                commandParameters[0x16].Value = model.pbakurl;
-                commandParameters[0x17].Value = model.postBankUrl;
-                commandParameters[0x18].Value = model.postCardUrl;
-                commandParameters[0x19].Value = model.postSMSUrl;
-                commandParameters[0x1a].Value = model.desc;
-                commandParameters[0x1b].Value = model.sort;
-                commandParameters[0x1c].Value = model.release;
-                commandParameters[0x1d].Value = model.issys;
-                commandParameters[30].Value = model.pcardbakurl;
-                commandParameters[0x1f].Value = model.name1;
-                commandParameters[0x20].Value = model.jumpUrl;
-                commandParameters[0x21].Value = model.isdistribution;
-                commandParameters[0x22].Value = model.distributionUrl;
-                commandParameters[0x23].Value = model.queryCardUrl;
-                commandParameters[0x24].Value = model.iswap;
-                commandParameters[0x25].Value = model.isali;
-                commandParameters[0x26].Value = model.iswx;
-                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_supplier_Update", commandParameters) > 0)
-                {
-                    ClearCache(model.code.Value);
+                SqlParameter[] parameters = {
+                    new SqlParameter("@id",SqlDbType.Int),
+                    new SqlParameter("@suppliercode",SqlDbType.Int),
+                    new SqlParameter("@suppliername",SqlDbType.VarChar,50),
+                    new SqlParameter("@logourl",SqlDbType.VarChar,100),
+                    new SqlParameter("@isbank",SqlDbType.Int),
+                    new SqlParameter("@isalipay",SqlDbType.Int),
+                    new SqlParameter("@isqq",SqlDbType.Int),
+                    new SqlParameter("@isweixin",SqlDbType.Int),
+                    new SqlParameter("@isjd",SqlDbType.Int),
+                    new SqlParameter("@puserid",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserkey",SqlDbType.VarChar,200),
+                    new SqlParameter("@pusername",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm1",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm2",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm3",SqlDbType.VarChar,200),
+                    new SqlParameter("@puserparm4",SqlDbType.VarChar,200),
+                    new SqlParameter("@isdebug",SqlDbType.Int),
+                    new SqlParameter("@bankposturl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@banknotifyurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@bankreturnurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@banksearchurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@bankjumurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@distributionurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@distributionnotifyurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@distributionsearchurl",SqlDbType.VarChar,2000),
+                    new SqlParameter("@spdesc",SqlDbType.NVarChar,4000),
+                    new SqlParameter("@listorder",SqlDbType.Int),
+                    new SqlParameter("@isdistribution",SqlDbType.Int),
+                    new SqlParameter("@active",SqlDbType.Int)
+                };
+                parameters[0].Value = model.ID ;
+                parameters[1].Value = model.SupplierCode;
+                parameters[2].Value = model.SupplierName;
+                parameters[3].Value = model.LogoUrl;
+                parameters[4].Value = model.IsBank;
+                parameters[5].Value = model.IsAlipay;
+                parameters[6].Value = model.IsQQ;
+                parameters[7].Value = model.IsWeiXin;
+                parameters[8].Value = model.IsJD;
+                parameters[9].Value = model.PUserID;
+                parameters[10].Value = model.PUserKey;
+                parameters[11].Value = model.PUserName;
+                parameters[12].Value = model.PUserParm1;
+                parameters[13].Value = model.PUserParm2;
+                parameters[14].Value = model.PUserParm3;
+                parameters[15].Value = model.PUserParm4;
+                parameters[16].Value = model.IsDebug;
+                parameters[17].Value = model.BankPostUrl;
+                parameters[18].Value = model.BankNotifyUrl;
+                parameters[19].Value = model.BankReturnUrl;
+                parameters[20].Value = model.BankSearchUrl;
+                parameters[21].Value = model.BankJumUrl;
+                parameters[22].Value = model.DistributionUrl;
+                parameters[23].Value = model.DistributionNotifyUrl;
+                parameters[24].Value = model.DistributionSearchUrl;
+                parameters[25].Value = model.SpDesc;
+                parameters[26].Value = model.ListOrder;
+                parameters[27].Value = model.IsDistribution;
+                parameters[28].Value = model.Active;
+
+                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_supplier_update", parameters) > 0)
                     return true;
-                }
                 return false;
             }
             catch (Exception exception)

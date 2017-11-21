@@ -12,7 +12,7 @@
     using System.Web.UI.WebControls;
     using System.Data;
     using OriginalStudio.BLL.Payment;
-    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.PayRate;
 
     public class UserInfoPrint : ManagePageBase
     {

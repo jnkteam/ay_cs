@@ -2,7 +2,7 @@
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
-    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.PayRate;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Web;
     using System;

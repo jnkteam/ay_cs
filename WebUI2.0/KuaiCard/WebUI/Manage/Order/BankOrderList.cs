@@ -276,39 +276,36 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
 
-
-           
-           
             string orderby = string.Empty;
             DataSet set = new OrderBank().AdminPageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
-           this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
-           this.rptOrders.DataSource = set.Tables[1];
-           this.rptOrders.DataBind();
-           if (this.currPage > -1)
-           {
-               this.Pager1.CurrentPageIndex = this.currPage;
-           }
-           DataTable table = set.Tables[2];
-           if (table.Rows.Count >= 0)
-           {
-               if (table.Rows[0]["realvalue"] != DBNull.Value)
-               {
-                   this.TotalTranATM = Convert.ToDecimal(table.Rows[0]["realvalue"]).ToString("f2");   //总额：0.00 
-               }
-               if (table.Rows[0]["payAmt"] != DBNull.Value)
-               {
-                   this.TotalUserATM = Convert.ToDecimal(table.Rows[0]["payAmt"]).ToString("f2");  //商户所得：0.00 
-               }
-               if (table.Rows[0]["commission"] != DBNull.Value)
-               {
-                   this.TotalCommission = Convert.ToDecimal(table.Rows[0]["commission"]).ToString("f2");   //业务总提成：0.00 
-               }
-               if (table.Rows[0]["profits"] != DBNull.Value)
-               {
-                   this.TotalProfit = Convert.ToDecimal(table.Rows[0]["profits"]).ToString("f2");  //平台利润：0.00 
-               }
-           }
-           
+            this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
+            this.rptOrders.DataSource = set.Tables[1];
+            this.rptOrders.DataBind();
+            if (this.currPage > -1)
+            {
+                this.Pager1.CurrentPageIndex = this.currPage;
+            }
+            DataTable table = set.Tables[2];
+            if (table.Rows.Count >= 0)
+            {
+                if (table.Rows[0]["realvalue"] != DBNull.Value)
+                {
+                    this.TotalTranATM = Convert.ToDecimal(table.Rows[0]["realvalue"]).ToString("f2");   //总额：0.00 
+                }
+                if (table.Rows[0]["payAmt"] != DBNull.Value)
+                {
+                    this.TotalUserATM = Convert.ToDecimal(table.Rows[0]["payAmt"]).ToString("f2");  //商户所得：0.00 
+                }
+                if (table.Rows[0]["commission"] != DBNull.Value)
+                {
+                    this.TotalCommission = Convert.ToDecimal(table.Rows[0]["commission"]).ToString("f2");   //业务总提成：0.00 
+                }
+                if (table.Rows[0]["profits"] != DBNull.Value)
+                {
+                    this.TotalProfit = Convert.ToDecimal(table.Rows[0]["profits"]).ToString("f2");  //平台利润：0.00 
+                }
+            }
+
         }
 
         protected void Page_Load(object sender, EventArgs e)

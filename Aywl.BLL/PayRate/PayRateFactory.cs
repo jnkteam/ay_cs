@@ -3,7 +3,7 @@
     using DBAccess;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Cache;
-    using OriginalStudio.Model.Payment;
+    using OriginalStudio.Model.PayRate;
     using OriginalStudio.Model.User;
     using OriginalStudio.Lib.ExceptionHandling;
     using System;

@@ -88,7 +88,7 @@
     <Compile Include="Payment\OrderConvern.cs" />
     <Compile Include="Payment\PayPriceConver.cs" />
     <Compile Include="Payment\PayRate.cs" />
-    <Compile Include="Payment\RateTypeEnum.cs" />
+    <Compile Include="PayRate\RateTypeEnum.cs" />
     <Compile Include="PayStatus.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Enum\AmtFreezeInfoStatus.cs" />
     <Compile Include="Settled\AmtunFreezeMode.cs" />
     <Compile Include="Settled\IncreaseAmtInfo.cs" />
-    <Compile Include="Settled\optypeenum.cs" />
+    <Compile Include="Settled\SettleTypeEnum.cs" />
     <Compile Include="Settled\TocashSchemeInfo.cs" />
     <Compile Include="Settled\Transfer.cs" />
     <Compile Include="Settled\TransferScheme.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="Supplier\SupplierInfo.cs" />
     <Compile Include="Supplier\SupplierPayRateInfo.cs" />
     <Compile Include="Supplier\SysSupplierInfo.cs" />
-    <Compile Include="Payment\SysPayrateInfo.cs" />
+    <Compile Include="PayRate\SysPayrateInfo.cs" />
     <Compile Include="Supplier\SysSupplierPayRateInfo.cs" />
     <Compile Include="Sys\debuginfo.cs" />
     <Compile Include="Sys\debugtypeenum.cs" />
@@ -148,6 +148,7 @@
     <Compile Include="Withdraw\settledAgent.cs" />
     <Compile Include="Withdraw\settledAgentNotify.cs" />
     <Compile Include="Withdraw\settledAgentSummary.cs" />
+    <Compile Include="Withdraw\WithdrawScheme.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aywl.Lib\Aywl.Lib.csproj">

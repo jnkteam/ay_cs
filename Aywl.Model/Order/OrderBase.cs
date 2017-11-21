@@ -101,6 +101,12 @@
 
         private string _msg = string.Empty;
 
+        private string _merchantName = string.Empty;
+
+        private string _ipaddress = string.Empty;
+
+
+
         public DateTime addtime
         {
             get
@@ -113,6 +119,27 @@
             }
         }
 
+        public string MerchantName {
+            get
+            {
+                return this._merchantName;
+            }
+            set
+            {
+                this._merchantName = value;
+            }
+        }
+        public string ipaddress
+        {
+            get
+            {
+                return this._ipaddress;
+            }
+            set
+            {
+                this._ipaddress = value;
+            }
+        }
         public string againNotifyUrl
         {
             get

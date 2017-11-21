@@ -28,7 +28,7 @@
                 DataRowView dataItem = e.Row.DataItem as DataRowView;
                 Literal literal = e.Row.FindControl("ltType") as Literal;
                 Literal literal2 = e.Row.FindControl("ltrunmode") as Literal;
-                literal.Text = Enum.GetName(typeof(ChannelClassEnum), dataItem["classid"]);
+                literal.Text = Enum.GetName(typeof(ChannelClassEnum), dataItem["TypeClassID"]);
                 if (dataItem["runmode"].ToString() == "1")
                 {
                     literal2.Text = "<span style='color:red'>轮询</span>";
@@ -65,7 +65,7 @@
 
         private void LoadData()
         {
-            this.GVChannel.DataSource = ChannelType.GetList(null);
+            this.GVChannel.DataSource = SysChannelType.GetList(null);
             this.GVChannel.DataBind();
         }
 

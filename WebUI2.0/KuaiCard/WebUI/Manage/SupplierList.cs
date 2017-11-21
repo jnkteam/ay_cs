@@ -21,8 +21,8 @@
 
         private void LoadData()
         {
-            string where = "release = 1";
-            this.GVSupplier.DataSource = SysSupplierFactory.GetList(where);
+           
+            this.GVSupplier.DataSource = SysSupplierFactory.GetList(null);
             this.GVSupplier.DataBind();
         }
 

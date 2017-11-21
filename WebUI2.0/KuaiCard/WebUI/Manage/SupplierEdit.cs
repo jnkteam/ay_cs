@@ -8,10 +8,11 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using OriginalStudio.BLL.Supplier;
+    using OriginalStudio.Model.Supplier;
 
     public class SupplierEdit : ManagePageBase
     {
-        public SupplierInfo _ItemInfo = null;
+        public SysSupplierInfo _ItemInfo = null;
         protected Button btnSave;
         protected CheckBox chkiali;
         protected CheckBox chkisbank;
@@ -25,7 +26,7 @@
         protected HtmlForm form1;
         protected TextBox txtCardbakUrl;
         protected TextBox txtcode;
-        protected TextBox txtdesc;
+       
         protected TextBox txtdistributionUrl;
         protected TextBox txtJumpUrl;
         protected TextBox txtlogourl;
@@ -36,94 +37,78 @@
         protected TextBox txtpostSMSUrl;
         protected TextBox txtpurl;
         protected TextBox txtpuserid;
-        protected TextBox txtpuserid1;
-        protected TextBox txtpuserid2;
-        protected TextBox txtpuserid3;
-        protected TextBox txtpuserid4;
-        protected TextBox txtpuserid5;
+        protected TextBox PUserParm1;
+        protected TextBox PUserParm2;
+        protected TextBox PUserParm3;
+        protected TextBox PUserParm4;
+        protected RadioButtonList Active;
+        protected RadioButtonList IsDebug;
         protected TextBox txtpuserkey;
-        protected TextBox txtpuserkey1;
-        protected TextBox txtpuserkey2;
-        protected TextBox txtpuserkey3;
-        protected TextBox txtpuserkey4;
-        protected TextBox txtpuserkey5;
+
+        protected TextBox BankPostUrl;// 网关地址
+        protected TextBox BankReturnUrl;// 异步通知地址
+        protected TextBox BankNotifyUrl;// 同步返回地址
+        protected TextBox BankSearchUrl;// 查单接口地址
+        protected TextBox BankJumUrl;// 中转域名地址
+        protected TextBox DistributionUrl;// 代付提交地址
+        protected TextBox DistributionNotifyUrl;// 代付通知地址
+        protected TextBox DistributionSearchUrl;//代付查询地址
+        
+        protected TextBox txtdesc;//说明
+        protected TextBox txtsort;//排序
+
         protected TextBox txtpusername;
         protected TextBox txtQueryCardUrl;
-        protected TextBox txtsort;
+        
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             int num = int.Parse(this.txtcode.Text);
             string text = this.txtname.Text;
-            string str2 = this.txtlogourl.Text;
-            bool flag = this.chkisbank.Checked;
-            bool flag2 = this.chkiscard.Checked;
-            bool flag3 = this.chkissms.Checked;
-            bool flag4 = this.chkissx.Checked;
-            bool flag5 = this.chkiwap.Checked;
+            bool flag5 = this.chkiwap.Checked; 
             bool flag6 = this.chkiali.Checked;
             bool flag7 = this.chkiwx.Checked;
             bool flag8 = this.chkisdistribution.Checked;
-            string str3 = this.txtdistributionUrl.Text;
-            string str4 = this.txtQueryCardUrl.Text.Trim();
             string str5 = this.txtpuserid.Text;
             string str6 = this.txtpuserkey.Text;
             string str7 = this.txtpusername.Text;
-            string str8 = this.txtpuserid1.Text;
-            string str9 = this.txtpuserkey1.Text;
-            string str10 = this.txtpuserid2.Text;
-            string str11 = this.txtpuserkey2.Text;
-            string str12 = this.txtpuserid3.Text;
-            string str13 = this.txtpuserkey3.Text;
-            string str14 = this.txtpuserid4.Text;
-            string str15 = this.txtpuserkey4.Text;
-            string str16 = this.txtpuserid5.Text;
-            string str17 = this.txtpuserkey5.Text;
-            string str18 = this.txtpurl.Text;
-            string str19 = this.txtpbakurl.Text;
-            string str20 = this.txtpostBankUrl.Text;
-            string str21 = this.txtpostCardUrl.Text;
-            string str22 = this.txtpostSMSUrl.Text;
-            string str23 = this.txtdesc.Text;
-            int num2 = int.Parse(this.txtsort.Text);
-            bool flag9 = true;
-            bool flag10 = true;
-            this.ItemInfo.code = new int?(num);
-            this.ItemInfo.name = text;
-            this.ItemInfo.logourl = str2;
-            this.ItemInfo.isbank = new bool?(flag);
-            this.ItemInfo.iscard = new bool?(flag2);
-            this.ItemInfo.issms = new bool?(flag3);
-            this.ItemInfo.issx = new bool?(flag4);
-            this.ItemInfo.iswap = new bool?(flag5);
-            this.ItemInfo.isali = new bool?(flag6);
-            this.ItemInfo.iswx = new bool?(flag7);
-            this.ItemInfo.puserid = str5;
-            this.ItemInfo.puserkey = str6;
-            this.ItemInfo.pusername = str7;
-            this.ItemInfo.puserid1 = str8;
-            this.ItemInfo.puserkey1 = str9;
-            this.ItemInfo.puserid2 = str10;
-            this.ItemInfo.puserkey2 = str11;
-            this.ItemInfo.puserid3 = str12;
-            this.ItemInfo.puserkey3 = str13;
-            this.ItemInfo.puserid4 = str14;
-            this.ItemInfo.puserkey4 = str15;
-            this.ItemInfo.puserid5 = str16;
-            this.ItemInfo.puserkey5 = str17;
-            this.ItemInfo.purl = str18;
-            this.ItemInfo.pbakurl = str19;
-            this.ItemInfo.postBankUrl = str20;
-            this.ItemInfo.postCardUrl = str21;
-            this.ItemInfo.postSMSUrl = str22;
-            this.ItemInfo.desc = str23;
-            this.ItemInfo.sort = new int?(num2);
-            this.ItemInfo.release = new bool?(flag9);
-            this.ItemInfo.issys = new bool?(flag10);
-            this.ItemInfo.jumpUrl = this.txtJumpUrl.Text.Trim();
-            this.ItemInfo.isdistribution = flag8;
-            this.ItemInfo.distributionUrl = str3;
-            this.ItemInfo.queryCardUrl = str4;
+
+
+            this.ItemInfo.SupplierCode = num;
+            this.ItemInfo.SupplierName = text;
+
+           
+            this.ItemInfo.IsBank = flag5;
+            this.ItemInfo.IsAlipay = flag6;
+            this.ItemInfo.IsWeiXin = flag7;
+            this.ItemInfo.IsDistribution = flag8;
+            this.ItemInfo.PUserID = str5;
+            this.ItemInfo.PUserKey = str6;
+            this.ItemInfo.PUserName = str7;
+            this.ItemInfo.PUserParm1 = this.PUserParm1.Text; //预留参数 1-4
+            this.ItemInfo.PUserParm2 = this.PUserParm2.Text; //预留参数 1-4
+            this.ItemInfo.PUserParm3 = this.PUserParm3.Text; //预留参数 1-4
+            this.ItemInfo.PUserParm4 = this.PUserParm4.Text; //预留参数 1-4
+
+            this.ItemInfo.Active = this.Active.SelectedValue == "1" ? true : false; //启停标记
+            this.ItemInfo.IsDebug = this.IsDebug.SelectedValue == "1" ? true : false; //调试
+
+
+            this.ItemInfo.BankPostUrl = this.BankPostUrl.Text;// 网关地址
+            this.ItemInfo.BankReturnUrl = this.BankReturnUrl.Text;// 异步通知地址
+            this.ItemInfo.BankNotifyUrl = this.BankNotifyUrl.Text;// 同步返回地址
+            this.ItemInfo.BankSearchUrl = this.BankSearchUrl.Text;// 查单接口地址
+            this.ItemInfo.BankJumUrl = this.BankJumUrl.Text;// 中转域名地址
+            this.ItemInfo.DistributionUrl = this.DistributionUrl.Text;// 代付提交地址
+            this.ItemInfo.DistributionNotifyUrl = this.DistributionNotifyUrl.Text;// 代付通知地址
+            this.ItemInfo.DistributionSearchUrl = this.DistributionSearchUrl.Text;//代付查询地址
+
+            this.ItemInfo.SpDesc = this.txtdesc.Text;
+            this.ItemInfo.ListOrder = int.Parse(this.txtsort.Text);
+
+            //this.ItemInfo.IsDistribution = flag8;
+            //==================================
+
             if (!this.isUpdate)
             {
                 if (SysSupplierFactory.Add(this.ItemInfo) > 0)
@@ -168,40 +153,39 @@
         {
             if (this.isUpdate && (this.ItemInfo != null))
             {
-                this.txtcode.Text = this.ItemInfo.code.ToString();
-                this.txtname.Text = this.ItemInfo.name;
-                this.txtlogourl.Text = this.ItemInfo.logourl;
-                this.chkisbank.Checked = this.ItemInfo.isbank.Value;
-                this.chkiscard.Checked = this.ItemInfo.iscard.Value;
-                this.chkissms.Checked = this.ItemInfo.issms.Value;
-                this.chkissx.Checked = this.ItemInfo.issx.Value;
-                this.chkisdistribution.Checked = this.ItemInfo.isdistribution;
-                this.chkiwap.Checked = this.ItemInfo.iswap.Value;
-                this.chkiali.Checked = this.ItemInfo.isali.Value;
-                this.chkiwx.Checked = this.ItemInfo.iswx.Value;
-                this.txtpuserid.Text = this.ItemInfo.puserid;
-                this.txtpuserkey.Text = this.ItemInfo.puserkey;
-                this.txtpusername.Text = this.ItemInfo.pusername;
-                this.txtpuserid1.Text = this.ItemInfo.puserid1;
-                this.txtpuserkey1.Text = this.ItemInfo.puserkey1;
-                this.txtpuserid2.Text = this.ItemInfo.puserid2;
-                this.txtpuserkey2.Text = this.ItemInfo.puserkey2;
-                this.txtpuserid3.Text = this.ItemInfo.puserid3;
-                this.txtpuserkey3.Text = this.ItemInfo.puserkey3;
-                this.txtpuserid4.Text = this.ItemInfo.puserid4;
-                this.txtpuserkey4.Text = this.ItemInfo.puserkey4;
-                this.txtpuserid5.Text = this.ItemInfo.puserid5;
-                this.txtpuserkey5.Text = this.ItemInfo.puserkey5;
-                this.txtpurl.Text = this.ItemInfo.purl;
-                this.txtpbakurl.Text = this.ItemInfo.pbakurl;
-                this.txtJumpUrl.Text = this.ItemInfo.jumpUrl;
-                this.txtpostBankUrl.Text = this.ItemInfo.postBankUrl;
-                this.txtpostCardUrl.Text = this.ItemInfo.postCardUrl;
-                this.txtQueryCardUrl.Text = this.ItemInfo.queryCardUrl;
-                this.txtpostSMSUrl.Text = this.ItemInfo.postSMSUrl;
-                this.txtdistributionUrl.Text = this.ItemInfo.distributionUrl;
-                this.txtdesc.Text = this.ItemInfo.desc;
-                this.txtsort.Text = this.ItemInfo.sort.ToString();
+                this.txtcode.Text = this.ItemInfo.SupplierCode.ToString(); //供应商编号
+                this.txtname.Text = this.ItemInfo.SupplierName;  //供应商通道名称
+                //this.txtlogourl.Text = this.ItemInfo.LogoUrl;  //logo图片
+               
+                this.chkiwap.Checked = this.ItemInfo.IsBank;     //支持网银
+                this.chkiali.Checked = this.ItemInfo.IsAlipay;//支持支付宝
+                this.chkiwx.Checked = this.ItemInfo.IsWeiXin;//支持微信
+                this.chkisdistribution.Checked = this.ItemInfo.IsDistribution;//支持代付
+                
+                this.txtpuserid.Text = this.ItemInfo.PUserID;  //账号
+                this.txtpuserkey.Text = this.ItemInfo.PUserKey; //秘钥
+                this.txtpusername.Text = this.ItemInfo.PUserName; //商户名称
+
+                this.PUserParm1.Text = this.ItemInfo.PUserParm1; //预留参数 1-4
+                this.PUserParm2.Text = this.ItemInfo.PUserParm2; //预留参数 1-4
+                this.PUserParm3.Text = this.ItemInfo.PUserParm3; //预留参数 1-4
+                this.PUserParm4.Text = this.ItemInfo.PUserParm4; //预留参数 1-4
+
+                this.Active.SelectedValue = this.ItemInfo.Active ? "1" : "0"; //启停标记
+                this.IsDebug.SelectedValue = this.ItemInfo.IsDebug ? "1" : "0"; //调试
+
+
+                this.BankPostUrl.Text = this.ItemInfo.BankPostUrl;// 网关地址
+                this.BankReturnUrl.Text = this.ItemInfo.BankReturnUrl;// 异步通知地址
+                this.BankNotifyUrl.Text = this.ItemInfo.BankNotifyUrl;// 同步返回地址
+                this.BankSearchUrl.Text = this.ItemInfo.BankSearchUrl;// 查单接口地址
+                this.BankJumUrl.Text = this.ItemInfo.BankJumUrl;// 中转域名地址
+                this.DistributionUrl.Text = this.ItemInfo.DistributionUrl;// 代付提交地址
+                this.DistributionNotifyUrl.Text = this.ItemInfo.DistributionNotifyUrl;// 代付通知地址
+                this.DistributionSearchUrl.Text = this.ItemInfo.DistributionSearchUrl;//代付查询地址
+
+                this.txtdesc.Text = this.ItemInfo.SpDesc;
+                this.txtsort.Text = this.ItemInfo.ListOrder.ToString();
             }
         }
 
@@ -213,7 +197,7 @@
             }
         }
 
-        public SupplierInfo ItemInfo
+        public SysSupplierInfo ItemInfo
         {
             get
             {
@@ -221,11 +205,11 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = null;  // SysSupplierFactory.GetSupplierModelById(this.ItemInfoId);
+                        this._ItemInfo = SysSupplierFactory.GetSupplierModelById(this.ItemInfoId); ; 
                     }
                     else
                     {
-                        this._ItemInfo = new SupplierInfo();
+                        this._ItemInfo = new SysSupplierInfo();
                     }
                 }
                 return this._ItemInfo;

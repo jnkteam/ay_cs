@@ -272,7 +272,7 @@
                 parameters[3].Value = model.TypeName;
                 parameters[4].Value = model.IsOpen;
                 parameters[5].Value = model.SupplierCode;
-                parameters[6].Value = model.SupplierRate;
+                parameters[6].Value = model.AddTime;     //错误修改
                 parameters[7].Value = model.ListOrder;
                 parameters[8].Value = model.Release;
                 parameters[9].Value = model.RunMode;

@@ -54,7 +54,7 @@
         {
             try
             {
-                return OriginalStudio.BLL.Channel.Channel.GetModelByCode(code).modeName;
+                return OriginalStudio.BLL.Channel.SysChannel.GetChannelModelByCode(code).ChannelName;
             }
             catch
             {
@@ -66,7 +66,7 @@
         {
             try
             {
-                return ChannelType.GetModelByTypeId(id).modetypename;
+                return SysChannelType.GetModelByTypeId(id).TypeName;
             }
             catch
             {
@@ -78,7 +78,7 @@
         {
             try
             {
-                return UserFactory.GetCacheModel(uid).UserName;
+                return MchUserFactory.GetUserBaseByUserID(uid).UserName;
             }
             catch
             {
@@ -117,7 +117,7 @@
                     this.lblid.Text = this.Id.ToString();
                     this.lblorderid.Text = model.orderid;
                     this.lblordertype.Text = model.ordertype.ToString();
-                    this.lbluserid.Text = model.userid.ToString() + " (" + this.getuserName(model.userid) + ")";
+                    this.lbluserid.Text = model.MerchantName.ToString() + " (" + model.userid + ")";
                     this.lbltypeId.Text = this.getChannelTypeName(model.channeltypeId);
                     this.lblpaymodeId.Text = this.getChannelName(model.channelcode);
                     this.lbluserorder.Text = model.userorder;

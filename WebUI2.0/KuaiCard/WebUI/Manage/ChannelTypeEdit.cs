@@ -16,7 +16,7 @@
 
     public class ChannelTypeEdit : ManagePageBase
     {
-        public ChannelTypeInfo _ItemInfo = null;
+        public SysChannelTypeInfo _ItemInfo = null;
         protected Button btnSave;
         protected CheckBoxList cblSupplier;
         protected DropDownList ddlOpen;
@@ -47,16 +47,16 @@
             int num5 = Convert.ToInt32(this.rblType.SelectedValue);
             if (!this.isUpdate)
             {
-                this.ItemInfo.modetypename = text;
-                this.ItemInfo.typeId = num;
-                this.ItemInfo.Class = (ChannelClassEnum) num5;
-                this.ItemInfo.addtime = DateTime.Now;
+                this.ItemInfo.TypeName = text;
+                this.ItemInfo.TypeID = num;
+                this.ItemInfo.TypeClassID = num5;
+                this.ItemInfo.AddTime = DateTime.Now;
             }
-            this.ItemInfo.isOpen = (OpenEnum) result;
-            this.ItemInfo.supplier = num3;
-            this.ItemInfo.sort = new int?(num4);
-            this.ItemInfo.release = flag;
-            this.ItemInfo.runmode = int.Parse(this.rblrunmode.SelectedValue);
+            this.ItemInfo.IsOpen = (SysChannelTypeOpenEnum)result;
+            this.ItemInfo.SupplierCode = num3;
+            this.ItemInfo.ListOrder = num4;
+            this.ItemInfo.Release = flag;
+            this.ItemInfo.RunMode = int.Parse(this.rblrunmode.SelectedValue);
             StringBuilder builder = new StringBuilder();
             int num6 = 1;
             foreach (RepeaterItem item in this.rptsupp.Items)
@@ -89,21 +89,21 @@
                     }
                 }
             }
-            this.ItemInfo.runset = builder.ToString();
+            this.ItemInfo.RunModeSet = builder.ToString();
             if (!this.isUpdate)
             {
-                if (ChannelType.Add(this.ItemInfo) > 0)
+                if (SysChannelType.Add(this.ItemInfo) > 0)
                 {
-                    base.AlertAndRedirect("保存成功！", "ChannelTypeList.aspx");
+                    base.AlertAndRedirect("保存成功！");
                 }
                 else
                 {
                     base.AlertAndRedirect("保存失败！");
                 }
             }
-            else if (ChannelType.Update(this.ItemInfo))
+            else if (SysChannelType.Update(this.ItemInfo))
             {
-                base.AlertAndRedirect("更新成功！", "ChannelTypeList.aspx");
+                base.AlertAndRedirect("更新成功！");
             }
             else
             {
@@ -113,29 +113,8 @@
 
         private void LoadData()
         {
-            string str = "release=1";
-            if (this.ItemInfo.Class == ChannelClassEnum.网银)
-            {
-                str = str + " and IsBank=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.支付宝)
-            {
-                str = str + "and IsAlipay=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.微信)
-            {
-                str = str + "and IsWeiXin=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.QQ)
-            {
-                str = str + " and IsQQ=1";
-            }
-            else if (this.ItemInfo.Class == ChannelClassEnum.京东)
-            {
-                str = str + " and IsJD=1";
-            }
-           
-            DataTable table = SysSupplierFactory.GetList("release=1").Tables[0];
+            
+            DataTable table = SysSupplierFactory.GetList(null).Tables[0];
             table.Columns.Add("weight", typeof(int));
             foreach (DataRow row in table.Rows)
             {
@@ -147,6 +126,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             this.setPower();
             if (!base.IsPostBack)
             {
@@ -179,14 +159,14 @@
 
         protected void rptsupp_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (((this.ItemInfo != null) && (this.ItemInfo.runmode == 1)) && ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem)))
+            if (((this.ItemInfo != null) && (this.ItemInfo.RunMode == 1)) && ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem)))
             {
                 HtmlInputCheckBox box = e.Item.FindControl("chkItem") as HtmlInputCheckBox;
                 TextBox box2 = e.Item.FindControl("txtweight") as TextBox;
-                string str = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "code"));
-                if (!string.IsNullOrEmpty(this.ItemInfo.runset))
+                string str = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "SupplierCode"));
+                if (!string.IsNullOrEmpty(this.ItemInfo.RunModeSet))
                 {
-                    foreach (string str2 in this.ItemInfo.runset.Split(new char[] { '|' }))
+                    foreach (string str2 in this.ItemInfo.RunModeSet.Split(new char[] { '|' }))
                     {
                         string[] strArray = str2.Split(new char[] { ':' });
                         if (strArray[0] == str)
@@ -211,22 +191,25 @@
 
         private void ShowInfo()
         {
+
+           
             if (this.isUpdate && (this.ItemInfo != null))
             {
-                this.rblType.SelectedValue = ((int) this.ItemInfo.Class).ToString();
-                this.txtmodetypename.Text = this.ItemInfo.modetypename;
-                this.txttypeId.Text = this.ItemInfo.typeId.ToString();
-                this.txtCode.Text = this.ItemInfo.code;
-                this.ddlOpen.SelectedValue = ((int) this.ItemInfo.isOpen).ToString();
-                this.txtsort.Text = this.ItemInfo.sort.ToString();
-                this.rblRelease.SelectedValue = this.ItemInfo.release ? "1" : "0";
-                this.rblrunmode.SelectedValue = this.ItemInfo.runmode.ToString();
-                this.tr_runmode_1.Visible = this.ItemInfo.runmode == 1;
-                this.tr_runmode_0.Visible = this.ItemInfo.runmode == 0;
+               
+                this.rblType.SelectedValue = ((int) this.ItemInfo.TypeClassID).ToString();
+                this.txtmodetypename.Text = this.ItemInfo.TypeName;
+                this.txttypeId.Text = this.ItemInfo.TypeID.ToString();
+                this.txtCode.Text = this.ItemInfo.TypeCode;
+                this.ddlOpen.SelectedValue = ((int) this.ItemInfo.IsOpen).ToString();
+                this.txtsort.Text = this.ItemInfo.ListOrder.ToString();
+                this.rblRelease.SelectedValue = this.ItemInfo.Release ? "1" : "0";
+                this.rblrunmode.SelectedValue = this.ItemInfo.RunMode.ToString();
+                this.tr_runmode_1.Visible = this.ItemInfo.RunMode == 1;
+                this.tr_runmode_0.Visible = this.ItemInfo.RunMode == 0;
                 string where = string.Empty;
 
 
-
+                /*
                 if (this.ItemInfo.Class == ChannelClassEnum.网银)
                 {
                     where = where + " and IsBank=1";
@@ -247,7 +230,7 @@
                 {
                     where = where + " and IsJD=1";
                 }
-
+                */
 
 
 
@@ -256,9 +239,11 @@
                 this.ddlSupplier.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlSupplier.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
+                    this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                 }
-                this.ddlSupplier.SelectedValue = this.ItemInfo.supplier.ToString();
+                this.ddlSupplier.SelectedValue = this.ItemInfo.SupplierCode.ToString();
+
+               
             }
         }
 
@@ -270,7 +255,7 @@
             }
         }
 
-        public ChannelTypeInfo ItemInfo
+        public SysChannelTypeInfo ItemInfo
         {
             get
             {
@@ -278,11 +263,11 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = ChannelType.GetModel(this.ItemInfoId);
+                        this._ItemInfo = SysChannelType.GetModel(this.ItemInfoId);
                     }
                     else
                     {
-                        this._ItemInfo = new ChannelTypeInfo();
+                        this._ItemInfo = new SysChannelTypeInfo();
                     }
                 }
                 return this._ItemInfo;

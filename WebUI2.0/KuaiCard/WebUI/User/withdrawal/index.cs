@@ -139,7 +139,7 @@
 
                  */
 
-                DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id, 
+                DataSet ds = OriginalStudio.BLL.Settled.TradeFactory.GetUserLeftBalance(modelByUser.id, 
                                                             base.CurrentUser.ID, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));

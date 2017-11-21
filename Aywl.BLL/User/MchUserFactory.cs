@@ -22,13 +22,13 @@
         internal const string USER_LOGIN_CLIENT_SESSIONID = "{2A1FA22C-201B-471c-B668-2FCC1C4A121A}";
         internal const string USER_LOGIN_SESSIONID = "{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}";
 
-        internal const string FIELD_USER = "[id]\r\n      ,[userName]\r\n      ,[password]\r\n      ,[CPSDrate]\r\n      ,[CVSNrate]\r\n      ,[email]\r\n      ,[qq]\r\n      ,[tel]\r\n      ,[idCard]\r\n      ,[settles]\r\n      ,[status]\r\n      ,[regTime]\r\n      ,[company]\r\n      ,[linkMan]\r\n      ,[agentId]\r\n      ,[siteName]\r\n      ,[siteUrl]\r\n      ,[userType]\r\n      ,[userLevel]\r\n      ,[maxdaytocashTimes]\r\n      ,[apiaccount]\r\n      ,[apikey]\r\n      ,[lastLoginIp]\r\n      ,[lastLoginTime]\r\n      ,[sessionId]\r\n      ,[updatetime]\r\n      ,[DESC]\r\n      ,[userid]\r\n      ,[pmode]\r\n      ,[account]\r\n      ,[payeeName]\r\n      ,[payeeBank]\r\n      ,[bankProvince]\r\n      ,[bankCity]\r\n      ,[bankAddress]\r\n      ,[Integral]\r\n      ,[balance]\r\n      ,[payment]\r\n      ,[unpayment]\r\n      ,[enableAmt]\r\n      ,[manageId]\r\n      ,[isRealNamePass]\r\n      ,[isPhonePass]\r\n      ,[isEmailPass]\r\n      ,[question]\r\n      ,[answer]\r\n      ,[smsNotifyUrl]\r\n      ,[full_name]\r\n      ,[classid]\r\n      ,[Freeze]\r\n      ,[schemename]\r\n      ,[idCardtype]\r\n      ,[msn]\r\n      ,[fax]\r\n      ,[province]\r\n      ,[city]\r\n      ,[zip]\r\n      ,[field1],[levName],[frontPic],[versoPic]";
-        internal const string SQL_BASE_TABLE = "userbase";
-        internal const string SQL_BASE_TABLE_FIELD = "[id],[pwd2],[full_name],[userName],[password],[CPSDrate],[CVSNrate],[email],[qq],[tel],[idCard],[settles],[status],[regTime],[company],[linkMan],[agentId],[siteName],[siteUrl],[userType],[userLevel],[maxdaytocashTimes],[apiaccount],[apikey],[updatetime],[DESC],isRealNamePass,isEmailPass,isPhonePass,[classid],[isdebug],[frontPic],[versoPic],settles_type,bank_limit,wx_limit,ali_limit,qq_limit";
-        internal const string SQL_PAYBANK_TABLE = "userspaybank";
-        internal const string SQL_PAYBANK_TABLE_FIELD = "[userid],[pmode],[account],[payeeName],[payeeBank],[bankProvince],[bankCity],[bankAddress],[status]";
-        internal const string SQL_TABLE = "V_Users";
-        internal const string SQL_TABLE_FIELD = "id,userName,password,CPSDrate,CVSNrate,email,qq,tel,idCard,pmode,settles,account,payeeName,payeeBank,bankProvince,bankCity,bankAddress,status,regTime,company,linkMan,agentId,siteName,siteUrl,userType,userLevel,maxdaytocashTimes,apiaccount,apikey,lastLoginIp,lastLoginTime,sessionId,manageId,isRealNamePass,full_name,classid,isdebug,frontPic,versoPic";
+        //internal const string FIELD_USER = "[id]\r\n      ,[userName]\r\n      ,[password]\r\n      ,[CPSDrate]\r\n      ,[CVSNrate]\r\n      ,[email]\r\n      ,[qq]\r\n      ,[tel]\r\n      ,[idCard]\r\n      ,[settles]\r\n      ,[status]\r\n      ,[regTime]\r\n      ,[company]\r\n      ,[linkMan]\r\n      ,[agentId]\r\n      ,[siteName]\r\n      ,[siteUrl]\r\n      ,[userType]\r\n      ,[userLevel]\r\n      ,[maxdaytocashTimes]\r\n      ,[apiaccount]\r\n      ,[apikey]\r\n      ,[lastLoginIp]\r\n      ,[lastLoginTime]\r\n      ,[sessionId]\r\n      ,[updatetime]\r\n      ,[DESC]\r\n      ,[userid]\r\n      ,[pmode]\r\n      ,[account]\r\n      ,[payeeName]\r\n      ,[payeeBank]\r\n      ,[bankProvince]\r\n      ,[bankCity]\r\n      ,[bankAddress]\r\n      ,[Integral]\r\n      ,[balance]\r\n      ,[payment]\r\n      ,[unpayment]\r\n      ,[enableAmt]\r\n      ,[manageId]\r\n      ,[isRealNamePass]\r\n      ,[isPhonePass]\r\n      ,[isEmailPass]\r\n      ,[question]\r\n      ,[answer]\r\n      ,[smsNotifyUrl]\r\n      ,[full_name]\r\n      ,[classid]\r\n      ,[Freeze]\r\n      ,[schemename]\r\n      ,[idCardtype]\r\n      ,[msn]\r\n      ,[fax]\r\n      ,[province]\r\n      ,[city]\r\n      ,[zip]\r\n      ,[field1],[levName],[frontPic],[versoPic]";
+        //internal const string SQL_BASE_TABLE = "userbase";
+        //internal const string SQL_BASE_TABLE_FIELD = "[id],[pwd2],[full_name],[userName],[password],[CPSDrate],[CVSNrate],[email],[qq],[tel],[idCard],[settles],[status],[regTime],[company],[linkMan],[agentId],[siteName],[siteUrl],[userType],[userLevel],[maxdaytocashTimes],[apiaccount],[apikey],[updatetime],[DESC],isRealNamePass,isEmailPass,isPhonePass,[classid],[isdebug],[frontPic],[versoPic],settles_type,bank_limit,wx_limit,ali_limit,qq_limit";
+        //internal const string SQL_PAYBANK_TABLE = "userspaybank";
+        //internal const string SQL_PAYBANK_TABLE_FIELD = "[userid],[pmode],[account],[payeeName],[payeeBank],[bankProvince],[bankCity],[bankAddress],[status]";
+        //internal const string SQL_TABLE = "V_Users";
+        //internal const string SQL_TABLE_FIELD = "id,userName,password,CPSDrate,CVSNrate,email,qq,tel,idCard,pmode,settles,account,payeeName,payeeBank,bankProvince,bankCity,bankAddress,status,regTime,company,linkMan,agentId,siteName,siteUrl,userType,userLevel,maxdaytocashTimes,apiaccount,apikey,lastLoginIp,lastLoginTime,sessionId,manageId,isRealNamePass,full_name,classid,isdebug,frontPic,versoPic";
 
         #region 清除缓存信息
 
@@ -101,37 +101,34 @@
             modle.UserType = (UserTypeEnum)(Utils.StrToInt(dr["usertype"].ToString(), 0));
             modle.UserLevel = (UserLevelEnum)(Utils.StrToInt(dr["userlevel"].ToString(), 0));
 
-            modle.ChannelTypeID = Utils.StrToInt(dr["ChannelTypeID"], 0);
-            modle.MinMoney = Utils.StrToDecimal(dr["MinMoney"].ToString(), 0);
-            modle.MaxMoney = Utils.StrToDecimal(dr["MaxMoney"].ToString(), 0);
+            modle.MchUsersAmtInfo.Integral = Utils.StrToLong(dr["integral"].ToString(), 0);
+            modle.MchUsersAmtInfo.Freeze = Utils.StrToDecimal(dr["freeze"].ToString(), 0);
+            modle.MchUsersAmtInfo.Balance = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.MchUsersAmtInfo.Payment = Utils.StrToDecimal(dr["Payment"].ToString(), 0);
+            modle.MchUsersAmtInfo.UnPayment = Utils.StrToDecimal(dr["UnPayment"].ToString(), 0);
+            modle.MchUsersAmtInfo.UnPayment2 = Utils.StrToDecimal(dr["unpayment2"].ToString(), 0);
+            modle.MchUsersAmtInfo.EnableAmt = Utils.StrToDecimal(dr["enableAmt"].ToString(), 0);
 
-            modle.Integral = Utils.StrToLong(dr["integral"].ToString(), 0);
-            modle.Freeze = Utils.StrToDecimal(dr["freeze"].ToString(), 0);
-            modle.Balance = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.Payment = Utils.StrToDecimal(dr["Payment"].ToString(), 0);
-            modle.UnPayment = Utils.StrToDecimal(dr["UnPayment"].ToString(), 0);
-            modle.UnPayment2 = Utils.StrToDecimal(dr["unpayment2"].ToString(), 0);
-            modle.EnableAmt = Utils.StrToDecimal(dr["enableAmt"].ToString(), 0);
-
-            modle.SchemeneType = Utils.StrToInt(dr["SchemeneType"].ToString(), 0); ;
-            modle.SchemeName = Convert.ToString(dr["schemename"]);
-            modle.SingleMinAmtLimit = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.SingleMaxAmtLimit = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.DailyMaxTimes = Utils.StrToInt(dr["dailymaxtimes"],0);
-            modle.DailyMaxAmt = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.ChargeRate = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.SingleMinCharge = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.SingleMaxCharge = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
-            modle.IsTranApi = Utils.StrToInt(dr["istranapi"]);
-            modle.IsDefault = Utils.StrToInt(dr["IsDefault"].ToString(), 0);
-            modle.IsSys = Utils.StrToInt(dr["IsSys"].ToString(), 0);
-            modle.BankDetentionDays = Utils.StrToInt(dr["bankdetentiondays"]);
-            modle.QQDetentionDays = Utils.StrToInt(dr["qqdetentiondays"]);
-            modle.JDDetentionDays = Utils.StrToInt(dr["jddetentiondays"]);
-            modle.IsTranRequiredAudit = Utils.StrToInt(dr["jddetentiondays"]);
-            modle.AlipayDetentionDays = Utils.StrToInt(dr["alipaydetentiondays"]);
-            modle.WeiXinDetentionDays = Utils.StrToInt(dr["weixindetentiondays"]);
-            modle.OtherDetentionDays = Utils.StrToInt(dr["otherdetentiondays"]);
+            modle.WithdrawScheme.ID = Utils.StrToInt(dr["SchemeID"].ToString(), 0); ;
+            modle.WithdrawScheme.Type = Utils.StrToInt(dr["SchemeneType"].ToString(), 0); ;
+            modle.WithdrawScheme.SchemeName = Convert.ToString(dr["schemename"]);
+            modle.WithdrawScheme.SingleMinAmtLimit = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.WithdrawScheme.SingleMaxAmtLimit = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.WithdrawScheme.DailyMaxTimes = Utils.StrToInt(dr["dailymaxtimes"],0);
+            modle.WithdrawScheme.DailyMaxAmt = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.WithdrawScheme.ChargeRate = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.WithdrawScheme.SingleMinCharge = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.WithdrawScheme.SingleMaxCharge = Utils.StrToDecimal(dr["Balance"].ToString(), 0);
+            modle.WithdrawScheme.IsTranApi = Utils.StrToInt(dr["istranapi"]);
+            modle.WithdrawScheme.IsDefault = Utils.StrToInt(dr["IsDefault"].ToString(), 0);
+            modle.WithdrawScheme.IsSys = Utils.StrToInt(dr["IsSys"].ToString(), 0);
+            modle.WithdrawScheme.BankDetentionDays = Utils.StrToInt(dr["bankdetentiondays"]);
+            modle.WithdrawScheme.QQDetentionDays = Utils.StrToInt(dr["qqdetentiondays"]);
+            modle.WithdrawScheme.JDDetentionDays = Utils.StrToInt(dr["jddetentiondays"]);
+            modle.WithdrawScheme.IsTranRequiredAudit = Utils.StrToInt(dr["jddetentiondays"]);
+            modle.WithdrawScheme.AlipayDetentionDays = Utils.StrToInt(dr["alipaydetentiondays"]);
+            modle.WithdrawScheme.WeiXinDetentionDays = Utils.StrToInt(dr["weixindetentiondays"]);
+            modle.WithdrawScheme.OtherDetentionDays = Utils.StrToInt(dr["otherdetentiondays"]);
 
             return modle;
         }
@@ -217,7 +214,7 @@
         /// <returns></returns>
         public static MchUserBaseInfo GetUserBaseByMerchantName(string merchantName, Boolean fromCache = false)
         {
-            MchUserBaseInfo o = new MchUserBaseInfo();
+            MchUserBaseInfo o = null;
             if (fromCache)
             {
                 string objId = string.Format(USER_CACHE_KEY, merchantName);

@@ -93,7 +93,7 @@
         /// <summary>
         /// 设置或获取
         /// </summary>
-        public System.Decimal Unpayment2
+        public System.Decimal UnPayment2
         {
             set { this._unpayment2 = value; }
             get { return this._unpayment2; }

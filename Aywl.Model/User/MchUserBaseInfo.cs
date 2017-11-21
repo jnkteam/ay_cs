@@ -56,46 +56,21 @@ namespace OriginalStudio.Model.User
         private System.Int32 _isdebug = 0;
         private System.Int32 _agentid = 0;
         private System.Int32 _cpsdrate = 0;
-        private System.Int64 _integral = 0;
-        private System.Decimal _freeze = 0M;
-        private System.Decimal _balance = 0M;
-        private System.Decimal _payment = 0M;
-        private System.Decimal _unpayment = 0M;
-        private System.Decimal _unpayment2 = 0M;
-        private System.Decimal _enableamt = 0M;
+
         private UserTypeEnum _usertype = UserTypeEnum.会员;
         private UserLevelEnum _userlevel = UserLevelEnum.普通商家;
         private String _lastloginaddress = "";
         private String _lastloginremark = "";
         private System.Int32 _logintype = 0;
         private String _token = "";
-        private System.Int32 _channeltypeid = 0;
-        private System.Decimal _minmoney = 0M;
-        private System.Decimal _maxmoney = 0M;
 
-        private System.Int32 _schemenetype = 0;
-        private System.String _schemename = string.Empty;
-        private System.Decimal _singleminamtlimit = 0M;
-        private System.Decimal _singlemaxamtlimit = 0M;
-        private System.Int32 _dailymaxtimes = 0;
-        private System.Decimal _dailymaxamt = 0M;
-        private System.Decimal _chargerate = 0M;
-        private System.Decimal _singlemincharge = 0M;
-        private System.Decimal _singlemaxcharge = 0M;
-        private System.Int32 _istranapi = 0;
-        private System.Int32 _isdefault = 0;
-        private System.Int32 _issys = 0;
-        private System.Int32 _bankdetentiondays = 0;
-        private System.Int32 _qqdetentiondays = 0;
-        private System.Int32 _jddetentiondays = 0;
-        private System.Int32 _istranrequiredaudit = 0;
-        private System.Int32 _alipaydetentiondays = 0;
-        private System.Int32 _weixindetentiondays = 0;
-        private System.Int32 _otherdetentiondays = 0;
+        private Withdraw.WithdrawScheme _withdrawscheme = new Withdraw.WithdrawScheme();
+
+        private MchUsersAmtInfo _mchusersamtinfo = new MchUsersAmtInfo();
 
         #endregion 字段
 
-        #region 公开属性
+        #region 基本属性
         /// <summary>
         /// 设置或获取
         /// </summary>
@@ -504,8 +479,41 @@ namespace OriginalStudio.Model.User
 
         #endregion 公开属性
 
+
+        #region 提现属性
+
+        public Withdraw.WithdrawScheme WithdrawScheme
+        {
+            set { this._withdrawscheme = value; }
+            get { return this._withdrawscheme; }
+        }
+
+        #endregion
+
         #region 账户金额属性
 
+        public MchUsersAmtInfo MchUsersAmtInfo
+        {
+            set { this._mchusersamtinfo = value; }
+            get { return this._mchusersamtinfo; }
+        }
+
+        #endregion
+
+    }
+}
+
+
+/*
+        private System.Int64 _integral = 0;
+        private System.Decimal _freeze = 0M;
+        private System.Decimal _balance = 0M;
+        private System.Decimal _payment = 0M;
+        private System.Decimal _unpayment = 0M;
+        private System.Decimal _unpayment2 = 0M;
+        private System.Decimal _enableamt = 0M;
+ * 
+        #region 账户金额属性
 
         /// <summary>
         /// 设置或获取
@@ -572,37 +580,27 @@ namespace OriginalStudio.Model.User
 
         #endregion
 
-        #region 限额属性
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 ChannelTypeID
-        {
-            set { this._channeltypeid = value; }
-            get { return this._channeltypeid; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal MinMoney
-        {
-            set { this._minmoney = value; }
-            get { return this._minmoney; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal MaxMoney
-        {
-            set { this._maxmoney = value; }
-            get { return this._maxmoney; }
-        }
-
-        #endregion
-
+        //private System.Int32 _schemenetype = 0;
+        //private System.Int32 _schemenetype = 0;
+        //private System.String _schemename = string.Empty;
+        //private System.Decimal _singleminamtlimit = 0M;
+        //private System.Decimal _singlemaxamtlimit = 0M;
+        //private System.Int32 _dailymaxtimes = 0;
+        //private System.Decimal _dailymaxamt = 0M;
+        //private System.Decimal _chargerate = 0M;
+        //private System.Decimal _singlemincharge = 0M;
+        //private System.Decimal _singlemaxcharge = 0M;
+        //private System.Int32 _istranapi = 0;
+        //private System.Int32 _isdefault = 0;
+        //private System.Int32 _issys = 0;
+        //private System.Int32 _bankdetentiondays = 0;
+        //private System.Int32 _qqdetentiondays = 0;
+        //private System.Int32 _jddetentiondays = 0;
+        //private System.Int32 _istranrequiredaudit = 0;
+        //private System.Int32 _alipaydetentiondays = 0;
+        //private System.Int32 _weixindetentiondays = 0;
+        //private System.Int32 _otherdetentiondays = 0;
+ * 
         #region 提现属性
 
         /// <summary>
@@ -778,5 +776,4 @@ namespace OriginalStudio.Model.User
 
 
         #endregion
-    }
-}
+ */

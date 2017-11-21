@@ -172,7 +172,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(this.UserId, 
+                return TradeFactory.GetUserIncome(this.UserId, 
                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
                                             DateTime.Now.AddDays(1.0));
             }
@@ -185,7 +185,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(5, 
+                return TradeFactory.GetUserIncome(5, 
                                                             this.UserId, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
                                                             DateTime.Now.AddDays(1.0));
@@ -199,7 +199,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(2, this.UserId, 
+                return TradeFactory.GetUserIncome(2, this.UserId, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
                                                             DateTime.Now.AddDays(1.0));
             }
@@ -212,7 +212,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(7, this.UserId,
+                return TradeFactory.GetUserIncome(7, this.UserId,
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));
             }
@@ -225,7 +225,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(3, this.UserId, 
+                return TradeFactory.GetUserIncome(3, this.UserId, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
                                                             DateTime.Now.AddDays(1.0));
             }
@@ -238,7 +238,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(1, this.UserId, 
+                return TradeFactory.GetUserIncome(1, this.UserId, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
                                                             DateTime.Now.AddDays(1.0));
             }
@@ -251,7 +251,7 @@
         {
             get
             {
-                return Trade.GetUserIncome(6, this.UserId, 
+                return TradeFactory.GetUserIncome(6, this.UserId, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
                                                             DateTime.Now.AddDays(1.0));
             }
@@ -345,7 +345,7 @@
             get
             {
                 DateTime time = DateTime.Now.AddDays(-7.0);
-                return Trade.GetUserIncome(this.UserId, 
+                return TradeFactory.GetUserIncome(this.UserId, 
                                                             Convert.ToDateTime(time.ToString("yyyy-MM-dd 00:00:00")), 
                                                             DateTime.Now.AddDays(1.0));
             }

@@ -55,7 +55,7 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            DataSet set = Trade.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = TradeFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.rptTrades.DataSource = set.Tables[1];
             this.rptTrades.DataBind();

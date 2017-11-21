@@ -245,7 +245,7 @@
                 TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
                 if (modelByUser != null)
                 {
-                    DataSet ds = OriginalStudio.BLL.Settled.Trade.GetUserLeftBalance(modelByUser.id,
+                    DataSet ds = OriginalStudio.BLL.Settled.TradeFactory.GetUserLeftBalance(modelByUser.id,
                                             userId,
                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                             DateTime.Now.AddDays(1.0));

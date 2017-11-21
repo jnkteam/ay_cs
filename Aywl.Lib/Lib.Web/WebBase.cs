@@ -320,6 +320,12 @@ namespace OriginalStudio.Lib.Web
 			return result;
 		}
 
+        /// <summary>
+        /// 获取请求参数。适用于Get或Post都行
+        /// </summary>
+        /// <param name="param"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public static string GetString(string param, string defaultValue)
         {
             string result;

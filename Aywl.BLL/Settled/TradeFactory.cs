@@ -9,10 +9,13 @@
     using System.Data.SqlClient;
     using System.Text;
 
-    public class Trade
+    /// <summary>
+    /// 交易查询操作
+    /// </summary>
+    public class TradeFactory
     {
         internal const string SQL_TABLE = "V_Trade";
-        internal const string SQL_TABLE_FIELDS = "[id]\r\n      ,[userid]\r\n      ,[type]\r\n      ,[billType]\r\n      ,[billNo]\r\n      ,[tradeTime]\r\n      ,[Amt]\r\n      ,[Balance]\r\n      ,[Remark]\r\n      ,[username]";
+        internal const string SQL_TABLE_FIELDS = "id,userid,type,billType,billNo,tradeTime,Amt,Balance,classid,Remark,username";
 
         private static string BuilderWhere(List<SearchParam> param, List<SqlParameter> paramList)
         {
@@ -49,13 +52,6 @@
                         case "billtype":
                             builder.Append(" AND [billtype] = @billtype");
                             parameter = new SqlParameter("@billtype", SqlDbType.Int);
-                            parameter.Value = (int) param2.ParamValue;
-                            paramList.Add(parameter);
-                            break;
-
-                        case "supplier":
-                            builder.Append(" AND exists(select 0 from ordercard with(nolock) where v_trade.billNo = ordercard.orderid and ordercard.supplierID = @supplier)");
-                            parameter = new SqlParameter("@supplier", SqlDbType.Int);
                             parameter.Value = (int) param2.ParamValue;
                             paramList.Add(parameter);
                             break;
@@ -160,7 +156,11 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userid", SqlDbType.Int), new SqlParameter("@btime", SqlDbType.VarChar, 10), new SqlParameter("@etime", SqlDbType.VarChar, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userid", SqlDbType.Int),
+                    new SqlParameter("@btime", SqlDbType.VarChar, 10),
+                    new SqlParameter("@etime", SqlDbType.VarChar, 10)
+                };
                 commandParameters[0].Value = userId;
                 commandParameters[1].Value = sdate.ToString("yyyy-MM-dd");
                 commandParameters[2].Value = edate.ToString("yyyy-MM-dd");
@@ -226,6 +226,74 @@
             }
         }
 
+        #region 新增
+
+        /// <summary>
+        /// 获取商户N天内指定通道类型收入
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="classId"></param>
+        /// <param name="detDays"></param>
+        /// <returns></returns>
+        public static decimal GetMerchantClassIncome(int userId, int classId, int detDays)
+        {
+            
+            try
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userid", SqlDbType.Int),
+                    new SqlParameter("@classid", SqlDbType.Int),
+                    new SqlParameter("@detdays", SqlDbType.Int)
+                };
+                commandParameters[0].Value = userId;
+                commandParameters[1].Value = classId;
+                commandParameters[2].Value = detDays;
+                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_trade_get_mch_class_days_income", commandParameters);
+                if (obj2 != DBNull.Value)
+                {
+                    return Convert.ToDecimal(obj2);
+                }
+                return 0M;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return 0M;
+            }
+
+        }
+
+
+        /// <summary>
+        /// 获取商户限制提现金额
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static decimal GetMerchantLimitDayIncome(int userId)
+        {
+
+            try
+            {
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userid", SqlDbType.Int)
+                };
+                commandParameters[0].Value = userId;
+                object obj2 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_trade_get_mch_limit_days_income", commandParameters);
+                if (obj2 != DBNull.Value)
+                {
+                    return Convert.ToDecimal(obj2);
+                }
+                return 0M;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return 0M;
+            }
+
+        }
+
+        #endregion
     }
 }
 

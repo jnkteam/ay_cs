@@ -107,7 +107,7 @@
     <Compile Include="Settled\IncreaseAmt.cs" />
     <Compile Include="Settled\ManageTrade.cs" />
     <Compile Include="Settled\WithdrawScheme.cs" />
-    <Compile Include="Settled\Trade.cs" />
+    <Compile Include="Settled\TradeFactory.cs" />
     <Compile Include="Settled\UsersAmtFreeze.cs" />
     <Compile Include="Supplier\SupplierPayRateFactory.cs" />
     <Compile Include="Supplier\SysSupplierFactory.cs" />

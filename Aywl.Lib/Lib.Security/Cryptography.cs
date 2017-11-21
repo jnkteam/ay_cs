@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 namespace OriginalStudio.Lib.Security
 {
@@ -291,6 +292,40 @@ namespace OriginalStudio.Lib.Security
 
         #endregion
 
+        #region 请求参数验签
+
+        public static bool CheckRequestSign(string key)
+        {
+            string reqSign = Web.WebBase.GetString("sign", "");
+            if (reqSign == "") return false;
+
+            SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
+            //判断是get还是post
+            if (OriginalStudio.Lib.XRequest.IsGet())
+            {
+                foreach (string K in HttpContext.Current.Request.QueryString.AllKeys)
+                {
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.QueryString[K]) && K.ToLower() != "sign")
+                    {
+                        waitSign.Add(K, HttpContext.Current.Request.QueryString[K].ToString());
+                    }
+                }
+            }
+            else if (OriginalStudio.Lib.XRequest.IsPost())
+            {
+                foreach (string K in HttpContext.Current.Request.Form.AllKeys)
+                {
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.Form[K]) && K.ToLower() != "sign")
+                    {
+                        waitSign.Add(K, HttpContext.Current.Request.Form[K].ToString());
+                    }
+                }
+            }
+            return SignSortedDictionary(waitSign, key).ToLower() == reqSign.ToLower();
+
+        }
+
+        #endregion
 
     }
 }

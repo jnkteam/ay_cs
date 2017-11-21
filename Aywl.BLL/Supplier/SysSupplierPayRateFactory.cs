@@ -47,7 +47,7 @@
                 parameters[0].Value = model.SupplierCode;
                 parameters[1].Value = model.PayrateXML;
 
-                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_supplierpayrate_edit", parameters));
+                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_supplierpayrate_edit", parameters);
             }
             catch (Exception exception)
             {

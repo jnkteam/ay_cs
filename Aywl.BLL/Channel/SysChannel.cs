@@ -415,11 +415,11 @@
                     new SqlParameter("@channelcode",SqlDbType.VarChar,10),
                     new SqlParameter("@channeltypeid",SqlDbType.Int),
                     new SqlParameter("@suppliercode",SqlDbType.Int),
-                    new SqlParameter("@supplierrate",SqlDbType.),
+                    new SqlParameter("@supplierrate",SqlDbType.Decimal),
                     new SqlParameter("@channelname",SqlDbType.VarChar,50),
                     new SqlParameter("@channelenname",SqlDbType.VarChar,50),
                     new SqlParameter("@facevalue",SqlDbType.Int),
-                    new SqlParameter("@isopen",SqlDbType.),
+                    new SqlParameter("@isopen",SqlDbType.Int),
                     new SqlParameter("@listsort",SqlDbType.Int),
                     new SqlParameter("@createuserid",SqlDbType.Int)
                 };
@@ -459,7 +459,7 @@
                     new SqlParameter("@channelname",SqlDbType.VarChar,50),
                     new SqlParameter("@channelenname",SqlDbType.VarChar,50),
                     new SqlParameter("@facevalue",SqlDbType.Int),
-                    new SqlParameter("@isopen",SqlDbType.),
+                    new SqlParameter("@isopen",SqlDbType.Int),
                     new SqlParameter("@listsort",SqlDbType.Int)
                 };
                 parameters[0].Value = model.ID;
@@ -470,7 +470,7 @@
                 parameters[5].Value = model.FaceValue;
                 parameters[6].Value = model.IsOpen;
                 parameters[7].Value = model.ListSort; 
-                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_Update", parameters) > 0;
+                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_channel_Update", parameters) > 0;
             }
             catch (Exception exception)
             {

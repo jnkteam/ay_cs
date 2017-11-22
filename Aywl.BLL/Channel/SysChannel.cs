@@ -410,14 +410,36 @@
         {
             try
             {
-                //DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_channel_ADD", commandParameters);
-                //int num = (int) commandParameters[0].Value;
-                //if (num > 0)
-                //{
-                //    ClearCache();
-                //}
-                //return num;
-                return 1;
+                SqlParameter[] parameters = {
+                    new SqlParameter("@id",SqlDbType.Int),
+                    new SqlParameter("@channelcode",SqlDbType.VarChar,10),
+                    new SqlParameter("@channeltypeid",SqlDbType.Int),
+                    new SqlParameter("@suppliercode",SqlDbType.Int),
+                    new SqlParameter("@supplierrate",SqlDbType.),
+                    new SqlParameter("@channelname",SqlDbType.VarChar,50),
+                    new SqlParameter("@channelenname",SqlDbType.VarChar,50),
+                    new SqlParameter("@facevalue",SqlDbType.Int),
+                    new SqlParameter("@isopen",SqlDbType.),
+                    new SqlParameter("@listsort",SqlDbType.Int),
+                    new SqlParameter("@createuserid",SqlDbType.Int)
+                };
+                parameters[0].Direction = ParameterDirection.InputOutput;
+                parameters[1].Value = model.ChannelCode;
+                parameters[2].Value = model.ChannelTypeId;
+                parameters[3].Value = model.SupplierRate;
+                parameters[4].Value = model.ChannelName;
+                parameters[5].Value = model.ChannelEnName;
+                parameters[6].Value = model.FaceValue;
+                parameters[7].Value = model.IsOpen;
+                parameters[8].Value = model.ListSort;
+                parameters[9].Value = model.CreateUserID;
+                DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_channel_add", parameters);
+                int num = (int)parameters[0].Value;
+                if (num > 0)
+                {
+                    ClearCache();
+                }
+                return num;
             }
             catch (Exception exception)
             {
@@ -425,6 +447,41 @@
                 return 0;
             }
         }
+
+        public static bool Update(SysChannelInfo model)
+        {
+            try
+            {
+                SqlParameter[] parameters = {
+                    new SqlParameter("@id",SqlDbType.Int),
+                    new SqlParameter("@channeltypeid",SqlDbType.Int),
+                    new SqlParameter("@suppliercode",SqlDbType.Int),
+                    new SqlParameter("@channelname",SqlDbType.VarChar,50),
+                    new SqlParameter("@channelenname",SqlDbType.VarChar,50),
+                    new SqlParameter("@facevalue",SqlDbType.Int),
+                    new SqlParameter("@isopen",SqlDbType.),
+                    new SqlParameter("@listsort",SqlDbType.Int)
+                };
+                parameters[0].Value = model.ID;
+                parameters[1].Value = model.ChannelTypeId;
+                parameters[2].Value = model.SupplierCode;
+                parameters[3].Value = model.ChannelName;
+                parameters[4].Value = model.ChannelEnName;
+                parameters[5].Value = model.FaceValue;
+                parameters[6].Value = model.IsOpen;
+                parameters[7].Value = model.ListSort; 
+                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_Update", parameters) > 0;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region 查询
 
         private static string BuilderWhere(List<SearchParam> param, List<SqlParameter> paramList)
         {
@@ -445,14 +502,10 @@
                             break;
 
                         case "typeid":
-                            builder.Append(" AND [typeId] = @typeId");
+                            builder.Append(" AND [ChannelTypeId] = @typeId");
                             parameter = new SqlParameter("@typeId", SqlDbType.Int, 10);
                             parameter.Value = (int) param2.ParamValue;
                             paramList.Add(parameter);
-                            break;
-
-                        case "cardtype":
-                            builder.Append(" AND [typeId] > 102 ");
                             break;
                     }
                 }
@@ -462,9 +515,11 @@
 
         public static bool Delete(int id)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10) };
+            SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@id", SqlDbType.Int, 10)
+            };
             commandParameters[0].Value = id;
-            return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_Delete", commandParameters) > 0);
+            return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_channel_Delete", commandParameters) > 0);
         }
 
         public static DataSet GetBankChanels(int pageindex, int pagesize, int userid, int typeid, int facevalue, int chanelstatus)
@@ -514,7 +569,8 @@
                 }
                 List<SqlParameter> paramList = new List<SqlParameter>();
                 string wheres = BuilderWhere(searchParams, paramList);
-                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + SqlHelper.GetPageSelectSQL(SQL_TABLE_FIELD, tables, wheres, orderby, key, pageSize, page, false);
+                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + 
+                                                    SqlHelper.GetPageSelectSQL(SQL_TABLE_FIELD, tables, wheres, orderby, key, pageSize, page, false);
                 return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
             }
             catch (Exception exception)
@@ -524,37 +580,8 @@
             }
         }
 
-        public static bool Update(SysChannelInfo model)
-        {
-            try
-            {
-                //SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@code", SqlDbType.VarChar, 10), new SqlParameter("@typeId", SqlDbType.Int, 10), new SqlParameter("@supplier", SqlDbType.Int, 10), new SqlParameter("@modeName", SqlDbType.VarChar, 50), new SqlParameter("@modeEnName", SqlDbType.VarChar, 50), new SqlParameter("@faceValue", SqlDbType.Int, 10), new SqlParameter("@isOpen", SqlDbType.TinyInt, 1), new SqlParameter("@addtime", SqlDbType.DateTime), new SqlParameter("@sort", SqlDbType.Int, 10) };
-                //commandParameters[0].Value = model.id;
-                //commandParameters[1].Value = model.code;
-                //commandParameters[2].Value = model.typeId;
-                //commandParameters[3].Value = model.supplier;
-                //commandParameters[4].Value = model.modeName;
-                //commandParameters[5].Value = model.modeEnName;
-                //commandParameters[6].Value = model.faceValue;
-                //commandParameters[7].Value = model.isOpen;
-                //commandParameters[8].Value = DateTime.Now;
-                //commandParameters[9].Value = model.sort;
-                //bool flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_Update", commandParameters) > 0;
-                //if (flag)
-                //{
-                //    ClearCache();
-                //}
-                //return flag;
-                return true;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return false;
-            }
-        }
-
         #endregion
+
     }
 
 }

@@ -25,7 +25,22 @@
             try
             {
                 SqlParameter[] commandParameters = new SqlParameter[] { 
-                    new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@username", SqlDbType.VarChar, 20), new SqlParameter("@password", SqlDbType.VarChar, 100), new SqlParameter("@role", SqlDbType.Int, 10), new SqlParameter("@status", SqlDbType.Int, 10), new SqlParameter("@relname", SqlDbType.NVarChar, 50), new SqlParameter("@lastLoginIp", SqlDbType.VarChar, 50), new SqlParameter("@lastLoginTime", SqlDbType.DateTime), new SqlParameter("@sessionid", SqlDbType.VarChar, 100), new SqlParameter("@secondpwd", SqlDbType.VarChar, 100), new SqlParameter("@commissiontype", SqlDbType.TinyInt), new SqlParameter("@commission", SqlDbType.Decimal, 9), new SqlParameter("@cardcommission", SqlDbType.Decimal, 9), new SqlParameter("@isSuperAdmin", SqlDbType.TinyInt, 1), new SqlParameter("@isAgent", SqlDbType.TinyInt, 1), new SqlParameter("@qq", SqlDbType.VarChar, 20), 
+                    new SqlParameter("@id", SqlDbType.Int, 10),
+                    new SqlParameter("@username", SqlDbType.VarChar, 20),
+                    new SqlParameter("@password", SqlDbType.VarChar, 100),
+                    new SqlParameter("@role", SqlDbType.Int, 10),
+                    new SqlParameter("@status", SqlDbType.Int, 10),
+                    new SqlParameter("@relname", SqlDbType.NVarChar, 50),
+                    new SqlParameter("@lastLoginIp", SqlDbType.VarChar, 50),
+                    new SqlParameter("@lastLoginTime", SqlDbType.DateTime),
+                    new SqlParameter("@sessionid", SqlDbType.VarChar, 100),
+                    new SqlParameter("@secondpwd", SqlDbType.VarChar, 100),
+                    new SqlParameter("@commissiontype", SqlDbType.TinyInt),
+                    new SqlParameter("@commission", SqlDbType.Decimal, 9),
+                    new SqlParameter("@cardcommission", SqlDbType.Decimal, 9),
+                    new SqlParameter("@isSuperAdmin", SqlDbType.TinyInt, 1),
+                    new SqlParameter("@isAgent", SqlDbType.TinyInt, 1),
+                    new SqlParameter("@qq", SqlDbType.VarChar, 20), 
                     new SqlParameter("@tel", SqlDbType.VarChar, 20)
                  };
                 commandParameters[0].Direction = ParameterDirection.Output;
@@ -121,7 +136,9 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = id;
                 return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_manage_del", commandParameters) > 0);
             }
@@ -136,12 +153,14 @@
         {
             try
             {
-                object obj2 = HttpContext.Current.Session["{90F37739-31E2-4b92-A35E-013313CE553D}"];
+                object obj2 = HttpContext.Current.Session[MANAGE_LOGIN_SESSIONID];
                 if (obj2 == null)
                 {
                     return 0;
                 }
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, obj2) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, obj2)
+                };
                 object obj3 = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_manage_getIdBySession", commandParameters);
                 if (obj3 == DBNull.Value)
                 {
@@ -174,7 +193,11 @@
             {
                 totalAmt = 0M;
                 commission = 0M;
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@begin", SqlDbType.DateTime, 8), new SqlParameter("@end", SqlDbType.DateTime, 8) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10),
+                    new SqlParameter("@begin", SqlDbType.DateTime, 8),
+                    new SqlParameter("@end", SqlDbType.DateTime, 8)
+                };
                 commandParameters[0].Value = id;
                 commandParameters[1].Value = begin;
                 commandParameters[2].Value = end;
@@ -257,7 +280,9 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = id;
                 return Convert.ToInt32(DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_manage_getusers", commandParameters));
             }
@@ -270,7 +295,9 @@
 
         public static Manage GetModel(int id)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10) };
+            SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@id", SqlDbType.Int, 10)
+            };
             commandParameters[0].Value = id;
             Manage manage = new Manage();
             DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_manage_get", commandParameters);
@@ -332,18 +359,20 @@
 
         public static bool IsSecondPwdValid()
         {
-            if (HttpContext.Current.Session["{36147A08-17F3-477a-8449-75AC0EF9299F}"] == null)
+            if (HttpContext.Current.Session[MANAGE_SECOND_SESSIONID] == null)
             {
                 return false;
             }
-            return Convert.ToBoolean(HttpContext.Current.Session["{36147A08-17F3-477a-8449-75AC0EF9299F}"]);
+            return Convert.ToBoolean(HttpContext.Current.Session[MANAGE_SECOND_SESSIONID]);
         }
 
         public static bool LoginLogDel(int id)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = id;
                 return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_manageLoginLog_del", commandParameters) > 0);
             }
@@ -381,7 +410,7 @@
         {
             if (!(string.IsNullOrEmpty(sedpwd) || !(Cryptography.MD5(sedpwd) == CurrentManage.secondpwd)))
             {
-                HttpContext.Current.Session["{36147A08-17F3-477a-8449-75AC0EF9299F}"] = true;
+                HttpContext.Current.Session[MANAGE_SECOND_SESSIONID] = true;
                 return true;
             }
             return false;
@@ -410,7 +439,7 @@
                 if ((obj2 != null) && (obj2 != DBNull.Value))
                 {
                     manage.id = (int) obj2;
-                    HttpContext.Current.Session["{90F37739-31E2-4b92-A35E-013313CE553D}"] = str2;
+                    HttpContext.Current.Session[MANAGE_LOGIN_SESSIONID] = str2;
                     str = "登录成功";
                 }
                 else
@@ -429,9 +458,9 @@
 
         public static void SignOut()
         {
-            HttpContext.Current.Items["{F25E0AC4-032C-42ba-B123-2289C6DBE4F1}"] = null;
-            HttpContext.Current.Session["{90F37739-31E2-4b92-A35E-013313CE553D}"] = null;
-            HttpContext.Current.Session["{36147A08-17F3-477a-8449-75AC0EF9299F}"] = null;
+            HttpContext.Current.Items[MANAGE_CONTEXT_KEY] = null;
+            HttpContext.Current.Session[MANAGE_LOGIN_SESSIONID] = null;
+            HttpContext.Current.Session[MANAGE_SECOND_SESSIONID] = null;
         }
 
         public static bool Update(Manage model)
@@ -474,16 +503,16 @@
             {
                 if (HttpContext.Current != null)
                 {
-                    if (HttpContext.Current.Items["{F25E0AC4-032C-42ba-B123-2289C6DBE4F1}"] == null)
+                    if (HttpContext.Current.Items[MANAGE_CONTEXT_KEY] == null)
                     {
                         int current = GetCurrent();
                         if (current <= 0)
                         {
                             return null;
                         }
-                        HttpContext.Current.Items["{F25E0AC4-032C-42ba-B123-2289C6DBE4F1}"] = GetModel(current);
+                        HttpContext.Current.Items[MANAGE_CONTEXT_KEY] = GetModel(current);
                     }
-                    return (HttpContext.Current.Items["{F25E0AC4-032C-42ba-B123-2289C6DBE4F1}"] as Manage);
+                    return (HttpContext.Current.Items[MANAGE_CONTEXT_KEY] as Manage);
                 }
                 return null;
             }

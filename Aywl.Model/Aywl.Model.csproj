@@ -135,9 +135,11 @@
     <Compile Include="Enum\UserLevelEnum.cs" />
     <Compile Include="User\UserLoginLog.cs" />
     <Compile Include="User\UserPayBankAppInfo.cs" />
+    <Compile Include="User\MchUserPayBankInfo.cs" />
     <Compile Include="User\MchUserPayLimit.cs" />
     <Compile Include="User\MchUsersAmtInfo.cs" />
     <Compile Include="User\usersettingInfo.cs" />
+    <Compile Include="User\MchUserImageInfo.cs" />
     <Compile Include="User\usersIdImageInfo.cs" />
     <Compile Include="User\userspaybank.cs" />
     <Compile Include="Enum\UserStatusEnum.cs" />

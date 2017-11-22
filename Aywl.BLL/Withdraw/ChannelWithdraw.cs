@@ -6,6 +6,8 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
+    using OriginalStudio.DBAccess;
 
     /// <summary>
     /// 通道结算
@@ -16,7 +18,20 @@
 
         public int Add(OriginalStudio.Model.Withdraw.ChannelWithdraw model)
         {
-            return this.dal.Add(model);
+            SqlParameter[] parameterArray = new SqlParameter[] {
+                new SqlParameter("@id", SqlDbType.Int, 10),
+                new SqlParameter("@bankCode", SqlDbType.VarChar, 10),
+                new SqlParameter("@bankName", SqlDbType.VarChar, 30),
+                new SqlParameter("@supplier", SqlDbType.Int, 10),
+                new SqlParameter("@sort", SqlDbType.Int, 10)
+            };
+            parameterArray[0].Direction = ParameterDirection.Output;
+            parameterArray[1].Value = model.bankCode;
+            parameterArray[2].Value = model.bankName;
+            parameterArray[3].Value = model.supplier;
+            parameterArray[4].Value = model.sort;
+            DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channelwithdraw_ADD", parameterArray);
+            return (int)parameterArray[0].Value;
         }
 
         public List<OriginalStudio.Model.Withdraw.ChannelWithdraw> DataTableToList(DataTable dt)

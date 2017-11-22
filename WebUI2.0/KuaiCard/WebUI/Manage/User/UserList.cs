@@ -69,7 +69,7 @@
                 string str = base.Request.Form["chkItem"];
                 foreach (string str2 in str.Split(new char[] { ',' }))
                 {
-                    MchUserFactory.Del(int.Parse(str2));
+                    MchUserFactory.Delete(int.Parse(str2));
                 }
             }
             catch

@@ -171,7 +171,7 @@
                 string PayeeBank = "";
                 string account = "";
                 string payeeName = "";
-                UserPayBankAppInfo info2 = new UserPayBankAppInfo();
+                MchUserPayBankInfo info2 = new MchUserPayBankInfo();
                 DataSet list = null;    // UserPayBankApp.GetList("id=" + accountID);
                 if (list != null)
                 {

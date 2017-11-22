@@ -281,7 +281,7 @@
 
         #endregion
 
-        #region 获取列表
+        #region 获取数据集
 
         public static DataSet GetList()
         {
@@ -462,7 +462,7 @@
 
         #endregion
 
-        #region 2017.4.2 增加服务商通道设置窗口
+        #region 2017.4.2 增加服务商通道设置窗口。暂时不用
 
         /// <summary>
         /// 获取服务商通道列表

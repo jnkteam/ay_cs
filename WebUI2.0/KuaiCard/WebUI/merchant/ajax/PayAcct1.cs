@@ -59,7 +59,7 @@
                 }
                 if (string.IsNullOrEmpty(str))
                 {
-                    UserPayBankAppInfo model = new UserPayBankAppInfo();
+                    MchUserPayBankInfo model = new MchUserPayBankInfo();
                     model.pmode = num;
                     model.payeeBank = str2;
                     model.bankProvince = str4;

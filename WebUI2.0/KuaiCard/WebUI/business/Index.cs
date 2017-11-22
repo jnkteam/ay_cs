@@ -27,18 +27,21 @@
             {
                 try
                 {
-                    decimal num;
-                    decimal num2;
+                    decimal totalAmt;
+                    decimal commission;
                     this.litlinks.Text = "?s=" + base.currentManage.id.ToString();
                     this.userscount = ManageFactory.GetManageUsers(base.currentManage.id).ToString();
-                    if (ManageFactory.GetManagePerformance(base.currentManage.id, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), DateTime.Now.AddDays(1.0), out num, out num2))
+                    if (ManageFactory.GetManagePerformance(base.currentManage.id, 
+                        Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")), 
+                        DateTime.Now.AddDays(1.0), 
+                        out totalAmt, out commission))
                     {
-                        this.todaytotalAmt = num.ToString("f2");
+                        this.todaytotalAmt = totalAmt.ToString("f2");
                     }
-                    if (ManageFactory.GetManagePerformance(base.currentManage.id, Convert.ToDateTime(DateTime.Now.AddDays(-7.0).ToString("yyyy-MM-dd 00:00:00")), DateTime.Now.AddDays(1.0), out num, out num2))
+                    if (ManageFactory.GetManagePerformance(base.currentManage.id, Convert.ToDateTime(DateTime.Now.AddDays(-7.0).ToString("yyyy-MM-dd 00:00:00")), DateTime.Now.AddDays(1.0), out totalAmt, out commission))
                     {
-                        this.monthtotalAmt = num.ToString("f2");
-                        this.monthcommission = num2.ToString("f2");
+                        this.monthtotalAmt = totalAmt.ToString("f2");
+                        this.monthcommission = commission.ToString("f2");
                     }
                     this.loginip = base.currentManage.lastLoginIp;
                     this.logintime = FormatConvertor.DateTimeToTimeString(base.currentManage.lastLoginTime.Value);

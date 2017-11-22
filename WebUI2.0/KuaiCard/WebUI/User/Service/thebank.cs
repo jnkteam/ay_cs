@@ -105,7 +105,7 @@
                 return;
             }
 
-            UserPayBankAppInfo info;
+            MchUserPayBankInfo info;
 
             string typeBank = GetFormValue("typeBank");
             string bankCode = GetFormValue("bankCode");
@@ -154,7 +154,7 @@
                     }
                     else if (string.IsNullOrEmpty(str))
                     {
-                        info = new UserPayBankAppInfo();
+                        info = new MchUserPayBankInfo();
                         info.pmode = 1;
                         info.BankCode = bankCode;
                         info.payeeBank = (chlObj == null) ? "空" : chlObj.bankName;
@@ -208,7 +208,7 @@
                 }
                 else if (string.IsNullOrEmpty(str))
                 {
-                    info = new UserPayBankAppInfo();
+                    info = new MchUserPayBankInfo();
                     info.pmode = 2;
                     info.payeeBank = "支付宝";
                     info.payeeName = str11;

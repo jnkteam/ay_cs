@@ -789,26 +789,16 @@
         /// </summary>
         /// <param name="merchantName"></param>
         /// <param name="userOrderId"></param>
-        /// <param name="orderRow"></param>
-        /// <returns>订单存在返回0，订单不存在返回99</returns>
-        public int SearchOrderAPI(string merchantName, string userOrderId, out DataRow orderRow)
+        /// <returns>返回订单信息</returns>
+        public DataSet SearchMerchantOrderAPI(string merchantName, string userOrderId)
         {
-            orderRow = null;
             SqlParameter[] commandParameters = new SqlParameter[] {
                 new SqlParameter("@merchantName", SqlDbType.VarChar, 50), 
-                new SqlParameter("@userorderid", SqlDbType.VarChar, 50), 
-                new SqlParameter("@result", SqlDbType.TinyInt) 
+                new SqlParameter("@userorderid", SqlDbType.VarChar, 50)
             };
             commandParameters[0].Value = merchantName;
             commandParameters[1].Value = userOrderId;
-            commandParameters[2].Direction = ParameterDirection.Output;
-            DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_orderbank_SearchAPI", commandParameters);
-            int num = Convert.ToInt32(commandParameters[2].Value);
-            if (num == 0)
-            {
-                orderRow = set.Tables[0].Rows[0];
-            }
-            return num;
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_orderbank_SearchAPI", commandParameters);
         }
 
         #endregion

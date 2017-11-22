@@ -104,7 +104,7 @@
 
         protected void rptApps_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            UserPayBankAppInfo model = new UserPayBankAppInfo();// UserPayBankApp.GetModel(int.Parse(e.CommandArgument.ToString()));
+            MchUserPayBankInfo model = new MchUserPayBankInfo();// UserPayBankApp.GetModel(int.Parse(e.CommandArgument.ToString()));
             if (e.CommandName == "pass")
             {
                 model.status = AcctChangeEnum.审核成功;

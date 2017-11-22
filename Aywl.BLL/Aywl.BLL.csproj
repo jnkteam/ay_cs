@@ -63,6 +63,7 @@
     <Compile Include="Channel\SysChannelType.cs" />
     <Compile Include="Email\EmailCheck.cs" />
     <Compile Include="FeedBack\feedback.cs" />
+    <Compile Include="Manage\ManageRolesFactory.cs" />
     <Compile Include="MessagingFactory\QueueAccess.cs" />
     <Compile Include="News\NewsFactory.cs" />
     <Compile Include="OKXR\SMS.cs" />

@@ -556,7 +556,7 @@
 
         public static DataTable GetUserlevData()
         {
-            string commandText = "select \r\n      [userLevel]\r\n      ,[levName] from [payrate] where rateType = 3 or rateType = 4 ";
+            string commandText = "select \r\n      [userLevel]\r\n      ,[RateName] from [sys_payrate] where rateType = 3 or rateType = 4 ";
             return DataBase.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 

@@ -70,6 +70,9 @@
     <Compile Include="KuaiCard\WebUI\Manage\Console\CleanUpData.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\ManageRoles.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderPrint.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

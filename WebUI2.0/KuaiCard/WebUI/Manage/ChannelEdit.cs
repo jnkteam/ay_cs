@@ -14,8 +14,8 @@
 
     public class ChannelEdit : ManagePageBase
     {
-        public ChannelInfo _ItemInfo = null;
-        public ChannelTypeInfo _typeInfo = null;
+        public SysChannelInfo _ItemInfo = null;
+        public SysChannelTypeInfo _typeInfo = null;
         protected Button btnSave;
         protected DropDownList ddlSupp;
         protected DropDownList ddlType;
@@ -35,35 +35,23 @@
             int result = -1;
             int.TryParse(this.rblOpen.SelectedValue, out result);
             int num2 = -1;
-            int.TryParse(this.ddlSupp.SelectedValue, out num2);
+            int.TryParse(this.ddlTypeSupp.SelectedValue, out num2);
             string str2 = this.txtmodeName.Text;
-            int num3 = int.Parse(this.txtfaceValue.Text);
+            
             int num4 = 0;
             int.TryParse(this.ddlType.SelectedValue, out num4);
             int num5 = int.Parse(this.txtsort.Text);
-            this.model.code = text;
-            this.model.typeId = num4;
-            this.model.modeName = str2;
-            this.model.faceValue = num3;
-            if (result == -1)
-            {
-                this.model.isOpen = null;
-            }
-            else
-            {
-                this.model.isOpen = new int?(result);
-            }
-            if (num2 == -1)
-            {
-                this.model.supplier = null;
-            }
-            else
-            {
-                this.model.supplier = new int?(num2);
-            }
-            this.model.addtime = DateTime.Now;
-            this.model.sort = new int?(num5);
-            this.model.modeEnName = this.txtenmodeName.Text;
+            this.model.ChannelCode = text;
+            this.model.ChannelTypeId = num4;
+            this.model.ChannelName = str2;
+          
+            this.model.IsOpen = result == 1 ? true : false ;
+                     
+            this.model.SupplierCode = num2;
+            
+            this.model.AddTime = DateTime.Now;
+            this.model.ListSort = num5;
+            this.model.ChannelEnName = this.txtenmodeName.Text;
             string url = "ChannelList.aspx";
             if (this.Session["selecttype"] != null)
             {
@@ -71,7 +59,7 @@
             }
             if (!this.isUpdate)
             {
-                if (OriginalStudio.BLL.Channel.Channel.Add(this.model) > 0)
+                if (OriginalStudio.BLL.Channel.SysChannel.Add(this.model) > 0)
                 {
                     base.AlertAndRedirect("保存成功！");
                 }
@@ -80,9 +68,9 @@
                     base.AlertAndRedirect("保存失败！");
                 }
             }
-            else if (OriginalStudio.BLL.Channel.Channel.Update(this.model))
+            else if (OriginalStudio.BLL.Channel.SysChannel.Update(this.model))
             {
-                base.AlertAndRedirect("更新成功！", url);
+                base.AlertAndRedirect("更新成功！");
             }
             else
             {
@@ -97,11 +85,11 @@
             int.TryParse(this.ddlType.SelectedValue, out result);
             if (result > 0)
             {
-                ChannelTypeInfo modelByTypeId = ChannelType.GetModelByTypeId(result);
+                SysChannelTypeInfo modelByTypeId = SysChannelType.GetModelByTypeId(result);
                 if (modelByTypeId != null)
                 {
-                    this.ddlTypeSupp.SelectedValue = modelByTypeId.supplier.ToString();
-                    this.rblTypeOpen.SelectedValue = ((int) modelByTypeId.isOpen).ToString();
+                    this.ddlTypeSupp.SelectedValue = modelByTypeId.SupplierCode.ToString();
+                    //this.rblTypeOpen.SelectedValue = ((int) modelByTypeId.IsOpen).ToString();
                 }
             }
         }
@@ -113,22 +101,18 @@
             if (!base.IsPostBack)
             {
                 this.ddlType.Items.Add(new ListItem("---全部类别---", ""));
-                DataTable table = ChannelType.GetList(null).Tables[0];
+                DataTable table = SysChannelType.GetList(null).Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlType.Items.Add(new ListItem(row["modetypename"].ToString(), row["typeId"].ToString()));
+                    this.ddlType.Items.Add(new ListItem(row["typename"].ToString(), row["typeId"].ToString()));
                 }
                 DataTable table2 = SysSupplierFactory.GetList(string.Empty).Tables[0];
                 this.ddlTypeSupp.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table2.Rows)
                 {
-                    this.ddlTypeSupp.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
+                    this.ddlTypeSupp.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                 }
-                this.ddlSupp.Items.Add(new ListItem("--默认--", "-1"));
-                foreach (DataRow row in table2.Rows)
-                {
-                    this.ddlSupp.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
-                }
+               
                 this.ShowInfo();
             }
         }
@@ -146,25 +130,25 @@
         {
             if (this.isUpdate && (this.model != null))
             {
-                this.txtcode.Text = this.model.code;
-                this.ddlType.SelectedValue = this.model.typeId.ToString();
-                this.txtmodeName.Text = this.model.modeName;
-                this.txtfaceValue.Text = this.model.faceValue.ToString();
-                this.rblTypeOpen.SelectedValue = ((int) this.typeInfo.isOpen).ToString();
-                this.txtsort.Text = this.model.sort.ToString();
-                this.txtenmodeName.Text = this.model.modeEnName;
-                this.ddlTypeSupp.SelectedValue = this.typeInfo.supplier.ToString();
-                if (this.model.supplier.HasValue)
+                this.txtcode.Text = this.model.ChannelCode;
+                this.ddlType.SelectedValue = this.model.ChannelTypeId.ToString();
+                this.txtmodeName.Text = this.model.ChannelName;
+                
+                //this.rblTypeOpen.SelectedValue = ((int) this.typeInfo.IsOpen).ToString();
+                this.txtsort.Text = this.model.ListSort.ToString();
+                this.txtenmodeName.Text = this.model.ChannelEnName;
+                this.ddlTypeSupp.SelectedValue = this.typeInfo.SupplierCode.ToString();
+                if (this.model.SupplierCode>0)
                 {
-                    this.ddlSupp.SelectedValue = this.model.supplier.Value.ToString();
+                    this.ddlSupp.SelectedValue = this.model.SupplierCode.ToString();
                 }
-                if (this.model.isOpen.HasValue)
+                if (this.model.IsOpen)
                 {
-                    this.rblOpen.SelectedValue = this.model.isOpen.Value.ToString();
+                    this.rblOpen.SelectedValue = this.model.IsOpen ? "1" : "0" ;
                 }
             }
-            this.ddlTypeSupp.Enabled = false;
-            this.rblTypeOpen.Enabled = false;
+            //this.ddlTypeSupp.Enabled = false;
+            //this.rblTypeOpen.Enabled = false;
         }
 
         public bool isUpdate
@@ -183,7 +167,7 @@
             }
         }
 
-        public ChannelInfo model
+        public SysChannelInfo model
         {
             get
             {
@@ -191,18 +175,18 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = OriginalStudio.BLL.Channel.Channel.GetModel(this.ItemInfoId);
+                        this._ItemInfo = OriginalStudio.BLL.Channel.SysChannel.GetChannelModelByID(this.ItemInfoId);
                     }
                     else
                     {
-                        this._ItemInfo = new ChannelInfo();
+                        this._ItemInfo = new SysChannelInfo();
                     }
                 }
                 return this._ItemInfo;
             }
         }
 
-        public ChannelTypeInfo typeInfo
+        public SysChannelTypeInfo typeInfo
         {
             get
             {
@@ -210,11 +194,11 @@
                 {
                     if (this.model != null)
                     {
-                        this._typeInfo = ChannelType.GetModelByTypeId(this.model.typeId);
+                        this._typeInfo = SysChannelType.GetModelByTypeId(this.model.ChannelTypeId);
                     }
                     else
                     {
-                        this._typeInfo = new ChannelTypeInfo();
+                        this._typeInfo = new SysChannelTypeInfo();
                     }
                 }
                 return this._typeInfo;

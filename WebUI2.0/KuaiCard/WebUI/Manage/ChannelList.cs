@@ -40,7 +40,7 @@
             {
                 if (e.CommandName == "del")
                 {
-                    OriginalStudio.BLL.Channel.Channel.Delete(Convert.ToInt32(e.CommandArgument));
+                    OriginalStudio.BLL.Channel.SysChannel.Delete(Convert.ToInt32(e.CommandArgument));
                     base.AlertAndRedirect("删除成功");
                 }
             }
@@ -56,19 +56,24 @@
             {
                 DataRowView dataItem = e.Row.DataItem as DataRowView;
                 Literal literal = e.Row.FindControl("litopen") as Literal;
-                string str = "Unknown";
+                Literal literalChannelTypeName = e.Row.FindControl("ChannelTypeName") as Literal;
+
+                string str = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
                 if (dataItem["isOpen"] != DBNull.Value)
                 {
                     if (Convert.ToInt32(dataItem["isOpen"]) == 0)
                     {
-                        str = "wrong";
+                        str = "<a title='关闭'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
                     }
                     else
                     {
-                        str = "right";
+                        str = "<a title='开启' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
                     }
                 }
-                literal.Text = string.Format("<img  src='../style/images/{0}.png' />", str);
+                literal.Text =  str;
+                string channelTypeName = SysChannelType.GetModelByTypeId(Convert.ToInt32(dataItem["ChannelTypeId"])).TypeName;
+                literalChannelTypeName.Text = channelTypeName;
+
             }
         }
 
@@ -79,7 +84,7 @@
             {
                 int.TryParse(this.ddlType.SelectedValue, out result);
             }
-            this.GVChannel.DataSource = OriginalStudio.BLL.Channel.Channel.GetList(result);
+            this.GVChannel.DataSource = OriginalStudio.BLL.Channel.SysChannel.GetList(result);
             this.GVChannel.DataBind();
         }
 
@@ -89,11 +94,11 @@
             //this.setPower();
             if (!base.IsPostBack)
             {
-                this.ddlType.Items.Add(new ListItem("---全部类别---", ""));
-                DataTable table = ChannelType.GetList(null).Tables[0];
+                this.ddlType.Items.Add(new ListItem("---全部类型---", ""));
+                DataTable table = SysChannelType.GetList(null).Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlType.Items.Add(new ListItem(row["modetypename"].ToString(), row["typeId"].ToString()));
+                    this.ddlType.Items.Add(new ListItem(row["typename"].ToString(), row["typeId"].ToString()));
                 }
                 if (!string.IsNullOrEmpty(this.ptypeId))
                 {

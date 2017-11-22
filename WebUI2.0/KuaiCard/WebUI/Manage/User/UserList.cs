@@ -69,7 +69,7 @@
                 string str = base.Request.Form["chkItem"];
                 foreach (string str2 in str.Split(new char[] { ',' }))
                 {
-                    UserFactory.Del(int.Parse(str2));
+                    MchUserFactory.Del(int.Parse(str2));
                 }
             }
             catch
@@ -88,7 +88,7 @@
             if (!string.IsNullOrEmpty(this.cmd) && (this.UserID > 0))
             {
                 List<UsersUpdateLog> changeList = new List<UsersUpdateLog>();
-                UserInfo model = UserFactory.GetModel(this.UserID);
+                MchUserBaseInfo model = MchUserFactory.GetUserBaseByUserID(this.UserID);
                 if (this.cmd == "ok")
                 {
                     changeList.Add(this.newUpdateLog("Status", model.Status.ToString(), "2", "审核"));
@@ -113,14 +113,16 @@
                     model.UserType = UserTypeEnum.会员;
                     model.UserLevel = UserLevelEnum.初级代理;
                 }
-                if (UserFactory.Update(model, changeList))
+                /* 此处在修改后  需要打开
+                if (MchUserBaseInfo.Update(model, changeList))
                 {
-                    base.AlertAndRedirect("操作成功", "UserList.aspx");
+                    base.AlertAndRedirect("操作成功");
                 }
                 else
                 {
                     base.AlertAndRedirect("操作失败");
                 }
+                */
             }
         }
 
@@ -206,7 +208,7 @@
                 searchParams.Add(new SearchParam("specialchannel", this.ddlSpecial.SelectedValue));
             }
             string orderby = this.orderBy + " " + this.orderByType;
-            DataSet set = UserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = MchUserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.rptUsers.DataSource = set.Tables[1];
             this.rptUsers.DataBind();
@@ -239,7 +241,7 @@
                 DataTable userlevData = PayRateFactory.GetUserlevData();
                 foreach (DataRow row in userlevData.Rows)
                 {
-                    this.ddlpayrate.Items.Add(new ListItem(row["levName"].ToString(), row["userLevel"].ToString()));
+                    this.ddlpayrate.Items.Add(new ListItem(row["RateName"].ToString(), row["userLevel"].ToString()));
                 }
                 if (this.proid > 0)
                 {
@@ -278,8 +280,8 @@
             {
                 string s = DataBinder.Eval(e.Item.DataItem, "userType").ToString();
                 string str3 = DataBinder.Eval(e.Item.DataItem, "status").ToString();
-                string str4 = DataBinder.Eval(e.Item.DataItem, "levName").ToString();
-                string str5 = DataBinder.Eval(e.Item.DataItem, "settles").ToString();
+                string str4 = DataBinder.Eval(e.Item.DataItem, "UserLevel").ToString();
+                //string str5 = DataBinder.Eval(e.Item.DataItem, "settles").ToString();
                 string str6 = DataBinder.Eval(e.Item.DataItem, "manageId").ToString();
                 Label label = (Label) e.Item.FindControl("lblUserType");
                 label.Text = Enum.GetName(typeof(UserTypeEnum), int.Parse(s));
@@ -288,8 +290,8 @@
                 Label label3 = (Label) e.Item.FindControl("lblUserLevel");
                 label3.Text = str4;
                 Label label4 = (Label) e.Item.FindControl("lblUserSettle");
-                label4.Text = "T+" + str5;
-                string str7 = DataBinder.Eval(e.Item.DataItem, "id").ToString();
+                //label4.Text = "T+" + str5;
+                string str7 = DataBinder.Eval(e.Item.DataItem, "userid").ToString();
                 string relname = string.Empty;
                 string str9 = str3;
                 if (str9 != null)

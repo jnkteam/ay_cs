@@ -404,41 +404,20 @@
 
         #endregion
 
-        #region 业务操作
+        #region 增删改
 
-        public static int Add(ChannelInfo model)
+        public static int Add(SysChannelInfo model)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] {
-                    new SqlParameter("@id", SqlDbType.Int, 10),
-                    new SqlParameter("@code", SqlDbType.VarChar, 10),
-                    new SqlParameter("@typeId", SqlDbType.Int, 10),
-                    new SqlParameter("@supplier", SqlDbType.Int, 10),
-                    new SqlParameter("@modeName", SqlDbType.VarChar, 50),
-                    new SqlParameter("@modeEnName", SqlDbType.VarChar, 50),
-                    new SqlParameter("@faceValue", SqlDbType.Int, 10),
-                    new SqlParameter("@isOpen", SqlDbType.TinyInt, 1),
-                    new SqlParameter("@addtime", SqlDbType.DateTime),
-                    new SqlParameter("@sort", SqlDbType.Int, 10)
-                };
-                commandParameters[0].Direction = ParameterDirection.Output;
-                commandParameters[1].Value = model.code;
-                commandParameters[2].Value = model.typeId;
-                commandParameters[3].Value = model.supplier;
-                commandParameters[4].Value = model.modeName;
-                commandParameters[5].Value = model.modeEnName;
-                commandParameters[6].Value = model.faceValue;
-                commandParameters[7].Value = model.isOpen;
-                commandParameters[8].Value = model.addtime;
-                commandParameters[9].Value = model.sort;
-                DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_ADD", commandParameters);
-                int num = (int) commandParameters[0].Value;
-                if (num > 0)
-                {
-                    ClearCache();
-                }
-                return num;
+                //DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_channel_ADD", commandParameters);
+                //int num = (int) commandParameters[0].Value;
+                //if (num > 0)
+                //{
+                //    ClearCache();
+                //}
+                //return num;
+                return 1;
             }
             catch (Exception exception)
             {
@@ -545,27 +524,28 @@
             }
         }
 
-        public static bool Update(ChannelInfo model)
+        public static bool Update(SysChannelInfo model)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@code", SqlDbType.VarChar, 10), new SqlParameter("@typeId", SqlDbType.Int, 10), new SqlParameter("@supplier", SqlDbType.Int, 10), new SqlParameter("@modeName", SqlDbType.VarChar, 50), new SqlParameter("@modeEnName", SqlDbType.VarChar, 50), new SqlParameter("@faceValue", SqlDbType.Int, 10), new SqlParameter("@isOpen", SqlDbType.TinyInt, 1), new SqlParameter("@addtime", SqlDbType.DateTime), new SqlParameter("@sort", SqlDbType.Int, 10) };
-                commandParameters[0].Value = model.id;
-                commandParameters[1].Value = model.code;
-                commandParameters[2].Value = model.typeId;
-                commandParameters[3].Value = model.supplier;
-                commandParameters[4].Value = model.modeName;
-                commandParameters[5].Value = model.modeEnName;
-                commandParameters[6].Value = model.faceValue;
-                commandParameters[7].Value = model.isOpen;
-                commandParameters[8].Value = DateTime.Now;
-                commandParameters[9].Value = model.sort;
-                bool flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_Update", commandParameters) > 0;
-                if (flag)
-                {
-                    ClearCache();
-                }
-                return flag;
+                //SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@code", SqlDbType.VarChar, 10), new SqlParameter("@typeId", SqlDbType.Int, 10), new SqlParameter("@supplier", SqlDbType.Int, 10), new SqlParameter("@modeName", SqlDbType.VarChar, 50), new SqlParameter("@modeEnName", SqlDbType.VarChar, 50), new SqlParameter("@faceValue", SqlDbType.Int, 10), new SqlParameter("@isOpen", SqlDbType.TinyInt, 1), new SqlParameter("@addtime", SqlDbType.DateTime), new SqlParameter("@sort", SqlDbType.Int, 10) };
+                //commandParameters[0].Value = model.id;
+                //commandParameters[1].Value = model.code;
+                //commandParameters[2].Value = model.typeId;
+                //commandParameters[3].Value = model.supplier;
+                //commandParameters[4].Value = model.modeName;
+                //commandParameters[5].Value = model.modeEnName;
+                //commandParameters[6].Value = model.faceValue;
+                //commandParameters[7].Value = model.isOpen;
+                //commandParameters[8].Value = DateTime.Now;
+                //commandParameters[9].Value = model.sort;
+                //bool flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_channel_Update", commandParameters) > 0;
+                //if (flag)
+                //{
+                //    ClearCache();
+                //}
+                //return flag;
+                return true;
             }
             catch (Exception exception)
             {

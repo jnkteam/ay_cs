@@ -99,36 +99,36 @@
                                 break;
 
                             case "stime":
-                                builder.Append(" AND [mydate] >= @beginmydate");
-                                parameter = new SqlParameter("@beginmydate", SqlDbType.VarChar, 10);
+                                builder.Append(" AND [OrderDate] >= @beginmydate");
+                                parameter = new SqlParameter("@OrderDate", SqlDbType.VarChar, 10);
                                 parameter.Value = param2.ParamValue;
                                 paramList.Add(parameter);
                                 break;
 
                             case "etime":
-                                builder.Append(" AND [mydate] <= @endmydate");
-                                parameter = new SqlParameter("@endmydate", SqlDbType.VarChar, 10);
+                                builder.Append(" AND [OrderDate] <= @endmydate");
+                                parameter = new SqlParameter("@OrderDate", SqlDbType.VarChar, 10);
                                 parameter.Value = param2.ParamValue;
                                 paramList.Add(parameter);
                                 break;
 
                             case "fvaluefrom":
-                                builder.Append(" AND [faceValue] >= @fvaluefrom");
-                                parameter = new SqlParameter("@fvaluefrom", SqlDbType.Decimal, 9);
+                                builder.Append(" AND [OrderValue] >= @fvaluefrom");
+                                parameter = new SqlParameter("@OrderValue", SqlDbType.Decimal, 9);
                                 parameter.Value = param2.ParamValue;
                                 paramList.Add(parameter);
                                 break;
 
                             case "fvalueto":
-                                builder.Append(" AND [faceValue] <= @fvalueto");
-                                parameter = new SqlParameter("@fvalueto", SqlDbType.Decimal, 9);
+                                builder.Append(" AND [OrderValue] <= @fvalueto");
+                                parameter = new SqlParameter("@OrderValue", SqlDbType.Decimal, 9);
                                 parameter.Value = param2.ParamValue;
                                 paramList.Add(parameter);
                                 break;
 
                             case "typeid":
-                                builder.Append(" AND [typeId] = @typeId");
-                                parameter = new SqlParameter("@typeId", SqlDbType.Int);
+                                builder.Append(" AND [ChanneltypeId] = @typeId");
+                                parameter = new SqlParameter("@ChanneltypeId", SqlDbType.Int);
                                 parameter.Value = (int) param2.ParamValue;
                                 paramList.Add(parameter);
                                 break;
@@ -453,44 +453,6 @@
                 commandParameters[0].Value = orderid;
                 commandParameters[1].Value = bankcode;
                 commandParameters[2].Value = suppid;
-                return (DataBase.ExecuteNonQuery(CommandType.Text, commandText, commandParameters) > 0);
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return false;
-            }
-        }
-
-        public static bool UpdateCardOrderStatus(string orderid)
-        {
-            try
-            {
-                string commandText = "update ordercardamt set [status] = 1 where orderid=@orderid and [status] = 4";
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@orderid", SqlDbType.VarChar, 30) };
-                commandParameters[0].Value = orderid;
-                return (DataBase.ExecuteNonQuery(CommandType.Text, commandText, commandParameters) > 0);
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return false;
-            }
-        }
-
-        public static bool UpdateCardOrderStatus(string orderid, int suppid, decimal refervalue)
-        {
-            try
-            {
-                string commandText = "declare @status tinyint\r\nset @status = 1\r\nselect @status = [status] from ordercardamt with(nolock) where orderid=@orderid\r\nset @status = isnull(@status,1)\r\n\r\nif (@status = 1 or @status = 4)\r\nbegin\r\n\tupdate ordercard set supplierID = @supplierID,refervalue=@refervalue where orderid=@orderid\r\n\tupdate ordercardamt set [status] = 1 where orderid=@orderid\r\nend";
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    new SqlParameter("@orderid", SqlDbType.VarChar, 30), 
-                    new SqlParameter("@supplierID", SqlDbType.Int, 10), 
-                    new SqlParameter("@refervalue", SqlDbType.Decimal, 9) 
-                };
-                commandParameters[0].Value = orderid;
-                commandParameters[1].Value = suppid;
-                commandParameters[2].Value = refervalue;
                 return (DataBase.ExecuteNonQuery(CommandType.Text, commandText, commandParameters) > 0);
             }
             catch (Exception exception)

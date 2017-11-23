@@ -14,6 +14,7 @@
     {
         protected DataTable ManageRolesTable = null;
         protected GridView GridView;
+        protected Button delete;
         protected void Page_Load(object sender, EventArgs e)
         {
             DataSet set = ManageRolesFactory.GetList(null);
@@ -34,14 +35,22 @@
                         row["statusStr"] = "<a title='启用' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
                         break;
                 }
-                
+
             }
             this.GridView.DataSource = ManageRolesTable;
             this.GridView.DataBind();
 
         }
-       
-
+        protected void BtnDelete_Click(object sender, CommandEventArgs e)
+        {
+            if (ManageRolesFactory.Delete(Convert.ToInt32(e.CommandArgument)))
+            {
+                base.AlertAndRedirect("删除成功");
+            }
+            else {
+                base.AlertAndRedirect("删除失败");
+            }
+        }
     }
 }
 

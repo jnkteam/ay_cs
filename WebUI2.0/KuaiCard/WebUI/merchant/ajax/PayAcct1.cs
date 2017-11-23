@@ -60,6 +60,7 @@
                 if (string.IsNullOrEmpty(str))
                 {
                     MchUserPayBankInfo model = new MchUserPayBankInfo();
+                    /*
                     model.pmode = num;
                     model.payeeBank = str2;
                     model.bankProvince = str4;
@@ -70,13 +71,15 @@
                     model.AddTime = new DateTime?(DateTime.Now);
                     model.userid = this.currentUser.ID;
                     model.status = AcctChangeEnum.审核成功;
+                    */
                     int num2 = 0;// UserPayBankApp.Add(model);
                     if (num2 > 0)
-                    {
+                    {   /*
                         model.id = num2;
                         model.status = AcctChangeEnum.审核成功;
                         model.SureTime = new DateTime?(DateTime.Now);
                         model.SureUser = 0;
+                        */
                         //UserPayBankApp.Check(model);
                         str = "true";
                     }

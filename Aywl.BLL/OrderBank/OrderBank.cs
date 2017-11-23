@@ -802,5 +802,33 @@
         }
 
         #endregion
+
+        #region 订单统计数据
+
+        /// <summary>
+        /// 统计N小时内的成功率。
+        /// </summary>
+        /// <param name="p_hour">小时</param>
+        /// <returns>成功订单 比 订单总数</returns>
+        public DataSet StatSuccessPercent(int p_hour)
+        {
+            DataSet ds = new DataSet();
+
+            return ds;
+        }
+
+        /// <summary>
+        /// 统计N小时内各种通道订单金额及成功金额，成功率
+        /// </summary>
+        /// <param name="p_hour">小时</param>
+        /// <returns></returns>
+        public DataSet StatChannelTypeOrderData(int p_hour)
+        {
+            DataSet ds = new DataSet();
+
+            return ds;
+        }
+
+        #endregion
     }
 }

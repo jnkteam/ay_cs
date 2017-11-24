@@ -15,9 +15,9 @@
         public Model.ManageRoles _ItemInfo = null;
         protected Button btnAdd;
 
-        protected string rolesMenu = string.Empty;
+        protected string rolesRules = string.Empty;
         private object context;
-        protected HiddenField rolesMenuCheckBox;
+        protected HiddenField rolesRulesCheckBox;
         protected void btnAdd_Click(object sender, EventArgs e)
         {
 
@@ -25,9 +25,9 @@
             if (this.isUpdate)
             {
                 this.ItemInfo.Id = this.ItemInfoId;
-                this.ItemInfo.Rules = this.rolesMenuCheckBox.Value;
+                this.ItemInfo.Rules = this.rolesRulesCheckBox.Value;
 
-                if (ManageRolesFactory.UpdateMenu(this.ItemInfo))
+                if (ManageRolesFactory.UpdateRules(this.ItemInfo))
                 {
                     flag = true;
                 }
@@ -50,7 +50,7 @@
 
             if (this.isUpdate)
             {
-                this.rolesMenu = ExMenuFactory.getRolesRules(this.ItemInfo);
+                this.rolesRules = ExMenuFactory.getRolesRules(this.ItemInfo);
             }
         }
 

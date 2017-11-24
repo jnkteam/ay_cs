@@ -8,6 +8,7 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using System.Data;
 
     public class ManageEdit : ManagePageBase
     {
@@ -18,6 +19,7 @@
         protected CheckBox ckb_SuperAdmin;
         protected DropDownList ddlCommissionType;
         protected DropDownList ddlStus;
+        protected DropDownList roles;
         protected HtmlForm form1;
         protected HiddenField hf_isupdate;
         protected TextBox lblbalance;
@@ -67,6 +69,8 @@
             }
             this.ItemInfo.relname = str4;
             this.ItemInfo.role = none;
+            this.ItemInfo.ManageRole = int.Parse(this.roles.SelectedValue);
+
             this.ItemInfo.commissiontype = new int?(int.Parse(this.ddlCommissionType.SelectedValue));
             decimal result = 0M;
             if (!decimal.TryParse(this.txtCommission.Text.Trim(), out result))
@@ -103,7 +107,7 @@
                     }
                     if (flag)
                     {
-                        base.AlertAndRedirect("操作成功", "Manage.aspx");
+                        base.AlertAndRedirect("操作成功");
                     }
                     else
                     {
@@ -128,6 +132,11 @@
                     this.cbl_roles.Items.Add(item);
                 }
             }
+            DataTable table = ManageRolesFactory.GetList("status = 1").Tables[0];
+            foreach (DataRow row in table.Rows)
+            {
+                this.roles.Items.Add(new ListItem(row["title"].ToString(), row["id"].ToString()));
+            }
             if (this.isUpdate)
             {
                 this.hf_isupdate.Value = "1";
@@ -137,7 +146,8 @@
                 this.ddlStus.SelectedValue = this.ItemInfo.status.ToString();
                 this.lbllastloginip.Text = this.ItemInfo.lastLoginIp;
                 this.qq.Text = this.ItemInfo.qq;
-                this.tel.Text = this.ItemInfo.tel;
+                this.tel.Text = this.ItemInfo.tel;               
+                this.roles.SelectedValue = this.ItemInfo.ManageRole.ToString();
                 if (this.ItemInfo.lastLoginTime.HasValue)
                 {
                     this.lbllastlogintime.Text = this.ItemInfo.lastLoginTime.Value.ToString("yyyy-MM-dd HH:mm:ss");
@@ -157,6 +167,11 @@
                 this.ckb_SuperAdmin.Checked = this.ItemInfo.isSuperAdmin > 0;
                 this.ckb_Agent.Checked = this.ItemInfo.isAgent > 0;
             }
+            else {
+               
+                
+            }
+           
         }
 
         protected void Page_Load(object sender, EventArgs e)

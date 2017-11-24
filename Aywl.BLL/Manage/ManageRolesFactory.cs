@@ -13,6 +13,9 @@
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Web;
+    using System.Security.Cryptography;
+    using System.IO;
+
     /// <summary>
     /// 角色管理
     /// </summary>
@@ -23,7 +26,8 @@
         internal static string SQL_TABLE = "manageRoles";
         internal static string SQL_TABLE_FIELD = "[id],[module],[type],[title],[description],[status],[rules],[menu]";
         internal static string SQL_TABLE_FIELD_INSERT = "[module],[type],[title],[description],[status]";
-
+        const string KEY_64 = "EavicCpp";//密匙，8个字符，64位   
+        const string IV_64  = "EavicCpp";
 
 
         /// <summary>
@@ -108,7 +112,11 @@
             return manageRoles;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public static int Add(ManageRoles model) { 
             try
             {
@@ -143,7 +151,11 @@
                 return 0;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public static bool Update(ManageRoles model)
         {
             try
@@ -198,9 +210,9 @@
                     new SqlParameter("@menu", SqlDbType.VarChar, 500),                  
                     new SqlParameter("@id", SqlDbType.Int, 10),
                 };
-
-
-                commandParameters[0].Value = model.Menu;
+               
+                string menus = !string.IsNullOrEmpty(model.Menu.ToString()) ? EnCode(model.Menu.ToString()) : string.Empty;
+                commandParameters[0].Value = menus;
                 commandParameters[1].Value = model.Id;
                 
 
@@ -211,6 +223,84 @@
                 ExceptionHandler.HandleException(exception);
                 return false;
             }
+        }
+        public static bool UpdateRules(ManageRoles model)
+        {
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.Append("update " + SQL_TABLE + " set ");
+                builder.Append("rules=@rules ");
+                builder.Append(" where id=@id  ");
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@rules", SqlDbType.VarChar, 500),
+                    new SqlParameter("@id", SqlDbType.Int, 10),
+                };
+
+                string rules = !string.IsNullOrEmpty(model.Rules.ToString()) ? EnCode(model.Rules.ToString()) : string.Empty;
+                commandParameters[0].Value = rules;
+                commandParameters[1].Value = model.Id;
+
+
+                return (DataBase.ExecuteNonQuery(CommandType.Text, builder.ToString(), commandParameters) > 0);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
+            }
+        }
+        /// <summary>
+        /// encode
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string EnCode(string data)
+        {
+            byte[] byKey = System.Text.ASCIIEncoding.ASCII.GetBytes(KEY_64);
+            byte[] byIV = System.Text.ASCIIEncoding.ASCII.GetBytes(IV_64);
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            int i = cryptoProvider.KeySize;
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cst = new CryptoStream(ms, cryptoProvider.CreateEncryptor(byKey,
+
+    byIV), CryptoStreamMode.Write);
+
+            StreamWriter sw = new StreamWriter(cst);
+            sw.Write(data);
+            sw.Flush();
+            cst.FlushFinalBlock();
+            sw.Flush();
+            return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length);
+        }
+        /// <summary>
+        /// decode
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string DeCode(string data)
+        {
+            byte[] byKey = System.Text.ASCIIEncoding.ASCII.GetBytes(KEY_64);
+            byte[] byIV = System.Text.ASCIIEncoding.ASCII.GetBytes(IV_64);
+
+            byte[] byEnc;
+            try
+            {
+                byEnc = Convert.FromBase64String(data);
+            }
+            catch
+            {
+                return null;
+            }
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream ms = new MemoryStream(byEnc);
+            CryptoStream cst = new CryptoStream(ms, cryptoProvider.CreateDecryptor(byKey,
+
+    byIV), CryptoStreamMode.Read);
+            StreamReader sr = new StreamReader(cst);
+            return sr.ReadToEnd();
         }
         /// <summary>
         /// 删除

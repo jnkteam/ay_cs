@@ -107,14 +107,14 @@
             MchUserPayBankInfo model = new MchUserPayBankInfo();// UserPayBankApp.GetModel(int.Parse(e.CommandArgument.ToString()));
             if (e.CommandName == "pass")
             {
-                model.status = AcctChangeEnum.审核成功;
+                //model.status = AcctChangeEnum.审核成功;
             }
             else if (e.CommandName == "fail")
             {
-                model.status = AcctChangeEnum.审核失败;
+                //model.status = AcctChangeEnum.审核失败;
             }
-            model.SureTime = new DateTime?(DateTime.Now);
-            model.SureUser = new int?(base.currentManage.id);
+            //model.SureTime = new DateTime?(DateTime.Now);
+            //model.SureUser = new int?(base.currentManage.id);
             if (false)  //UserPayBankApp.Check(model))
             {
                 base.AlertAndRedirect("操作成功", "UserPayAccts.aspx");

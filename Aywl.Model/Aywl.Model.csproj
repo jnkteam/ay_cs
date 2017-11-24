@@ -52,6 +52,7 @@
     <Compile Include="FeedBack\feedbackstatus.cs" />
     <Compile Include="FeedBack\feedbacktype.cs" />
     <Compile Include="Json\AjaxResult.cs" />
+    <Compile Include="Manage\ManageRoles.cs" />
     <Compile Include="News\NewsInfo.cs" />
     <Compile Include="News\NewsType.cs" />
     <Compile Include="PayRate\SysPayrateInfo.cs" />

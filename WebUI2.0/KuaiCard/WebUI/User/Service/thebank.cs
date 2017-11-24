@@ -155,24 +155,24 @@
                     else if (string.IsNullOrEmpty(str))
                     {
                         info = new MchUserPayBankInfo();
-                        info.pmode = 1;
-                        info.BankCode = bankCode;
-                        info.payeeBank = (chlObj == null) ? "空" : chlObj.bankName;
-                        info.payeeName = payeeName;
-                        info.userid = this.currentUser.ID;
-                        info.status = AcctChangeEnum.审核成功;
-                        info.bankProvince = string.Empty;
-                        info.bankCity = string.Empty;
-                        info.bankAddress = string.Empty;
-                        info.account = accountID;
-                        info.AddTime = new DateTime?(DateTime.Now);
+                        info.PMode = 1;
+                        info.BankCode = int.Parse(bankCode);
+                        //info.payeeBank = (chlObj == null) ? "空" : chlObj.bankName;
+                        //info.payeeName = payeeName;
+                        info.UserID = this.currentUser.ID;
+                        //info.status = AcctChangeEnum.审核成功;
+                        //info.bankProvince = string.Empty;
+                        info.BankCity = string.Empty;
+                        info.BankAddress = string.Empty;
+                        info.AccountName = accountID;
+                        info.AddTime = DateTime.Now;
                         num = 0;  // UserPayBankApp.Add(info);
                         if (num > 0)
                         {
-                            info.id = num;
-                            info.status = AcctChangeEnum.审核成功;
-                            info.SureTime = new DateTime?(DateTime.Now);
-                            info.SureUser = 0;
+                            info.ID = num;
+                            //info.status = AcctChangeEnum.审核成功;
+                            info.AddTime = DateTime.Now;
+                            //info.SureUser = 0;
                             if (false)  //UserPayBankApp.Check(info))
                             {
                                 str = "添加成功!";
@@ -209,19 +209,19 @@
                 else if (string.IsNullOrEmpty(str))
                 {
                     info = new MchUserPayBankInfo();
-                    info.pmode = 2;
-                    info.payeeBank = "支付宝";
-                    info.payeeName = str11;
-                    info.AddTime = new DateTime?(DateTime.Now);
-                    info.userid = this.currentUser.ID;
-                    info.status = AcctChangeEnum.审核成功;
+                    info.PMode = 2;
+                    //info.payeeBank = "支付宝";
+                    //info.payeeName = str11;
+                    info.AddTime = DateTime.Now;
+                    info.UserID = this.currentUser.ID;
+                    //info.status = AcctChangeEnum.审核成功;
                     num = 0;//UserPayBankApp.Add(info);
                     if (num > 0)
                     {
-                        info.id = num;
-                        info.status = AcctChangeEnum.审核成功;
-                        info.SureTime = new DateTime?(DateTime.Now);
-                        info.SureUser = 0;
+                        info.ID = num;
+                        //info.status = AcctChangeEnum.审核成功;
+                        //info.SureTime = new DateTime?(DateTime.Now);
+                        //info.SureUser = 0;
                         if (false) // UserPayBankApp.Check(info))
                         {
                             str = "添加成功!";

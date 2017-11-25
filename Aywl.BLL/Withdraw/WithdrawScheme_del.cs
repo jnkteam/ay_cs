@@ -8,7 +8,7 @@
     using System.Data.SqlClient;
     using System.Text;
 
-    public class WithdrawScheme
+    public class WithdrawScheme_del
     {
         public static int Add(TocashSchemeInfo model)
         {

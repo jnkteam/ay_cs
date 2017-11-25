@@ -129,6 +129,7 @@
             modle.WithdrawScheme.AlipayDetentionDays = Utils.StrToInt(dr["alipaydetentiondays"]);
             modle.WithdrawScheme.WeiXinDetentionDays = Utils.StrToInt(dr["weixindetentiondays"]);
             modle.WithdrawScheme.OtherDetentionDays = Utils.StrToInt(dr["otherdetentiondays"]);
+            modle.WithdrawScheme.TranSupplier = Utils.StrToInt(dr["TranSupplier"]);           
 
             return modle;
         }
@@ -556,7 +557,7 @@
                     {
                         case "id":
                         {
-                            builder.Append(" AND [id] = @id");
+                            builder.Append(" AND [userid] = @id");
                             parameter = new SqlParameter("@id", SqlDbType.Int);
                             parameter.Value = (int) param2.ParamValue;
                             paramList.Add(parameter);
@@ -570,6 +571,14 @@
                             paramList.Add(parameter);
                             continue;
                         }
+                        case "merchantname":
+                            {
+                                builder.Append(" AND [merchantname] like @MerchantName");
+                                parameter = new SqlParameter("@MerchantName", SqlDbType.VarChar, 20);
+                                parameter.Value = "%" + SqlHelper.CleanString((string)param2.ParamValue, 20) + "%";
+                                paramList.Add(parameter);
+                                continue;
+                            }
                         case "qq":
                         {
                             builder.Append(" AND [qq] like @qq");
@@ -580,7 +589,7 @@
                         }
                         case "tel":
                         {
-                            builder.Append(" AND [Tel] like @tel");
+                            builder.Append(" AND [Phone] like @tel");
                             parameter = new SqlParameter("@tel", SqlDbType.VarChar, 50);
                             parameter.Value = "%" + SqlHelper.CleanString((string) param2.ParamValue, 50) + "%";
                             paramList.Add(parameter);
@@ -594,14 +603,14 @@
                             paramList.Add(parameter);
                             continue;
                         }
-                        case "full_name":
-                        {
-                            builder.Append(" AND [full_name] like @full_name");
-                            parameter = new SqlParameter("@full_name", SqlDbType.VarChar, 50);
-                            parameter.Value = "%" + SqlHelper.CleanString((string) param2.ParamValue, 50) + "%";
-                            paramList.Add(parameter);
-                            continue;
-                        }
+                        //case "full_name":
+                        //{
+                        //    builder.Append(" AND [full_name] like @full_name");
+                        //    parameter = new SqlParameter("@full_name", SqlDbType.VarChar, 50);
+                        //    parameter.Value = "%" + SqlHelper.CleanString((string) param2.ParamValue, 50) + "%";
+                        //    paramList.Add(parameter);
+                        //    continue;
+                        //}
                         case "status":
                         {
                             builder.Append(" AND [status] = @status");
@@ -610,14 +619,14 @@
                             paramList.Add(parameter);
                             continue;
                         }
-                        case "usertype":
-                        {
-                            builder.Append(" AND [userType] = @userType");
-                            parameter = new SqlParameter("@userType", SqlDbType.TinyInt);
-                            parameter.Value = (int) param2.ParamValue;
-                            paramList.Add(parameter);
-                            continue;
-                        }
+                        //case "usertype":
+                        //{
+                        //    builder.Append(" AND [userType] = @userType");
+                        //    parameter = new SqlParameter("@userType", SqlDbType.TinyInt);
+                        //    parameter.Value = (int) param2.ParamValue;
+                        //    paramList.Add(parameter);
+                        //    continue;
+                        //}
                         case "specialchannel":
                         {
                             string paramValue = (string) param2.ParamValue;
@@ -629,7 +638,7 @@
                         }
                         case "special":
                         {
-                            builder.Append(" AND [special] = @special");
+                            builder.Append(" AND [PayRateID] = @special");
                             parameter = new SqlParameter("@special", SqlDbType.TinyInt);
                             parameter.Value = (int) param2.ParamValue;
                             paramList.Add(parameter);
@@ -637,7 +646,7 @@
                         }
                         case "isrealnamepass":
                         {
-                            builder.Append(" AND [isRealNamePass] = @isRealNamePass");
+                            builder.Append(" AND [IsRealName] = @isRealNamePass");
                             parameter = new SqlParameter("@isRealNamePass", SqlDbType.TinyInt);
                             parameter.Value = (int) param2.ParamValue;
                             paramList.Add(parameter);
@@ -651,14 +660,14 @@
                             paramList.Add(parameter);
                             continue;
                         }
-                        case "proid":
-                        {
-                            builder.Append(" AND Exists(select 0 from PromotionUser where PromotionUser.PID = @proid and PromotionUser.RegId=v_users.id)");
-                            parameter = new SqlParameter("@proid", SqlDbType.Int);
-                            parameter.Value = (int) param2.ParamValue;
-                            paramList.Add(parameter);
-                            continue;
-                        }
+                        //case "proid":
+                        //{
+                        //    builder.Append(" AND Exists(select 0 from PromotionUser where PromotionUser.PID = @proid and PromotionUser.RegId=v_users.id)");
+                        //    parameter = new SqlParameter("@proid", SqlDbType.Int);
+                        //    parameter.Value = (int) param2.ParamValue;
+                        //    paramList.Add(parameter);
+                        //    continue;
+                        //}
                         case "manageid":
                         {
                             builder.Append(" AND [manageId] = @manageId");
@@ -688,10 +697,10 @@
                             continue;
                         }
                     }
-                    builder.Append(" AND exists(select 0 from channeltypeusers where isnull(suppid,0)>0 and userid=v_users.id)");
+                    builder.Append(" AND exists(select 0 from mch_userChannelType where isnull(SupplierCode,0)>0 and userid=v_mch_user_detail.userid)");
                     continue;
                 Label_05B7:
-                    builder.Append(" AND not exists(select 0 from channeltypeusers where isnull(suppid,0)>0 and userid=v_users.id)");
+                    builder.Append(" AND not exists(select 0 from mch_userChannelType where isnull(SupplierCode,0)>0 and userid=v_mch_user_detail.userid)");
                 }
             }
             return builder.ToString();

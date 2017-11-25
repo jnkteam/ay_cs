@@ -54,7 +54,6 @@
             }
         }
 
-
         public static bool Update(SettledInfo model)
         {
             try
@@ -123,7 +122,6 @@
                 return 0;
             }
         }
-
 
         public static bool Delete(DateTime etime)
         {
@@ -448,12 +446,21 @@
             return str;
         }
 
+
+        #region 提现操作
+
+        /// <summary>
+        /// 获取商户体现总额
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public static decimal GetUserDaySettledAmt(int userid, string day)
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    DataBase.MakeInParam("@userid", SqlDbType.Int, 10, userid), 
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@userid", SqlDbType.Int, 10, userid),
                     DataBase.MakeInParam("@day", SqlDbType.VarChar, 20, day)
                 };
 
@@ -466,6 +473,12 @@
             }
         }
 
+        /// <summary>
+        /// 商户指定某天提现次数
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public static int GetUserDaySettledTimes(int userid, string day)
         {
             try
@@ -483,7 +496,9 @@
                 return 0;
             }
         }
-        
+
+        #endregion
+
         #region 查询操作
 
         public static DataSet PageSearch(List<SearchParam> searchParams, int pageSize, int page, string orderby)

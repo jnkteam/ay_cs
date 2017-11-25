@@ -64,7 +64,7 @@ namespace OriginalStudio.Model.User
         private System.Int32 _logintype = 0;
         private String _token = "";
 
-        private Withdraw.WithdrawScheme _withdrawscheme = new Withdraw.WithdrawScheme();
+        private Withdraw.WithdrawSchemeInfo _withdrawscheme = new Withdraw.WithdrawSchemeInfo();
 
         private MchUsersAmtInfo _mchusersamtinfo = new MchUsersAmtInfo();
 
@@ -72,7 +72,7 @@ namespace OriginalStudio.Model.User
 
         #region 基本属性
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取ID
         /// </summary>
         public System.Int32 UserID
         {
@@ -81,7 +81,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户类型。0个人；1企业
         /// </summary>
         public System.Int32 ClassID
         {
@@ -90,7 +90,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户登录名。商户注册名。
         /// </summary>
         public System.String UserName
         {
@@ -99,7 +99,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户密码
         /// </summary>
         public System.String UserPwd
         {
@@ -108,7 +108,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户支付密码
         /// </summary>
         public System.String UserPayPwd
         {
@@ -117,7 +117,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户名。系统分配。
         /// </summary>
         public System.String MerchantName
         {
@@ -126,7 +126,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取密钥
         /// </summary>
         public System.String ApiKey
         {
@@ -135,7 +135,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取联系人
         /// </summary>
         public System.String ContactName
         {
@@ -144,7 +144,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取身份证
         /// </summary>
         public System.String IDCard
         {
@@ -153,7 +153,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取电话
         /// </summary>
         public System.String Phone
         {
@@ -162,7 +162,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取Email
         /// </summary>
         public System.String EMail
         {
@@ -171,7 +171,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取QQ
         /// </summary>
         public System.String QQ
         {
@@ -180,25 +180,25 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取身份电话认证。1：认证；0：未认证
         /// </summary>
         public System.Boolean IsPhone
         {
             set { this._isphone = value; }
             get { return this._isphone; }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取邮件认证。1：认证；0：未认证
         /// </summary>
         public System.Boolean IsEmail
         {
             set { this._isemail = value; }
             get { return this._isemail; }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取实名认证。1：认证；0：未认证
         /// </summary>
         public System.Boolean IsRealName
         {
@@ -207,7 +207,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取结算方案ID
         /// </summary>
         public System.Int32 WithdrawSchemeID
         {
@@ -216,7 +216,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取费率方案ID
         /// </summary>
         public System.Int32 PayRateID
         {
@@ -225,7 +225,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取当天最多结算次数。
         /// </summary>
         public System.Int32 MaxDayWithdrawTimes
         {
@@ -234,34 +234,34 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取首次登陆IP（自动记录，不需要设置）
         /// </summary>
         public System.String FirstLoginIP
         {
             set { this._firstloginip = value; }
             get { return this._firstloginip.Trim(); }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取首次登陆MAC（自动记录，不需要设置）
         /// </summary>
         public System.String FirstLoginMac
         {
             set { this._firstloginmac = value; }
             get { return this._firstloginmac.Trim(); }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取末次登陆IP（自动记录，不需要设置）
         /// </summary>
         public System.String LastLoginIP
         {
             set { this._lastloginip = value; }
             get { return this._lastloginip.Trim(); }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取末次登陆AMC（自动记录，不需要设置）
         /// </summary>
         public System.String LastLoginMAC
         {
@@ -270,7 +270,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取SessionID（登录后设置）
         /// </summary>
         public System.String SessionID
         {
@@ -279,7 +279,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取状态
         /// </summary>
         public System.Int32 Status
         {
@@ -288,7 +288,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取添加时间。
         /// </summary>
         public System.DateTime AddTime
         {
@@ -297,7 +297,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取公司名称（企业用户需要添加）
         /// </summary>
         public System.String Company
         {
@@ -306,7 +306,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取联系人
         /// </summary>
         public System.String LinkMan
         {
@@ -315,7 +315,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取结算方式。选择项   0：前台；1：接口；2：前台+接口
         /// </summary>
         public System.Int32 WithdrawType
         {
@@ -324,7 +324,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否随机取商品名称。0：固定；1：随机
         /// </summary>
         public System.Int32 RandomProduct
         {
@@ -333,7 +333,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取管理员ID
         /// </summary>
         public System.Int32 ManageId
         {
@@ -342,7 +342,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取公司或个人网址
         /// </summary>
         public System.String SiteUrl
         {
@@ -351,16 +351,16 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取个人身份证照片正面或企业证件
         /// </summary>
         public System.String FrontPic
         {
             set { this._frontpic = value; }
             get { return this._frontpic.Trim(); }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取个人身份证照片背面或企业证件
         /// </summary>
         public System.String VersoPic
         {
@@ -369,7 +369,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取默认主题。（后台不需要设置）
         /// </summary>
         public System.String DefaultThemes
         {
@@ -378,7 +378,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否开启调试日志。0：不开启；1开启
         /// </summary>
         public System.Int32 IsDebug
         {
@@ -387,7 +387,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取代理ID
         /// </summary>
         public System.Int32 AgentID
         {
@@ -397,7 +397,7 @@ namespace OriginalStudio.Model.User
 
 
         /// <summary>
-        /// 设置或获取随机扣单几率
+        /// 设置或获取随机扣单机率
         /// </summary>
         public System.Int32 CPSDrate
         {
@@ -406,7 +406,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取用户类型。会员或代理，Enum定义。
         /// </summary>
         public UserTypeEnum UserType
         {
@@ -415,7 +415,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取会员等级
+        /// 设置或获取会员等级（这个不需要了，后台不用设置）
         /// </summary>
         public UserLevelEnum UserLevel
         {
@@ -424,7 +424,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取末次登录地址。
         /// </summary>
         public System.String LastLoginAddress
         {
@@ -433,7 +433,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取末次登录备注
         /// </summary>
         public System.String LastLoginRemark
         {
@@ -442,7 +442,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取登录类型。（不需要设置）
         /// </summary>
         public System.Int32 LoginType
         {
@@ -451,7 +451,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取首次登录时间
         /// </summary>
         public System.DateTime FirstLoginTime
         {
@@ -460,7 +460,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取末次登录时间
         /// </summary>
         public System.DateTime LastLoginTime
         {
@@ -469,7 +469,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取Token
         /// </summary>
         public System.String Token
         {
@@ -479,10 +479,9 @@ namespace OriginalStudio.Model.User
 
         #endregion 公开属性
 
-
         #region 提现属性
 
-        public Withdraw.WithdrawScheme WithdrawScheme
+        public Withdraw.WithdrawSchemeInfo WithdrawScheme
         {
             set { this._withdrawscheme = value; }
             get { return this._withdrawscheme; }
@@ -502,278 +501,3 @@ namespace OriginalStudio.Model.User
 
     }
 }
-
-
-/*
-        private System.Int64 _integral = 0;
-        private System.Decimal _freeze = 0M;
-        private System.Decimal _balance = 0M;
-        private System.Decimal _payment = 0M;
-        private System.Decimal _unpayment = 0M;
-        private System.Decimal _unpayment2 = 0M;
-        private System.Decimal _enableamt = 0M;
- * 
-        #region 账户金额属性
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int64 Integral
-        {
-            set { this._integral = value; }
-            get { return this._integral; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal Freeze
-        {
-            set { this._freeze = value; }
-            get { return this._freeze; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal Balance
-        {
-            set { this._balance = value; }
-            get { return this._balance; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal Payment
-        {
-            set { this._payment = value; }
-            get { return this._payment; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal UnPayment
-        {
-            set { this._unpayment = value; }
-            get { return this._unpayment; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal UnPayment2
-        {
-            set { this._unpayment2 = value; }
-            get { return this._unpayment2; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal EnableAmt
-        {
-            set { this._enableamt = value; }
-            get { return this._enableamt; }
-        }
-
-        #endregion
-
-        //private System.Int32 _schemenetype = 0;
-        //private System.Int32 _schemenetype = 0;
-        //private System.String _schemename = string.Empty;
-        //private System.Decimal _singleminamtlimit = 0M;
-        //private System.Decimal _singlemaxamtlimit = 0M;
-        //private System.Int32 _dailymaxtimes = 0;
-        //private System.Decimal _dailymaxamt = 0M;
-        //private System.Decimal _chargerate = 0M;
-        //private System.Decimal _singlemincharge = 0M;
-        //private System.Decimal _singlemaxcharge = 0M;
-        //private System.Int32 _istranapi = 0;
-        //private System.Int32 _isdefault = 0;
-        //private System.Int32 _issys = 0;
-        //private System.Int32 _bankdetentiondays = 0;
-        //private System.Int32 _qqdetentiondays = 0;
-        //private System.Int32 _jddetentiondays = 0;
-        //private System.Int32 _istranrequiredaudit = 0;
-        //private System.Int32 _alipaydetentiondays = 0;
-        //private System.Int32 _weixindetentiondays = 0;
-        //private System.Int32 _otherdetentiondays = 0;
- * 
-        #region 提现属性
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 SchemeneType
-        {
-            set { this._schemenetype = value; }
-            get { return this._schemenetype; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.String SchemeName
-        {
-            set { this._schemename = value; }
-            get { return this._schemename.Trim(); }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal SingleMinAmtLimit
-        {
-            set { this._singleminamtlimit = value; }
-            get { return this._singleminamtlimit; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal SingleMaxAmtLimit
-        {
-            set { this._singlemaxamtlimit = value; }
-            get { return this._singlemaxamtlimit; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 DailyMaxTimes
-        {
-            set { this._dailymaxtimes = value; }
-            get { return this._dailymaxtimes; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal DailyMaxAmt
-        {
-            set { this._dailymaxamt = value; }
-            get { return this._dailymaxamt; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal ChargeRate
-        {
-            set { this._chargerate = value; }
-            get { return this._chargerate; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal SingleMinCharge
-        {
-            set { this._singlemincharge = value; }
-            get { return this._singlemincharge; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Decimal SingleMaxCharge
-        {
-            set { this._singlemaxcharge = value; }
-            get { return this._singlemaxcharge; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 IsTranApi
-        {
-            set { this._istranapi = value; }
-            get { return this._istranapi; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 IsDefault
-        {
-            set { this._isdefault = value; }
-            get { return this._isdefault; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 IsSys
-        {
-            set { this._issys = value; }
-            get { return this._issys; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 BankDetentionDays
-        {
-            set { this._bankdetentiondays = value; }
-            get { return this._bankdetentiondays; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 QQDetentionDays
-        {
-            set { this._qqdetentiondays = value; }
-            get { return this._qqdetentiondays; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 JDDetentionDays
-        {
-            set { this._jddetentiondays = value; }
-            get { return this._jddetentiondays; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 IsTranRequiredAudit
-        {
-            set { this._istranrequiredaudit = value; }
-            get { return this._istranrequiredaudit; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 AlipayDetentionDays
-        {
-            set { this._alipaydetentiondays = value; }
-            get { return this._alipaydetentiondays; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 WeiXinDetentionDays
-        {
-            set { this._weixindetentiondays = value; }
-            get { return this._weixindetentiondays; }
-        }
-
-        /// <summary>
-        /// 设置或获取
-        /// </summary>
-        public System.Int32 OtherDetentionDays
-        {
-            set { this._otherdetentiondays = value; }
-            get { return this._otherdetentiondays; }
-        }
-
-
-        #endregion
- */

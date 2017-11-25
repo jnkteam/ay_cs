@@ -65,11 +65,11 @@
             {
                 try
                 {
-                    this.totalordercount = Convert.ToDecimal(table.Rows[0]["s_num"]).ToString("f0");
-                    this.totalsumpay = Convert.ToDecimal(table.Rows[0]["sumpay"]).ToString("f2");
-                    this.totalfaceValue = Convert.ToDecimal(table.Rows[0]["totalFaceValue"]).ToString("f2");
-                    this.faceValue = Convert.ToDecimal(table.Rows[0]["faceValue"]).ToString("f2");
-                    this.totalchargeValue = (Convert.ToDecimal(this.totalfaceValue) - Convert.ToDecimal(this.totalsumpay)).ToString("f2");
+                    this.totalordercount = Convert.ToDecimal(table.Rows[0]["OrderCount"]).ToString("f0");
+                    this.totalsumpay = Convert.ToDecimal(table.Rows[0]["Sumpay"]).ToString("f2");
+                    this.totalfaceValue = Convert.ToDecimal(table.Rows[0]["TotalOrderValue"]).ToString("f2");
+                    this.faceValue = Convert.ToDecimal(table.Rows[0]["OrderValue"]).ToString("f2");
+                    this.totalchargeValue = Convert.ToDecimal(table.Rows[0]["TotalChareValue"]).ToString("f2");
                 }
                 catch
                 {

@@ -17,7 +17,7 @@
     /// </summary>
     public class SettledFactory
     {
-        private static OriginalStudio.DAL.Settled.Settled dal = new DAL.Settled.Settled();
+        //private static OriginalStudio.DAL.Settled.Settled dal = new DAL.Settled.Settled();
 
         #region 增删改
 
@@ -518,7 +518,7 @@
 
                 return DataBase.ExecuteDataset(CommandType.Text,
                     SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" +
-                    SqlHelper.GetPageSelectSQL("[UserName]\r\n      ,[PayeeName]\r\n      ,[Account]\r\n      ,[id]\r\n      ,[userid]\r\n      ,[amount]\r\n      ,[status]\r\n      ,[addTime]\r\n      ,[tax]\r\n      ,ISNULL([charges],0) as charges,[PayTime],[userid],[PayeeBank],[apptype],[required],[settmode],[settles],[tranapi],Payeeaddress\r\n      ,[amount]-isnull([charges],0)-isnull([tax],0) realpay,trade_no", tables, wheres, orderby, key, pageSize, page, false)
+                    SqlHelper.GetPageSelectSQL("[UserName]\r\n      ,[PayeeName]\r\n      ,[Account]\r\n      ,[id]\r\n      ,[userid]\r\n      ,[amount]\r\n      ,[status]\r\n      ,[addTime]\r\n      ,[tax]\r\n      ,ISNULL([charges],0) as charges,[PayTime],[userid],[PayeeBank],[apptype],[required],[settmode],[tranapi],Payeeaddress\r\n      ,[amount]-isnull([charges],0)-isnull([tax],0) realpay", tables, wheres, orderby, key, pageSize, page, false)
                     //+ "\r\nselect ISNULL(sum(amount),0) from V_Settled where " + wheres, paramList.ToArray());
                     + "\r\n select sum(1) totalcount,sum(amount) totalamt,sum(case when [status]=8 then 1 else 0 end) successcount,sum(case when [status]=8 then amount else 0 end) successamt,sum(case when [status]=8 then ISNULL([charges],0) else 0 end) successcharges  from V_Settled where " + wheres, paramList.ToArray());
             }

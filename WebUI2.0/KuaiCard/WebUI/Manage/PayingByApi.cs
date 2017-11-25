@@ -140,17 +140,19 @@
             if (!base.IsPostBack)
             {
                 this.ddlmode.Items.Add(new ListItem("--提现方式--", ""));
+                /*
                 foreach (int num in Enum.GetValues(typeof(SettledmodeEnum)))
                 {
                     string name = Enum.GetName(typeof(SettledmodeEnum), num);
                     this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
                 }
+                */
                 DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlSupplier.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
+                    this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                 }
                 this.BindData();
             }

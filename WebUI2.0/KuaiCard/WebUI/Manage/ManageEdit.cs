@@ -107,11 +107,11 @@
                     }
                     if (flag)
                     {
-                        base.AlertAndRedirect("操作成功");
+                        showPageMsg("操作成功");
                     }
                     else
                     {
-                        base.AlertAndRedirect("操作失败");
+                        showPageMsg("操作失败");
                     }
                 }
             }

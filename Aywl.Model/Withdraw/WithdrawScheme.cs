@@ -8,7 +8,7 @@ namespace OriginalStudio.Model.Withdraw
     /// <summary>
     /// 结算方式
     /// </summary>
-    public class WithdrawScheme
+    public class WithdrawSchemeInfo
     {
         #region 字段
 
@@ -32,7 +32,9 @@ namespace OriginalStudio.Model.Withdraw
         private System.Int32 _alipaydetentiondays = 0;
         private System.Int32 _weixindetentiondays = 0;
         private System.Int32 _otherdetentiondays = 0;
+        private System.Int32 _transupplier = 0;
         
+
         #endregion 字段
 
         #region 公开属性
@@ -46,7 +48,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取方案适用类型。1是商户；2是代理
         /// </summary>
         public System.Int32 Type
         {
@@ -55,7 +57,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取方案名称 
         /// </summary>
         public System.String SchemeName
         {
@@ -64,7 +66,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取最低提现金额限制(每笔) 
         /// </summary>
         public System.Decimal SingleMinAmtLimit
         {
@@ -73,7 +75,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取最大提现金额限制(每笔)
         /// </summary>
         public System.Decimal SingleMaxAmtLimit
         {
@@ -82,7 +84,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取每天最多可提现次数
         /// </summary>
         public System.Int32 DailyMaxTimes
         {
@@ -91,7 +93,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取每天最多提现金额
         /// </summary>
         public System.Decimal DailyMaxAmt
         {
@@ -100,7 +102,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获每笔取提现手续费
         /// </summary>
         public System.Decimal ChargeRate
         {
@@ -109,7 +111,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取每笔提现手续费最少
         /// </summary>
         public System.Decimal SingleMinCharge
         {
@@ -118,7 +120,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取每笔提现手续费最高
         /// </summary>
         public System.Decimal SingleMaxCharge
         {
@@ -127,7 +129,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否走接口
         /// </summary>
         public System.Int32 IsTranApi
         {
@@ -136,7 +138,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否默认
         /// </summary>
         public System.Int32 IsDefault
         {
@@ -145,7 +147,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否默认
         /// </summary>
         public System.Int32 IsSys
         {
@@ -154,7 +156,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取网银T+几 
         /// </summary>
         public System.Int32 BankDetentionDays
         {
@@ -163,7 +165,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取QQT+几 
         /// </summary>
         public System.Int32 QQDetentionDays
         {
@@ -172,7 +174,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取京东T+几 
         /// </summary>
         public System.Int32 JDDetentionDays
         {
@@ -181,7 +183,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否需要审核
         /// </summary>
         public System.Int32 IsTranRequiredAudit
         {
@@ -190,7 +192,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取支付宝T+几 
         /// </summary>
         public System.Int32 AlipayDetentionDays
         {
@@ -199,7 +201,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取微信T+几 
         /// </summary>
         public System.Int32 WeiXinDetentionDays
         {
@@ -208,7 +210,7 @@ namespace OriginalStudio.Model.Withdraw
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取其他类型T+几 
         /// </summary>
         public System.Int32 OtherDetentionDays
         {
@@ -216,6 +218,15 @@ namespace OriginalStudio.Model.Withdraw
             get { return this._otherdetentiondays; }
         }
 
+        /// <summary>
+        /// 设置或获取代付默认通道商
+        /// </summary>
+        public System.Int32 TranSupplier
+        {
+            set { this._transupplier = value; }
+            get { return this._transupplier; }
+        }
+        
         #endregion 公开属性
     }
 }

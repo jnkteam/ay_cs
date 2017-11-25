@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户ID
         /// </summary>
         public System.Int32 UserID
         {
@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取积分
         /// </summary>
         public System.Int64 Integral
         {
@@ -55,7 +55,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取冻结金额
         /// </summary>
         public System.Decimal Freeze
         {
@@ -64,7 +64,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取账户总额
         /// </summary>
         public System.Decimal Balance
         {
@@ -73,7 +73,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取已支付金额
         /// </summary>
         public System.Decimal Payment
         {
@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取未支付金额
         /// </summary>
         public System.Decimal UnPayment
         {
@@ -91,7 +91,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取为支付金额2
         /// </summary>
         public System.Decimal UnPayment2
         {
@@ -100,7 +100,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取可以支付金额
         /// </summary>
         public System.Decimal EnableAmt
         {

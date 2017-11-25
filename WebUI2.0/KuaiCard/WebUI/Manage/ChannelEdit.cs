@@ -61,20 +61,20 @@
             {
                 if (OriginalStudio.BLL.Channel.SysChannel.Add(this.model) > 0)
                 {
-                    base.AlertAndRedirect("保存成功！");
+                    showPageMsg("保存成功！");
                 }
                 else
                 {
-                    base.AlertAndRedirect("保存失败！");
+                    showPageMsg("保存失败！");
                 }
             }
             else if (OriginalStudio.BLL.Channel.SysChannel.Update(this.model))
             {
-                base.AlertAndRedirect("更新成功！");
+                showPageMsg("更新成功！");
             }
             else
             {
-                base.AlertAndRedirect("更新失败！");
+                showPageMsg("更新失败！");
             }
         }
 

@@ -52,6 +52,15 @@
             }
         }
         /// <summary>
+        /// 公用方法  提示
+        /// </summary>
+        /// <param name="msg"></param>
+        public void showPageMsg(string msg)
+        {
+
+            HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='javascript'><!--\r\nvar index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);parent.showPageMsg('" + msg + "');\r\n//--></SCRIPT>");
+        }
+        /// <summary>
         /// auth
         /// </summary>
         public void checkAuth() {

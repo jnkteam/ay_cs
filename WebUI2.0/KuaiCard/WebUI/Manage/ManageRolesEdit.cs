@@ -48,9 +48,7 @@
             }
             if (flag)
             {
-                //base.AlertAndRedirect("操作成功");
-
-                HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='javascript'><!--\r\nvar index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);parent.showPageMsg('操作成功');\r\n//--></SCRIPT>");
+                showPageMsg("操作成功");             
             }
             else
             {
@@ -59,6 +57,7 @@
 
            
         }
+        
 
         private void InitForm()
         {

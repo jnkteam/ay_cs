@@ -113,20 +113,20 @@
             {
                 if (SysSupplierFactory.Add(this.ItemInfo) > 0)
                 {
-                    base.AlertAndRedirect("保存成功！");
+                    showPageMsg("保存成功！");
                 }
                 else
                 {
-                    base.AlertAndRedirect("保存失败！");
+                    showPageMsg("保存失败！");
                 }
             }
             else if (SysSupplierFactory.Update(this.ItemInfo))
             {
-                base.AlertAndRedirect("更新成功！");
+                showPageMsg("更新成功！");
             }
             else
             {
-                base.AlertAndRedirect("更新失败！");
+                showPageMsg("更新失败！");
             }
         }
 

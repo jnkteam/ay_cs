@@ -146,11 +146,11 @@
                     }
                     if (flag)
                     {
-                        base.AlertAndRedirect("操作成功");
+                        showPageMsg("操作成功");
                     }
                     else
                     {
-                        base.AlertAndRedirect("操作失败");
+                        showPageMsg("操作失败");
                     }
                 }
             }
@@ -162,11 +162,12 @@
             {
                 if (ManageFactory.Delete(this.ItemInfoId))
                 {
-                    base.AlertAndRedirect("删除成功!");
+                    
+                    base.AlertAndRedirect("删除成功!", "Manage.aspx?sign=48&menuId=50");
                 }
                 else
                 {
-                    base.AlertAndRedirect("删除失败!");
+                    base.AlertAndRedirect("删除失败!", "Manage.aspx?sign=48&menuId=50");
                 }
             }
         }

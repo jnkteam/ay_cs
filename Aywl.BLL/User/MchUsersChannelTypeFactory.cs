@@ -15,7 +15,7 @@
     /// <summary>
     /// 商户自定义通道操作对象。
     /// </summary>
-    public class MchUsersChannelType
+    public class MchUsersChannelTypeFactory
     {
         public static string ChannelTypeUsers_CACHEKEY = (Constant.Cache_Mark + "SYS_CHANNEL_TYPE_USER_{0}");
         internal static string SQL_TABLE = "mch_userChannelType";

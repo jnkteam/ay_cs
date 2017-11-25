@@ -190,7 +190,7 @@
         public static int GetSysOpenStatus(int userId, int typeId, int defaultvalue)
         {
             int num = defaultvalue;
-            MchUserChannelType cacheModel = MchUsersChannelType.GetCacheModel(userId, typeId);
+            MchUserChannelType cacheModel = MchUsersChannelTypeFactory.GetCacheModel(userId, typeId);
             if ((cacheModel != null) && cacheModel.SysIsOpen)
             {
                 num = cacheModel.SysIsOpen ? 1 : 0;

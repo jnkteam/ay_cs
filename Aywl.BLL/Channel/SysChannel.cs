@@ -326,7 +326,7 @@
                 issysopen = channelInfo.IsOpen ? 1 : 0;
             }
 
-            MchUserChannelType userchannelInfo = MchUsersChannelType.GetCacheModel(userId, typeId);
+            MchUserChannelType userchannelInfo = MchUsersChannelTypeFactory.GetCacheModel(userId, typeId);
             if ((userchannelInfo != null) && userchannelInfo.SysIsOpen)
             {
                 isuseropen = userchannelInfo.SysIsOpen ? 1 : 0;
@@ -377,7 +377,7 @@
         public static int GetUserSupplierOpenStatus(int userId, string channelCode, int typeId, int defaultvalue)
         {
             int num = defaultvalue;
-            MchUserChannelType cacheModel = MchUsersChannelType.GetCacheModel(userId, typeId);
+            MchUserChannelType cacheModel = MchUsersChannelTypeFactory.GetCacheModel(userId, typeId);
             if ((cacheModel != null) && cacheModel.SupplierCode > 0)
             {
                 num = cacheModel.UserIsOpen ? 1 : 0;
@@ -394,7 +394,7 @@
         private static int GetUserSupplierCode(int userId, int typeId)
         {
             int suppcode = -1;
-            MchUserChannelType cacheModel = MchUsersChannelType.GetCacheModel(userId, typeId);
+            MchUserChannelType cacheModel = MchUsersChannelTypeFactory.GetCacheModel(userId, typeId);
             if (cacheModel != null && cacheModel.SupplierCode > 0)
             {
                 suppcode = cacheModel.SupplierCode;

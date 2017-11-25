@@ -65,7 +65,7 @@
             {
                 if ((this._currentUserAmt == null) && (this.UserId > 0))
                 {
-                    this._currentUserAmt = MchUsersAmt.GetModel(this.UserId);
+                    this._currentUserAmt = MchUsersAmtFactory.GetModel(this.UserId);
                 }
                 return this._currentUserAmt;
             }

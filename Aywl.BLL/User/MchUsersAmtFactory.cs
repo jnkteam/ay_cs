@@ -10,7 +10,7 @@
     using System.Data.SqlClient;
     using System.Text;
 
-    public class MchUsersAmt
+    public class MchUsersAmtFactory
     {
         internal const string SQL_TABLE = "mch_userAmt";
         internal const string SQL_TABLE_FIELD = "[ID],[UserID],[Integral],[Freeze],[Balance],[Payment],[UnPayment],[unpayment2],(ISNULL([balance],0)-ISNULL([unpayment],0)-ISNULL([Freeze],0)) as enableAmt";

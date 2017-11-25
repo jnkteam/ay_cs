@@ -180,8 +180,8 @@
         public static DataSet GetList(string where)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("select id,commissiontype,commission,username,password,role,status,relname,lastLoginIp,lastLoginTime,sessionid,commissiontype,commission,CardCommission,Balance,qq,tel,manageRole ");
-            builder.Append(" FROM V_manage ");
+            builder.Append("select * ");
+            builder.Append(" FROM v_manage ");
             if (!string.IsNullOrEmpty(where))
             {
                 builder.AppendFormat(" where {0}", where);

@@ -81,7 +81,8 @@
     <Compile Include="Stat\OrderReport.cs" />
     <Compile Include="Sys\SysRunLog.cs" />
     <Compile Include="SMS\SMS.cs" />
-    <Compile Include="User\MchUsersChannelType.cs" />
+    <Compile Include="User\MchUsersImageFactory.cs" />
+    <Compile Include="User\MchUsersChannelTypeFactory.cs" />
     <Compile Include="Settled\Distribution.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="Manage\ManageFactory.cs" />
@@ -129,7 +130,7 @@
     <Compile Include="User\UserFactory.cs" />
     <Compile Include="User\userHost.cs" />
     <Compile Include="User\UserLoginLogFactory.cs" />
-    <Compile Include="User\MchUsersAmt.cs" />
+    <Compile Include="User\MchUsersAmtFactory.cs" />
     <Compile Include="User\usersetting.cs" />
     <Compile Include="User\usersIdImage.cs" />
     <Compile Include="User\usersOrderIncome.cs" />

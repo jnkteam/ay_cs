@@ -81,7 +81,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取商户类型。0个人；1企业
+        /// 设置或获取签约属性。0个人；1企业
         /// </summary>
         public System.Int32 ClassID
         {
@@ -394,7 +394,6 @@ namespace OriginalStudio.Model.User
             set { this._agentid = value; }
             get { return this._agentid; }
         }
-
 
         /// <summary>
         /// 设置或获取随机扣单机率

@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户ID
         /// </summary>
         public System.Int32 UserID
         {
@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取账户类型。1对公 0对私
         /// </summary>
         public System.Int32 AccountType
         {
@@ -55,7 +55,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取收款方式。（这个前台忽略掉） 1 银行帐户 2 支付宝 3 财付通
         /// </summary>
         public System.Int32 PMode
         {
@@ -64,7 +64,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取银行卡账户
         /// </summary>
         public System.String BankAccount
         {
@@ -73,7 +73,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取账户姓名
         /// </summary>
         public System.String AccountName
         {
@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取银行名称
         /// </summary>
         public System.String BankName
         {
@@ -91,7 +91,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取银行代码
         /// </summary>
         public System.Int32 BankCode
         {
@@ -100,7 +100,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取银行城市
         /// </summary>
         public System.String BankCity
         {
@@ -109,7 +109,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取开户行地址
         /// </summary>
         public System.String BankAddress
         {
@@ -118,7 +118,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是否启用
         /// </summary>
         public System.Int32 Active
         {
@@ -127,7 +127,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取添加时间
         /// </summary>
         public System.DateTime AddTime
         {
@@ -136,7 +136,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取省份代码
         /// </summary>
         public System.String ProvinceCode
         {
@@ -145,7 +145,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取城市代码
         /// </summary>
         public System.String CityCode
         {
@@ -154,7 +154,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取排序
         /// </summary>
         public System.Int32 ListOrder
         {
@@ -163,7 +163,7 @@
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取默认银行卡
         /// </summary>
         public System.Int32 IsDefault
         {

@@ -123,6 +123,7 @@
     <Compile Include="User\MchUserBaseInfo.cs" />
     <Compile Include="Enum\IdImageStatus.cs" />
     <Compile Include="Manage\Manage.cs" />
+    <Compile Include="User\MchUserBindIP.cs" />
     <Compile Include="User\MchUserPayRateInfo.cs" />
     <Compile Include="Enum\noRefCheckStatusEnum.cs" />
     <Compile Include="User\PayhSubmerchant.cs" />

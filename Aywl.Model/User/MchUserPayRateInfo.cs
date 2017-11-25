@@ -32,16 +32,16 @@ namespace OriginalStudio.Model.User
 
         #region 公开属性
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取商户ID
         /// </summary>
         public System.Int32 UserID
         {
             set { this._userid = value; }
             get { return this._userid; }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取（暂时不用）
         /// </summary>
         public System.Int32 DefaultPay
         {
@@ -50,7 +50,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取是启用。   不启用0，启用1
         /// </summary>
         public System.Int32 Special
         {
@@ -59,7 +59,7 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取XML配置
         /// </summary>
         public System.String  PayrateXML
         {
@@ -68,16 +68,16 @@ namespace OriginalStudio.Model.User
         }
         
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取（暂时不用）
         /// </summary>
         public System.Boolean Istransfer
         {
             set { this._istransfer = value; }
             get { return this._istransfer; }
         }
-        
+
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取（暂时不用）
         /// </summary>
         public System.Boolean IsRequireAgentDistAudit
         {
@@ -86,7 +86,7 @@ namespace OriginalStudio.Model.User
         }
 
         /// <summary>
-        /// 设置或获取
+        /// 设置或获取（暂时不用）
         /// </summary>
         public UserLevelEnum UserLevel
         {

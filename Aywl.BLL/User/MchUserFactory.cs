@@ -22,14 +22,6 @@
         internal const string USER_LOGIN_CLIENT_SESSIONID = "{2A1FA22C-201B-471c-B668-2FCC1C4A121A}";
         internal const string USER_LOGIN_SESSIONID = "{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}";
 
-        //internal const string FIELD_USER = "[id]\r\n      ,[userName]\r\n      ,[password]\r\n      ,[CPSDrate]\r\n      ,[CVSNrate]\r\n      ,[email]\r\n      ,[qq]\r\n      ,[tel]\r\n      ,[idCard]\r\n      ,[settles]\r\n      ,[status]\r\n      ,[regTime]\r\n      ,[company]\r\n      ,[linkMan]\r\n      ,[agentId]\r\n      ,[siteName]\r\n      ,[siteUrl]\r\n      ,[userType]\r\n      ,[userLevel]\r\n      ,[maxdaytocashTimes]\r\n      ,[apiaccount]\r\n      ,[apikey]\r\n      ,[lastLoginIp]\r\n      ,[lastLoginTime]\r\n      ,[sessionId]\r\n      ,[updatetime]\r\n      ,[DESC]\r\n      ,[userid]\r\n      ,[pmode]\r\n      ,[account]\r\n      ,[payeeName]\r\n      ,[payeeBank]\r\n      ,[bankProvince]\r\n      ,[bankCity]\r\n      ,[bankAddress]\r\n      ,[Integral]\r\n      ,[balance]\r\n      ,[payment]\r\n      ,[unpayment]\r\n      ,[enableAmt]\r\n      ,[manageId]\r\n      ,[isRealNamePass]\r\n      ,[isPhonePass]\r\n      ,[isEmailPass]\r\n      ,[question]\r\n      ,[answer]\r\n      ,[smsNotifyUrl]\r\n      ,[full_name]\r\n      ,[classid]\r\n      ,[Freeze]\r\n      ,[schemename]\r\n      ,[idCardtype]\r\n      ,[msn]\r\n      ,[fax]\r\n      ,[province]\r\n      ,[city]\r\n      ,[zip]\r\n      ,[field1],[levName],[frontPic],[versoPic]";
-        //internal const string SQL_BASE_TABLE = "userbase";
-        //internal const string SQL_BASE_TABLE_FIELD = "[id],[pwd2],[full_name],[userName],[password],[CPSDrate],[CVSNrate],[email],[qq],[tel],[idCard],[settles],[status],[regTime],[company],[linkMan],[agentId],[siteName],[siteUrl],[userType],[userLevel],[maxdaytocashTimes],[apiaccount],[apikey],[updatetime],[DESC],isRealNamePass,isEmailPass,isPhonePass,[classid],[isdebug],[frontPic],[versoPic],settles_type,bank_limit,wx_limit,ali_limit,qq_limit";
-        //internal const string SQL_PAYBANK_TABLE = "userspaybank";
-        //internal const string SQL_PAYBANK_TABLE_FIELD = "[userid],[pmode],[account],[payeeName],[payeeBank],[bankProvince],[bankCity],[bankAddress],[status]";
-        //internal const string SQL_TABLE = "V_Users";
-        //internal const string SQL_TABLE_FIELD = "id,userName,password,CPSDrate,CVSNrate,email,qq,tel,idCard,pmode,settles,account,payeeName,payeeBank,bankProvince,bankCity,bankAddress,status,regTime,company,linkMan,agentId,siteName,siteUrl,userType,userLevel,maxdaytocashTimes,apiaccount,apikey,lastLoginIp,lastLoginTime,sessionId,manageId,isRealNamePass,full_name,classid,isdebug,frontPic,versoPic";
-
         #region 清除缓存信息
 
         internal static void ClearCache(int userId)
@@ -854,19 +846,6 @@
             }
         }
 
-        public static DataTable getAgentList()
-        {
-            try
-            {
-                string commandText = "select id,userName from userbase with(nolock) where userType = 4";
-                return DataBase.ExecuteDataset(CommandType.Text, commandText).Tables[0];
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public static List<int> GetUsers(string where)
         {
             List<int> list = new List<int>();
@@ -1130,7 +1109,7 @@
         /// <param name="ipType">1:loginip   2:noticeip</param>
         /// <param name="ip"></param>
         /// <returns></returns>
-        public static int SetUserBindIp(int userId, int ipType, string ip)
+        public static int EditUserBindIp(int userId, int ipType, string ip)
         {
             SqlParameter[] commandParameters = new SqlParameter[] { 
                 new SqlParameter("@userid", SqlDbType.Int, 10),
@@ -1149,7 +1128,7 @@
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public static DataSet GetUserBindIp(int userId, int ipType = 0)
+        public static DataSet GetUserBindIpList(int userId, int ipType = 0)
         {
             SqlParameter[] commandParameters = new SqlParameter[] { 
                 new SqlParameter("@userid", SqlDbType.Int, 10),
@@ -1175,6 +1154,116 @@
 
             return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_bindip_delete", commandParameters);
         }
+
+
+        /// <summary>
+        /// 获取用户绑定IP。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static MchUserBindIP GetUserBindIp(int id)
+        {
+            SqlParameter[] commandParameters = new SqlParameter[] {
+                new SqlParameter("@id", SqlDbType.Int, 10)
+            };
+            commandParameters[0].Value = id;
+
+            DataSet ds = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_bindip_get", commandParameters);
+
+            MchUserBindIP model = new MchUserBindIP();
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0) return model;
+
+            DataRow dr = ds.Tables[0].Rows[0];
+            model.ID = Convert.ToInt32(dr["id"].ToString());
+            model.IP = Convert.ToString(dr["ip"].ToString());
+            model.IpType = Convert.ToInt32(dr["ip_type"].ToString());
+            model.UserID = Convert.ToInt32(dr["userid"].ToString());
+            model.BindDate = Convert.ToDateTime(dr["bind_date"].ToString());
+
+            return model;
+        }
+
+        #endregion
+
+        #region 代理
+
+        /// <summary>
+        /// 代理列表
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetAgentList()
+        {
+            string commandText = "select id,userName from mch_userbase with(nolock) where userType = 4";
+            return DataBase.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        #endregion
+
+        #region 通道限额显示及设置
+
+        public static int EditUserChannelTypeLimit(int userID, int typeID, decimal minMoney, decimal maxMoney)
+        {
+            SqlParameter[] parameters = {
+                new SqlParameter("@typeid",SqlDbType.Int),
+                new SqlParameter("@userid",SqlDbType.Int),
+                new SqlParameter("@minmoney",SqlDbType.Decimal),
+                new SqlParameter("@maxmoney",SqlDbType.Decimal)
+            };
+            parameters[0].Value = typeID;
+            parameters[1].Value = userID;
+            parameters[2].Value = minMoney;
+            parameters[3].Value = maxMoney;
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_channeltype_paylimit_edit", parameters);
+        }
+
+        /// <summary>
+        /// 获取通道限额列表
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public static DataSet GetUserChannelTypeLimit(int userID)
+        {
+            SqlParameter[] parameters = {
+                new SqlParameter("@userid",SqlDbType.Int)
+            };
+            parameters[0].Value = userID;
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_channeltype_paylimit_list", parameters);
+        }
+
+        #endregion
+
+        #region 商户银行卡列表
+
+        /// <summary>
+        /// 获取银行卡列表
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static DataSet GetUserPayBankList(int userId)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@UserID",SqlDbType.Int)
+                };
+            parameters[0].Value = userId;
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_paybank_List", parameters);
+        }
+
+        /// <summary>
+        /// 删除商户银行卡
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int DeleteUserPayBank(int id)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@id",SqlDbType.Int)
+                };
+            parameters[0].Value = id;
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_paybank_Delete", parameters);
+
+        }
+
         #endregion
     }
 }

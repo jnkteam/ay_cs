@@ -176,7 +176,7 @@
 
         #endregion
 
-        #region 获取Model
+        #region 获取对象或列表
 
         /// <summary>
         /// 获取Model
@@ -219,8 +219,8 @@
         {
             try
             {
-                string commandText = "select [RateName],[RateType],[Active],[CreateUserID],[CreateTime],[PayrateXML],[UserLevel] from sys_payrate " +
-                                                    " where RateType = " + ((Int32)rateType).ToString() + " and UserLevel = " + userLevel.ToString();
+                string commandText = "select [ID],[RateName],[RateType],[Active],[CreateUserID],[CreateTime],[PayrateXML],[UserLevel] from sys_payrate " +
+                                                    " where RateType = " + ((Int32)rateType).ToString();
                 DataSet o = DataBase.ExecuteDataset(CommandType.Text, commandText);
                 return o.Tables[0];
             }

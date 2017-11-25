@@ -19,14 +19,14 @@ namespace OriginalStudio.BLL.BLL.User
         /// <summary>
         /// 获取商户自定义费率对象
         /// </summary>
-        /// <param name="userid"></param>
+        /// <param name="userID"></param>
         /// <returns></returns>
-        public static MchUserPayRateInfo GetModel(int userid)
+        public static MchUserPayRateInfo GetModel(int userID)
         {
             SqlParameter[] commandParameters = new SqlParameter[] { 
                 new SqlParameter("@userid", SqlDbType.Int, 10) 
             };
-            commandParameters[0].Value = userid;
+            commandParameters[0].Value = userID;
             DataSet set = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userpayrate_GetModel", commandParameters);
 
             MchUserPayRateInfo modle = new MchUserPayRateInfo();

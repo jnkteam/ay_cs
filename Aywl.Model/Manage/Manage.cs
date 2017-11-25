@@ -37,7 +37,7 @@
         private string _tel = string.Empty;
 
         private string _default_themes = "";
-
+        private int _manageRole;
         public decimal? balance
         {
             get;
@@ -265,6 +265,8 @@
                 this._default_themes = value;
             }
         }
+
+        public int ManageRole { get => _manageRole; set => _manageRole = value; }
     }
 }
 

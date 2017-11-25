@@ -59,6 +59,8 @@
             table.Columns.Add("LevelText");
             table.Columns.Add("Commissiontypeview");
             table.Columns.Add("statusName");
+            table.Columns.Add("manageRoleName");
+
             foreach (DataRow row in table.Rows)
             {
                 switch (((int) row["status"]))
@@ -76,6 +78,10 @@
                 {
                     row["Commissiontypeview"] = (row["Commissiontype"].ToString() == "2") ? "按支付金额%" : "按条固定提成";
                 }
+
+                Model.ManageRoles manageRoles = ManageRolesFactory.GetModelById(int.Parse(row["manageRole"].ToString()));
+                row["manageRoleName"] = manageRoles.Title.ToString();
+
             }
             this.GridView1.DataSource = table;
             this.GridView1.DataBind();
@@ -140,7 +146,7 @@
                     }
                     if (flag)
                     {
-                        base.AlertAndRedirect("操作成功", "Manage.aspx");
+                        base.AlertAndRedirect("操作成功");
                     }
                     else
                     {
@@ -156,11 +162,11 @@
             {
                 if (ManageFactory.Delete(this.ItemInfoId))
                 {
-                    base.AlertAndRedirect("删除成功!", "Manage.aspx");
+                    base.AlertAndRedirect("删除成功!");
                 }
                 else
                 {
-                    base.AlertAndRedirect("删除失败!", "Manage.aspx");
+                    base.AlertAndRedirect("删除失败!");
                 }
             }
         }
@@ -179,6 +185,7 @@
             {
                 this.BindView();
             }
+           
         }
 
         private void setPower()

@@ -41,7 +41,8 @@
                     new SqlParameter("@isSuperAdmin", SqlDbType.TinyInt, 1),
                     new SqlParameter("@isAgent", SqlDbType.TinyInt, 1),
                     new SqlParameter("@qq", SqlDbType.VarChar, 20), 
-                    new SqlParameter("@tel", SqlDbType.VarChar, 20)
+                    new SqlParameter("@tel", SqlDbType.VarChar, 20),
+                    new SqlParameter("@manageRole", SqlDbType.Int, 10)
                  };
                 commandParameters[0].Direction = ParameterDirection.Output;
                 commandParameters[1].Value = model.username;
@@ -60,6 +61,7 @@
                 commandParameters[14].Value = model.isAgent;
                 commandParameters[15].Value = model.qq;
                 commandParameters[0x10].Value = model.tel;
+                commandParameters[17].Value = model.ManageRole;
                 int num = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_manage_add", commandParameters);
                 return (int) commandParameters[0].Value;
             }
@@ -178,7 +180,7 @@
         public static DataSet GetList(string where)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("select id,commissiontype,commission,username,password,role,status,relname,lastLoginIp,lastLoginTime,sessionid,commissiontype,commission,CardCommission,Balance,qq,tel ");
+            builder.Append("select id,commissiontype,commission,username,password,role,status,relname,lastLoginIp,lastLoginTime,sessionid,commissiontype,commission,CardCommission,Balance,qq,tel,manageRole ");
             builder.Append(" FROM V_manage ");
             if (!string.IsNullOrEmpty(where))
             {
@@ -310,6 +312,7 @@
                 manage.username = set.Tables[0].Rows[0]["username"].ToString();
                 manage.password = set.Tables[0].Rows[0]["password"].ToString();
                 manage.secondpwd = set.Tables[0].Rows[0]["secondpwd"].ToString();
+               
                 if (set.Tables[0].Rows[0]["role"].ToString() != "")
                 {
                     manage.role = (ManageRole) int.Parse(set.Tables[0].Rows[0]["role"].ToString());
@@ -317,6 +320,10 @@
                 if (set.Tables[0].Rows[0]["status"].ToString() != "")
                 {
                     manage.status = new int?(int.Parse(set.Tables[0].Rows[0]["status"].ToString()));
+                }
+                if (set.Tables[0].Rows[0]["manageRole"].ToString() != "")
+                {
+                    manage.ManageRole = int.Parse(set.Tables[0].Rows[0]["manageRole"].ToString());
                 }
                 manage.relname = set.Tables[0].Rows[0]["relname"].ToString();
                 manage.lastLoginIp = set.Tables[0].Rows[0]["lastLoginIp"].ToString();
@@ -469,7 +476,8 @@
             {
                 SqlParameter[] commandParameters = new SqlParameter[] { 
                     new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@username", SqlDbType.VarChar, 20), new SqlParameter("@password", SqlDbType.VarChar, 100), new SqlParameter("@role", SqlDbType.Int, 10), new SqlParameter("@status", SqlDbType.Int, 10), new SqlParameter("@relname", SqlDbType.NVarChar, 50), new SqlParameter("@lastLoginIp", SqlDbType.VarChar, 50), new SqlParameter("@lastLoginTime", SqlDbType.DateTime), new SqlParameter("@sessionid", SqlDbType.VarChar, 50), new SqlParameter("@secondpwd", SqlDbType.VarChar, 100), new SqlParameter("@commissiontype", SqlDbType.TinyInt), new SqlParameter("@commission", SqlDbType.Decimal, 9), new SqlParameter("@cardcommission", SqlDbType.Decimal, 9), new SqlParameter("@isSuperAdmin", SqlDbType.TinyInt, 1), new SqlParameter("@isAgent", SqlDbType.TinyInt, 1), new SqlParameter("@qq", SqlDbType.VarChar, 20), 
-                    new SqlParameter("@tel", SqlDbType.VarChar, 20)
+                    new SqlParameter("@tel", SqlDbType.VarChar, 20),
+                    new SqlParameter("@manageRole", SqlDbType.Int, 10)
                  };
                 commandParameters[0].Value = model.id;
                 commandParameters[1].Value = model.username;
@@ -488,6 +496,8 @@
                 commandParameters[14].Value = model.isAgent;
                 commandParameters[15].Value = model.qq;
                 commandParameters[0x10].Value = model.tel;
+                commandParameters[17].Value = model.ManageRole;
+
                 return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_manage_Update", commandParameters) > 0);
             }
             catch (Exception exception)

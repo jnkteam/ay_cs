@@ -27,6 +27,7 @@
         public void checkLogin()
         {
             string str = string.Format("/{0}/Login.aspx", RuntimeSetting.ManagePagePath);
+            
             try
             {
                 this.username = ManageFactory.CurrentManage.username;
@@ -50,6 +51,34 @@
                 HttpContext.Current.Response.End();
             }
         }
+        /// <summary>
+        /// auth
+        /// </summary>
+        public void checkAuth() {
+            string url = HttpContext.Current.Request.Path;
+            //OriginalStudio.Lib.Logging.LogHelper.Write("url:"+url);
+            int menuId = ExMenuFactory.getExMenuIdByControl(url);          
+            if (menuId > 0) {                
+                if (!ExMenuFactory.authContains(menuId.ToString(), "menu")) {
+                    Response.Write("权限错误! CODE : 1244");
+                    Response.End();
+                }               
+            }
+            //---------/------------/----------------
+            int rulesId = ExMenuFactory.getRulesIdByControl(url);
+            if (rulesId > 0)
+            {
+                if (!ExMenuFactory.authContains(rulesId.ToString(), "rules"))
+                {
+                    Response.Write("没有当前项操作权限! CODE : 1245");
+                    Response.End();
+                }
+            }
+            // Response.Write("没有当前项操作权限! CODE : 1245");
+
+
+
+        }
 
         public static string GetViewStatusName(object isRealNamePass)
         {
@@ -72,6 +101,7 @@
         {
             base.OnInit(e);
             this.checkLogin();
+            this.checkAuth();
         }
 
         public bool CheckHost

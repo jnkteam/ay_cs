@@ -38,35 +38,27 @@
 
         #region 固定配置
 
-        public static string alipay_body
+        public static string ProductBody
         {
             get
             {
-                return ConfigHelper.GetConfig(SettingGroup, "alipay_body");
+                return ConfigHelper.GetConfig(SettingGroup, "prod_body");
             }
         }
 
-        public static string alipay_subject
+        public static string ProductSubject
         {
             get
             {
-                return ConfigHelper.GetConfig(SettingGroup, "alipay_subject");
+                return ConfigHelper.GetConfig(SettingGroup, "prod_subject");
             }
         }
 
-        public static string weixin_body
+        public static string ProductEngSubject
         {
             get
             {
-                return ConfigHelper.GetConfig(SettingGroup, "weixin_body");
-            }
-        }
-
-        public static string weixin_subject
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "weixin_subject");
+                return ConfigHelper.GetConfig(SettingGroup, "prod_eng_subject");
             }
         }
 

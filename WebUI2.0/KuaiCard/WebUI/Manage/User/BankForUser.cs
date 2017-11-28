@@ -24,7 +24,7 @@
         protected Button btnAllSettle;
         protected Button btnBatchSettle;
         protected Button btnSearch;
-        private ChannelWithdraw chnlBLL = new ChannelWithdraw();
+        //private ChannelWithdraw chnlBLL = new ChannelWithdraw();
         protected HtmlForm form1;
         protected HtmlHead Head1;
         protected AspNetPager Pager1;
@@ -170,7 +170,7 @@
                 searchParams.Add(new SearchParam("id", num2));
             }
             string orderby = this.orderBy + " " + this.orderByType;
-            DataSet set = UserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = MchUserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.TotalMoney = set.Tables[1].Compute("Sum(balance)", "").ToString(); //2017.2.13增加
             this.rptUsers.DataSource = set.Tables[1];
@@ -336,7 +336,7 @@
         {
             string str = "";
             //用户信息
-            UserInfo model = UserFactory.GetModel(userId);
+            MchUserBaseInfo model = MchUserFactory.GetUserBaseByUserID(userId);
             if (model == null)
             {
                 return "用户不存在";
@@ -345,7 +345,7 @@
             {
                 return "请输入正确的金额";
             }
-            if (settleAmt > model.enableAmt)
+            if (settleAmt > model.MchUsersAmtInfo.EnableAmt)
             {
                 return "结算金额大于余额 操作有误";
             }
@@ -359,6 +359,7 @@
             info2.AppType = AppTypeEnum.t0;
             info2.SettledMode =  SettledModeEnum.系统自动结算;
             //支付通道
+            /*
             info2.BankCode = model.BankCode;    //代码
             if (model.PMode == 1)
             {
@@ -375,9 +376,12 @@
                 //财付通
                 info2.PayeeBank = "财付通";
             }
+            */
+            /*
             info2.PayeeAddress = model.BankAddress;
             info2.PayeeName = model.PayeeName;      //商户收款姓名
             info2.Account = model.Account;                  //商户收款账号
+            */
             TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
             info2.Charges = modelByUser.chargerate * settleAmt;
             decimal? charges = info2.Charges;
@@ -408,7 +412,9 @@
                 //走接口结算。这里选择结算接口供应商
                 //info2.suppid = this.chnlBLL.GetSupplier(info2.PayeeBank);
                 //2017.2.9修改如下，目的是处理 代付自动走接口
-                info2.Suppid = this.chnlBLL.GetSupplier(info2.BankCode);
+                //info2.Suppid = this.chnlBLL.GetSupplier(info2.BankCode);
+                info2.Suppid = 0;
+
             }
             if ((modelByUser.vaiInterface > 0) && (modelByUser.tranRequiredAudit == 0))
             {

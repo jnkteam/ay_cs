@@ -55,22 +55,23 @@
         {
             if ((!string.IsNullOrEmpty(this.cmd) && (this.ItemID > 0)) && (this.UserId > 0))
             {
-                usersIdImageInfo model = new usersIdImageInfo();
-                model.id = this.ItemID;
+                MchUserImageInfo model = new MchUserImageInfo();
+
+                model.ID = this.ItemID;
                 if (this.cmd == "ok")
                 {
-                    model.status = IdImageStatus.审核成功;
+                    model.Status = IdImageStatus.审核成功;
                 }
                 if (this.cmd == "fail")
                 {
-                    model.status = IdImageStatus.审核失败;
+                    model.Status = IdImageStatus.审核失败;
                 }
-                model.why = string.Empty;
-                model.checktime = new DateTime?(DateTime.Now);
-                model.admin = new int?(base.ManageId);
-                model.userId = new int?(this.UserId);
-                usersIdImage image = new usersIdImage();
-                if (image.Check(model))
+                //model.why = string.Empty;
+                model.CheckTime = DateTime.Now;
+                //model.admin = new int?(base.ManageId);
+                model.UserID = this.UserId;
+                
+                if (MchUsersImageFactory.CheckUserImage(0,0,0) == 1)
                 {
                     base.AlertAndRedirect("操作成功", "UserIdImgList.aspx?s=1");
                 }
@@ -120,9 +121,9 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            DataSet set = usersIdImage.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
-            this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
-            this.rptIamges.DataSource = set.Tables[1];
+            //DataSet set = MchUsersImageFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            //this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
+            //this.rptIamges.DataSource = set.Tables[1];
             this.rptIamges.DataBind();
         }
 

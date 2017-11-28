@@ -91,9 +91,9 @@
                 searchParams.Add(new SearchParam("id", result));
             }
             string orderby = this.orderBy + " " + this.orderByType;
-            //DataSet set = UserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
-            //this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
-            //this.rptUsers.DataSource = set.Tables[1];
+            DataSet set = MchUserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
+            this.rptUsers.DataSource = set.Tables[1];
             this.rptUsers.DataBind();
         }
 

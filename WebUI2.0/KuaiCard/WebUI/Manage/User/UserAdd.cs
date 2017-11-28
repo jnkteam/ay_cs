@@ -15,50 +15,40 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.BLL.PayRate;
+    using System.Globalization;
 
     public class UserAdd : ManagePageBase
     {
-        public UserInfo _ItemInfo = null;
+        public MchUserBaseInfo _ItemInfo = null;
         protected Button btnAdd;
-        protected CheckBox cb_isdebug;
-        protected CheckBox cb_isEmailPass;
-        protected CheckBox cb_isPhonePass;
-        protected CheckBox cb_isRealNamePass;
-        protected CheckBox cb_UrlNoRefPayUrl;
-        protected DropDownList ddlmange;
-        protected DropDownList ddlmemvip;
-        protected DropDownList ddlpromvip;
-        protected DropDownList ddlStatus;
-        protected DropDownList ddlTocashScheme;
         protected HtmlForm form1;
-        protected RadioButtonList rbl_settledmode;
-        protected RadioButtonList rblsettlemode;
-        protected RadioButtonList rbluserType;
-        protected RadioButtonList rbuserclass;
-        protected TextBox txtaccount;
-        protected TextBox txtanswer;
-        protected TextBox txtapiAcct;
-        protected TextBox txtapikey;
-        protected TextBox txtbankAddress;
-        protected TextBox txtbankCity;
-        protected TextBox txtbankProvince;
-        protected TextBox txtCPSDrate;
-        protected TextBox txtCVSNrate;
-        protected TextBox txtdesc;
-        protected TextBox txtemail;
-        protected TextBox txtfullname;
-        protected TextBox txtGetPromSuperior;
-        protected TextBox txtidCard;
-        protected TextBox txtpassword;
-        protected TextBox txtpassword2;
-        protected TextBox txtpayeeBank;
-        protected TextBox txtpayeeName;
-        protected TextBox txtqq;
-        protected TextBox txtquestion;
-        protected TextBox txtsiteName;
-        protected TextBox txtsiteUrl;
-        protected TextBox txttel;
-        protected TextBox txtuserName;
+        protected TextBox UserName;
+        protected RadioButtonList ClassID; //签约属性
+        protected TextBox ContactName;
+        protected TextBox UserPwd;
+        protected TextBox UserPayPwd; //提现密码
+        protected TextBox MerchantName; //商户名
+        protected TextBox ApiKey; //秘钥
+        protected TextBox IDCard;
+        protected RadioButtonList IsRealName;
+        protected TextBox Phone;
+        protected RadioButtonList IsPhone;
+        protected TextBox EMail;
+        protected RadioButtonList IsEmail;
+        protected TextBox QQ;
+        protected TextBox AddTime;      
+        protected DropDownList WithdrawSchemeID;
+        protected DropDownList PayRateID;
+        protected DropDownList manageId;//管理员
+        protected TextBox SiteUrl;
+        protected RadioButtonList WithdrawType;//结算方式
+        protected TextBox RandomProduct;//随机商品名称
+        protected TextBox LinkMan;//企业联系人
+        protected DropDownList AgentID;
+        protected DropDownList Status;
+        protected TextBox LastLoginRemark;
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
@@ -67,53 +57,45 @@
 
         private void InitForm()
         {
-            if (!base.isSuperAdmin)
+
+            
+            DataTable WithdrawScheme = WithdrawSchemeFactory.GetList("type = 1").Tables[0];
+            foreach (DataRow row in WithdrawScheme.Rows)
             {
-                int? manageId = this.model.manageId;
-                int id = base.currentManage.id;
-                if (!((manageId.GetValueOrDefault() == id) && manageId.HasValue))
-                {
-                    base.Response.Write("Sorry,No authority!");
-                    base.Response.End();
-                }
+                this.WithdrawSchemeID.Items.Add(new ListItem(row["SchemeName"].ToString(), row["id"].ToString()));
             }
-            this.ddlmemvip.Style.Add("display", "none");
-            this.ddlpromvip.Style.Add("display", "none");
+
+            DataTable SysPayRate = SysPayRateFactory.GetList(RateTypeEnum.会员, 0);
+            foreach (DataRow row in SysPayRate.Rows)
+            {
+                this.PayRateID.Items.Add(new ListItem(row["RateName"].ToString(), row["id"].ToString()));
+            }
+            DataTable manage = ManageFactory.GetList("status=1").Tables[0];
+            foreach (DataRow row in manage.Rows)
+            {
+                this.manageId.Items.Add(new ListItem(row["userName"].ToString(), row["id"].ToString()));
+            }
+
+            DataTable MchUser = MchUserFactory.GetAgentList();
+            foreach (DataRow row in MchUser.Rows)
+            {
+                this.AgentID.Items.Add(new ListItem(row["userName"].ToString(), row["userid"].ToString()));
+            }
             foreach (int num2 in Enum.GetValues(typeof(UserStatusEnum)))
             {
                 string name = Enum.GetName(typeof(UserStatusEnum), num2);
-                this.ddlStatus.Items.Add(new ListItem(name, num2.ToString()));
+                this.Status.Items.Add(new ListItem(name, num2.ToString()));
             }
-            DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
-            this.ddlmemvip.Items.Add("--商户等级--");
-            foreach (DataRow row in levName.Rows)
-            {
-                this.ddlmemvip.Items.Add(new ListItem(row["levName"].ToString(), row["userLevel"].ToString()));
-            }
-            levName = PayRateFactory.GetLevName(RateTypeEnum.代理);
-            this.ddlpromvip.Items.Add("--代理等级--");
-            foreach (DataRow row in levName.Rows)
-            {
-                this.ddlpromvip.Items.Add(new ListItem(row["levName"].ToString(), row["userLevel"].ToString()));
-            }
-            this.ddlmange.Items.Add(new ListItem("--请选择管理员--", ""));
-            levName = ManageFactory.GetList(" status =1").Tables[0];
-            foreach (DataRow row in levName.Rows)
-            {
-                this.ddlmange.Items.Add(new ListItem(row["username"].ToString(), row["id"].ToString()));
-            }
-            this.ddlTocashScheme.Items.Add(new ListItem("--默认--", ""));
-            levName = TocashScheme.GetList(string.Empty).Tables[0];
-            foreach (DataRow row in levName.Rows)
-            {
-                this.ddlTocashScheme.Items.Add(new ListItem(row["schemename"].ToString(), row["id"].ToString()));
-            }
+
+           
+
+            
         }
 
         private UsersUpdateLog newUpdateLog(string f, string n, string o)
         {
             UsersUpdateLog log = new UsersUpdateLog();
-            log.userid = this.model.ID;
+            log.userid = this.model.UserID;
             log.Addtime = DateTime.Now;
             log.field = f;
             log.newvalue = n;
@@ -130,195 +112,75 @@
             {
                 this.InitForm();
                 this.ShowInfo();
-                this.rbluserType.Style.Add("display", "none");
+               
             }
         }
 
         private void Save()
         {
             List<UsersUpdateLog> changeList = new List<UsersUpdateLog>();
-            string text = this.txtuserName.Text;
-            string str2 = this.txtpassword.Text;
-            int result = 0;
-            int.TryParse(this.txtCPSDrate.Text, out result);
-            int num2 = 0;
-            int.TryParse(this.txtCVSNrate.Text, out num2);
-            string n = this.txtemail.Text;
-            string str4 = this.txtqq.Text;
-            string str5 = this.txttel.Text;
-            string str6 = this.txtidCard.Text;
-            int num3 = 0;
-            int.TryParse(this.rblsettlemode.SelectedValue, out num3);
-            string str7 = this.txtpayeeName.Text;
-            string str8 = this.txtpayeeBank.Text;
-            string str9 = this.txtbankProvince.Text;
-            string str10 = this.txtbankCity.Text;
-            string str11 = this.txtbankAddress.Text;
-            int num4 = int.Parse(this.ddlStatus.SelectedValue);
-            this.model.classid = int.Parse(this.rbuserclass.SelectedValue);
-            string str12 = this.txtaccount.Text;
-            string str13 = this.txtsiteName.Text;
-            string str14 = this.txtsiteUrl.Text;
-            UserTypeEnum enum2 = (UserTypeEnum) int.Parse(this.rbluserType.SelectedValue);
-            int num5 = 0;
-            if (enum2 == UserTypeEnum.会员)
-            {
-                num5 = int.Parse(this.ddlmemvip.SelectedValue);
+
+            
+            this.model.UserName = this.UserName.Text;
+            this.model.ClassID  = int.Parse(this.ClassID.SelectedValue);
+            this.model.ContactName = this.ContactName.Text;
+            this.model.UserPwd             = this.UserPwd.Text ;
+             this.model.UserPayPwd          = this.UserPayPwd.Text ; 
+             this.model.MerchantName        = this.MerchantName.Text ; 
+             this.model.ApiKey              = this.ApiKey.Text; 
+             this.model.IDCard              = this.IDCard.Text;
+             this.model.IsRealName          = this.IsRealName.SelectedValue == "1" ? true : false;
+             this.model.Phone               = this.Phone.Text;
+             this.model.IsPhone             = this.IsPhone.SelectedValue == "1" ? true : false;
+             this.model.EMail               = this.EMail.Text;
+             this.model.IsEmail             = this.IsEmail.SelectedValue == "1" ? true : false;
+             this.model.QQ                  = this.QQ.Text;
+             
+            if (!string.IsNullOrEmpty(this.AddTime.Text.ToString())) {
+               
+                this.model.AddTime = DateTime.ParseExact(this.AddTime.Text.ToString(), "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
             }
-            else if (enum2 == UserTypeEnum.代理)
-            {
-                num5 = int.Parse(this.ddlpromvip.SelectedValue);
+            else {
+                this.model.AddTime = DateTime.Now;
             }
-            string str15 = this.txtapikey.Text;
-            this.model.UserName = text;
-            this.model.APIAccount = int.Parse(this.txtapiAcct.Text);
-            this.model.Settles = Convert.ToInt32(this.rbl_settledmode.SelectedValue);
-            if (!string.IsNullOrEmpty(str2))
+           
+             this.model.WithdrawSchemeID    = int.Parse(this.WithdrawSchemeID.SelectedValue);
+             this.model.PayRateID           = int.Parse(this.PayRateID.SelectedValue);
+             this.model.ManageId            = int.Parse(this.manageId.SelectedValue);
+             if (!string.IsNullOrEmpty(this.SiteUrl.Text.ToString())) {
+                this.model.SiteUrl = this.SiteUrl.Text;
+             }
+             
+             this.model.WithdrawType        = int.Parse(this.WithdrawType.SelectedValue);
+            if (!string.IsNullOrEmpty(this.RandomProduct.Text.ToString()))
             {
-                str2 = Cryptography.MD5(str2);
-                if (this.isUpdate && (str2 != this.model.Password))
-                {
-                    changeList.Add(this.newUpdateLog("password", str2, this.model.Password));
-                }
-                this.model.Password = str2;
+                this.model.RandomProduct = int.Parse(this.RandomProduct.Text); //类型未知
             }
-            if (!string.IsNullOrEmpty(this.txtpassword2.Text.Trim()))
-            {
-                string str16 = Cryptography.MD5(this.txtpassword2.Text.Trim());
-                this.model.Password2 = str16;
-            }
-            if (this.isUpdate && (result != this.model.CPSDrate))
-            {
-                changeList.Add(this.newUpdateLog("CPSDrate", result.ToString(), this.model.CPSDrate.ToString()));
-            }
-            this.model.CPSDrate = result;
-            if (this.isUpdate && (num2 != this.model.CVSNrate))
-            {
-                changeList.Add(this.newUpdateLog("CVSNrate", num2.ToString(), this.model.CVSNrate.ToString()));
-            }
-            this.model.CVSNrate = num2;
-            if (this.isUpdate && (n != this.model.Email))
-            {
-                changeList.Add(this.newUpdateLog("Email", n, this.model.Email));
-            }
-            this.model.Email = n;
-            if (this.isUpdate && (str4 != this.model.QQ))
-            {
-                changeList.Add(this.newUpdateLog("QQ", str4, this.model.QQ));
-            }
-            this.model.QQ = str4;
-            if (this.isUpdate && (str5 != this.model.Tel))
-            {
-                changeList.Add(this.newUpdateLog("tel", str5, this.model.Tel));
-            }
-            this.model.Tel = str5;
-            if (this.isUpdate && (str6 != this.model.IdCard))
-            {
-                changeList.Add(this.newUpdateLog("idCard", str6, this.model.IdCard));
-            }
-            this.model.IdCard = str6;
-            if (this.isUpdate && (num3 != this.model.PMode))
-            {
-                changeList.Add(this.newUpdateLog("pmode", num3.ToString(), this.model.PMode.ToString()));
-            }
-            this.model.PMode = num3;
-            if (this.isUpdate && (str12 != this.model.Account))
-            {
-                changeList.Add(this.newUpdateLog("account", str12, this.model.Account));
-            }
-            this.model.Account = str12;
-            if (this.isUpdate && (str7 != this.model.PayeeName))
-            {
-                changeList.Add(this.newUpdateLog("payeeName", str7, this.model.PayeeName));
-            }
-            this.model.PayeeName = str7;
-            if (this.isUpdate && (str8 != this.model.PayeeBank))
-            {
-                changeList.Add(this.newUpdateLog("payeeBank", str8, this.model.PayeeBank));
-            }
-            this.model.PayeeBank = str8;
-            if (this.isUpdate && (str9 != this.model.BankProvince))
-            {
-                changeList.Add(this.newUpdateLog("BankProvince", str9, this.model.BankProvince));
-            }
-            this.model.BankProvince = str9;
-            if (this.isUpdate && (str10 != this.model.BankCity))
-            {
-                changeList.Add(this.newUpdateLog("BankCity", str10, this.model.BankCity));
-            }
-            this.model.BankCity = str10;
-            if (this.isUpdate && (str11 != this.model.BankAddress))
-            {
-                changeList.Add(this.newUpdateLog("bankAddress", str11, this.model.BankAddress));
-            }
-            this.model.BankAddress = str11;
-            if (this.isUpdate && (num4 != this.model.Status))
-            {
-                changeList.Add(this.newUpdateLog("status", num4.ToString(), this.model.Status.ToString()));
-            }
-            this.model.Status = num4;
-            if (this.isUpdate && (str13 != this.model.SiteName))
-            {
-                changeList.Add(this.newUpdateLog("SiteName", str13, this.model.SiteName));
-            }
-            this.model.SiteName = str13;
-            if (this.isUpdate && (str14 != this.model.SiteUrl))
-            {
-                changeList.Add(this.newUpdateLog("siteUrl", str14, this.model.SiteUrl));
-            }
-            this.model.SiteUrl = str14;
-            if (this.isUpdate && (enum2 != this.model.UserType))
-            {
-                changeList.Add(this.newUpdateLog("userType", enum2.ToString(), ((int) this.model.UserType).ToString()));
-            }
-            this.model.UserType = enum2;
-            if (this.isUpdate && (num5 != Convert.ToInt32(this.model.UserLevel)))
-            {
-                changeList.Add(this.newUpdateLog("userLevel", num5.ToString(), ((int) this.model.UserLevel).ToString()));
-            }
-            this.model.UserLevel = (UserLevelEnum) num5;
-            int num6 = 0;
-            if (!string.IsNullOrEmpty(this.ddlTocashScheme.SelectedValue))
-            {
-                num6 = int.Parse(this.ddlTocashScheme.SelectedValue);
-            }
-            if (this.isUpdate && (num6 != this.model.MaxDayToCashTimes))
-            {
-                changeList.Add(this.newUpdateLog("MaxDayToCashTimes", num6.ToString(), this.model.MaxDayToCashTimes.ToString()));
-            }
-            this.model.MaxDayToCashTimes = num6;
-            if (this.isUpdate && (str15 != this.model.APIKey))
-            {
-                changeList.Add(this.newUpdateLog("APIKey", str15, this.model.APIKey));
-            }
-            this.model.APIKey = str15;
-            this.model.Desc = this.txtdesc.Text;
-            this.model.IsRealNamePass = this.cb_isRealNamePass.Checked ? 1 : 0;
-            this.model.IsEmailPass = this.cb_isEmailPass.Checked ? 1 : 0;
-            this.model.IsPhonePass = this.cb_isPhonePass.Checked ? 1 : 0;
-            this.model.isdebug = this.cb_isdebug.Checked ? 1 : 0;
-            if (!string.IsNullOrEmpty(this.ddlmange.SelectedValue))
-            {
-                this.model.manageId = new int?(int.Parse(this.ddlmange.SelectedValue));
-            }
+             this.model.LinkMan             = this.LinkMan.Text;
+             this.model.AgentID             = int.Parse(this.AgentID.SelectedValue);
+             this.model.Status              = int.Parse(this.Status.SelectedValue);
+             this.model.LastLoginRemark     = this.LastLoginRemark.Text;
+
+
+            
             if (!this.isUpdate)
             {
-                if (UserFactory.Add(this.model) > 0)
+                if (MchUserFactory.Add(this.model) > 0)
                 {
-                    base.AlertAndRedirect("保存成功！", "UserList.aspx");
+                    showPageMsg("保存成功！");
                 }
                 else
                 {
-                    base.AlertAndRedirect("保存失败！");
+                    showPageMsg("保存失败！");
                 }
             }
-            else if (UserFactory.Update(this.model, changeList))
+            else if (MchUserFactory.Update(this.model))
             {
-                base.AlertAndRedirect("更新成功！", "UserList.aspx");
+                showPageMsg("更新成功！");
             }
             else
             {
-                base.AlertAndRedirect("更新失败！");
+                showPageMsg("更新失败！");
             }
         }
 
@@ -335,61 +197,39 @@
         {
             if (this.isUpdate && (this.model != null))
             {
-                UserInfo promSuperior = UserFactory.GetPromSuperior(this.model.ID);
-                if ((promSuperior != null) && (promSuperior.ID > 0))
-                {
-                    this.txtGetPromSuperior.Text = promSuperior.UserName;
-                }
-                else
-                {
-                    this.txtGetPromSuperior.Text = "无代理";
-                }
-                this.rbuserclass.SelectedValue = this.model.classid.ToString();
-                this.txtuserName.Text = this.model.UserName;
-                this.txtfullname.Text = this.model.full_name;
-                this.txtCPSDrate.Text = this.model.CPSDrate.ToString();
-                this.txtCVSNrate.Text = this.model.CVSNrate.ToString();
-                this.txtemail.Text = this.model.Email;
-                this.txtqq.Text = this.model.QQ;
-                this.txttel.Text = this.model.Tel;
-                this.txtidCard.Text = this.model.IdCard;
-                this.rblsettlemode.SelectedValue = this.model.PMode.ToString();
-                this.ddlTocashScheme.SelectedValue = this.model.MaxDayToCashTimes.ToString();
-                this.txtaccount.Text = this.model.Account;
-                this.txtpayeeName.Text = this.model.PayeeName;
-                this.txtpayeeBank.Text = this.model.PayeeBank;
-                this.txtbankProvince.Text = this.model.BankProvince;
-                this.txtbankCity.Text = this.model.BankCity;
-                this.txtbankAddress.Text = this.model.BankAddress;
-                this.ddlStatus.SelectedValue = this.model.Status.ToString();
-                this.txtsiteName.Text = this.model.SiteName;
-                this.txtsiteUrl.Text = this.model.SiteUrl;
-                this.rbluserType.SelectedValue = ((int) this.model.UserType).ToString();
-                this.txtapiAcct.Text = this.model.APIAccount.ToString();
-                if (this.model.UserType == UserTypeEnum.会员)
-                {
-                    this.ddlmemvip.SelectedValue = ((int) this.model.UserLevel).ToString();
-                }
-                if (this.model.UserType == UserTypeEnum.代理)
-                {
-                    this.ddlpromvip.SelectedValue = ((int) this.model.UserLevel).ToString();
-                }
-                int num = 0;
-                if (!string.IsNullOrEmpty(this.ddlTocashScheme.SelectedValue))
-                {
-                    num = int.Parse(this.ddlTocashScheme.SelectedValue);
-                }
-                this.txtapikey.Text = this.model.APIKey;
-                this.txtdesc.Text = this.model.Desc;
-                this.ddlmange.SelectedValue = this.model.manageId.ToString();
-                this.txtquestion.Text = this.model.question;
-                this.txtanswer.Text = this.model.answer;
-                this.cb_isRealNamePass.Checked = this.model.IsRealNamePass == 1;
-                this.cb_isEmailPass.Checked = this.model.IsEmailPass == 1;
-                this.cb_isPhonePass.Checked = this.model.IsPhonePass == 1;
-                this.rbl_settledmode.SelectedValue = this.model.Settles.ToString();
-                this.cb_isdebug.Checked = this.model.isdebug == 1;
+
+
+                //MchUserBaseInfo promSuperior = MchUserFactory.GetPromSuperior(this.model.UserID);
+                OriginalStudio.Lib.Logging.LogHelper.Write(this.model.UserName);
+                this.UserName.Text = this.model.UserName ;
+                this.ClassID.SelectedValue = this.model.ClassID.ToString() ;
+                this.ContactName.Text = this.model.ContactName ;
+                this.UserPwd.Text = this.model.UserPwd  ;
+                this.UserPayPwd.Text =this.model.UserPayPwd ;
+                this.MerchantName.Text = this.model.MerchantName ;
+                this.ApiKey.Text = this.model.ApiKey ;
+                this.IDCard.Text = this.model.IDCard ;
+                this.IsRealName.SelectedValue = this.model.IsRealName == true ? "1": "0";
+                this.Phone.Text = this.model.Phone;
+                this.IsPhone.SelectedValue = this.model.IsPhone == true ? "1" : "0";
+                this.EMail.Text = this.model.EMail ;
+                this.IsEmail.SelectedValue = this.model.IsEmail == true ? "1" : "0";
+                this.QQ.Text = this.model.QQ ;
+                this.AddTime.Text = this.model.AddTime.ToString();
+                this.SiteUrl.Text =  this.model.SiteUrl  ;
+                this.RandomProduct.Text = this.model.RandomProduct.ToString() ;
+
+                this.LinkMan.Text = this.model.LinkMan;
+              
+                this.Status.SelectedValue = this.model.Status.ToString();
+                this.LastLoginRemark.Text = this.model.LastLoginRemark ;
+
+                this.WithdrawSchemeID.SelectedValue = this._ItemInfo.WithdrawSchemeID.ToString();
+                this.PayRateID.SelectedValue = this._ItemInfo.PayRateID.ToString();
+                this.manageId.SelectedValue = this._ItemInfo.ManageId.ToString();
+                this.AgentID.SelectedValue = this._ItemInfo.AgentID.ToString();
             }
+
         }
 
         public bool isUpdate
@@ -408,7 +248,7 @@
             }
         }
 
-        public UserInfo model
+        public MchUserBaseInfo model
         {
             get
             {
@@ -416,11 +256,11 @@
                 {
                     if (this.ItemInfoId > 0)
                     {
-                        this._ItemInfo = UserFactory.GetModel(this.ItemInfoId);
+                        this._ItemInfo = MchUserFactory.GetUserBaseByUserID(this.ItemInfoId);
                     }
                     else
                     {
-                        this._ItemInfo = new UserInfo();
+                        this._ItemInfo = new MchUserBaseInfo();
                     }
                 }
                 return this._ItemInfo;

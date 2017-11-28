@@ -134,9 +134,9 @@
             }
             if (Convert.ToInt32(obj) > 0)
             {
-                return "√";
+                return "<a title='√' style='color:#1db283' href='javascript:void(0)'><i class='fa  fa-check-circle'></i></a>";
             }
-            return "\x00d7";
+            return "<a title='×'  style='color:#ff4a4a' href='javascript:void(0)'><i class='fa  fa-times-circle'></i></a>";
         }
 
         public string isSpecialChannel(object userid)
@@ -266,13 +266,13 @@
                     HyperLink link = (HyperLink) e.Item.FindControl("hlinkOrderby");
                     if (this.orderByType == "asc")
                     {
-                        link.Text = "余额↓";
-                        link.NavigateUrl = "?orderby=balance&type=desc";
+                        link.Text = "余额 <i class='fa fa-sort-amount-asc'></i>";
+                        link.NavigateUrl = "?orderby=balance&type=desc&sign=19&menuId=20";
                     }
                     else
                     {
-                        link.Text = "余额↑";
-                        link.NavigateUrl = "?orderby=balance&type=asc";
+                        link.Text = "余额 <i class='fa fa-sort-amount-desc'></i>";
+                        link.NavigateUrl = "?orderby=balance&type=asc&sign=19&menuId=20";
                     }
                 }
             }
@@ -280,7 +280,7 @@
             {
                 string s = DataBinder.Eval(e.Item.DataItem, "userType").ToString();
                 string str3 = DataBinder.Eval(e.Item.DataItem, "status").ToString();
-                string str4 = DataBinder.Eval(e.Item.DataItem, "UserLevel").ToString();
+                //string str4 = DataBinder.Eval(e.Item.DataItem, "UserLevel").ToString();
                 //string str5 = DataBinder.Eval(e.Item.DataItem, "settles").ToString();
                 string str6 = DataBinder.Eval(e.Item.DataItem, "manageId").ToString();
                 Label label = (Label) e.Item.FindControl("lblUserType");
@@ -288,7 +288,7 @@
                 Label label2 = (Label) e.Item.FindControl("lblUserStat");
                 label2.Text = Enum.GetName(typeof(UserStatusEnum), int.Parse(str3));
                 Label label3 = (Label) e.Item.FindControl("lblUserLevel");
-                label3.Text = str4;
+                //label3.Text = str4;
                 Label label4 = (Label) e.Item.FindControl("lblUserSettle");
                 //label4.Text = "T+" + str5;
                 string str7 = DataBinder.Eval(e.Item.DataItem, "userid").ToString();
@@ -323,8 +323,8 @@
                         relname = model.relname;
                     }
                 }
-                Label label6 = (Label) e.Item.FindControl("labagcmd");
-                label6.Text = relname;
+                //Label label6 = (Label) e.Item.FindControl("labagcmd");
+                //label6.Text = relname;
             }
         }
 

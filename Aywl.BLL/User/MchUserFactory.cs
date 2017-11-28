@@ -1193,7 +1193,7 @@
         /// <returns></returns>
         public static DataTable GetAgentList()
         {
-            string commandText = "select id,userName from mch_userbase with(nolock) where userType = 4";
+            string commandText = "select userid,userName from mch_userbase with(nolock) where userType = 4";
             return DataBase.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 

@@ -98,6 +98,7 @@
         private void LoadData()
         {
             List<SearchParam> searchParams = new List<SearchParam>();
+            /*
             if (!string.IsNullOrEmpty(this.StatusList.SelectedValue))
             {
                 searchParams.Add(new SearchParam("status", int.Parse(this.StatusList.SelectedValue)));
@@ -120,6 +121,7 @@
             {
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
+            */
             string orderby = string.Empty;
             //DataSet set = MchUsersImageFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             //this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
@@ -133,6 +135,7 @@
             this.DoCmd();
             if (!base.IsPostBack)
             {
+                /*
                 this.StimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 this.EtimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
@@ -141,6 +144,7 @@
                 {
                     this.StatusList.SelectedValue = this.ItemStatus;
                 }
+                */
                 this.LoadData();
             }
         }

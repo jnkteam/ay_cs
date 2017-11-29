@@ -312,8 +312,8 @@
                         relname = string.Format("<a onclick=\"return confirm('你确定要通过该用户吗？')\" href=\"?cmd=ok&ID={0}\" style=\"color:Green;\">通过</a> <a onclick=\"return confirm('你确定要锁定该用户吗？')\" href=\"?cmd=del&ID={0}\" style=\"color:red;\">锁定</a>", str7);
                     }
                 }
-                Label label5 = (Label) e.Item.FindControl("labcmd");
-                label5.Text = relname;
+                //Label label5 = (Label) e.Item.FindControl("labcmd");
+                //label5.Text = relname;
                 relname = string.Empty;
                 if (!string.IsNullOrEmpty(str6))
                 {

@@ -98,6 +98,18 @@
     <Compile Include="KuaiCard\WebUI\Manage\StatCharts\SingleDayHourChart.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserBankCard.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserPayRate.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserBindIp.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserTypeLimit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\UserPayAccts.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

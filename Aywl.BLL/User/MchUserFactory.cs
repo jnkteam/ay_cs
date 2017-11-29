@@ -1128,14 +1128,14 @@
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public static DataSet GetUserBindIpList(int userId, int ipType = 0)
+        public static DataSet GetUserBindIpList(int userId)
         {
             SqlParameter[] commandParameters = new SqlParameter[] { 
                 new SqlParameter("@userid", SqlDbType.Int, 10),
-                new SqlParameter("@iptype", SqlDbType.Int, 10)
+               
             };
             commandParameters[0].Value = userId;
-            commandParameters[1].Value = ipType;
+           
 
             return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_bindip_list", commandParameters);
         }

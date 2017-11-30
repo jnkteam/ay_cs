@@ -11,6 +11,7 @@
     using OriginalStudio.DBAccess;
     using System.Data.SqlClient;
     using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// 结算操作类。
@@ -835,6 +836,21 @@
                 info.BankCode = (string)obj14;
             }
             return info;
+        }
+
+        #endregion
+
+        #region 结算异步通知
+
+        public void DoNotify(string trade_no)
+        {
+            OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.Settled.SettledFactory.GetModel(0);
+            if (model != null)
+            {
+                SettledNotifyHelper helper = new SettledNotifyHelper();
+                helper.SettleModel = model;
+                new Thread(new ThreadStart(helper.DoNotify)).Start();
+            }
         }
 
         #endregion

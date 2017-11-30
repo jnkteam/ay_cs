@@ -26,6 +26,7 @@
         private int _suppstatus;
         private decimal _tax = 0;
         private int _userid;
+        private string _notifyurl = string.Empty;
 
         public string Account
         {
@@ -252,6 +253,18 @@
             set
             {
                 this._BankCode = value;
+            }
+        }
+
+        public string NotifyUrl
+        {
+            get
+            {
+                return this._notifyurl;
+            }
+            set
+            {
+                this._notifyurl = value;
             }
         }
     }

@@ -34,7 +34,7 @@
         /// <param name="supp_trade_no"></param>
         /// <param name="message"></param>
         /// <param name="bill_trade_no"></param>
-        /// <returns></returns>
+        /// <returns>返回0：代表成功</returns>
         public static int Process(int suppId, string trade_no, bool is_cancel, int status, string amount, string supp_trade_no, string message, out string bill_trade_no)
         {
             bill_trade_no = string.Empty;
@@ -63,7 +63,7 @@
             }
             DataRow row = table.Rows[0];
             bill_trade_no = Convert.ToString(row["bill_trade_no"]);
-            return Convert.ToInt32(row["result"]);
+            return Convert.ToInt32(row["result"]);  
         }
 
         #endregion

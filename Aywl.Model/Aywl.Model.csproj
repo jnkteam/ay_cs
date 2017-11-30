@@ -149,9 +149,9 @@
     <Compile Include="Enum\UserTypeEnum.cs" />
     <Compile Include="WebInfo.cs" />
     <Compile Include="Withdraw\ChannelWithdraw.cs" />
-    <Compile Include="Withdraw\settledAgent.cs" />
-    <Compile Include="Withdraw\settledAgentNotify.cs" />
-    <Compile Include="Withdraw\settledAgentSummary.cs" />
+    <Compile Include="Settled\old\settledAgent.cs" />
+    <Compile Include="Settled\old\settledAgentNotify.cs" />
+    <Compile Include="Settled\old\settledAgentSummary.cs" />
     <Compile Include="Withdraw\WithdrawScheme.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,38 +8,34 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.User;
+    using System.Data;
 
     public class UserBankCard : ManagePageBase
     {
 
-        public Model.ManageRoles _ItemInfo = null;
-        protected Button btnAdd;
 
-        protected string rolesMenu = string.Empty;
-        private object context;
-        protected HiddenField rolesMenuCheckBox;
+        protected Button btnAdd;
+        protected Repeater bindIpRepeater;
+
+        protected DropDownList ipType;
+        protected TextBox IP;
         protected void btnAdd_Click(object sender, EventArgs e)
         {
 
             bool flag = false;
             if (this.isUpdate)
-            {
-                this.ItemInfo.Id = this.ItemInfoId;
-                this.ItemInfo.Menu = this.rolesMenuCheckBox.Value;
+            {          
 
-                if (ManageRolesFactory.UpdateMenu(this.ItemInfo))
-                {
-                    flag = true;
-                }
             }
 
             if (flag)
             {
-                showPageMsg("菜单授权成功");
+                base.AlertAndRedirect("绑定成功");
             }
             else
             {
-                showPageMsg("操作失败");
+                base.AlertAndRedirect("绑定失败");
             }
 
 
@@ -50,16 +46,49 @@
 
             if (this.isUpdate)
             {
-                this.rolesMenu = ExMenuFactory.getRolesMenu(this.ItemInfo);
+                DataSet set = MchUserFactory.GetUserPayBankList(this.ItemInfoId);
+
+                DataTable table = set.Tables[0];
+                table.Columns.Add("accountTypeName");
+                table.Columns.Add("BankAccountHide");
+                foreach (DataRow row in table.Rows)
+                {
+                    
+                     row["accountTypeName"] = Convert.ToInt32(row["AccountType"]) == 1 ? "对公" : "对私";
+                     string str = row["BankAccount"].ToString();
+                     string hideString = str.Length > 10 ? str.Remove(10)+"*******" : str;
+                     row["BankAccountHide"] = hideString;
+
+                }
+
+
+                this.bindIpRepeater.DataSource = table;
+                this.bindIpRepeater.DataBind();
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             this.setPower();
             if (!base.IsPostBack)
             {
                 this.InitForm();
+            }
+            string cmd = WebBase.GetQueryStringString("cmd", string.Empty);
+            int bankid = WebBase.GetQueryStringInt32("bankid", 0);
+            int userid = WebBase.GetQueryStringInt32("userid", 0);
+
+            if (!string.IsNullOrEmpty(cmd) && cmd == "delete")
+            {
+                if (MchUserFactory.DeleteUserPayBank(bankid) > 0)
+                {
+                    base.AlertAndRedirect("删除成功", "UserBankCard.aspx?id=" + userid);
+                }
+                else
+                {
+                    base.AlertAndRedirect("删除失败", "UserBankCard.aspx?id=" + userid);
+                }
             }
         }
 
@@ -82,24 +111,6 @@
             }
         }
 
-        public OriginalStudio.Model.ManageRoles ItemInfo
-        {
-            get
-            {
-                if (this._ItemInfo == null)
-                {
-                    if (this.isUpdate)
-                    {
-                        this._ItemInfo = ManageRolesFactory.GetModelById(this.ItemInfoId);
-                    }
-                    else
-                    {
-                        this._ItemInfo = new OriginalStudio.Model.ManageRoles();
-                    }
-                }
-                return this._ItemInfo;
-            }
-        }
 
         public int ItemInfoId
         {

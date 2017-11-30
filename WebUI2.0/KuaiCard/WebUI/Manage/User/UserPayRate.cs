@@ -8,38 +8,50 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.User;
+    using System.Data;
+    using OriginalStudio.BLL.Channel;
+    using OriginalStudio.BLL.BLL.User;
+    using OriginalStudio.Model.User;
 
     public class UserPayRate : ManagePageBase
     {
 
-        public Model.ManageRoles _ItemInfo = null;
-        protected Button btnAdd;
 
-        protected string rolesMenu = string.Empty;
-        private object context;
-        protected HiddenField rolesMenuCheckBox;
+        protected Button btnAdd;
+        protected Repeater PayRateRepeater;
+        protected Label labUserName;
+        
+
+        protected CheckBox Special;
+        protected HiddenField hideValue;
+        
+            
         protected void btnAdd_Click(object sender, EventArgs e)
         {
 
             bool flag = false;
             if (this.isUpdate)
             {
-                this.ItemInfo.Id = this.ItemInfoId;
-                this.ItemInfo.Menu = this.rolesMenuCheckBox.Value;
+                MchUserPayRateInfo model = new MchUserPayRateInfo();
+                model.UserID        = this.ItemInfoId;
+                model.Special       = this.Special.Checked ? 1 : 0;
+                model.PayrateXML    = this.hideValue.Value;
 
-                if (ManageRolesFactory.UpdateMenu(this.ItemInfo))
+                if (MchUserPayRateFactory.EditUserChannelPayRate(model))
                 {
                     flag = true;
                 }
+
             }
 
             if (flag)
             {
-                showPageMsg("菜单授权成功");
+                base.AlertAndRedirect("操作成功");
             }
             else
             {
-                showPageMsg("操作失败");
+                base.AlertAndRedirect("操作失败");
             }
 
 
@@ -50,16 +62,53 @@
 
             if (this.isUpdate)
             {
-                this.rolesMenu = ExMenuFactory.getRolesMenu(this.ItemInfo);
+                MchUserBaseInfo userInfo = MchUserFactory.GetUserBaseByUserID(this.ItemInfoId);
+                this.labUserName.Text = userInfo.UserName.ToString(); 
+                DataSet set = SysChannelType.GetList(true);
+                DataTable table =  set.Tables[0];
+                table.Columns.Add("rateValue");
+
+                MchUserPayRateInfo myRateInfo = MchUserPayRateFactory.GetModel(this.ItemInfoId);
+                this.Special.Checked = myRateInfo.Special == 1 ? true :false;
+                foreach (DataRow row in table.Rows)
+                {
+                    if (myRateInfo.Special == 1)
+                    {
+                        decimal speRate  = MchUserPayRateFactory.GetUserChannelPayRate(this.ItemInfoId, Convert.ToInt32(row["typeid"]));
+                        row["rateValue"] = speRate * 100;
+                    }
+                    else {
+                        row["rateValue"] = Convert.ToDouble(row["supplierrate"])*100;
+                    }
+                    
+                }
+                this.PayRateRepeater.DataSource = table;
+                this.PayRateRepeater.DataBind();
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             this.setPower();
             if (!base.IsPostBack)
             {
                 this.InitForm();
+            }
+            string cmd = WebBase.GetQueryStringString("cmd", string.Empty);
+            int ipid = WebBase.GetQueryStringInt32("ipid", 0);
+            int userid = WebBase.GetQueryStringInt32("userid", 0);
+
+            if (!string.IsNullOrEmpty(cmd) && cmd == "delete")
+            {
+                if (MchUserFactory.DeleteUserBindIp(ipid) > 0)
+                {
+                    base.AlertAndRedirect("删除成功", "UserBindIp.aspx?id=" + userid);
+                }
+                else
+                {
+                    base.AlertAndRedirect("删除失败", "UserBindIp.aspx?id=" + userid);
+                }
             }
         }
 
@@ -82,24 +131,6 @@
             }
         }
 
-        public OriginalStudio.Model.ManageRoles ItemInfo
-        {
-            get
-            {
-                if (this._ItemInfo == null)
-                {
-                    if (this.isUpdate)
-                    {
-                        this._ItemInfo = ManageRolesFactory.GetModelById(this.ItemInfoId);
-                    }
-                    else
-                    {
-                        this._ItemInfo = new OriginalStudio.Model.ManageRoles();
-                    }
-                }
-                return this._ItemInfo;
-            }
-        }
 
         public int ItemInfoId
         {

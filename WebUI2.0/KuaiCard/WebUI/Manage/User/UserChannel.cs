@@ -107,7 +107,7 @@
 
         private void LoadData()
         {
-            DataTable table = ChannelType.GetList(new bool?(true)).Tables[0];
+            DataTable table = SysChannelType.GetList(new bool?(true)).Tables[0];
             if (!table.Columns.Contains("type_status"))
             {
                 table.Columns.Add("type_status", typeof(string));
@@ -132,7 +132,7 @@
             {
                 int typeId = int.Parse(row["typeId"].ToString());
                 bool flag = false;
-                ChannelTypeUserInfo model = ChannelTypeUsers.GetModel(this.UserID, typeId);
+                MchUserChannelType model = MchUsersChannelTypeFactory.GetModel(this.UserID, typeId);
                 switch (ChannelType.GetModelByTypeId(typeId).isOpen)
                 {
                     case OpenEnum.AllClose:
@@ -151,18 +151,20 @@
                 row["suppid"] = 0;
                 if (model != null)
                 {
-                    if (model.sysIsOpen.HasValue)
+                    /*if (model.SysIsOpen.HasValue)
                     {
-                        row["sys_setting"] = model.sysIsOpen.Value ? "right" : "wrong";
+                        row["sys_setting"] = model.SysIsOpen ? "right" : "wrong";
                     }
-                    if (model.userIsOpen.HasValue)
+                    if (model.SysIsOpen)
                     {
                         row["user_setting"] = model.userIsOpen.Value ? "right" : "wrong";
                     }
-                    if (model.suppid.HasValue)
+                    
+                    if (model.SupplierCode)
                     {
                         row["suppid"] = model.suppid.Value;
                     }
+                    */
                 }
                 row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.会员, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
             }

@@ -41,7 +41,7 @@
             }
             else
             {
-                base.AlertAndRedirect("绑定成功");
+                base.AlertAndRedirect("绑定失败");
             }
 
 

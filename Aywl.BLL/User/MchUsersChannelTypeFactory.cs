@@ -170,8 +170,8 @@
                 };
                 commandParameters[0].Value = model.TypeID;
                 commandParameters[1].Value = model.UserId;
-                commandParameters[2].Value = model.UserIsOpen;
-                commandParameters[3].Value = model.SysIsOpen;
+                commandParameters[2].Value = model.UserIsOpen ? 1 : 0;
+                commandParameters[3].Value = model.SysIsOpen ? 1 : 0;
                 String R = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_channeltype_add", commandParameters).ToString();
 
                 return Utils.StrToInt(R, 0);

@@ -14,6 +14,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using OriginalStudio.BLL.Supplier;
+    using OriginalStudio.BLL.PayRate;
 
     public class UserChannel : BusinessPageBase
     {
@@ -35,26 +36,26 @@
             ddlctrl.Items.Add(new ListItem("--默认--", "0"));
             foreach (DataRow row in table.Rows)
             {
-                ddlctrl.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
+                ddlctrl.Items.Add(new ListItem(row["SupplierName"].ToString(), row["suppliercode"].ToString()));
             }
             ddlctrl.SelectedValue = suppId.ToString();
         }
 
         protected void btnAllColse_Click(object sender, EventArgs e)
         {
-            ChannelTypeUsers.Setting(this.UserID, 0);
+            MchUsersChannelTypeFactory.BatchSettingSupp(this.UserID, 0);
             this.LoadData();
         }
 
         protected void btnAllOpen_Click(object sender, EventArgs e)
         {
-            ChannelTypeUsers.Setting(this.UserID, 1);
+            MchUsersChannelTypeFactory.BatchSettingSupp(this.UserID, 1);
             this.LoadData();
         }
 
         protected void btnReSet_Click(object sender, EventArgs e)
         {
-            ChannelTypeUsers.Setting(this.UserID, 3);
+            MchUsersChannelTypeFactory.BatchSettingSupp(this.UserID, 3);
             this.LoadData();
         }
 
@@ -71,13 +72,13 @@
                         DropDownList list = item.FindControl("ddlsupp") as DropDownList;
                         if (list != null)
                         {
-                            ChannelTypeUserInfo model = new ChannelTypeUserInfo();
-                            model.updateTime = new DateTime?(DateTime.Now);
-                            model.typeId = num;
-                            model.updateTime = new DateTime?(DateTime.Now);
-                            model.userId = this.UserID;
-                            model.suppid = new int?(int.Parse(list.SelectedValue));
-                            ChannelTypeUsers.AddSupp(model);
+                            MchUserChannelType model = new MchUserChannelType();
+                            
+                            model.TypeID = num;
+                            model.UpdateTime = DateTime.Now;
+                            model.UserId = this.UserID;
+                            model.SupplierCode = int.Parse(list.SelectedValue);
+                            MchUsersChannelTypeFactory.AddSupp(model);
                         }
                     }
                 }
@@ -89,7 +90,8 @@
         {
             if (((this.typeId > 0) && !string.IsNullOrEmpty(this.cmd)) && (this.ajaxUserId > 0))
             {
-                ChannelTypeUserInfo model = new ChannelTypeUserInfo();
+                SysChannelTypeInfo model = new SysChannelTypeInfo();
+                /*
                 model.userId = this.ajaxUserId;
                 model.typeId = this.typeId;
                 model.sysIsOpen = new bool?(this.cmd != "close");
@@ -100,7 +102,8 @@
                 {
                     s = "success";
                 }
-                base.Response.Write(s);
+                */
+                base.Response.Write("");
                 base.Response.End();
             }
         }
@@ -132,41 +135,43 @@
             {
                 int typeId = int.Parse(row["typeId"].ToString());
                 bool flag = false;
+                
                 MchUserChannelType model = MchUsersChannelTypeFactory.GetModel(this.UserID, typeId);
-                switch (ChannelType.GetModelByTypeId(typeId).isOpen)
+                switch (SysChannelType.GetModelByTypeId(typeId).IsOpen)
                 {
-                    case OpenEnum.AllClose:
-                    case OpenEnum.Close:
+                    case SysChannelTypeOpenEnum.AllClose:
+                    case SysChannelTypeOpenEnum.Close:
                         flag = false;
                         break;
 
-                    case OpenEnum.AllOpen:
-                    case OpenEnum.Open:
+                    case SysChannelTypeOpenEnum.AllOpen:
+                    case SysChannelTypeOpenEnum.Open:
                         flag = true;
                         break;
                 }
-                row["type_status"] = flag ? "right" : "wrong";
-                row["sys_setting"] = "Unknown";
-                row["user_setting"] = "Unknown";
+               
+
+
+                row["type_status"] = flag ? "<a title='√' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>" : "<a title='×'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                row["sys_setting"] = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
+                row["user_setting"] = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
                 row["suppid"] = 0;
                 if (model != null)
                 {
-                    /*if (model.SysIsOpen.HasValue)
+                   
+                    row["sys_setting"] = model.SysIsOpen ? "<a title='√' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>" : "<a title='×'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    
+                   
+                    row["user_setting"] = model.UserIsOpen ? "<a title='√' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>" : "<a title='×'  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    
+                    
+                    if (model.SupplierCode > 0)
                     {
-                        row["sys_setting"] = model.SysIsOpen ? "right" : "wrong";
-                    }
-                    if (model.SysIsOpen)
-                    {
-                        row["user_setting"] = model.userIsOpen.Value ? "right" : "wrong";
+                        row["suppid"] = model.SupplierCode;
                     }
                     
-                    if (model.SupplierCode)
-                    {
-                        row["suppid"] = model.suppid.Value;
-                    }
-                    */
-                }
-                row["payrate"] = 100M * PayRateFactory.GetPayRate(RateTypeEnum.会员, (int) UserFactory.GetModel(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
+            }
+            row["payrate"] = 100M * SysPayRateFactory.GetSysChannelTypePayRate(RateTypeEnum.会员,  MchUserFactory.GetUserBaseByUserID(this.UserID).UserLevel, Convert.ToInt32(row["typeId"]));
             }
             this.rpt_paymode.DataSource = table;
             this.rpt_paymode.DataBind();
@@ -186,21 +191,22 @@
 
         protected void rpt_paymode_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            ChannelTypeUserInfo model = new ChannelTypeUserInfo();
-            model.updateTime = new DateTime?(DateTime.Now);
-            model.typeId = int.Parse(e.CommandArgument.ToString());
-            model.updateTime = new DateTime?(DateTime.Now);
-            model.userId = this.UserID;
-            model.userIsOpen = null;
+            MchUserChannelType model = new MchUserChannelType();
+            model.UpdateTime = DateTime.Now;
+            model.TypeID = int.Parse(e.CommandArgument.ToString());
+            
+            model.UserId = this.UserID;
+           
+            model.UserIsOpen = false;
             if (e.CommandName == "open")
             {
-                model.sysIsOpen = true;
+                model.SysIsOpen = true;
             }
             else if (e.CommandName == "close")
             {
-                model.sysIsOpen = false;
+                model.SysIsOpen = false;
             }
-            ChannelTypeUsers.Add(model);
+            MchUsersChannelTypeFactory.Add(model);
             this.LoadData();
         }
 
@@ -210,13 +216,13 @@
             {
                 DataRowView dataItem = e.Item.DataItem as DataRowView;
                 int typeId = int.Parse(dataItem["typeId"].ToString());
-                ChannelTypeUserInfo model = ChannelTypeUsers.GetModel(this.UserID, typeId);
-                if ((model != null) && model.sysIsOpen.HasValue)
+                MchUserChannelType model = MchUsersChannelTypeFactory.GetModel(this.UserID, typeId);
+                if (model != null)
                 {
                     Button button = e.Item.FindControl("btn_open") as Button;
                     Button button2 = e.Item.FindControl("btn_close") as Button;
-                    button.Enabled = !model.sysIsOpen.Value;
-                    button2.Enabled = model.sysIsOpen.Value;
+                    button.Enabled = !model.SysIsOpen;
+                    button2.Enabled = model.SysIsOpen;
                 }
                 DropDownList ddlctrl = e.Item.FindControl("ddlsupp") as DropDownList;
                 if (ddlctrl != null)

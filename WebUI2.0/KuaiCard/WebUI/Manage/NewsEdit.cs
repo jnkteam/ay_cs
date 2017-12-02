@@ -60,11 +60,11 @@
             }
             if (flag)
             {
-                base.AlertAndRedirect("保存成功!", "NewsList.aspx");
+                base.AlertAndRedirect("保存成功!", "NewsList.aspx?sign=45&menuId=46");
             }
             else
             {
-                base.AlertAndRedirect("保存失败");
+                base.AlertAndRedirect("保存失败", "NewsList.aspx?sign=45&menuId=46");
             }
         }
 

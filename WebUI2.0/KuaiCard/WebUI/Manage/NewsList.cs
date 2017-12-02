@@ -74,7 +74,7 @@
             int newsid = Convert.ToInt32(e.CommandArgument);
             if (e.CommandName == "update")
             {
-                base.Response.Redirect("NewsEdit.aspx?id=" + newsid.ToString(), true);
+                base.Response.Redirect("NewsEdit.aspx?id=" + newsid.ToString()+ "&sign=45&menuId=47", true);
             }
             else if (e.CommandName == "del")
             {
@@ -96,9 +96,13 @@
             {
                 DataRowView dataItem = (DataRowView) e.Row.DataItem;
                 Label label = e.Row.FindControl("lblNewsType") as Label;
-                if (label != null)
+                Label label1 = e.Row.FindControl("releaseName") as Label;
+
+                if (label != null && label1!=null)
                 {
-                    label.Text = Enum.GetName(typeof(NewsType), dataItem["newstype"]);
+                    label.Text  = Enum.GetName(typeof(NewsType), dataItem["newstype"]);
+                    
+                    label1.Text = dataItem["release"].ToString() == "True" ? "<a title='√' style='color:#1db283' href='javascript:void(0)'><i class='fa  fa-check-circle'></i></a>" : "<a title='×'  style='color:#ff4a4a' href='javascript:void(0)'><i class='fa  fa-times-circle'></i></a>";
                 }
             }
         }

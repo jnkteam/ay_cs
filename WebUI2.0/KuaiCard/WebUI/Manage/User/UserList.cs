@@ -167,10 +167,12 @@
             {
                 searchParams.Add(new SearchParam("status", int.Parse(this.StatusList.SelectedValue)));
             }
+            /*
             if (!string.IsNullOrEmpty(this.ddlisSpecialPayRate.SelectedValue))
             {
                 searchParams.Add(new SearchParam("special", int.Parse(this.ddlisSpecialPayRate.SelectedValue)));
             }
+            */
             if (!string.IsNullOrEmpty(this.txtuserName.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("userName", this.txtuserName.Text.Trim()));
@@ -183,10 +185,11 @@
                     searchParams.Add(new SearchParam("id", result));
                 }
             }
-            if (!string.IsNullOrEmpty(this.ddlpayrate.SelectedValue))
+            /*if (!string.IsNullOrEmpty(this.ddlpayrate.SelectedValue))
             {
                 searchParams.Add(new SearchParam("userlevel", int.Parse(this.ddlpayrate.SelectedValue)));
             }
+            */
             if (!string.IsNullOrEmpty(this.txtQQ.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("qq", this.txtQQ.Text.Trim()));
@@ -201,12 +204,13 @@
             }
             if (!string.IsNullOrEmpty(this.txtfullname.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("full_name", this.txtfullname.Text.Trim()));
+                searchParams.Add(new SearchParam("ContactName", this.txtfullname.Text.Trim()));
             }
-            if (!string.IsNullOrEmpty(this.ddlSpecial.SelectedValue))
+            /*if (!string.IsNullOrEmpty(this.ddlSpecial.SelectedValue))
             {
                 searchParams.Add(new SearchParam("specialchannel", this.ddlSpecial.SelectedValue));
             }
+            */
             string orderby = this.orderBy + " " + this.orderByType;
             DataSet set = MchUserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
@@ -238,11 +242,13 @@
                 {
                     this.StatusList.SelectedValue = this.UserStatus;
                 }
+                /*
                 DataTable userlevData = PayRateFactory.GetUserlevData();
                 foreach (DataRow row in userlevData.Rows)
                 {
                     this.ddlpayrate.Items.Add(new ListItem(row["RateName"].ToString(), row["userLevel"].ToString()));
                 }
+                */
                 if (this.proid > 0)
                 {
                     this.txtagent.Text = this.proid.ToString();

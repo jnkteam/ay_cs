@@ -88,6 +88,18 @@ namespace OriginalStudio.Lib.Utils
 			return result;
 		}
 
+        public static decimal StrToDecimal(object strValue, float defValue)
+        {
+            try
+            {
+                return Convert.ToDecimal(strValue);
+            }
+            catch
+            {
+                return Convert.ToDecimal(defValue);
+            }
+        }
+
         public static int StrToInt(object expression, int defValue)
 		{
             //int result;

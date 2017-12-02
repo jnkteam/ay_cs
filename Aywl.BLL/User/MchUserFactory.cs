@@ -356,9 +356,86 @@
         /// </summary>
         /// <param name="_userinfo"></param>
         /// <returns></returns>
-        public static bool Update(MchUserBaseInfo _userinfo)
+        public static bool Update(MchUserBaseInfo userInfo)
         {
-            return true;
+            try
+            {
+                SqlParameter[] commandParameters = {
+                    new SqlParameter("@userid",SqlDbType.Int),
+                    new SqlParameter("@classid",SqlDbType.Int),
+                    new SqlParameter("@username",SqlDbType.VarChar,100),
+                    new SqlParameter("@userpwd",SqlDbType.VarChar,100),
+                    new SqlParameter("@userpaypwd",SqlDbType.VarChar,100),
+                    new SqlParameter("@merchantname",SqlDbType.VarChar,100),
+                    new SqlParameter("@apikey",SqlDbType.VarChar,100),
+                    new SqlParameter("@contactname",SqlDbType.VarChar,100),
+                    new SqlParameter("@idcard",SqlDbType.VarChar,100),
+                    new SqlParameter("@phone",SqlDbType.VarChar,100),
+                    new SqlParameter("@email",SqlDbType.VarChar,100),
+                    new SqlParameter("@qq",SqlDbType.VarChar,100),
+                    new SqlParameter("@isphone",SqlDbType.Int),
+                    new SqlParameter("@isemail",SqlDbType.Int),
+                    new SqlParameter("@isrealname",SqlDbType.Int),
+                    new SqlParameter("@withdrawschemeid",SqlDbType.Int),
+                    new SqlParameter("@payrateid",SqlDbType.Int),
+                    new SqlParameter("@maxdaywithdrawtimes",SqlDbType.Int),
+                    new SqlParameter("@status",SqlDbType.Int),
+                    new SqlParameter("@company",SqlDbType.VarChar,100),
+                    new SqlParameter("@linkman",SqlDbType.VarChar,100),
+                    new SqlParameter("@withdrawtype",SqlDbType.Int),
+                    new SqlParameter("@randomproduct",SqlDbType.Int),
+                    new SqlParameter("@manageid",SqlDbType.Int),
+                    new SqlParameter("@siteurl",SqlDbType.VarChar,100),
+                    new SqlParameter("@frontpic",SqlDbType.VarChar,100),
+                    new SqlParameter("@versopic",SqlDbType.VarChar,100),
+                    new SqlParameter("@defaultthemes",SqlDbType.VarChar,100),
+                    new SqlParameter("@isdebug",SqlDbType.Int),
+                    new SqlParameter("@agentid",SqlDbType.Int),
+                    new SqlParameter("@cpsdrate",SqlDbType.Int),
+                    new SqlParameter("@usertype",SqlDbType.Int),
+                    new SqlParameter("@userlevel",SqlDbType.Int)
+                };
+                commandParameters[0].Value = userInfo.UserID;
+                commandParameters[1].Value = userInfo.ClassID;
+                commandParameters[2].Value = userInfo.UserName;
+                commandParameters[3].Value = userInfo.UserPwd;
+                commandParameters[4].Value = userInfo.UserPayPwd;
+                commandParameters[5].Value = userInfo.MerchantName;
+                commandParameters[6].Value = userInfo.ApiKey;
+                commandParameters[7].Value = userInfo.ContactName;
+                commandParameters[8].Value = userInfo.IDCard;
+                commandParameters[9].Value = userInfo.Phone;
+                commandParameters[10].Value = userInfo.EMail;
+                commandParameters[11].Value = userInfo.QQ;
+                commandParameters[12].Value = userInfo.IsPhone;
+                commandParameters[13].Value = userInfo.IsEmail;
+                commandParameters[14].Value = userInfo.IsRealName;
+                commandParameters[15].Value = userInfo.WithdrawSchemeID;
+                commandParameters[16].Value = userInfo.PayRateID;
+                commandParameters[17].Value = userInfo.MaxDayWithdrawTimes;
+                commandParameters[18].Value = userInfo.Status;
+                commandParameters[19].Value = userInfo.Company;
+                commandParameters[20].Value = userInfo.LinkMan;
+                commandParameters[21].Value = userInfo.WithdrawType;
+                commandParameters[22].Value = userInfo.RandomProduct;
+                commandParameters[23].Value = userInfo.ManageId;
+                commandParameters[24].Value = userInfo.SiteUrl;
+                commandParameters[25].Value = userInfo.FrontPic;
+                commandParameters[26].Value = userInfo.VersoPic;
+                commandParameters[27].Value = userInfo.DefaultThemes;
+                commandParameters[28].Value = userInfo.IsDebug;
+                commandParameters[29].Value = userInfo.AgentID;
+                commandParameters[30].Value = userInfo.CPSDrate;
+                commandParameters[31].Value = userInfo.UserType;
+                commandParameters[32].Value = userInfo.UserLevel;
+
+                return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_userbase_update", commandParameters) > 0;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
+            }
         }
 
         #endregion

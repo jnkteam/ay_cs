@@ -1509,7 +1509,7 @@ namespace OriginalStudio.Lib.Utils
 
         public static decimal StrToDecimal(object strValue, float defValue = 0)
         {
-            return Convert.ToDecimal(TypeParse.StrToFloat(strValue, defValue));
+            return TypeParse.StrToDecimal(strValue, defValue);
         }
 
         public static int StrToInt(object expression, int defValue = 0)

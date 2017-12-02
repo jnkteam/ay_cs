@@ -680,6 +680,7 @@
                 userInfo.ApiKey = row["apikey"].ToString();
                 userInfo.IsDebug = Utils.StrToInt(row["isdebug"].ToString(), 0);
                 userInfo.ManageId = Utils.StrToInt(row["manageId"].ToString(), 0);
+                userInfo.AgentID = Utils.StrToInt(row["AgentId"].ToString(), 0);
                 //用户限额
                 userPayLimit = ds.Tables[1];
             }

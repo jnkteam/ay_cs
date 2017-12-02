@@ -180,29 +180,29 @@
                 int suppcode = -1;
                 int isopen = 0;
 
-                //OriginalStudio.Lib.Logging.LogHelper.Write("测试:" + userId.ToString() + "," + cacheModel.ChannelTypeId.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("测试:" + userId.ToString() + "," + typeInfo.IsOpen.ToString());
 
                 switch (typeInfo.IsOpen)
                 {
                     case SysChannelTypeOpenEnum.AllClose:
-                        //全部关闭
+                        //全部关闭  AllClose = 1,
                         suppcode = -1;  //GetUserSupplierCode(userId, cacheModel.ChannelTypeId);
                         isopen = 0;
                         break;
 
                     case SysChannelTypeOpenEnum.AllOpen:
-                        //全部开启
+                        //全部开启  AllOpen = 2,
                         suppcode = GetUserSupplierCode(userId, cacheModel.ChannelTypeId);
                         isopen = 1;
                         break;
 
                     case SysChannelTypeOpenEnum.Close:
-                        //按配置(默认关闭)
+                        //按配置(默认关闭) Close = 4,
                         isopen = GetChanelSysStatus(4, userId, channelCode, cacheModel.ChannelTypeId, ref suppcode);
                         break;
 
                     case SysChannelTypeOpenEnum.Open:
-                        //按配置(默认开启)
+                        //按配置(默认开启) Open = 8
                         isopen = GetChanelSysStatus(8, userId, channelCode, cacheModel.ChannelTypeId, ref suppcode);
                         break;
                 }
@@ -313,7 +313,7 @@
         public static int GetChanelSysStatus(int typeStatus, int userId, string channelCode, int typeId, ref int suppid)
         {
             suppid = -1;
-            int num = 0;
+            int status = 0;
             int issysopen = -1;
             int isuseropen = -1;
             SysChannelInfo channelInfo = null;
@@ -321,20 +321,22 @@
             {
                 channelInfo = GetChannelModelByCode(channelCode);
             }
-            if ((channelInfo != null) && channelInfo.IsOpen)
+
+            if (channelInfo != null)     // && channelInfo.IsOpen
             {
                 issysopen = channelInfo.IsOpen ? 1 : 0;
             }
 
             MchUserChannelType userchannelInfo = MchUsersChannelTypeFactory.GetCacheModel(userId, typeId);
-            if ((userchannelInfo != null) && userchannelInfo.SysIsOpen)
-            {
+            if (userchannelInfo != null)       //) && userchannelInfo.SysIsOpen
+            {                
                 isuseropen = userchannelInfo.SysIsOpen ? 1 : 0;
                 if (userchannelInfo.SupplierCode > 0)
                 {
                     suppid = userchannelInfo.SupplierCode;
                 }
             }
+
             if (typeStatus == 4)
             {
                 //按配置(默认关闭)
@@ -361,9 +363,9 @@
             }
             if ((issysopen == 1) && (isuseropen == 1))
             {
-                num = 1;
+                status = 1;
             }
-            return num;
+            return status;
         }
 
         /// <summary>

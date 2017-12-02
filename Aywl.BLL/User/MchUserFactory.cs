@@ -853,7 +853,7 @@
             {
                 where = "1=1";
             }
-            string commandText = "select id from dbo.userbase where " + where;
+            string commandText = "select userid from dbo.mch_userbase where " + where;
             SqlDataReader reader = DataBase.ExecuteReader(CommandType.Text, commandText);
             while (reader.Read())
             {

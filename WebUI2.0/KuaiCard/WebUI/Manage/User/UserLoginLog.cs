@@ -61,7 +61,7 @@
                 {
                     int result = 0;
                     int.TryParse(str, out result);
-                    searchParams.Add(new SearchParam("id", result));
+                    searchParams.Add(new SearchParam("userid", result));
                 }
                 else if (this.SeachType.SelectedValue == "UserName")
                 {

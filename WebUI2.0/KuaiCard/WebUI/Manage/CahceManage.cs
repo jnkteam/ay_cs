@@ -43,7 +43,7 @@
                         string str;
                         if (((item.Value == "CHANNEL_TYPE_USER_") || (item.Value == "USER_")) || (item.Value == "USERHOST_"))
                         {
-                            List<int> users = UserFactory.GetUsers("[status] = 2");
+                            List<int> users = MchUserFactory.GetUsers("[status] = 2");
                             foreach (int num in users)
                             {
                                 str = string.Format(item.Value + "{0}", num);
@@ -107,7 +107,7 @@
                 row["cacheKey"] = objId;
                 table.Rows.Add(row);
             }
-            List<int> users = UserFactory.GetUsers("[status] = 2");
+            List<int> users = MchUserFactory.GetUsers("[status] = 2");
             foreach (int num in users)
             {
                 objId = string.Format(ChannelTypeUsers.ChannelTypeUsers_CACHEKEY, num);

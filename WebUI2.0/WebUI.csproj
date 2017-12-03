@@ -822,9 +822,6 @@
     <Compile Include="KuaiCard\WebUI\Manage\settledAgentSummarys.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\User\UserPayRateEdit.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\User\MainSite.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

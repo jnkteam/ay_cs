@@ -54,7 +54,7 @@
                 spuserclass = this.model.classid == 0 ? "个人" : "企业";
                 spfullname =  this.model.full_name.ToString();
                 spuserType = Enum.GetName(typeof(UserTypeEnum), this.model.UserType);
-                if (this.model.UserType == UserTypeEnum.会员)
+                if (this.model.UserType == UserTypeEnum.商户)
                 {
                     this.sppromvip = "";// ((int)this.model.UserLevel).ToString();//会员等级：
                 }

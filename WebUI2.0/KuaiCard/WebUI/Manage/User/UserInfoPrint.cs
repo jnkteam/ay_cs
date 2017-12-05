@@ -84,7 +84,7 @@
                     this.lblidCard.Text = this.model.IdCard;
                     this.lblregTime.Text = this.model.RegTime.ToString("yyyy-MM-dd HH:mm");
                     this.lbluserclass.Text = this.model.classid == 0 ? "个人" : "企业";
-                    if (this.model.UserType == UserTypeEnum.会员)
+                    if (this.model.UserType == UserTypeEnum.商户)
                         lbluserType.Text = "会员";
                     if (this.model.UserType == UserTypeEnum.代理)
                         lbluserType.Text = "代理";
@@ -96,7 +96,7 @@
                         this.lblpayeeBank.Text = this.model.PayeeBank;
                     /*    */
                     DataTable levName = new DataTable();
-                    if (this.model.UserType == UserTypeEnum.会员)
+                    if (this.model.UserType == UserTypeEnum.商户)
                     {
                         lblmemvip.Text = this.model.UserLevel.ToString();
                     }

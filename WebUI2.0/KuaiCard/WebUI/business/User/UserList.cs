@@ -110,7 +110,7 @@
                 {
                     changeList.Add(this.newUpdateLog("UserType", ((int) model.UserType).ToString(), "1", "取消代理"));
                     changeList.Add(this.newUpdateLog("UserLevel", ((int) model.UserLevel).ToString(), "100", "取消代理"));
-                    model.UserType = UserTypeEnum.会员;
+                    model.UserType = UserTypeEnum.商户;
                     model.UserLevel = UserLevelEnum.初级代理;
                 }
                 if (UserFactory.Update(model, changeList))

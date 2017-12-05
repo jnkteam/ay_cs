@@ -250,7 +250,7 @@
             UserTypeEnum enum2 = (UserTypeEnum) int.Parse(this.rbluserType.SelectedValue);
             int settles_type = int.Parse(this.ddlsettles_type.SelectedValue);       //2017.2.13add 结算途径
             int num5 = 0;
-            if (enum2 == UserTypeEnum.会员)
+            if (enum2 == UserTypeEnum.商户)
             {
                 num5 = int.Parse(this.ddlmemvip.SelectedValue);
             }
@@ -510,7 +510,7 @@
                 this.txtsiteUrl.Text = this.model.SiteUrl;
                 this.rbluserType.SelectedValue = ((int) this.model.UserType).ToString();
                 this.txtapiAcct.Text = this.model.APIAccount.ToString();
-                if (this.model.UserType == UserTypeEnum.会员)
+                if (this.model.UserType == UserTypeEnum.商户)
                 {
                     this.ddlmemvip.SelectedValue = ((int) this.model.UserLevel).ToString();
                 }

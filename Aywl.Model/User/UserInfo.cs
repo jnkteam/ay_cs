@@ -84,7 +84,7 @@
 
         private UserLevelEnum _userLevel = UserLevelEnum.普通商家;
 
-        private UserTypeEnum _userType = UserTypeEnum.会员;
+        private UserTypeEnum _userType = UserTypeEnum.商户;
 
         private string _desc = string.Empty;
 

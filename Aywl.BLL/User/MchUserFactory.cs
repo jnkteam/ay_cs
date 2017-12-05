@@ -688,14 +688,14 @@
                             paramList.Add(parameter);
                             continue;
                         }
-                        //case "usertype":
-                        //{
-                        //    builder.Append(" AND [userType] = @userType");
-                        //    parameter = new SqlParameter("@userType", SqlDbType.TinyInt);
-                        //    parameter.Value = (int) param2.ParamValue;
-                        //    paramList.Add(parameter);
-                        //    continue;
-                        //}
+                        case "usertype":
+                            {
+                                builder.Append(" AND [userType] = @userType");
+                                parameter = new SqlParameter("@userType", SqlDbType.TinyInt);
+                                parameter.Value = (int)param2.ParamValue;
+                                paramList.Add(parameter);
+                                continue;
+                            }
                         case "specialchannel":
                         {
                             string paramValue = (string) param2.ParamValue;

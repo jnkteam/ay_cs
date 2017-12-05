@@ -42,7 +42,7 @@
                 {
                     SqlDependency dependency = DataBase.AddSqlDependency(objId, SQL_TABLE, SQL_TABLE_FIELD, string.Empty, null);
                     StringBuilder builder = new StringBuilder();
-                    builder.Append(" select option_code,option_type,option_value,value_type from sys_options");
+                    builder.Append("select option_code,option_type,option_value,value_type from sys_options");
                     o = DataBase.ExecuteDataset(CommandType.Text, builder.ToString());
                     WebCache.GetCacheService().AddObject(objId, o);
                 }
@@ -101,25 +101,38 @@
             }
         }
 
-        public static bool Update(int id, string value)
+        /// <summary>
+        /// 更新系统参数。
+        /// </summary>
+        /// <param name="dtConfig"></param>
+        /// <returns></returns>
+        public static Boolean UpdateSysOptions(DataTable dtConfig)
         {
-            try
+            SqlParameter[] parameters = {
+                new SqlParameter("@option_code",SqlDbType.VarChar,50),
+                new SqlParameter("@option_value",SqlDbType.VarChar,4000)
+            };
+            foreach (DataRow dr in dtConfig.Rows)
             {
-                StringBuilder builder = new StringBuilder();
-                builder.Append("update SysConfig set ");
-                builder.Append("value=@value");
-                builder.Append(" where id=@id");
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@value", SqlDbType.VarChar, 100), new SqlParameter("@id", SqlDbType.Int, 10) };
-                commandParameters[0].Value = value;
-                commandParameters[1].Value = id;
-                ClearCache();
-                return (DataBase.ExecuteNonQuery(CommandType.Text, builder.ToString(), commandParameters) > 0);
+                if (dr["new_value"].ToString() != dr["option_value"].ToString())
+                {
+                    parameters[0].Value = dr["option_code"].ToString();
+                    parameters[1].Value = dr["option_value"].ToString();
+
+                    if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_option_update", parameters) == 0)
+                        return false;
+                }
             }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return false;
-            }
+            return true;
+        }
+
+        /// <summary>
+        /// 获取系统参数列表
+        /// </summary>
+        /// <returns></returns>
+        public static DataSet GetSysOptions()
+        {
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_sys_option_get", null);
         }
 
         #region 正在使用
@@ -1177,6 +1190,32 @@
                 {
                     return "非法登录";
                 }
+            }
+        }
+
+        #endregion
+
+        #region 作废
+
+
+        public static bool Update(int id, string value)
+        {
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.Append("update SysConfig set ");
+                builder.Append("value=@value");
+                builder.Append(" where id=@id");
+                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@value", SqlDbType.VarChar, 100), new SqlParameter("@id", SqlDbType.Int, 10) };
+                commandParameters[0].Value = value;
+                commandParameters[1].Value = id;
+                ClearCache();
+                return (DataBase.ExecuteNonQuery(CommandType.Text, builder.ToString(), commandParameters) > 0);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return false;
             }
         }
 

@@ -57,7 +57,7 @@ namespace OriginalStudio.Model.User
         private System.Int32 _agentid = 0;
         private System.Int32 _cpsdrate = 0;
 
-        private UserTypeEnum _usertype = UserTypeEnum.会员;
+        private UserTypeEnum _usertype = UserTypeEnum.商户;
         private UserLevelEnum _userlevel = UserLevelEnum.普通商家;
         private String _lastloginaddress = "";
         private String _lastloginremark = "";

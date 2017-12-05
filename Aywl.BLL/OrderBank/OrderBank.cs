@@ -681,6 +681,11 @@
                 userInfo.IsDebug = Utils.StrToInt(row["isdebug"].ToString(), 0);
                 userInfo.ManageId = Utils.StrToInt(row["manageId"].ToString(), 0);
                 userInfo.AgentID = Utils.StrToInt(row["AgentId"].ToString(), 0);
+                if (Utils.StrToInt(row["usertype"].ToString(), 0) == 3)
+                    userInfo.UserType = UserTypeEnum.商户;
+                else
+                    userInfo.UserType = UserTypeEnum.代理;
+
                 //用户限额
                 userPayLimit = ds.Tables[1];
             }

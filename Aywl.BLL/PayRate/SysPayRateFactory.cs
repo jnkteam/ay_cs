@@ -51,7 +51,7 @@
 
                 tmp = GetSysChannelTypePayRate(RateTypeEnum.代理, cacheUserBaseInfo.UserLevel, channelTypeId);
             }
-            else if (cacheUserBaseInfo.UserType == UserTypeEnum.会员)
+            else if (cacheUserBaseInfo.UserType == UserTypeEnum.商户)
             {
                 //首先取商户自定义费率
                 tmp = MchUserPayRateFactory.GetUserChannelPayRate(userId, channelTypeId);

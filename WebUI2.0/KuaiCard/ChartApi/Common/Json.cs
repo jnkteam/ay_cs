@@ -24,7 +24,7 @@ namespace General.Common
 
 		public void AddToJson(string TableName, DataTable DtSource)
 		{
-			if(this.sbJson.Length > 0) this.sbJson.Append(',');
+            if (this.sbJson.Length > 0) this.sbJson.Append(',');
 
 			this.sbJson.Append("'" + TableName + "'"); 
 			this.sbJson.Append(":["); 
@@ -40,7 +40,7 @@ namespace General.Common
                             this.sbJson.Append("'" + dc.ColumnName + "':");
                             if (dr[dc] != null)
                             {
-                                this.sbJson.Append("'" + dr[dc] + "',");
+                                this.sbJson.Append("'" + dr[dc].ToString() + "',");
                             }
                         }
                         this.sbJson.Remove(this.sbJson.ToString().LastIndexOf(','), 1);

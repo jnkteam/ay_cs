@@ -43,8 +43,6 @@
         protected TextBox txtuserid;
         protected TextBox txtUserOrder;
 
-
-
         protected void btn_Search_Click(object sender, EventArgs e)
         {
             this.LoadData();
@@ -54,18 +52,18 @@
         {
             try
             {
-                DataSet data = this.GetData();
-                if (data != null)
-                {
-                    DataTable dataTable = data.Tables[1];
-                    dataTable.TableName = "Rpt";
-                    string file = base.Server.MapPath("~/common/template/xls/cards.xls");
-                    WorkbookDesigner designer = new WorkbookDesigner();
-                    designer.Workbook = new Workbook(file);
-                    designer.SetDataSource(dataTable);
-                    designer.Process();
-                    designer.Workbook.Save(base.Response, DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls", ContentDisposition.Attachment, designer.Workbook.SaveOptions);
-                }
+                //DataSet data = this.GetData();
+                //if (data != null)
+                //{
+                //    DataTable dataTable = data.Tables[1];
+                //    dataTable.TableName = "Rpt";
+                //    string file = base.Server.MapPath("~/common/template/xls/cards.xls");
+                //    WorkbookDesigner designer = new WorkbookDesigner();
+                //    designer.Workbook = new Workbook(file);
+                //    designer.SetDataSource(dataTable);
+                //    designer.Process();
+                //    designer.Workbook.Save(base.Response, DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls", ContentDisposition.Attachment, designer.Workbook.SaveOptions);
+                //}
             }
             catch (Exception exception)
             {

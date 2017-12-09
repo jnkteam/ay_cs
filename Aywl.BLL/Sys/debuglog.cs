@@ -76,7 +76,7 @@
                 }
                 if (set.Tables[0].Rows[0]["bugtype"].ToString() != "")
                 {
-                    debuginfo.bugtype = (debugtypeenum) int.Parse(set.Tables[0].Rows[0]["bugtype"].ToString());
+                    debuginfo.bugtype = (LogTypeEnum) int.Parse(set.Tables[0].Rows[0]["bugtype"].ToString());
                 }
                 if (set.Tables[0].Rows[0]["userid"].ToString() != "")
                 {

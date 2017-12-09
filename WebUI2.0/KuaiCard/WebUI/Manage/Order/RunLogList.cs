@@ -13,7 +13,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
 
-    public class DebugInfos : ManagePageBase
+    public class RunLogList : ManagePageBase
     {
         protected Button btnDel;
         protected Button btnSearch;
@@ -60,7 +60,7 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            DataSet set = DebugLog.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = SysRunLogFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.rptTrades.DataSource = set.Tables[1];
             this.rptTrades.DataBind();
@@ -72,7 +72,7 @@
             if (!base.IsPostBack)
             {
                 this.StimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                this.EtimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                this.EtimeBox.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.EtimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.LoadData();

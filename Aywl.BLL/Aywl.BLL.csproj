@@ -79,7 +79,7 @@
     <Compile Include="Settled\TransferScheme.cs" />
     <Compile Include="SMS\PhoneValidFactory.cs" />
     <Compile Include="Stat\OrderReport.cs" />
-    <Compile Include="Sys\SysRunLog.cs" />
+    <Compile Include="Sys\SysRunLogFactory.cs" />
     <Compile Include="SMS\SMS.cs" />
     <Compile Include="User\MchUsersImageFactory.cs" />
     <Compile Include="User\MchUsersChannelTypeFactory.cs" />

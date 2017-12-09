@@ -1,13 +1,12 @@
-﻿namespace OriginalStudio.WebUI.business.Order
+﻿namespace OriginalStudio.WebUI.Manage.Order
 {
-    using OriginalStudio.BLL.Sys;
     using OriginalStudio.Model.Sys;
     using OriginalStudio.WebComponents.Web;
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
 
-    public class DebugInfoShow : BusinessPageBase
+    public class RunLogShow : ManagePageBase
     {
         protected HtmlForm form1;
         protected Label lbladdtime;
@@ -33,16 +32,19 @@
 
         private void ShowInfo(int id)
         {
-            DebugInfo model = DebugLog.GetModel(id);
-            this.lblid.Text = model.id.ToString();
-            this.lblbugtype.Text = Enum.GetName(typeof(LogTypeEnum), model.bugtype);
-            this.lbluserid.Text = model.userid.ToString();
-            this.lbluserorder.Text = model.userorder;
-            this.lblurl.Text = model.url;
-            this.lblerrorcode.Text = model.errorcode;
-            this.lblerrorinfo.Text = model.errorinfo;
-            this.lbldetail.Text = model.detail;
-            this.lbladdtime.Text = model.addtime.Value.ToString("yyyy-MM-dd HH:ss:mm");
+            OriginalStudio.Model.Sys.SysRunLog model = OriginalStudio.BLL.Sys.SysRunLogFactory.GetModel(id);
+            this.lblid.Text = model.Id.ToString();
+            this.lblbugtype.Text = Enum.GetName(typeof(LogTypeEnum), model.Logtype);
+            this.lbluserid.Text = model.UserID.ToString();
+            this.lbluserorder.Text = model.UserOrder;
+            this.lblurl.Text = model.Url;
+            this.lblerrorcode.Text = model.ErrorCode;
+            this.lblerrorinfo.Text = model.ErrorInfo;
+            if (model.Detail.IndexOf("<xml>") >= 0)
+                this.lbldetail.Text = "<xmp>" + model.Detail + "</xmp>";
+            else
+                this.lbldetail.Text = model.Detail;
+            this.lbladdtime.Text = model.AddTime.ToString("yyyy-MM-dd HH:ss:mm");
         }
     }
 }

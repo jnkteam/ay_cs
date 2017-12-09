@@ -6,7 +6,7 @@
     public class DebugInfo
     {
         private DateTime? _addtime;
-        private debugtypeenum _bugtype;
+        private LogTypeEnum _bugtype;
         private string _detail;
         private string _errorcode;
         private string _errorinfo;
@@ -27,7 +27,7 @@
             }
         }
 
-        public debugtypeenum bugtype
+        public LogTypeEnum bugtype
         {
             get
             {

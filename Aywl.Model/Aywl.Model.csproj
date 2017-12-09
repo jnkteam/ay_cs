@@ -58,6 +58,7 @@
     <Compile Include="PayRate\SysPayrateInfo.cs" />
     <Compile Include="SMS\phoneValid.cs" />
     <Compile Include="SMS\PhoneValidLog.cs" />
+    <Compile Include="Sys\SysRunLog.cs" />
     <Compile Include="User\MchUserChannelType.cs" />
     <Compile Include="Manage\ManageRole.cs" />
     <Compile Include="Enum\AppTypeEnum.cs" />
@@ -115,7 +116,7 @@
     <Compile Include="Supplier\SysSupplierInfo.cs" />
     <Compile Include="Supplier\SysSupplierPayRateInfo.cs" />
     <Compile Include="Sys\debuginfo.cs" />
-    <Compile Include="Sys\debugtypeenum.cs" />
+    <Compile Include="Enum\LogTypeEnum.cs" />
     <Compile Include="Sys\SmsComInfo.cs" />
     <Compile Include="Sys\SoftRegistrationInfo.cs" />
     <Compile Include="Supplier\UserSupplierInfo.cs" />

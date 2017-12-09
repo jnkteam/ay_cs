@@ -2,7 +2,7 @@
 {
     using System;
 
-    public enum debugtypeenum
+    public enum LogTypeEnum
     {
         未知 = 0,
         网银订单 = 1,

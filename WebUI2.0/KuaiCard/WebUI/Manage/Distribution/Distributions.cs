@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage.User.distribution
+﻿namespace OriginalStudio.WebUI.Manage.Distribution
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -164,6 +164,8 @@
             if (e.CommandName == "query")
             {
                 string str = Convert.ToString(e.CommandArgument);
+
+                //调用接口查代付状态
             }
             else if (e.CommandName == "Reissue")
             {
@@ -177,7 +179,7 @@
             {
                 int num = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "status"));
                 Button button = (Button) e.Item.FindControl("btnquery");
-                Button button2 = (Button) e.Item.FindControl("btnReissue");
+                Button button2 = (Button) e.Item.FindControl("btnReissue"); //手动回发
             }
         }
 

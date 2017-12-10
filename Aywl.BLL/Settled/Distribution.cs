@@ -553,7 +553,7 @@
             DataSet set = new DataSet();
             try
             {
-                string tables = this.SQL_TABLE;
+                string tables = "v_distribution";
                 string key = "[id]";
                 if (string.IsNullOrEmpty(orderby))
                 {
@@ -562,7 +562,7 @@
                 List<SqlParameter> paramList = new List<SqlParameter>();
                 string wheres = this.BuilderWhere(searchParams, paramList);
                 return DataBase.ExecuteDataset(CommandType.Text, SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" +
-                    SqlHelper.GetPageSelectSQL(this.SQL_TABLE_FIELD, tables, wheres, orderby, key, pageSize, page, false), paramList.ToArray());
+                    SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false), paramList.ToArray());
             }
             catch (Exception exception)
             {

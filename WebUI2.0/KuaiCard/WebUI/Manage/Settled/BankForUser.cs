@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage.User
+﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Settled;
@@ -237,83 +237,35 @@
         {
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
             {
+                OriginalStudio.Lib.Logging.LogHelper.Write("111111");
+
                 TextBox box = (TextBox) e.Item.FindControl("txtpayAmt");
                 Literal literal = (Literal) e.Item.FindControl("litTodayIncome");
+
+                OriginalStudio.Lib.Logging.LogHelper.Write("222222");
+
                 box.Attributes["onkeypress"] = "if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;";
                 box.Text = "0";
-                int userId = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "id"));
-                TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
-                if (modelByUser != null)
-                {
-                    DataSet ds = OriginalStudio.BLL.Settled.TradeFactory.GetUserLeftBalance(modelByUser.id,
-                                            userId,
-                                            Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
-                                            DateTime.Now.AddDays(1.0));
-                    //结算金额
-                    string tmp = ds.Tables[0].Rows[0]["left_balance"].ToString();
-                    if (tmp != "")
-                        box.Text = decimal.Round(Convert.ToDecimal(tmp), 2).ToString();
-                    else
-                        box.Text = "0";
+                int userId = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "userid"));
 
-                    //扣押金额
-                    tmp = ds.Tables[0].Rows[0]["todayincome"].ToString();
-                    if (tmp != "")
-                        literal.Text = decimal.Round(Convert.ToDecimal(tmp), 2).ToString();
-                    else
-                        literal.Text = "0";
-                    return;
+                OriginalStudio.Lib.Logging.LogHelper.Write("userId：" + userId.ToString());
 
-                    //================下面为老代码，不再使用 2017.6.1================
-                    /*
-                    decimal d = 0M;
-                    decimal num3 = 0M;
-                    decimal num4 = Convert.ToDecimal(DataBinder.Eval(e.Item.DataItem, "balance"));
-                    decimal num5 = 0M;
-                    if (DataBinder.Eval(e.Item.DataItem, "unpayment") != DBNull.Value)
-                    {
-                        num5 = Convert.ToDecimal(DataBinder.Eval(e.Item.DataItem, "unpayment"));
-                    }
-                    decimal num6 = 0M;
-                    if (DataBinder.Eval(e.Item.DataItem, "Freeze") != DBNull.Value)
-                    {
-                        num6 = Convert.ToDecimal(DataBinder.Eval(e.Item.DataItem, "Freeze"));
-                    }
-                    if (modelByUser.bankdetentiondays > 0)
-                    {
-                        num3 += Trade.GetNdaysIncome(1, userId, modelByUser.bankdetentiondays);
-                    }
-                    if (modelByUser.carddetentiondays > 0)
-                    {
-                        num3 += Trade.GetNdaysIncome(2, userId, modelByUser.carddetentiondays);
-                    }
-                    if (modelByUser.otherdetentiondays > 0)
-                    {
-                        num3 += Trade.GetNdaysIncome(3, userId, modelByUser.otherdetentiondays);
-                    }
-                    if (modelByUser.alipaydetentiondays > 0)
-                    {
-                        num3 += Trade.GetNdaysIncome(5, userId, modelByUser.alipaydetentiondays);
-                    }
-                    if (modelByUser.weixindetentiondays > 0)
-                    {
-                        num3 += Trade.GetNdaysIncome(6, userId, modelByUser.weixindetentiondays);
-                    }
-                    //2017.3.18 加上QQ钱包的
-                    if (modelByUser.qqdetentiondays > 0)
-                    {
-                        num3 += Trade.GetNdaysIncome(7, userId, modelByUser.qqdetentiondays);
-                    }
-                    literal.Text = decimal.Round(num3, 2).ToString();
-                    d = ((num4 - num5) - num6) - num3;
-                    if (d < 0M)
-                    {
-                        d = 0M;
-                    }
-                    box.Text = decimal.Round(d, 2).ToString();
-                    */
-                    //================下面为老代码，不再使用 2017.6.1================
-                }
+                //6、检查可提现金额
+                decimal allLimitIncome = BLL.Settled.TradeFactory.GetMerchantLimitDayIncome(userId);
+                MchUserBaseInfo mchInfo = MchUserFactory.GetUserBaseByUserID(userId);
+                decimal canPayMoney = mchInfo.MchUsersAmtInfo.Balance -
+                                                        mchInfo.MchUsersAmtInfo.Freeze -
+                                                        mchInfo.MchUsersAmtInfo.UnPayment -
+                                                        allLimitIncome;
+
+                OriginalStudio.Lib.Logging.LogHelper.Write("Balance：" + mchInfo.MchUsersAmtInfo.Balance.ToString());
+                OriginalStudio.Lib.Logging.LogHelper.Write("Freeze：" + mchInfo.MchUsersAmtInfo.Freeze.ToString());
+                OriginalStudio.Lib.Logging.LogHelper.Write("UnPayment：" + mchInfo.MchUsersAmtInfo.UnPayment.ToString());
+                OriginalStudio.Lib.Logging.LogHelper.Write("canPayMoney：" + canPayMoney.ToString());
+
+                //扣押金额
+                literal.Text = allLimitIncome.ToString();
+                box.Text = canPayMoney.ToString();
             }
         }
 

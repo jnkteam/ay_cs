@@ -48,6 +48,7 @@
     <Compile Include="Email\EmailCheckInfo.cs" />
     <Compile Include="Email\EmailCheckStatus.cs" />
     <Compile Include="Email\EmailCheckType.cs" />
+    <Compile Include="Enum\DistributionStatusEnum.cs" />
     <Compile Include="FeedBack\feedbackInfo.cs" />
     <Compile Include="FeedBack\feedbackstatus.cs" />
     <Compile Include="FeedBack\feedbacktype.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Enum\AmtFreezeInfoStatus.cs" />
     <Compile Include="Settled\AmtunFreezeMode.cs" />
     <Compile Include="Settled\IncreaseAmtInfo.cs" />
-    <Compile Include="Settled\SettleTypeEnum.cs" />
+    <Compile Include="Enum\SettleTypeEnum.cs" />
     <Compile Include="Settled\TocashSchemeInfo.cs" />
     <Compile Include="Settled\Transfer.cs" />
     <Compile Include="Settled\TransferScheme.cs" />

@@ -31,22 +31,29 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { 
-                    DataBase.MakeOutParam("@id", SqlDbType.Int, 10),       //作为返回值
-                    DataBase.MakeInParam("@userid", SqlDbType.Int, 10, model.UserID), 
-                    DataBase.MakeInParam("@amount", SqlDbType.Money, 8, model.Amount), 
-                    DataBase.MakeInParam("@status", SqlDbType.Int, 10, model.Status), 
-                    DataBase.MakeInParam("@addtime", SqlDbType.DateTime, 8, model.AddTime), 
-                    DataBase.MakeInParam("@paytime", SqlDbType.DateTime, 8, model.PayTime), 
-                    DataBase.MakeInParam("@tax", SqlDbType.Money, 8, model.Tax), 
-                    DataBase.MakeInParam("@charges", SqlDbType.Money, 8, model.Charges), 
-                    DataBase.MakeInParam("@settmode", SqlDbType.TinyInt, 1, model.SettledMode) 
-                };
-
-                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_settled_add", commandParameters) == 1)
-                    return (int)commandParameters[0].Value;
-                else
-                    return 0;
+                //2017.1.15 添加status参数。是否需要审核。
+                SqlParameter parameter = DataBase.MakeOutParam("@id", SqlDbType.Int, 10);
+                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_settled_apply",
+                            new SqlParameter[] { parameter,
+                                DataBase.MakeInParam("@userid", SqlDbType.Int, 10, model.UserID),
+                                DataBase.MakeInParam("@amount", SqlDbType.Decimal, 9, model.Amount),
+                                DataBase.MakeInParam("@addtime", SqlDbType.DateTime, 8, model.AddTime),
+                                DataBase.MakeInParam("@apptype", SqlDbType.Int, 10, model.AppType),
+                                DataBase.MakeInParam("@required", SqlDbType.DateTime, 8, model.AddTime),
+                                DataBase.MakeInParam("@Paytype", SqlDbType.TinyInt, 1, model.PayType),
+                                DataBase.MakeInParam("@PayeeBank", SqlDbType.VarChar, 50, model.PayeeBank),
+                                DataBase.MakeInParam("@payeeName", SqlDbType.VarChar, 50, model.PayeeName),
+                                DataBase.MakeInParam("@Account", SqlDbType.VarChar, 50, model.Account),
+                                DataBase.MakeInParam("@BankAddress", SqlDbType.VarChar, 100, model.PayeeAddress),
+                                DataBase.MakeInParam("@settmode", SqlDbType.TinyInt, 1, model.SettledMode),
+                                DataBase.MakeInParam("@charges", SqlDbType.Decimal, 9, model.Charges),
+                                DataBase.MakeInParam("@tranapi", SqlDbType.Int, 10, model.Suppid),
+                                DataBase.MakeInParam("@bankcode", SqlDbType.VarChar, 30, model.BankCode),
+                                DataBase.MakeInParam("@status", SqlDbType.Int, 10, model.Status),}) > 0)
+                {
+                    return (int)parameter.Value;
+                }
+                return 0;
             }
             catch (Exception exception)
             {
@@ -54,6 +61,7 @@
                 return 0;
             }
         }
+
 
         public static bool Update(SettledInfo model)
         {
@@ -507,7 +515,7 @@
             DataSet set = new DataSet();
             try
             {
-                string tables = "V_Settled";
+                string tables = "v_settled";
                 string key = "[id]";
                 if (string.IsNullOrEmpty(orderby))
                 {

@@ -304,7 +304,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\chargessetting.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\User\BankForUser.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Settled\BankForUser.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\Salesman.cs">
@@ -558,7 +558,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\Pays.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Audits.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\Audits.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistNotifys.cs">
@@ -683,10 +683,10 @@
     <Compile Include="KuaiCard\WebUI\Manage\Historys.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\User\distribution\Distributions2.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Distribution\Distributions2.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\User\distribution\Distributions.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Distribution\Distributions.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Withdraw\AgentDistsSchemeModi.cs">
@@ -736,7 +736,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\Login.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\User\distribution\list.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Distribution\list.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\ChannelTypeEdit.cs">

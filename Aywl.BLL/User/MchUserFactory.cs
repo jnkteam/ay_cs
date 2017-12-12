@@ -887,6 +887,19 @@
                 return false;
             }
         }
+        
+        public static DataTable getAgentList()
+        {
+            try
+            {
+                string commandText = "select userid,userName from mch_userbase with(nolock) where userType = 4";
+                return DataBase.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public static bool DelUpdateLog(int id)
         {

@@ -7,7 +7,7 @@
     using System.Web.SessionState;
     using System.IO;
     using System.Drawing;
-    using OriginalStudio.Model.Enum;
+    using OriginalStudio.Model.Trade;
 
     public class realname : IHttpHandler, IReadOnlySessionState, IRequiresSessionState
     {

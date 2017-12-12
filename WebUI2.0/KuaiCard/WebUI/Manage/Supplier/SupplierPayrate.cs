@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.Supplier
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;

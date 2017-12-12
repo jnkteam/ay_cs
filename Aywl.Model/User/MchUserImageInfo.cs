@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.Model.User
 {
-    using OriginalStudio.Model.Enum;
+    using OriginalStudio.Model.Trade;
     using System;
 
     /// <summary>

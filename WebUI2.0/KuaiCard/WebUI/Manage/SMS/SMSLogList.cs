@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.SMS
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;

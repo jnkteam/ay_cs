@@ -88,35 +88,10 @@
         {
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
             {
-                string str = string.Empty;
-                string str2 = DataBinder.Eval(e.Item.DataItem, "type").ToString();
+                string tradetype = DataBinder.Eval(e.Item.DataItem, "type").ToString();
                 Literal literal = (Literal) e.Item.FindControl("litbillType");
-                switch (str2)
-                {
-                    case "1":
-                        str = "订单提成";
-                        break;
 
-                    case "3":
-                        str = "提现结算";
-                        break;
-
-                    case "4":
-                        str = "后台加款";
-                        break;
-
-                    case "5":
-                        str = "扣量";
-                        break;
-
-                    case "6":
-                        str = "还单";
-                        break;
-
-                    case "7":
-                        str = "解冻扣除";
-                        break;
-                }
+                string str = Enum.GetName(typeof(OriginalStudio.Model.Trade.TradeTypeEnum), Lib.Utils.Common.StrToInt(tradetype, 0));
                 literal.Text = str;
             }
         }

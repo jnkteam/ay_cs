@@ -242,6 +242,17 @@
             return GetModelFromDs(set);
         }
 
+        public static DataTable GetLevName(RateTypeEnum rateType)
+        {
+            string commandText = "SELECT [ID],[RateName] FROM sys_payrate WHERE rateType = @rateType";
+            SqlParameter[] commandParameters = new SqlParameter[] 
+            {
+                new SqlParameter("@rateType", SqlDbType.TinyInt, 1)
+            };
+            commandParameters[0].Value = (int)rateType;
+            return DataBase.ExecuteDataset(CommandType.Text, commandText, commandParameters).Tables[0];
+        }
+
         #endregion
     }
 }

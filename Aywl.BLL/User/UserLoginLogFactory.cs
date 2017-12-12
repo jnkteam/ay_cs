@@ -24,7 +24,14 @@
                 builder.Append("type,userID,lastIP,address,remark,lastTime)");
                 builder.Append(" values (");
                 builder.Append("@type,@userID,@lastIP,@address,@remark,@lastTime)");
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@type", logEntity.type), new SqlParameter("@userID", logEntity.userID), new SqlParameter("@lastIP", logEntity.lastIP), new SqlParameter("@address", logEntity.address), new SqlParameter("@remark", logEntity.remark), new SqlParameter("@lastTime", logEntity.lastTime) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@type", logEntity.type),
+                    new SqlParameter("@userID", logEntity.userID),
+                    new SqlParameter("@lastIP", logEntity.lastIP),
+                    new SqlParameter("@address", logEntity.address),
+                    new SqlParameter("@remark", logEntity.remark),
+                    new SqlParameter("@lastTime", logEntity.lastTime)
+                };
                 return DataBase.ExecuteNonQuery(CommandType.Text, builder.ToString(), commandParameters);
             }
             catch (Exception exception)

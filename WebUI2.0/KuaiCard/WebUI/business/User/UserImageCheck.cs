@@ -10,7 +10,7 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
-    using OriginalStudio.Model.Enum;
+    using OriginalStudio.Model.Trade;
 
     public class UserImageCheck : BusinessPageBase
     {

@@ -9,7 +9,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
-    using OriginalStudio.Model.Enum;
+    using OriginalStudio.Model.Trade;
 
     public class usersIdImage
     {

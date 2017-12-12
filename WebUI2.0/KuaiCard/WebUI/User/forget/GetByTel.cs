@@ -4,7 +4,7 @@ using System.Text;
 using OriginalStudio.WebComponents.Web;
 using System.Web.UI.WebControls;
 using OriginalStudio.Cache;
-using OriginalStudio.BLL.Tools;
+using OriginalStudio.BLL.SMS;
 using OriginalStudio.BLL.User;
 
 namespace OriginalStudio.WebUI.User.Forget

@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.register
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.SMS;
     using OriginalStudio.Cache;
     using System;
     using System.Web;

@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.User.Service
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.SMS;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Cache;
     using OriginalStudio.Model.User;

@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.Model.Enum
+﻿namespace OriginalStudio.Model.Trade
 {
     using System;
 

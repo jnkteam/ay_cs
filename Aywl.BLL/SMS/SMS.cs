@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.BLL.Tools
+﻿namespace OriginalStudio.BLL.SMS
 {
     //using com.todaynic.ScpClient;
     using OriginalStudio.BLL;

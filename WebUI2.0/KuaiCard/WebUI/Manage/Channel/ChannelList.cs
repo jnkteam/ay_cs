@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.Channel
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;

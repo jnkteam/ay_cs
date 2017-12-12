@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.Sys
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Tools;
@@ -14,7 +14,7 @@
     using System.Data.SqlClient;
     using DBAccess;
 
-    public class Console_CleanUpData : ManagePageBase
+    public class CleanUpData : ManagePageBase
     {
         protected Button btnCleanUp;
         protected CheckBoxList cb_stat;

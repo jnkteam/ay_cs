@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
@@ -11,8 +11,9 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.PayRate;
 
-    public class Newsuser : ManagePageBase
+    public class NewUser : ManagePageBase
     {
         protected Button Button1;
         protected CheckBox cb_isEmailPass;
@@ -37,7 +38,9 @@
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            UserInfo info = new UserInfo();
+            MchUserBaseInfo info = new MchUserBaseInfo();
+            //需要重新写，和前台对应
+            /*
             info.UserName = this.txtName.Text;
             info.Password = this.pwd.Text;
             info.Email = this.email.Text;
@@ -78,17 +81,19 @@
             {
                 info.manageId = 0;
             }
+            */
             int num = 0;
-            int num2 = UserFactory.Add(info);
+            int num2 = MchUserFactory.Add(info);
             if (num2 > 0)
             {
-                info.ID = num2;
-                info.agentDistscheme = 0;
-                if (UserFactory.Update1(info))
-                {
-                    num = num2;
-                    base.AlertAndRedirect("保存成功！", "User/UserList.aspx");
-                }
+                base.AlertAndRedirect("保存成功！", "UserList.aspx");
+
+                //info.UserID = num2;
+                //info.agentDistscheme = 0;
+                //if (MchUserFactory.Update1(info))
+                //{
+                //    num = num2;
+                //}
             }
             else
             {
@@ -111,12 +116,12 @@
             string s = this.ddlagents.SelectedValue.ToString();
             if (s != "")
             {
-                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
-                UserInfo model = UserFactory.GetModel(int.Parse(s));
-                if (model.manageId > 0)
-                {
-                    this.ddlmange.SelectedValue = model.manageId.ToString();
-                }
+                //DataTable levName = SysPayRateFactory.GetLevName(RateTypeEnum.会员);
+                //MchUserBaseInfo model = MchUserFactory.GetUserBaseByUserID(int.Parse(s));
+                //if (model.ManageId > 0)
+                //{
+                //    this.ddlmange.SelectedValue = model.ManageId.ToString();
+                //}
             }
         }
 
@@ -132,18 +137,18 @@
                     string name = Enum.GetName(typeof(UserStatusEnum), num);
                     this.ddlStatus.Items.Add(new ListItem(name, num.ToString()));
                 }
-                DataTable levName = PayRateFactory.GetLevName(RateTypeEnum.会员);
+                DataTable levName = SysPayRateFactory.GetLevName(RateTypeEnum.会员);
                 this.ddlmange.Items.Add(new ListItem("--请选择所属商务--", ""));
-                levName = ManageFactory.GetList(" status =1").Tables[0];
+                levName = ManageFactory.GetList("status =1").Tables[0];
                 foreach (DataRow row in levName.Rows)
                 {
                     this.ddlmange.Items.Add(new ListItem(row["username"].ToString(), row["id"].ToString()));
                 }
                 this.ddlagents.Items.Add(new ListItem("--请选择代理员--", ""));
-                levName = UserFactory.getAgentList();
+                levName = MchUserFactory.getAgentList();
                 foreach (DataRow row in levName.Rows)
                 {
-                    this.ddlagents.Items.Add(new ListItem(row["username"].ToString(), row["id"].ToString()));
+                    this.ddlagents.Items.Add(new ListItem(row["username"].ToString(), row["userid"].ToString()));
                 }
             }
             this.dldropDownList();

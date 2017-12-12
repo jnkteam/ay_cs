@@ -13,7 +13,7 @@
     using System.Data;
     using OriginalStudio.Lib.TimeControl;
     using OriginalStudio.BLL.Withdraw;
-    using OriginalStudio.BLL.Tools;
+    using OriginalStudio.BLL.SMS;
 
     public class withdrawal : IHttpHandler, IReadOnlySessionState, IRequiresSessionState
     {

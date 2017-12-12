@@ -13,7 +13,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
-    using OriginalStudio.Model.Enum;
+    using OriginalStudio.Model.Trade;
 
     public class List : ManagePageBase
     {

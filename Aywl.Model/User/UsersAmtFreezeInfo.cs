@@ -1,21 +1,22 @@
-﻿namespace OriginalStudio.Model.Settled
+﻿namespace OriginalStudio.Model.User
 {
+    using OriginalStudio.Model.Settled;
     using System;
 
     [Serializable]
     public class UsersAmtFreezeInfo
     {
-        private DateTime? _addtime;
-        private DateTime? _checktime;
+        private DateTime _addtime = DateTime.Now;
+        private DateTime _checktime = DateTime.Now;
         private decimal _freezeamt;
         private int _id;
-        private int? _manageid;
+        private int _manageid = 0;
         private AmtFreezeInfoStatus _status = AmtFreezeInfoStatus.否;
         private AmtunFreezeMode _unfreezemode = AmtunFreezeMode.未处理;
-        private int _userid;
-        private string _why;
+        private int _userid = 0;
+        private string _why = "";
 
-        public DateTime? addtime
+        public DateTime Addtime
         {
             get
             {
@@ -27,7 +28,7 @@
             }
         }
 
-        public DateTime? checktime
+        public DateTime Checktime
         {
             get
             {
@@ -39,7 +40,7 @@
             }
         }
 
-        public decimal freezeAmt
+        public decimal FreezeAmt
         {
             get
             {
@@ -51,7 +52,7 @@
             }
         }
 
-        public int id
+        public int ID
         {
             get
             {
@@ -63,7 +64,7 @@
             }
         }
 
-        public int? manageId
+        public int ManageId
         {
             get
             {
@@ -75,7 +76,7 @@
             }
         }
 
-        public AmtFreezeInfoStatus status
+        public AmtFreezeInfoStatus Status
         {
             get
             {
@@ -87,7 +88,7 @@
             }
         }
 
-        public AmtunFreezeMode unfreezemode
+        public AmtunFreezeMode UnFreezeMode
         {
             get
             {
@@ -99,7 +100,7 @@
             }
         }
 
-        public int userid
+        public int UserID
         {
             get
             {
@@ -111,7 +112,7 @@
             }
         }
 
-        public string why
+        public string Why
         {
             get
             {

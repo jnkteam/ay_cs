@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.User.withdrawal
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
@@ -139,7 +139,7 @@
 
                  */
 
-                DataSet ds = OriginalStudio.BLL.Settled.TradeFactory.GetUserLeftBalance(modelByUser.id, 
+                DataSet ds = OriginalStudio.BLL.User.TradeFactory.GetUserLeftBalance(modelByUser.id, 
                                                             base.CurrentUser.ID, 
                                                             Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 00:00:00")),
                                                             DateTime.Now.AddDays(1.0));

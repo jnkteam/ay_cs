@@ -9,7 +9,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
 
     public class index : UserPageBase
     {

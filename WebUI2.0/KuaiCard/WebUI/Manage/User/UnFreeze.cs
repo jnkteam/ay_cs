@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
     using OriginalStudio.WebComponents.Web;
@@ -23,7 +23,7 @@
         protected AspNetPager Pager1;
         protected Repeater rptData;
         protected HtmlInputHidden selectedUsers;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected string wzfmoney = string.Empty;
         protected string yzfmoney = string.Empty;
 
@@ -35,13 +35,9 @@
         private void LoadData()
         {
             List<SearchParam> searchParams = new List<SearchParam>();
-            string str = this.txtuserId.Text.Trim();
+            string str = this.txtMerchantName.Text.Trim();
             if (!string.IsNullOrEmpty(str))
-            {
-                int result = 0;
-                int.TryParse(str, out result);
-                searchParams.Add(new SearchParam("userid", result));
-            }
+                searchParams.Add(new SearchParam("merchantname", str));
             string orderby = this.orderBy + " " + this.orderByType;
             DataSet set = UsersAmtFreeze.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
@@ -78,7 +74,7 @@
                 }
                 if (mode != AmtunFreezeMode.未处理)
                 {
-                    if (UsersAmtFreeze.unFreeze(int.Parse(e.CommandArgument.ToString()), mode))
+                    if (UsersAmtFreeze.UnFreeze(int.Parse(e.CommandArgument.ToString()), mode))
                     {
                         base.AlertAndRedirect("操作成功");
                     }

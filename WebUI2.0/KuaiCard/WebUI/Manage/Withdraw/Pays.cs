@@ -14,7 +14,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model.Settled;
     using OriginalStudio.BLL.Supplier;
 
@@ -34,8 +34,8 @@
         protected TextBox txtAccount;
         protected TextBox txtItemInfoId;
         protected TextBox txtPassWord;
-        protected TextBox txtpayeeName;
-        protected TextBox txtUserId;
+        //protected TextBox txtpayeeName;
+        protected TextBox txtMerchantName;
 
         private void BindData()
         {
@@ -46,9 +46,9 @@
             {
                 searchParams.Add(new SearchParam("id", result));
             }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
+            if (!(string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()) || !int.TryParse(this.txtMerchantName.Text.Trim(), out result)))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("MerchantName", result));
             }
             if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
             {
@@ -61,10 +61,6 @@
             if (!string.IsNullOrEmpty(this.txtAccount.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
-            }
-            if (!string.IsNullOrEmpty(this.txtpayeeName.Text.Trim()))
-            {
-                searchParams.Add(new SearchParam("payeename", this.txtpayeeName.Text.Trim()));
             }
             DataSet set = SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
@@ -127,6 +123,87 @@
             }
         }
 
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            this.BindData();
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            this.setPower();
+            if (!base.IsPostBack)
+            {
+                this.ddlmode.Items.Add(new ListItem("--提现方式--", ""));
+                foreach (int num in Enum.GetValues(typeof(SettledModeEnum)))
+                {
+                    string name = Enum.GetName(typeof(SettledModeEnum), num);
+                    this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
+                }
+                DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
+                this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
+                this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
+                foreach (DataRow row in table.Rows)
+                {
+                    this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
+                }
+
+                //--收款银行--
+                DataTable dtBank = OriginalStudio.BLL.Withdraw.ChannelWithdraw.GetChannelWithdrawList().Tables[0];
+                this.ddlbankName.Items.Add(new ListItem("--收款银行--", ""));
+                foreach (DataRow row in dtBank.Rows)
+                    this.ddlbankName.Items.Add(new ListItem(row["bankName"].ToString(), row["bankCode"].ToString()));
+
+                //rbl_export_mode.Visible = false;
+
+                this.BindData();
+            }
+        }
+
+        protected void Pager1_PageChanging(object src, PageChangingEventArgs e)
+        {
+            this.BindData();
+        }
+
+        private void setPower()
+        {
+            if (!ManageFactory.CheckCurrentPermission(false, ManageRole.Financial))
+            {
+                base.Response.Write("Sorry,No authority!");
+                base.Response.End();
+            }
+        }
+
+        #region 导出
+
+
+        private DataSet GetData()
+        {
+            List<SearchParam> searchParams = new List<SearchParam>();
+            searchParams.Add(new SearchParam("status", 2));
+            int result = 0;
+            if (!(string.IsNullOrEmpty(this.txtItemInfoId.Text.Trim()) || !int.TryParse(this.txtItemInfoId.Text.Trim(), out result)))
+            {
+                searchParams.Add(new SearchParam("id", result));
+            }
+            if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
+            {
+                searchParams.Add(new SearchParam("MerchantName", this.txtMerchantName.Text.Trim()));
+            }
+            if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("tranapi", int.Parse(this.ddlSupplier.SelectedValue)));
+            }
+            if (!string.IsNullOrEmpty(this.ddlbankName.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("payeebank", this.ddlbankName.SelectedValue));
+            }
+            if (!string.IsNullOrEmpty(this.txtAccount.Text.Trim()))
+            {
+                searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
+            }
+            return SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
+        }
+
         protected void btnExport_Click(object sender, EventArgs e)
         {
             try
@@ -185,78 +262,7 @@
             }
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            this.BindData();
-        }
-
-        private DataSet GetData()
-        {
-            List<SearchParam> searchParams = new List<SearchParam>();
-            searchParams.Add(new SearchParam("status", 2));
-            int result = 0;
-            if (!(string.IsNullOrEmpty(this.txtItemInfoId.Text.Trim()) || !int.TryParse(this.txtItemInfoId.Text.Trim(), out result)))
-            {
-                searchParams.Add(new SearchParam("id", result));
-            }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
-            {
-                searchParams.Add(new SearchParam("userid", result));
-            }
-            if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("tranapi", int.Parse(this.ddlSupplier.SelectedValue)));
-            }
-            if (!string.IsNullOrEmpty(this.ddlbankName.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("payeebank", this.ddlbankName.SelectedValue));
-            }
-            if (!string.IsNullOrEmpty(this.txtAccount.Text.Trim()))
-            {
-                searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
-            }
-            if (!string.IsNullOrEmpty(this.txtpayeeName.Text.Trim()))
-            {
-                searchParams.Add(new SearchParam("payeename", this.txtpayeeName.Text.Trim()));
-            }
-            return SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            this.setPower();
-            if (!base.IsPostBack)
-            {
-                this.ddlmode.Items.Add(new ListItem("--提现方式--", ""));
-               /* foreach (int num in Enum.GetValues(typeof(SettledmodeEnum)))
-                {
-                    string name = Enum.GetName(typeof(SettledmodeEnum), num);
-                    this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
-                }*/
-                DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
-                this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
-                this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
-                foreach (DataRow row in table.Rows)
-                {
-                    this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
-                }
-                this.BindData();
-            }
-        }
-
-        protected void Pager1_PageChanging(object src, PageChangingEventArgs e)
-        {
-            this.BindData();
-        }
-
-        private void setPower()
-        {
-            if (!ManageFactory.CheckCurrentPermission(false, ManageRole.Financial))
-            {
-                base.Response.Write("Sorry,No authority!");
-                base.Response.End();
-            }
-        }
+        #endregion
     }
 }
 

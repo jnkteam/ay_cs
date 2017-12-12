@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// 资金冻结状态。
+    /// </summary>
     public enum AmtFreezeInfoStatus
     {
         否 = 1,

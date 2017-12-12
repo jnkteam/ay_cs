@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
     using OriginalStudio.WebComponents.Web;
@@ -21,7 +21,7 @@
 
         private void BindView()
         {
-            DataTable table = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=1").Tables[0];
+            DataTable table = OriginalStudio.BLL.User.TocashScheme.GetList("type=1").Tables[0];
             this.GridView1.DataSource = table.DefaultView;
             this.GridView1.DataBind();
         }
@@ -35,7 +35,7 @@
         {
             if (this.isDel)
             {
-                if (OriginalStudio.BLL.Settled.TocashScheme.Delete(this.ItemInfoId))
+                if (OriginalStudio.BLL.User.TocashScheme.Delete(this.ItemInfoId))
                 {
                     base.AlertAndRedirect("删除成功!", "TocashSchemes.aspx");
                 }
@@ -103,7 +103,7 @@
                 {
                     if (this.isUpdate)
                     {
-                        this._ItemInfo = OriginalStudio.BLL.Settled.TocashScheme.GetModel(this.ItemInfoId);
+                        this._ItemInfo = OriginalStudio.BLL.User.TocashScheme.GetModel(this.ItemInfoId);
                     }
                     else
                     {

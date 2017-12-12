@@ -2,7 +2,7 @@
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.BLL.Sys;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;

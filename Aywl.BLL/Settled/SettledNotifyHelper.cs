@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.BLL.Settled
+﻿namespace OriginalStudio.BLL.User
 {
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.Withdraw;

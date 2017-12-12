@@ -102,13 +102,13 @@
     <Compile Include="Enum\SettledModeEnum.cs" />
     <Compile Include="Enum\SettledStatusEnum.cs" />
     <Compile Include="Enum\AmtFreezeInfoStatus.cs" />
-    <Compile Include="Settled\AmtunFreezeMode.cs" />
+    <Compile Include="Enum\AmtunFreezeMode.cs" />
     <Compile Include="Settled\IncreaseAmtInfo.cs" />
     <Compile Include="Enum\SettleTypeEnum.cs" />
     <Compile Include="Settled\TocashSchemeInfo.cs" />
     <Compile Include="Settled\Transfer.cs" />
     <Compile Include="Settled\TransferScheme.cs" />
-    <Compile Include="Settled\UsersAmtFreezeInfo.cs" />
+    <Compile Include="User\UsersAmtFreezeInfo.cs" />
     <Compile Include="ShowStyleEnum.cs" />
     <Compile Include="SinglePage.cs" />
     <Compile Include="SiteType.cs" />

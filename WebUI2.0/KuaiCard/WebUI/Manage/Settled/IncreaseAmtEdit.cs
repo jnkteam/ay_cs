@@ -1,7 +1,6 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
@@ -22,7 +21,7 @@
         protected RadioButtonList rbl_optype;
         protected TextBox txtdesc;
         protected TextBox txtincreaseAmt;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
@@ -31,12 +30,11 @@
 
         protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            if (String.IsNullOrEmpty(this.txtMerchantName.Text.Trim())) return;
+
             int result = 0;
-            if (!int.TryParse(this.txtuserId.Text.Trim(), out result))
-            {
-                args.IsValid = false;
-            }
-            else if (!UserFactory.Exists(int.Parse(this.txtuserId.Text)))
+            MchUserBaseInfo m = MchUserFactory.GetUserBaseByMerchantName(this.txtMerchantName.Text.Trim());
+            if (m.UserID == 0)
             {
                 args.IsValid = false;
             }
@@ -48,22 +46,23 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.userId > 0)
+            if (this.MchName != "")
             {
                 string s = string.Empty;
-                MchUsersAmtInfo model = MchUsersAmtFactory.GetModel(this.userId);
+                MchUsersAmtInfo model = MchUserFactory.GetUserBaseByMerchantName(this.MchName).MchUsersAmtInfo;
                 if (model == null)
                 {
                     s = "用户不存在!";
                 }
                 else
                 {
-                    s = ((model.Balance - model.Freeze) - model.UnPayment).ToString("f2");
+                    s = (model.Balance - model.Freeze - model.UnPayment).ToString("f2");
                 }
                 base.Response.Write(s);
                 base.Response.End();
             }
-            //ManageFactory.CheckSecondPwd();
+
+            //ManageFactory.CheckCurrentPermission();
             //this.setPower();
             if (!base.IsPostBack)
             {
@@ -76,28 +75,30 @@
             if (base.IsValid)
             {
                 int result = 0;
-                if (!int.TryParse(this.txtuserId.Text, out result))
+                if (String.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
                 {
                     base.AlertAndRedirect("请输入正确的用户ID");
                 }
                 else
                 {
-                    decimal num2 = 0M;
-                    if (!decimal.TryParse(this.txtincreaseAmt.Text, out num2))
+                    decimal increaseAmt = 0M;
+                    if (!decimal.TryParse(this.txtincreaseAmt.Text, out increaseAmt))
                     {
                         base.AlertAndRedirect("请输入正确的金额");
                     }
                     else
                     {
+                        MchUserBaseInfo m = MchUserFactory.GetUserBaseByMerchantName(this.txtMerchantName.Text.Trim());
+
                         string text = this.txtdesc.Text;
-                        this.model.userId = new int?(result);
-                        this.model.increaseAmt = new decimal?(num2);
-                        this.model.addtime = new DateTime?(DateTime.Now);
-                        this.model.mangeId = new int?(base.ManageId);
-                        this.model.mangeName = base.currentManage.username;
-                        this.model.status = 1;
+                        this.model.UserID = m.UserID;
+                        this.model.IncreaseAmt = increaseAmt;
+                        this.model.AddTime = DateTime.Now;
+                        this.model.MangeId = base.ManageId;
+                        this.model.MangeName = base.currentManage.username;
+                        this.model.Status = 1;
                         this.model.optype = (SettleTypeEnum) int.Parse(this.rbl_optype.SelectedValue);
-                        this.model.desc = text;
+                        this.model.Desc = text;
                         if (!this.isUpdate)
                         {
                             if (IncreaseAmt.Add(this.model) > 0)
@@ -127,9 +128,9 @@
         {
             if (this.isUpdate && (this.model != null))
             {
-                this.txtuserId.Text = this.model.userId.ToString();
-                this.txtincreaseAmt.Text = this.model.increaseAmt.ToString();
-                this.txtdesc.Text = this.model.desc;
+                this.txtMerchantName.Text = this.model.MerchantName.ToString();
+                this.txtincreaseAmt.Text = this.model.IncreaseAmt.ToString();
+                this.txtdesc.Text = this.model.Desc;
             }
         }
 
@@ -168,11 +169,11 @@
             }
         }
 
-        public int userId
+        public string MchName
         {
             get
             {
-                return WebBase.GetQueryStringInt32("user", 0);
+                return WebBase.GetQueryStringString("user", "");
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.BLL.Settled
+﻿namespace OriginalStudio.BLL.User
 {
     using OriginalStudio.DBAccess;
     using OriginalStudio.Lib.ExceptionHandling;

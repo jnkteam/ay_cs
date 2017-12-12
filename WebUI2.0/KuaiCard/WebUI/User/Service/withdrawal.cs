@@ -9,7 +9,7 @@
     using System.Web;
     using System.Web.SessionState;
     using OriginalStudio.Model.Settled;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using System.Data;
     using OriginalStudio.Lib.TimeControl;
     using OriginalStudio.BLL.Withdraw;

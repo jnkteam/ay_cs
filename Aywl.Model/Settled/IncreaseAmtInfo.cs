@@ -4,17 +4,18 @@
 
     public class IncreaseAmtInfo
     {
-        private DateTime? _addtime;
+        private DateTime _addtime = DateTime.Now;
         private string _desc;
-        private int _id;
-        private decimal? _increaseamt;
-        private int? _mangeid;
+        private int _id = 0;
+        private decimal _increaseamt = 0M;
+        private int _mangeid = 0;
         private string _mangename;
         private SettleTypeEnum _optype;
-        private int? _status;
-        private int? _userid;
+        private int _status = 0;
+        private int _userid = 0;
+        private string _merchantname = "";
 
-        public DateTime? addtime
+        public DateTime AddTime
         {
             get
             {
@@ -26,7 +27,7 @@
             }
         }
 
-        public string desc
+        public string Desc
         {
             get
             {
@@ -38,7 +39,7 @@
             }
         }
 
-        public int id
+        public int ID
         {
             get
             {
@@ -50,7 +51,7 @@
             }
         }
 
-        public decimal? increaseAmt
+        public decimal IncreaseAmt
         {
             get
             {
@@ -62,7 +63,7 @@
             }
         }
 
-        public int? mangeId
+        public int MangeId
         {
             get
             {
@@ -74,7 +75,7 @@
             }
         }
 
-        public string mangeName
+        public string MangeName
         {
             get
             {
@@ -98,7 +99,7 @@
             }
         }
 
-        public int? status
+        public int Status
         {
             get
             {
@@ -110,7 +111,7 @@
             }
         }
 
-        public int? userId
+        public int UserID
         {
             get
             {
@@ -119,6 +120,18 @@
             set
             {
                 this._userid = value;
+            }
+        }
+
+        public string MerchantName
+        {
+            get
+            {
+                return this._merchantname;
+            }
+            set
+            {
+                this._merchantname = value;
             }
         }
     }

@@ -679,7 +679,7 @@
     <Compile Include="KuaiCard\WebUI\agent\Index.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Historys.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\Historys.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Distribution\Distributions2.cs">

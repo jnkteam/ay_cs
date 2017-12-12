@@ -140,13 +140,13 @@
                 this.ddlagents.Items.Add(new ListItem(row2["username"].ToString(), row2["id"].ToString()));
             }
             this.ddlTocashScheme.Items.Add(new ListItem("--默认--", ""));
-            levName = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=1").Tables[0];
+            levName = OriginalStudio.BLL.User.TocashScheme.GetList("type=1").Tables[0];
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlTocashScheme.Items.Add(new ListItem(row2["schemename"].ToString(), row2["id"].ToString()));
             }
             this.ddlagentDistscheme.Items.Add(new ListItem("--默认--", ""));
-            levName = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=2").Tables[0];
+            levName = OriginalStudio.BLL.User.TocashScheme.GetList("type=2").Tables[0];
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlagentDistscheme.Items.Add(new ListItem(row2["schemename"].ToString(), row2["id"].ToString()));

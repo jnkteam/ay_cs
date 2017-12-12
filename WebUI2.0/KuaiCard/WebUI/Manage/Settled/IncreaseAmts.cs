@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Data;
@@ -24,7 +24,7 @@
         protected Repeater rptTrades;
         protected HtmlInputHidden selectedUsers;
         protected TextBox StimeBox;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected string wzfmoney = string.Empty;
         protected string yzfmoney = string.Empty;
 
@@ -44,11 +44,10 @@
             if (base.currentManage.isSuperAdmin <= 0)
             {
             }
-            string s = this.txtuserId.Text.Trim();
-            int result = 0;
-            if (int.TryParse(s, out result))
+            string s = this.txtMerchantName.Text.Trim();
+            if (!String.IsNullOrEmpty(s))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", s));
             }
             DateTime minValue = DateTime.MinValue;
             if ((!string.IsNullOrEmpty(this.StimeBox.Text.Trim()) && DateTime.TryParse(this.StimeBox.Text.Trim(), out minValue)) && (minValue > DateTime.MinValue))

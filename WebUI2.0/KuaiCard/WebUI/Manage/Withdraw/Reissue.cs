@@ -100,7 +100,7 @@
             {
                 if ((this._model == null) && (this.id > 0))
                 {
-                    this._model = new OriginalStudio.BLL.Settled.Distribution().GetDistributionModel(this.id);
+                    this._model = new OriginalStudio.BLL.User.Distribution().GetDistributionModel(this.id);
                 }
                 return this._model;
             }

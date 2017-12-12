@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.BLL.Settled
+﻿namespace OriginalStudio.BLL.User
 {
     using OriginalStudio.DAL.Settled;
     using OriginalStudio.Lib.ExceptionHandling;
@@ -251,7 +251,7 @@
                 {
                     withdrawListByApi = set.Tables[0];
                 }
-                return Convert.ToBoolean(commandParameters[2]);
+                return Convert.ToBoolean(commandParameters[2].Value);
             }
             catch (Exception exception)
             {
@@ -316,7 +316,9 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { DataBase.MakeInParam("@ID", SqlDbType.BigInt, 10, id) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    DataBase.MakeInParam("@ID", SqlDbType.BigInt, 10, id)
+                };
                 SettledInfo info = null;
                 using (SqlDataReader reader = DataBase.ExecuteReader(CommandType.StoredProcedure, "proc_settled_GetModel", commandParameters))
                 {
@@ -527,7 +529,7 @@
 
                 return DataBase.ExecuteDataset(CommandType.Text,
                     SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" +
-                    SqlHelper.GetPageSelectSQL("[UserName]\r\n      ,[PayeeName]\r\n      ,[Account]\r\n      ,[id]\r\n      ,[userid]\r\n      ,[amount]\r\n      ,[status]\r\n      ,[addTime]\r\n      ,[tax]\r\n      ,ISNULL([charges],0) as charges,[PayTime],[userid],[PayeeBank],[apptype],[required],[settmode],[tranapi],Payeeaddress\r\n      ,[amount]-isnull([charges],0)-isnull([tax],0) realpay", tables, wheres, orderby, key, pageSize, page, false)
+                    SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false)
                     //+ "\r\nselect ISNULL(sum(amount),0) from V_Settled where " + wheres, paramList.ToArray());
                     + "\r\n select sum(1) totalcount,sum(amount) totalamt,sum(case when [status]=8 then 1 else 0 end) successcount,sum(case when [status]=8 then amount else 0 end) successamt,sum(case when [status]=8 then ISNULL([charges],0) else 0 end) successcharges  from V_Settled where " + wheres, paramList.ToArray());
             }
@@ -685,6 +687,14 @@
                                 SqlParameter parameter14 = new SqlParameter("@id", SqlDbType.Int);
                                 parameter14.Value = (int)param2.ParamValue;
                                 paramList.Add(parameter14);
+                                break;
+                            }
+                        case "merchantname":
+                            {
+                                builder.Append(" AND [MerchantName] = @MerchantName");
+                                SqlParameter parameter15 = new SqlParameter("@MerchantName", SqlDbType.VarChar);
+                                parameter15.Value = ((string)param2.ParamValue);
+                                paramList.Add(parameter15);
                                 break;
                             }
                     }
@@ -852,7 +862,7 @@
 
         public void DoNotify(string trade_no)
         {
-            OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.Settled.SettledFactory.GetModel(0);
+            OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.User.SettledFactory.GetModel(0);
             if (model != null)
             {
                 SettledNotifyHelper helper = new SettledNotifyHelper();

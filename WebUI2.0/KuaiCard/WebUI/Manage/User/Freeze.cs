@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.User
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
@@ -14,6 +14,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
+    using OriginalStudio.Model.User;
 
     public class Freeze : ManagePageBase
     {
@@ -23,7 +24,7 @@
         protected AspNetPager Pager1;
         protected Repeater rptUsers;
         protected HtmlInputHidden selectedUsers;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected string wzfmoney = string.Empty;
         protected string yzfmoney = string.Empty;
 
@@ -83,12 +84,10 @@
             {
                 searchParams.Add(new SearchParam("proid", this.proid));
             }
-            string str = this.txtuserId.Text.Trim();
+            string str = this.txtMerchantName.Text.Trim();
             if (!string.IsNullOrEmpty(str))
             {
-                int result = 0;
-                int.TryParse(str, out result);
-                searchParams.Add(new SearchParam("id", result));
+                searchParams.Add(new SearchParam("merchantname", str));
             }
             string orderby = this.orderBy + " " + this.orderByType;
             DataSet set = MchUserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
@@ -128,12 +127,12 @@
                 decimal num4 = 0M;
                 decimal.TryParse(strArray[2], out num4);
                 TextBox box = e.Item.FindControl("txtFreezeMoney") as TextBox;
-                decimal num5 = decimal.Parse(box.Text.Trim());
-                if (num5 <= 0M)
+                decimal FreezeMoney = decimal.Parse(box.Text.Trim());
+                if (FreezeMoney <= 0M)
                 {
                     base.AlertAndRedirect("请输入正确的金额");
                 }
-                else if (num5 > ((result - num3) - num4))
+                else if (FreezeMoney > ((result - num3) - num4))
                 {
                     base.AlertAndRedirect("冻结的金额大于余额 操作有误");
                 }
@@ -141,13 +140,13 @@
                 {
                     TextBox box2 = (TextBox) e.Item.FindControl("txtWhy");
                     UsersAmtFreezeInfo model = new UsersAmtFreezeInfo();
-                    model.userid = num;
-                    model.addtime = new DateTime?(DateTime.Now);
-                    model.freezeAmt = num5;
-                    model.manageId = new int?(base.ManageId);
-                    model.status = AmtFreezeInfoStatus.否;
-                    model.why = box2.Text.Trim();
-                    model.unfreezemode = AmtunFreezeMode.未处理;
+                    model.UserID = num;
+                    model.Addtime = DateTime.Now;
+                    model.FreezeAmt = FreezeMoney;
+                    model.ManageId = base.ManageId;
+                    model.Status = AmtFreezeInfoStatus.否;
+                    model.Why = box2.Text.Trim();
+                    model.UnFreezeMode = AmtunFreezeMode.未处理;
                     if (UsersAmtFreeze.Freeze(model))
                     {
                         base.AlertAndRedirect("操作成功");

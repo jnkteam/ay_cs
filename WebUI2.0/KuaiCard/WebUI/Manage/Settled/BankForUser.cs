@@ -1,9 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.User;
-    using OriginalStudio.BLL.Withdraw;
     using OriginalStudio.ETAPI;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
@@ -251,7 +249,7 @@
                 OriginalStudio.Lib.Logging.LogHelper.Write("userId：" + userId.ToString());
 
                 //6、检查可提现金额
-                decimal allLimitIncome = BLL.Settled.TradeFactory.GetMerchantLimitDayIncome(userId);
+                decimal allLimitIncome = BLL.User.TradeFactory.GetMerchantLimitDayIncome(userId);
                 MchUserBaseInfo mchInfo = MchUserFactory.GetUserBaseByUserID(userId);
                 decimal canPayMoney = mchInfo.MchUsersAmtInfo.Balance -
                                                         mchInfo.MchUsersAmtInfo.Freeze -

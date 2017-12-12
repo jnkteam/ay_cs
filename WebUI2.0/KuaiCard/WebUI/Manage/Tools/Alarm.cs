@@ -7,7 +7,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Web;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
 
     public class Alarm : ManagePageBase
     {

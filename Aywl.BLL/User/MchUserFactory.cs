@@ -117,7 +117,7 @@
             modle.WithdrawScheme.BankDetentionDays = Utils.StrToInt(dr["bankdetentiondays"]);
             modle.WithdrawScheme.QQDetentionDays = Utils.StrToInt(dr["qqdetentiondays"]);
             modle.WithdrawScheme.JDDetentionDays = Utils.StrToInt(dr["jddetentiondays"]);
-            modle.WithdrawScheme.IsTranRequiredAudit = Utils.StrToInt(dr["jddetentiondays"]);
+            modle.WithdrawScheme.IsTranRequiredAudit = Utils.StrToInt(dr["IsTranRequiredAudit"]);
             modle.WithdrawScheme.AlipayDetentionDays = Utils.StrToInt(dr["alipaydetentiondays"]);
             modle.WithdrawScheme.WeiXinDetentionDays = Utils.StrToInt(dr["weixindetentiondays"]);
             modle.WithdrawScheme.OtherDetentionDays = Utils.StrToInt(dr["otherdetentiondays"]);
@@ -133,7 +133,7 @@
         /// <returns></returns>
         public static MchUserBaseInfo GetUserBaseByUserID(int userID, Boolean fromCache = false)
         {
-            MchUserBaseInfo o = new MchUserBaseInfo();
+            MchUserBaseInfo o = null;
             if (fromCache)
             {
                 string objId = string.Format(USER_CACHE_KEY, userID);
@@ -157,7 +157,7 @@
         /// <returns></returns>
         public static MchUserBaseInfo GetUserBaseByUserName(string userName, Boolean fromCache = false)
         {
-            MchUserBaseInfo o = new MchUserBaseInfo();
+            MchUserBaseInfo o = null;
             if (fromCache)
             {
                 string objId = string.Format(USER_CACHE_KEY, userName);
@@ -182,7 +182,7 @@
         /// <returns></returns>
         public static MchUserBaseInfo GetUserBaseBySessionID(string sessionID, Boolean fromCache = false)
         {
-            MchUserBaseInfo o = new MchUserBaseInfo();
+            MchUserBaseInfo o = null;
             if (fromCache)
             {
                 string objId = string.Format(USER_CACHE_KEY, sessionID);

@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
     using OriginalStudio.WebComponents.Web;
@@ -16,7 +16,7 @@
         protected Button btnAdd;
         protected HtmlForm form1;
         protected RadioButtonList rblisdefault;
-        protected OriginalStudio.BLL.Settled.TransferScheme tsBLL = new OriginalStudio.BLL.Settled.TransferScheme();
+        protected OriginalStudio.BLL.User.TransferScheme tsBLL = new OriginalStudio.BLL.User.TransferScheme();
         protected TextBox txtchargeleastofeach;
         protected TextBox txtchargemostofeach;
         protected TextBox txtchargerate;

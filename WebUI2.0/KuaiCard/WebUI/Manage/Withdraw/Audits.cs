@@ -15,7 +15,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
     using OriginalStudio.Model.Settled;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.BLL.Supplier;
 
     public class Audits : ManagePageBase
@@ -34,8 +34,8 @@
         protected Repeater rptApply;
         protected TextBox txtAccount;
         protected TextBox txtItemInfoId;
-        protected TextBox txtpayeeName;
-        protected TextBox txtUserId;
+        //protected TextBox txtpayeeName;
+        protected TextBox txtMerchantName;
 
         private void BindData()
         {
@@ -44,6 +44,8 @@
             DataTable table = data.Tables[1];
             this.rptApply.DataSource = table;
             this.rptApply.DataBind();
+
+            this.DataBind();
         }
 
         protected void btnallfail_Click(object sender, EventArgs e)
@@ -121,14 +123,14 @@
             {
                 if (SettledFactory.BatchPass(str, batchNo, out withdrawListByApi))
                 {
-                    if ((withdrawListByApi != null) && (withdrawListByApi.Rows.Count > 0))
-                    {
-                        List<SettledInfo> list = SettledFactory.DataTableToList(withdrawListByApi);
-                        foreach (SettledInfo info in list)
-                        {
-                            OriginalStudio.ETAPI.Withdraw.InitDistribution(info);
-                        }
-                    }
+                    //if ((withdrawListByApi != null) && (withdrawListByApi.Rows.Count > 0))
+                    //{
+                    //    List<SettledInfo> list = SettledFactory.DataTableToList(withdrawListByApi);
+                    //    foreach (SettledInfo info in list)
+                    //    {
+                    //        OriginalStudio.ETAPI.Withdraw.InitDistribution(info);
+                    //    }
+                    //}
                     base.AlertAndRedirect("审核成功!");
                     this.BindData();
                 }
@@ -157,9 +159,9 @@
             {
                 searchParams.Add(new SearchParam("id", result));
             }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
+            if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("MerchantName", this.txtMerchantName.Text.Trim()));
             }
             if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
             {
@@ -172,10 +174,6 @@
             if (!string.IsNullOrEmpty(this.txtAccount.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
-            }
-            if (!string.IsNullOrEmpty(this.txtpayeeName.Text.Trim()))
-            {
-                searchParams.Add(new SearchParam("payeename", this.txtpayeeName.Text.Trim()));
             }
             return SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
         }
@@ -199,12 +197,12 @@
             if (!base.IsPostBack)
             {
                 this.ddlmode.Items.Add(new ListItem("--提现方式--", ""));
-                /*foreach (int num in Enum.GetValues(typeof(SettledmodeEnum)))
+                foreach (int num in Enum.GetValues(typeof(SettledModeEnum)))
                 {
-                    string name = Enum.GetName(typeof(SettledmodeEnum), num);
+                    string name = Enum.GetName(typeof(SettledModeEnum), num);
                     this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
                 }
-                */
+                /**/
                 DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
@@ -212,6 +210,12 @@
                 {
                     this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                 }
+                //--收款银行--
+                DataTable dtBank = OriginalStudio.BLL.Withdraw.ChannelWithdraw.GetChannelWithdrawList().Tables[0];
+                this.ddlbankName.Items.Add(new ListItem("--收款银行--", ""));
+                foreach (DataRow row in dtBank.Rows)
+                    this.ddlbankName.Items.Add(new ListItem(row["bankName"].ToString(), row["bankCode"].ToString()));
+
                 this.BindData();
             }
         }

@@ -63,9 +63,13 @@
                     int.TryParse(str, out result);
                     searchParams.Add(new SearchParam("userid", result));
                 }
-                else if (this.SeachType.SelectedValue == "UserName")
+                else if (this.SeachType.SelectedValue.ToLower() == "UserName".ToLower())
                 {
                     searchParams.Add(new SearchParam("userName", str));
+                }
+                else if (this.SeachType.SelectedValue.ToLower() == "MerchantName".ToLower())
+                {
+                    searchParams.Add(new SearchParam("MerchantName", str));
                 }
             }
             if (!string.IsNullOrEmpty(this.StimeBox.Text))

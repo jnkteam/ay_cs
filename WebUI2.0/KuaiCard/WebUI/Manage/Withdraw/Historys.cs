@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -13,7 +13,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
     using OriginalStudio.BLL.Supplier;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model.Settled;
 
     public class Historys : ManagePageBase
@@ -34,7 +34,7 @@
         protected TextBox txtItemInfoId;
         protected TextBox txtpayeeName;
         protected TextBox txtStimeBox;
-        protected TextBox txtUserId;
+        protected TextBox txtMerchantName;
 
         private void BindData()
         {
@@ -48,9 +48,9 @@
             {
                 searchParams.Add(new SearchParam("id", result));
             }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
+            if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", this.txtMerchantName.Text.Trim()));
             }
             if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
             {
@@ -110,75 +110,10 @@
             this.TotalMoney = Convert.ToString(set.Tables[2].Rows[0][0]);
         }
 
-        protected void btnExport_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DataSet data = this.GetData();
-                if (data != null)
-                {
-                    DataTable dataTable = data.Tables[1];
-                    dataTable.Columns.Add("sName", typeof(string));
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        row["sName"] = Enum.GetName(typeof(SettledStatusEnum), row["status"]);
-                        row["PayeeBank"] = SettledFactory.GetSettleBankName(row["PayeeBank"].ToString());
-                    }
-                    dataTable.AcceptChanges();
-                    dataTable.TableName = "Rpt";
-                    string file = base.Server.MapPath("~/common/template/xls/settle.xls");
-                    WorkbookDesigner designer = new WorkbookDesigner();
-                    designer.Workbook = new Workbook(file);
-                    designer.SetDataSource(dataTable);
-                    designer.Process();
-                    designer.Workbook.Save(base.Response, DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls", ContentDisposition.Attachment, designer.Workbook.SaveOptions);
-                }
-            }
-            catch (Exception exception)
-            {
-                base.AlertAndRedirect(exception.Message);
-            }
-        }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             this.BindData();
-        }
-
-        private DataSet GetData()
-        {
-            //导出使用
-            List<SearchParam> searchParams = new List<SearchParam>();
-            if (!string.IsNullOrEmpty(this.ddlStatusList.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("status", int.Parse(this.ddlStatusList.SelectedValue)));
-            }
-            int result = 0;
-            if (!(string.IsNullOrEmpty(this.txtItemInfoId.Text.Trim()) || !int.TryParse(this.txtItemInfoId.Text.Trim(), out result)))
-            {
-                searchParams.Add(new SearchParam("id", result));
-            }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
-            {
-                searchParams.Add(new SearchParam("userid", result));
-            }
-            if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("tranapi", int.Parse(this.ddlSupplier.SelectedValue)));
-            }
-            if (!string.IsNullOrEmpty(this.ddlbankName.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("payeebank", this.ddlbankName.SelectedValue));
-            }
-            if (!string.IsNullOrEmpty(this.txtAccount.Text.Trim()))
-            {
-                searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
-            }
-            if (!string.IsNullOrEmpty(this.txtpayeeName.Text.Trim()))
-            {
-                searchParams.Add(new SearchParam("payeename", this.txtpayeeName.Text.Trim()));
-            }
-            return SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -187,13 +122,12 @@
             if (!base.IsPostBack)
             {
                 this.ddlmode.Items.Add(new ListItem("--提现方式--", ""));
-                /*
-                foreach (int num in Enum.GetValues(typeof(SettledmodeEnum)))
+                foreach (int num in Enum.GetValues(typeof(SettledModeEnum)))
                 {
-                    string name = Enum.GetName(typeof(SettledmodeEnum), num);
+                    string name = Enum.GetName(typeof(SettledModeEnum), num);
                     this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
                 }
-                */
+                
                 DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
@@ -212,6 +146,15 @@
                     this.ddlStatusList.Items.Add(new ListItem(text, num.ToString()));
                 }
                 this.ddlStatusList.SelectedValue = 8.ToString();
+
+
+                DataTable dtBank = OriginalStudio.BLL.Withdraw.ChannelWithdraw.GetChannelWithdrawList().Tables[0];
+                this.ddlbankName.Items.Add(new ListItem("--收款银行--", ""));
+                foreach (DataRow row in dtBank.Rows)
+                    this.ddlbankName.Items.Add(new ListItem(row["bankName"].ToString(), row["bankCode"].ToString()));
+
+
+
                 this.BindData();
             }
         }
@@ -245,6 +188,77 @@
                 return WebBase.GetQueryStringInt32("userid", 0);
             }
         }
+
+        #region 导出
+
+
+        private DataSet GetData()
+        {
+            //导出使用
+            List<SearchParam> searchParams = new List<SearchParam>();
+            if (!string.IsNullOrEmpty(this.ddlStatusList.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("status", int.Parse(this.ddlStatusList.SelectedValue)));
+            }
+            int result = 0;
+            if (!(string.IsNullOrEmpty(this.txtItemInfoId.Text.Trim()) || !int.TryParse(this.txtItemInfoId.Text.Trim(), out result)))
+            {
+                searchParams.Add(new SearchParam("id", result));
+            }
+            if (!(string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()) || !int.TryParse(this.txtMerchantName.Text.Trim(), out result)))
+            {
+                searchParams.Add(new SearchParam("merchantname", result));
+            }
+            if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("tranapi", int.Parse(this.ddlSupplier.SelectedValue)));
+            }
+            if (!string.IsNullOrEmpty(this.ddlbankName.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("payeebank", this.ddlbankName.SelectedValue));
+            }
+            if (!string.IsNullOrEmpty(this.txtAccount.Text.Trim()))
+            {
+                searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
+            }
+            if (!string.IsNullOrEmpty(this.txtpayeeName.Text.Trim()))
+            {
+                searchParams.Add(new SearchParam("payeename", this.txtpayeeName.Text.Trim()));
+            }
+            return SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
+        }
+
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataSet data = this.GetData();
+                if (data != null)
+                {
+                    DataTable dataTable = data.Tables[1];
+                    dataTable.Columns.Add("sName", typeof(string));
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        row["sName"] = Enum.GetName(typeof(SettledStatusEnum), row["status"]);
+                        row["PayeeBank"] = SettledFactory.GetSettleBankName(row["PayeeBank"].ToString());
+                    }
+                    dataTable.AcceptChanges();
+                    dataTable.TableName = "Rpt";
+                    string file = base.Server.MapPath("~/common/template/xls/settle.xls");
+                    WorkbookDesigner designer = new WorkbookDesigner();
+                    designer.Workbook = new Workbook(file);
+                    designer.SetDataSource(dataTable);
+                    designer.Process();
+                    designer.Workbook.Save(base.Response, DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls", ContentDisposition.Attachment, designer.Workbook.SaveOptions);
+                }
+            }
+            catch (Exception exception)
+            {
+                base.AlertAndRedirect(exception.Message);
+            }
+        }
+        #endregion
     }
 }
 

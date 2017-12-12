@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.BLL.Tools;
     using OriginalStudio.BLL.User;
     using OriginalStudio.ETAPI;
@@ -17,11 +17,13 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using OriginalStudio.BLL.Supplier;
+    using OriginalStudio.Model.Withdraw;
 
     public class Pay : ManagePageBase
     {
         private SettledInfo _ItemInfo = null;
-        private UserInfo _userInfo = null;
+        private MchUserBaseInfo _userInfo = null;
+
         protected Label AccountLabel;
         protected Label AddTimeLabel;
         protected Label BankLabel;
@@ -31,7 +33,6 @@
         protected DropDownList ddlSupplier;
         protected Label errLabel;
         protected HtmlForm form1;
-        protected HtmlHead Head1;
         protected Label lblAccount;
         protected Label lblBank;
         protected Label lblPayeeaddress;
@@ -142,10 +143,11 @@
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlSupplier.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
+                    this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                     //mark:畅捷code:6001，这里只返回一个
                 }
-                if (((this.ItemInfoId > 0) && (this.ItemInfo != null)) && (this.userInfo != null))
+
+                if (((this.ItemInfoId > 0) && (this.ItemInfo != null)) && (this.UserInfo != null))
                 {
                     this.PayMoneyLabel.Text = this.ItemInfo.Amount.ToString("c2");
                     this.AddTimeLabel.Text = FormatConvertor.DateTimeToTimeString(this.ItemInfo.AddTime);
@@ -159,27 +161,27 @@
                     }
                     else
                     {
-                        TocashSchemeInfo modelByUser = OriginalStudio.BLL.Settled.TocashScheme.GetModelByUser(1, this.ItemInfo.UserID);
-                        decimal chargeleastofeach = modelByUser.chargerate * this.ItemInfo.Amount;
-                        if (chargeleastofeach < modelByUser.chargeleastofeach)
+                        WithdrawSchemeInfo model = this.UserInfo.WithdrawScheme;
+                        decimal chargeleastofeach = model.ChargeRate * this.ItemInfo.Amount;
+                        if (chargeleastofeach < model.SingleMinCharge)
                         {
-                            chargeleastofeach = modelByUser.chargeleastofeach;
+                            chargeleastofeach = model.SingleMinCharge;
                         }
-                        else if (chargeleastofeach > modelByUser.chargemostofeach)
+                        else if (chargeleastofeach > model.SingleMaxCharge)
                         {
-                            chargeleastofeach = modelByUser.chargemostofeach;
+                            chargeleastofeach = model.SingleMaxCharge;
                         }
                         this.ChargesBox.Text = chargeleastofeach.ToString("f2");
                     }
                     this.ddlSupplier.SelectedValue = this.ItemInfo.Suppid.ToString();
-                    this.UidLabel.Text = this.userInfo.ID.ToString();
-                    this.UserNameLabel.Text = this.userInfo.UserName;
-                    this.MoneyLabel.Text = this.userInfo.Balance.ToString("c2");
-                    this.PayeeNameLabel.Text = this.userInfo.PayeeName;
-                    this.PayeeaddressLabel.Text = this.userInfo.BankAddress;
-                    this.AccountLabel.Text = this.userInfo.Account;
-                    this.BankLabel.Text = this.userInfo.PayeeBank;
-                    this.UserStatusLabel.Text = Enum.GetName(typeof(UserStatusEnum), this.userInfo.Status);
+                    this.UidLabel.Text = this.UserInfo.UserID.ToString();
+                    this.UserNameLabel.Text = this.UserInfo.MerchantName;
+                    this.MoneyLabel.Text = this.UserInfo.MchUsersAmtInfo.Balance.ToString("c2");
+                    this.PayeeNameLabel.Text = this.ItemInfo.PayeeName;     //收款人
+                    this.PayeeaddressLabel.Text = this.ItemInfo.PayeeAddress;
+                    this.AccountLabel.Text = this.ItemInfo.Account;
+                    this.BankLabel.Text = this.ItemInfo.PayeeBank;
+                    this.UserStatusLabel.Text = Enum.GetName(typeof(UserStatusEnum), this.UserInfo.Status);
                     if (this.ItemInfo.Status !=  SettledStatusEnum.支付中)
                     {
                         this.TaxBox.Enabled = false;
@@ -252,13 +254,13 @@
             }
         }
 
-        public UserInfo userInfo
+        public MchUserBaseInfo UserInfo
         {
             get
             {
                 if ((this._userInfo == null) && (this.ItemInfo != null))
                 {
-                    this._userInfo = UserFactory.GetModel(this.ItemInfo.UserID);
+                    this._userInfo = MchUserFactory.GetUserBaseByUserID(this.ItemInfo.UserID);
                 }
                 return this._userInfo;
             }

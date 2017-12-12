@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebComponents.Web
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.BLL.User;
     using OriginalStudio.Model.Order;
     using OriginalStudio.Model.User;

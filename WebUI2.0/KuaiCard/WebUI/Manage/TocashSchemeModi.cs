@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
     using OriginalStudio.WebComponents.Web;
@@ -113,7 +113,7 @@
                 bool flag = false;
                 if (this.isUpdate)
                 {
-                    if (OriginalStudio.BLL.Settled.TocashScheme.Update(this.model))
+                    if (OriginalStudio.BLL.User.TocashScheme.Update(this.model))
                     {
                         flag = true;
                     }
@@ -121,7 +121,7 @@
                 else
                 {
                     this.model.type = 1;
-                    if (OriginalStudio.BLL.Settled.TocashScheme.Add(this.model) > 0)
+                    if (OriginalStudio.BLL.User.TocashScheme.Add(this.model) > 0)
                     {
                         flag = true;
                     }
@@ -215,7 +215,7 @@
                 {
                     if (this.isUpdate)
                     {
-                        this._ItemInfo = OriginalStudio.BLL.Settled.TocashScheme.GetModel(this.ItemInfoId);
+                        this._ItemInfo = OriginalStudio.BLL.User.TocashScheme.GetModel(this.ItemInfoId);
                     }
                     else
                     {

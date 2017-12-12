@@ -20,6 +20,9 @@
         protected string DefaultThemes = "";
 
         public string ADMIN_URI = ConfigHelper.GetConfig("runtimeSettings", "ADMIN_URI");
+        //平台名称
+        public string PlatformName = ConfigHelper.GetConfig("runtimeSettings", "PlatformName");
+
         public string username = string.Empty;
         public string loginip = string.Empty;
         public string logintime = string.Empty;

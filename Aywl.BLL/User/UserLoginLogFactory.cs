@@ -66,6 +66,14 @@
                             paramList.Add(parameter);
                             break;
 
+                        case "merchantname":
+                            builder.Append(" AND [merchantName] like @merchantName");
+                            parameter = new SqlParameter("@merchantName", SqlDbType.VarChar, 20);
+                            parameter.Value = SqlHelper.CleanString((string)param2.ParamValue, 100);
+                            paramList.Add(parameter);
+                            break;
+                            
+
                         case "starttime":
                             builder.Append(" AND [lastTime] > @starttime");
                             parameter = new SqlParameter("@starttime", SqlDbType.DateTime);
@@ -113,7 +121,7 @@
                 }
                 List<SqlParameter> paramList = new List<SqlParameter>();
                 string wheres = BuilderWhere(searchParams, paramList);
-                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + SqlHelper.GetPageSelectSQL("[id]\r\n      ,[type]\r\n      ,[userID]\r\n      ,[lastIP]\r\n      ,[address]\r\n      ,[remark]\r\n      ,[lastTime]\r\n      ,[sessionId]\r\n      ,[userName],[payeeName]", tables, wheres, orderby, key, pageSize, page, false);
+                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false);
                 return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
             }
             catch (Exception exception)

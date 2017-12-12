@@ -12,7 +12,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
     using OriginalStudio.Model.Settled;
-    using OriginalStudio.BLL.Settled;
+    using OriginalStudio.BLL.User;
 
     public class SettledSearch : ManagePageBase
     {

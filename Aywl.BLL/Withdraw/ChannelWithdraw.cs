@@ -8,12 +8,23 @@
     using System.Data;
     using System.Data.SqlClient;
     using OriginalStudio.DBAccess;
+    using System.Text;
 
     /// <summary>
     /// 通道结算
     /// </summary>
     public class ChannelWithdraw
     {
+        #region 新版本使用
+
+        public static DataSet GetChannelWithdrawList()
+        {
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_channelwithdraw_GetList", null);
+        }
+
+
+        #endregion
+
         private readonly OriginalStudio.DAL.Withdraw.channelwithdraw dal = new OriginalStudio.DAL.Withdraw.channelwithdraw();
 
         public int Add(OriginalStudio.Model.Withdraw.ChannelWithdraw model)

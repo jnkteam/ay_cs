@@ -41,7 +41,7 @@
                     dataTable.Columns.Add("sName", typeof(string));
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        row["sName"] = OriginalStudio.BLL.Settled.Distribution.GetStatusText(row["status"]);
+                        row["sName"] = OriginalStudio.BLL.User.Distribution.GetStatusText(row["status"]);
                     }
                     dataTable.AcceptChanges();
                     dataTable.TableName = "Rpt";
@@ -98,7 +98,7 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            return new OriginalStudio.BLL.Settled.Distribution().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            return new OriginalStudio.BLL.User.Distribution().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
         }
 
         private void LoadData()
@@ -135,7 +135,7 @@
                 searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
             }
             string orderby = string.Empty;
-            DataSet set = new OriginalStudio.BLL.Settled.Distribution().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            DataSet set = new OriginalStudio.BLL.User.Distribution().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.rptTrades.DataSource = set.Tables[1];
             this.rptTrades.DataBind();

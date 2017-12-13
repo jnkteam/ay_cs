@@ -572,7 +572,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport5.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport4.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Order\OrderReport4.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\transfers.cs">

@@ -173,6 +173,32 @@
                 return SysConfig.WebSiteTitleSuffix;
             }
         }
+
+        #region 新增
+
+        /// <summary>
+        /// 平台名称
+        /// </summary>
+        public string PlatformName
+        {
+            get
+            {
+                return Lib.Configuration.ConfigHelper.GetConfig("runtimeSettings", "PlatformName");
+            }
+        }
+
+        /// <summary>
+        /// 管理员地址
+        /// </summary>
+        public string ADMIN_URI
+        {
+            get
+            {
+                return Lib.Configuration.ConfigHelper.GetConfig("runtimeSettings", "ADMIN_URI");
+            }
+        }
+
+        #endregion
     }
 }
 

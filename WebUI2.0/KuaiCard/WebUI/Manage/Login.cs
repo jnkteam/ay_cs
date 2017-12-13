@@ -17,7 +17,7 @@
         protected HtmlHead Head1;
         protected HtmlInputPassword pas;
         protected HtmlInputText UserNameBox;
-        protected string ADMIN_URI = ConfigHelper.GetConfig("runtimeSettings", "ADMIN_URI");
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (XRequest.IsPost())

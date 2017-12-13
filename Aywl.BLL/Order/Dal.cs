@@ -19,12 +19,26 @@
         internal const string SQL_TABLE = "V_usersOrderIncome";
 
 
+        /// <summary>
+        /// 代理收益
+        /// </summary>
+        /// <param name="sdt"></param>
+        /// <param name="edt"></param>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="orderby"></param>
+        /// <returns></returns>
         public static DataSet AgentStat2(DateTime sdt, DateTime edt, int page, int pagesize, string orderby)
         {
             try
             {
                 string commandText = "\r\nselect count(0) as C\r\n\tfrom(\r\n\tselect agentid\r\n\tfrom v_order with(nolock)\r\n\twhere agentid > 0 and promAmt > 0 and processingtime >= @sdt and processingtime < @edt \r\n\tgroup by agentid) A\r\n\r\n\r\nselect D1.agentid,payAmt,promAmt,supplierAmt,realvalue,B.username,B.full_name\r\nfrom(\r\n\tselect agentid,payAmt,promAmt,supplierAmt,realvalue,ROW_NUMBER() OVER(ORDER BY D.agentid) AS P_ROW \r\n\tfrom(\r\n\tselect agentid,sum(payAmt) payAmt,sum(promAmt) as promAmt,sum(supplierAmt) as supplierAmt,sum(realvalue) as realvalue\r\n\tfrom v_order with(nolock)\r\n\twhere agentid > 0 and promAmt > 0 and processingtime >= @sdt and processingtime < @edt  \r\n\tgroup by agentid) D \r\n)D1  left join userbase B with(nolock)  on D1.agentid = B.id\r\nWHERE D1.P_ROW BETWEEN @page*@pagesize+1 AND @page*@pagesize+@pagesize\r\norder by " + orderby;
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@sdt", SqlDbType.DateTime, 8), new SqlParameter("@edt", SqlDbType.DateTime, 8), new SqlParameter("@page", SqlDbType.Int, 10), new SqlParameter("@pagesize", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@sdt", SqlDbType.DateTime, 8),
+                    new SqlParameter("@edt", SqlDbType.DateTime, 8),
+                    new SqlParameter("@page", SqlDbType.Int, 10),
+                    new SqlParameter("@pagesize", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = sdt;
                 commandParameters[1].Value = edt;
                 commandParameters[2].Value = page;

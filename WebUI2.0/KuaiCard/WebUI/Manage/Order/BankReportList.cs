@@ -32,7 +32,7 @@
         protected string TotalUserATM = "0.00";
         protected TextBox txtOrderId;
         protected TextBox txtSuppOrder;
-        protected TextBox txtuserid;
+        protected TextBox txtMerchantName;
         protected TextBox txtUserOrder;
 
         protected void btn_Search_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@
         {
             if (this.UserId > -1)
             {
-                this.txtuserid.Text = this.UserId.ToString();
+                this.txtMerchantName.Text = this.UserId.ToString();
             }
             if (this.Status > -1)
             {
@@ -183,9 +183,9 @@
                 {
                     searchParams.Add(new SearchParam("orderId_like", this.txtOrderId.Text));
                 }
-                if (!(string.IsNullOrEmpty(this.txtuserid.Text.Trim()) || !int.TryParse(this.txtuserid.Text.Trim(), out result)))
+                if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
                 {
-                    searchParams.Add(new SearchParam("userid", result));
+                    searchParams.Add(new SearchParam("MerchantName", this.txtMerchantName.Text.Trim()));
                 }
                 if ((!string.IsNullOrEmpty(this.ddlChannelType.SelectedValue) && int.TryParse(this.ddlChannelType.SelectedValue, out result)) && (result > 0))
                 {
@@ -218,33 +218,25 @@
                 }
                 string orderby = string.Empty;
 
-                DataSet set = new OrderBank().PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
-                this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
-                this.rptOrders.DataSource = set.Tables[1];
+                DataSet set = new OrderBank().AdminPageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex);
+                DataTable table = set.Tables[0];
+
+                this.rptOrders.DataSource = table;
                 this.rptOrders.DataBind();
+
+                this.Pager1.RecordCount = table.Rows.Count;
+
                 if (this.currPage > -1)
                 {
                     this.Pager1.CurrentPageIndex = this.currPage;
                 }
-                DataTable table = set.Tables[2];
+                
                 if (table.Rows.Count >= 0)
                 {
-                    if (table.Rows[0]["realvalue"] != DBNull.Value)
-                    {
-                        this.TotalTranATM = Convert.ToDecimal(table.Rows[0]["realvalue"]).ToString("f2");
-                    }
-                    if (table.Rows[0]["payAmt"] != DBNull.Value)
-                    {
-                        this.TotalUserATM = Convert.ToDecimal(table.Rows[0]["payAmt"]).ToString("f2");
-                    }
-                    if (table.Rows[0]["commission"] != DBNull.Value)
-                    {
-                        this.TotalCommission = Convert.ToDecimal(table.Rows[0]["commission"]).ToString("f2");
-                    }
-                    if (table.Rows[0]["profits"] != DBNull.Value)
-                    {
-                        this.TotalProfit = Convert.ToDecimal(table.Rows[0]["profits"]).ToString("f2");
-                    }
+                    this.TotalTranATM = Convert.ToDecimal(table.Compute("sum(realvalue)", "true").ToString()).ToString("f2");
+                    this.TotalUserATM = Convert.ToDecimal(table.Compute("sum(payAmt)", "true").ToString()).ToString("f2");
+                    this.TotalCommission = Convert.ToDecimal(table.Compute("sum(commission)", "true").ToString()).ToString("f2");
+                    this.TotalProfit = Convert.ToDecimal(table.Compute("sum(profits)", "true").ToString()).ToString("f2");
                 }
             }
             catch (Exception err)
@@ -275,7 +267,7 @@
         protected void rptOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string url = string.Concat(new object[] { 
-                "BankReportList.aspx?status=", this.ddlOrderStatus.SelectedValue, "&ctype=", this.ddlChannelType.SelectedValue, "&userid=", this.txtuserid.Text, "&ns=", this.ddlNotifyStatus.SelectedValue, "&stime=", this.StimeBox.Text, "&etime=", this.EtimeBox.Text, "&mid=", this.ddlmange.SelectedValue, "&orderid=", this.txtOrderId.Text, 
+                "BankReportList.aspx?status=", this.ddlOrderStatus.SelectedValue, "&ctype=", this.ddlChannelType.SelectedValue, "&userid=", this.txtMerchantName.Text, "&ns=", this.ddlNotifyStatus.SelectedValue, "&stime=", this.StimeBox.Text, "&etime=", this.EtimeBox.Text, "&mid=", this.ddlmange.SelectedValue, "&orderid=", this.txtOrderId.Text, 
                 "&userorder=", this.txtUserOrder.Text, "&supporder=", this.txtSuppOrder.Text, "&currpage=", this.Pager1.CurrentPageIndex
              });
             try

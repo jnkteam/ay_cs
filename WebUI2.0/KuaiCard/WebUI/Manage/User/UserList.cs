@@ -91,30 +91,30 @@
                 MchUserBaseInfo model = MchUserFactory.GetUserBaseByUserID(this.UserID);
                 if (this.cmd == "ok")
                 {
-                    changeList.Add(this.newUpdateLog("Status", model.Status.ToString(), "2", "审核"));
+                    //changeList.Add(this.newUpdateLog("Status", model.Status.ToString(), "2", "审核"));
                     model.Status = 2;
                 }
                 else if (this.cmd == "del")
                 {
-                    changeList.Add(this.newUpdateLog("Status", model.Status.ToString(), "4", "锁定"));
+                    //changeList.Add(this.newUpdateLog("Status", model.Status.ToString(), "4", "锁定"));
                     model.Status = 4;
                 }
                 else if (this.cmd == "pok")
                 {
-                    changeList.Add(this.newUpdateLog("UserType", ((int) model.UserType).ToString(), "2", "设为代理"));
-                    changeList.Add(this.newUpdateLog("UserLevel", ((int) model.UserLevel).ToString(), "1", "设为代理"));
+                    //changeList.Add(this.newUpdateLog("UserType", ((int) model.UserType).ToString(), "2", "设为代理"));
+                    //changeList.Add(this.newUpdateLog("UserLevel", ((int) model.UserLevel).ToString(), "1", "设为代理"));
                     model.UserType = UserTypeEnum.代理;
                     model.UserLevel = UserLevelEnum.普通代理;
                 }
                 else if (this.cmd == "pdel")
                 {
-                    changeList.Add(this.newUpdateLog("UserType", ((int) model.UserType).ToString(), "1", "取消代理"));
-                    changeList.Add(this.newUpdateLog("UserLevel", ((int) model.UserLevel).ToString(), "100", "取消代理"));
+                    //changeList.Add(this.newUpdateLog("UserType", ((int) model.UserType).ToString(), "1", "取消代理"));
+                    //changeList.Add(this.newUpdateLog("UserLevel", ((int) model.UserLevel).ToString(), "100", "取消代理"));
                     model.UserType = UserTypeEnum.商户;
                     model.UserLevel = UserLevelEnum.初级代理;
                 }
-                /* 此处在修改后  需要打开
-                if (MchUserBaseInfo.Update(model, changeList))
+                /* 此处在修改后  需要打开*/
+                if (MchUserFactory.Update(model))
                 {
                     base.AlertAndRedirect("操作成功");
                 }
@@ -122,7 +122,7 @@
                 {
                     base.AlertAndRedirect("操作失败");
                 }
-                */
+                
             }
         }
 
@@ -167,12 +167,6 @@
             {
                 searchParams.Add(new SearchParam("status", int.Parse(this.StatusList.SelectedValue)));
             }
-            /*
-            if (!string.IsNullOrEmpty(this.ddlisSpecialPayRate.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("special", int.Parse(this.ddlisSpecialPayRate.SelectedValue)));
-            }
-            */
             if (!string.IsNullOrEmpty(this.txtuserName.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("userName", this.txtuserName.Text.Trim()));
@@ -185,11 +179,17 @@
                     searchParams.Add(new SearchParam("id", result));
                 }
             }
+            /*
+            if (!string.IsNullOrEmpty(this.ddlisSpecialPayRate.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("special", int.Parse(this.ddlisSpecialPayRate.SelectedValue)));
+            }
+            */
             /*if (!string.IsNullOrEmpty(this.ddlpayrate.SelectedValue))
             {
                 searchParams.Add(new SearchParam("userlevel", int.Parse(this.ddlpayrate.SelectedValue)));
             }
-            */
+            
             if (!string.IsNullOrEmpty(this.txtQQ.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("qq", this.txtQQ.Text.Trim()));
@@ -206,7 +206,7 @@
             {
                 searchParams.Add(new SearchParam("ContactName", this.txtfullname.Text.Trim()));
             }
-            /*if (!string.IsNullOrEmpty(this.ddlSpecial.SelectedValue))
+            if (!string.IsNullOrEmpty(this.ddlSpecial.SelectedValue))
             {
                 searchParams.Add(new SearchParam("specialchannel", this.ddlSpecial.SelectedValue));
             }

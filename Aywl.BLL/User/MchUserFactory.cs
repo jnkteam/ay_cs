@@ -480,7 +480,7 @@
                             userinfo.UserID = (int)reader["userId"];
                             userinfo.UserType = (UserTypeEnum)Convert.ToInt32(reader["userType"]);
                             userinfo.IsEmail = reader["isEmailPass"].ToString() == "1";
-                            userloginMsgForUnCheck = "登录成功";
+                            userloginMsgForUnCheck = "OK";
                             HttpContext.Current.Session[USER_LOGIN_SESSIONID] = sessionID;
                             HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID] = userinfo.UserID;
                         }
@@ -729,14 +729,12 @@
                             paramList.Add(parameter);
                             continue;
                         }
-                        //case "proid":
-                        //{
-                        //    builder.Append(" AND Exists(select 0 from PromotionUser where PromotionUser.PID = @proid and PromotionUser.RegId=v_users.id)");
-                        //    parameter = new SqlParameter("@proid", SqlDbType.Int);
-                        //    parameter.Value = (int) param2.ParamValue;
-                        //    paramList.Add(parameter);
-                        //    continue;
-                        //}
+                        case "proid":
+                            builder.Append(" AND [AgentID] = @proid");
+                            parameter = new SqlParameter("@proid", SqlDbType.Int);
+                            parameter.Value = (int)param2.ParamValue;
+                            paramList.Add(parameter);
+                            continue;
                         case "manageid":
                         {
                             builder.Append(" AND [manageId] = @manageId");

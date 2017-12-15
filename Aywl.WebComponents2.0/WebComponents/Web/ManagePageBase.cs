@@ -88,23 +88,6 @@
 
         }
 
-        public static string GetViewStatusName(object isRealNamePass)
-        {
-            if (isRealNamePass == DBNull.Value)
-            {
-                return string.Empty;
-            }
-            if (Convert.ToInt32(isRealNamePass) == 3)
-            {
-                return "<font style=\"color: #F40;\">审核失败</font>";
-            }
-            if (Convert.ToInt32(isRealNamePass) == 2)
-            {
-                return "<font style=\"color: #2254F3;\">待审核</font>";
-            }
-            return ((Convert.ToInt32(isRealNamePass) == 1) ? "<font style=\"color: #F39C2D;\">审核成功</font>" : "<font style=\"color: #2254F3;\">无提交认证</font>");
-        }
-
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

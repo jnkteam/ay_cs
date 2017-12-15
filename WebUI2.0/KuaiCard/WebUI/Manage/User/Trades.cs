@@ -24,7 +24,7 @@
         protected Repeater rptTrades;
         protected HtmlInputHidden selectedUsers;
         protected TextBox StimeBox;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected string wzfmoney = string.Empty;
         protected string yzfmoney = string.Empty;
 
@@ -39,11 +39,9 @@
             if (base.currentManage.isSuperAdmin <= 0)
             {
             }
-            string s = this.txtuserId.Text.Trim();
-            int result = 0;
-            if (int.TryParse(s, out result))
+            if (!String.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", this.txtMerchantName.Text.Trim()));
             }
             DateTime minValue = DateTime.MinValue;
             if ((!string.IsNullOrEmpty(this.StimeBox.Text.Trim()) && DateTime.TryParse(this.StimeBox.Text.Trim(), out minValue)) && (minValue > DateTime.MinValue))
@@ -70,7 +68,6 @@
                 this.EtimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.EtimeBox.Attributes.Add("onFocus", "WdatePicker()");
-                this.LoadData();
             }
         }
 
@@ -86,14 +83,6 @@
 
         protected void rptUsersItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
-            {
-                string tradetype = DataBinder.Eval(e.Item.DataItem, "type").ToString();
-                Literal literal = (Literal) e.Item.FindControl("litbillType");
-
-                string str = Enum.GetName(typeof(OriginalStudio.Model.Trade.TradeTypeEnum), Lib.Utils.Common.StrToInt(tradetype, 0));
-                literal.Text = str;
-            }
         }
 
         private void setPower()

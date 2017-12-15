@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.Question
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.User;

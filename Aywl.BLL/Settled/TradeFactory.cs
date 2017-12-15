@@ -191,7 +191,9 @@
                 }
                 List<SqlParameter> paramList = new List<SqlParameter>();
                 string wheres = BuilderWhere(searchParams, paramList);
-                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + SqlHelper.GetPageSelectSQL("[id]\r\n      ,[userid]\r\n      ,[type]\r\n      ,[billType]\r\n      ,[billNo]\r\n      ,[tradeTime]\r\n      ,[Amt]\r\n      ,[Balance]\r\n      ,[Remark]\r\n      ,[username]", tables, wheres, orderby, key, pageSize, page, false) + "\r\nselect \r\n sum(case when [type] = 1 then Amt else 0 end) income\r\n,sum(case when [billType] = 2 then Amt else 0 end) agentincome\r\n,sum(case when [type] = 0 then 0-Amt else 0 end) expenditure from v_trade where " + wheres;
+                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" + 
+                    SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false) + 
+                                                            " \r\n select sum(case when [type] = 1 then Amt else 0 end) income ,sum(case when [billType] = 2 then Amt else 0 end) agentincome ,sum(case when [type] = 0 then 0-Amt else 0 end) expenditure from v_trade where " + wheres;
                 return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
             }
             catch (Exception exception)

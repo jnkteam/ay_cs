@@ -50,6 +50,7 @@
     <Compile Include="Email\EmailCheckType.cs" />
     <Compile Include="Enum\DistributionStatusEnum.cs" />
     <Compile Include="Enum\TradeTypeEnum.cs" />
+    <Compile Include="Enum\UserClassEnum.cs" />
     <Compile Include="FeedBack\feedbackInfo.cs" />
     <Compile Include="FeedBack\feedbackstatus.cs" />
     <Compile Include="FeedBack\feedbacktype.cs" />

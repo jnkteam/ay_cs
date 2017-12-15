@@ -24,10 +24,8 @@
         protected Repeater rptTrades;
         protected HtmlInputHidden selectedUsers;
         protected TextBox StimeBox;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected TextBox txtuserOrder;
-        protected string wzfmoney = string.Empty;
-        protected string yzfmoney = string.Empty;
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
@@ -40,11 +38,9 @@
             if (base.currentManage.isSuperAdmin <= 0)
             {
             }
-            string s = this.txtuserId.Text.Trim();
-            int result = 0;
-            if (int.TryParse(s, out result))
+            if (!String.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", this.txtMerchantName.Text.Trim()));
             }
             if (!string.IsNullOrEmpty(this.txtuserOrder.Text.Trim()))
             {
@@ -69,6 +65,7 @@
         protected void Page_Load(object sender, EventArgs e)
         {
             this.setPower();
+            this.btnDel.Visible = false;
             if (!base.IsPostBack)
             {
                 this.StimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -97,54 +94,6 @@
             {
                 base.Response.Write("Sorry,No authority!");
                 base.Response.End();
-            }
-        }
-
-        public string cmd
-        {
-            get
-            {
-                return WebBase.GetQueryStringString("cmd", "");
-            }
-        }
-
-        public string orderBy
-        {
-            get
-            {
-                return WebBase.GetQueryStringString("orderby", "balance");
-            }
-        }
-
-        public string orderByType
-        {
-            get
-            {
-                return WebBase.GetQueryStringString("type", "asc");
-            }
-        }
-
-        public int proid
-        {
-            get
-            {
-                return WebBase.GetQueryStringInt32("proid", 0);
-            }
-        }
-
-        public int UserID
-        {
-            get
-            {
-                return WebBase.GetQueryStringInt32("ID", 0);
-            }
-        }
-
-        public string UserStatus
-        {
-            get
-            {
-                return WebBase.GetQueryStringString("UserStatus", "");
             }
         }
     }

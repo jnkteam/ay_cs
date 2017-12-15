@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.News
 {
     using OriginalStudio.BLL;
     using OriginalStudio.Model;
@@ -11,7 +11,7 @@
     using OriginalStudio.Model.News;
     using OriginalStudio.BLL.News;
 
-    public class NewsEdit : ManagePageBase
+    public class NewsEdit1 : ManagePageBase
     {
         public NewsInfo _ItemInfo = null;
         protected CheckBox cb_bold;

@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.OrderStat
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Order;
@@ -10,7 +10,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
 
-    public class orderreport2 : ManagePageBase
+    public class OrderReport2 : ManagePageBase
     {
         protected Button btn_Search;
         protected DropDownList ddlSupplier;
@@ -18,10 +18,12 @@
         protected HtmlForm form1;
         protected Repeater rep_report;
         protected TextBox StimeBox;
-        protected string TotalPayAmtATM = "0.00";
-        protected string TotalProfit = "0.00";
         protected string TotalRealvalue = "0.00";
         protected string TotalSupplierAmt = "0.00";
+        protected string TotalPromAmt = "0.00";
+        protected string TotalPayAmtATM = "0.00";
+        protected string TotalProfit = "0.00";
+
 
         protected void btn_Search_Click(object sender, EventArgs e)
         {
@@ -35,25 +37,27 @@
             {
                 suppid = int.Parse(this.ddlSupplier.SelectedValue);
             }
-            DateTime minValue = DateTime.MinValue;
-            if (!(string.IsNullOrEmpty(this.StimeBox.Text.Trim()) || !DateTime.TryParse(this.StimeBox.Text.Trim(), out minValue)))
+            else
             {
+                suppid = 0;
             }
-            DateTime result = DateTime.MinValue;
-            if (!(string.IsNullOrEmpty(this.EtimeBox.Text.Trim()) || !DateTime.TryParse(this.EtimeBox.Text.Trim(), out result)))
+            DateTime dtbegin = Lib.Utils.Utils.StrToDateTime(this.StimeBox.Text.Trim());
+            DateTime dtend = Lib.Utils.Utils.StrToDateTime(this.EtimeBox.Text.Trim());
+
+            DataSet ds = OriginalStudio.BLL.Stat.OrderReport.统计通道商订单金额利润(suppid, dtbegin, dtend);
+
+            if (ds != null)
             {
-            }
-            DataTable table = Dal.Stat(suppid, minValue, result);
-            this.rep_report.DataSource = table;
-            this.rep_report.DataBind();
-            if (table != null)
-            {
+                DataTable dt = ds.Tables[0];
+                this.rep_report.DataSource = dt;
+                this.rep_report.DataBind();
                 try
                 {
-                    this.TotalRealvalue = Convert.ToDecimal(table.Compute("sum(realvalue)", "")).ToString("f2");
-                    this.TotalSupplierAmt = Convert.ToDecimal(table.Compute("sum(supplierAmt)", "")).ToString("f2");
-                    this.TotalPayAmtATM = Convert.ToDecimal(table.Compute("sum(payAmt)", "")).ToString("f2");
-                    this.TotalProfit = Convert.ToDecimal(table.Compute("sum(profits)", "")).ToString("f2");
+                    this.TotalRealvalue = Convert.ToDecimal(dt.Compute("sum(订单总额)", "")).ToString("f2");
+                    this.TotalSupplierAmt = Convert.ToDecimal(dt.Compute("sum(平台总额)", "")).ToString("f2");
+                    this.TotalPromAmt = Convert.ToDecimal(dt.Compute("sum(代理总额)", "")).ToString("f2");
+                    this.TotalPayAmtATM = Convert.ToDecimal(dt.Compute("sum(商户总额)", "")).ToString("f2");
+                    this.TotalProfit = Convert.ToDecimal(dt.Compute("sum(利润)", "")).ToString("f2");
                 }
                 catch
                 {
@@ -74,9 +78,9 @@
                 this.ddlSupplier.Items.Add(new ListItem("--请选择--", ""));
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlSupplier.Items.Add(new ListItem(row["name"].ToString(), row["code"].ToString()));
+                    this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                 }
-                this.LoadData();
+                //this.LoadData();
             }
         }
 

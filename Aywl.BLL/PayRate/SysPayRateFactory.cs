@@ -41,6 +41,11 @@
             {
                 return 0M;
             }
+            if (cacheUserBaseInfo.Status != 2)
+            {
+                //非审核通过账户,费率一律为0
+                return 0M;
+            }
 
             decimal tmp= 0;
 

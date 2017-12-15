@@ -15,6 +15,7 @@
     using System.Web.UI.WebControls;
     using OriginalStudio.BLL.Supplier;
     using OriginalStudio.BLL.PayRate;
+    using OriginalStudio.Model.User;
 
     public class UserChannel : BusinessPageBase
     {
@@ -183,8 +184,9 @@
             this.DoCmd();
             if (!base.IsPostBack)
             {
+                MchUserBaseInfo userInfo = MchUserFactory.GetUserBaseByUserID(this.UserID);
                 this.puser.Value = this.UserID.ToString();
-                this.lblInfo.Text = "当前用户ID：" + this.UserID.ToString();
+                this.lblInfo.Text = "商户号：" + userInfo.MerchantName.ToString();
                 this.LoadData();
             }
         }

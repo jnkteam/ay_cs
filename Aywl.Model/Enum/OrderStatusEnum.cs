@@ -7,6 +7,7 @@
     /// </summary>
     public enum OrderStatusEnum
     {   
+        不存在 = 0,
         处理中 = 1,
         已完成 = 2,
         失败 = 4,

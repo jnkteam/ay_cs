@@ -401,59 +401,6 @@
         public static string GetSettleBankName(string code)
         {
             string str = code;
-            switch (code)
-            {
-                case "0002":
-                    return "支付宝";
-
-                case "0003":
-                    return "财付通";
-
-                case "1002":
-                    return "工商银行";
-
-                case "1005":
-                    return "农业银行";
-
-                case "1003":
-                    return "建设银行";
-
-                case "1026":
-                    return "中国银行";
-
-                case "1001":
-                    return "招商银行";
-
-                case "1006":
-                    return "民生银行";
-
-                case "1020":
-                    return "交通银行";
-
-                case "1025":
-                    return "华夏银行";
-
-                case "1009":
-                    return "兴业银行";
-
-                case "1027":
-                    return "广发银行";
-
-                case "1004":
-                    return "浦发银行";
-
-                case "1022":
-                    return "光大银行";
-
-                case "1021":
-                    return "中信银行";
-
-                case "1010":
-                    return "平安银行";
-
-                case "1066":
-                    return "邮政储蓄银行";
-            }
             return str;
         }
 
@@ -603,6 +550,7 @@
                             }
                         case "settmode":
                             {
+                                //OriginalStudio.Lib.Logging.LogHelper.Write("param2.ParamValue:" + param2.ParamValue.ToString());
                                 builder.Append(" AND [settmode] = @settmode");
                                 SqlParameter parameter5 = new SqlParameter("@settmode", SqlDbType.TinyInt);
                                 parameter5.Value = (int)param2.ParamValue;

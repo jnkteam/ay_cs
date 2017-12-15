@@ -63,7 +63,7 @@
             if (this.isUpdate)
             {
                 MchUserBaseInfo userInfo = MchUserFactory.GetUserBaseByUserID(this.ItemInfoId);
-                this.labUserName.Text = userInfo.UserName.ToString(); 
+                this.labUserName.Text = userInfo.MerchantName.ToString() + "[" + userInfo.UserID.ToString() + "]";
                 DataSet set = SysChannelType.GetList(true);
                 DataTable table =  set.Tables[0];
                 table.Columns.Add("rateValue");

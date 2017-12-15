@@ -30,7 +30,7 @@
         protected HtmlInputHidden selectedUsers;
         protected TextBox txtbalance;
         protected TextBox txtPassWord;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected string wzfmoney = string.Empty;
         protected string yzfmoney = string.Empty;
         protected string TotalMoney = "";       //2017.2.13增加。目的是前台能看到总余额
@@ -58,7 +58,7 @@
                 }
                 else
                 {
-                    base.AlertAndRedirect("结算失败");
+                    base.AlertAndRedirect("结算失败", "SettledAudit.aspx");
                 }
             }
         }
@@ -160,12 +160,10 @@
             {
                 searchParams.Add(new SearchParam("proid", this.proid));
             }
-            string str = this.txtuserId.Text.Trim();
-            if (!string.IsNullOrEmpty(str))
+            string merchantname = this.txtMerchantName.Text.Trim();
+            if (!string.IsNullOrEmpty(merchantname))
             {
-                int num2 = 0;
-                int.TryParse(str, out num2);
-                searchParams.Add(new SearchParam("id", num2));
+                searchParams.Add(new SearchParam("merchantname", merchantname));
             }
             string orderby = this.orderBy + " " + this.orderByType;
             DataSet set = MchUserFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);

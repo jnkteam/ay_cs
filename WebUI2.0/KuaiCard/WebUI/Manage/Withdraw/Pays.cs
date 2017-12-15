@@ -62,6 +62,10 @@
             {
                 searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
             }
+            if (ddlmode.SelectedIndex > 0)
+            {
+                searchParams.Add(new SearchParam("settmode", ddlmode.SelectedValue));
+            }
             DataSet set = SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             DataTable table = set.Tables[1];

@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Output2\Aspose.Cells.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Data" />
     <Reference Include="System" />
@@ -70,19 +74,22 @@
     <Compile Include="KuaiCard\WebUI\Manage\Channel\Ygww.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\SuccessStat.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Sys\CleanUpData.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\ManageRolesMenu.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Manage\ManageRolesMenu.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\ManageRolesRules.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Manage\ManageRolesRules.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\ManageRolesEdit.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Manage\ManageRolesEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\ManageRoles.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Manage\ManageRoles.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Order\BankOrderPrint.cs">
@@ -121,13 +128,13 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\UserPayAccts.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport2.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\OrderReport2.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Settled\IncreaseAmts.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\NewsList.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\News\NewsList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\NewUser.cs">
@@ -140,9 +147,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Channel\mutisupp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\CodeMappingEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Channel\ChannelEdit.cs">
@@ -318,7 +322,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\Order\BankReportList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\NewsEdit.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\News\NewsEdit1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\News\NewsEdit.cs">
@@ -327,7 +331,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\ManageLoginLog.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\User\UserEdit.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserEditdel.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Sys\DataBackup.cs">
@@ -360,22 +364,16 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\UserEdits.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\PayRate.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Tools\Supplier1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Supplier\SupplierList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\OrderReport.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\OrderReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\UnFreeze.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\CodeMappingList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Channel\ChannelList.cs">
@@ -427,7 +425,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\UserAdd.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport6.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\orderreport6.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\Trades.cs">
@@ -464,7 +462,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\Withdraw\Reissue.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\PayingByApi.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Withdraw\PayingByApi.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Withdraw\Pay.cs">
@@ -479,7 +477,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\Top.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\usersOrderIncomes.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\UsersOrderIncomes.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\wxkmadmin_Md5.cs">
@@ -495,9 +493,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\EmailTest.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\emailconfig.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\User\validate\frame.cs">
@@ -519,13 +514,13 @@
     <Compile Include="KuaiCard\WebUI\business\Order\BankReportList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\QuestionEdit.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Question\QuestionEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\TransferschemeModi.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Manage.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Manage\Manage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebMasterPage.cs">
@@ -569,10 +564,10 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\PayRateEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport5.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\orderreport5.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Order\OrderReport4.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\OrderReport4.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\transfers.cs">
@@ -590,7 +585,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\Freeze.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\ManageEdit.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Manage\ManageEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\Sys\CahceManage.cs">
@@ -725,7 +720,7 @@
     <Compile Include="KuaiCard\WebUI\Manage\User\SendMsg.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KuaiCard\WebUI\Manage\Questions.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\Question\Questions.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ConsoleDll\Console\DataBackup.cs" />
@@ -859,7 +854,7 @@
     <Compile Include="KuaiCard\WebUI\User\Service\realname.cs" />
     <Compile Include="KuaiCard\WebUI\merchant\ajax\replenish.cs" />
     <Compile Include="KuaiCard\WebUI\merchant\ajax\getdaxie.cs" />
-    <Compile Include="KuaiCard\WebUI\Manage\Order\orderreport7.cs">
+    <Compile Include="KuaiCard\WebUI\Manage\OrderStat\OrderReport7.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\ChangePwd.cs">

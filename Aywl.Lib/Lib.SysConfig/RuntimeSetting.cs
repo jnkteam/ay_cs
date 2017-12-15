@@ -178,7 +178,6 @@
             }
         }
 
-
         public static string ManagePagePath
         {
             get
@@ -192,11 +191,26 @@
             }
         }
 
-        #endregion
+        public static string GateWayServer
+        { 
+            get
+            {
+                string config = ConfigHelper.GetConfig(SettingGroup, "GateWay");
+                if (config == string.Empty)
+                {
+                    return "";
+                }
+                if (config.Substring(config.Length - 1) != "/")
+                    return config + "/";
 
-        #region 短信配置
+                return config;
+            }
+        }
+    #endregion
 
-        public static string HostName
+    #region 短信配置
+
+    public static string HostName
         {
             get
             {

@@ -175,6 +175,10 @@
             {
                 searchParams.Add(new SearchParam("account", this.txtAccount.Text.Trim()));
             }
+            if (ddlmode.SelectedIndex>0)
+            {
+                searchParams.Add(new SearchParam("settmode", ddlmode.SelectedValue));
+            }
             return SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
         }
 

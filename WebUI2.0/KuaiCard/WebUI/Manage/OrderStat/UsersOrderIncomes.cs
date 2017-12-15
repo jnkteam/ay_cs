@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.OrderStat
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Order;
@@ -12,7 +12,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
 
-    public class usersOrderIncomes : ManagePageBase
+    public class UsersOrderIncomes : ManagePageBase
     {
         protected Button btn_Search;
         protected DropDownList ddlChannelType;
@@ -21,7 +21,7 @@
         protected Repeater gv_data;
         protected AspNetPager Pager1;
         protected TextBox StimeBox;
-        protected TextBox txtuserid;
+        protected TextBox txtMerchantName;
         protected TextBox txtvaluefrom;
         protected TextBox txtvalueto;
 
@@ -33,24 +33,20 @@
         private void LoadData()
         {
             List<SearchParam> searchParams = new List<SearchParam>();
-            int result = 0;
-            if (!(string.IsNullOrEmpty(this.txtuserid.Text.Trim()) || !int.TryParse(this.txtuserid.Text.Trim(), out result)))
+            if (!String.IsNullOrEmpty(txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", txtMerchantName.Text.Trim()));
             }
-            if ((!string.IsNullOrEmpty(this.ddlChannelType.SelectedValue) && int.TryParse(this.ddlChannelType.SelectedValue, out result)) && (result > 0))
+            if (!string.IsNullOrEmpty(this.ddlChannelType.SelectedValue))
             {
-                searchParams.Add(new SearchParam("typeid", result));
+                searchParams.Add(new SearchParam("typeid", this.ddlChannelType.SelectedValue));
             }
-            DateTime minValue = DateTime.MinValue;
-            if ((!string.IsNullOrEmpty(this.StimeBox.Text.Trim()) && DateTime.TryParse(this.StimeBox.Text.Trim(), out minValue)) && (minValue > DateTime.MinValue))
-            {
-                searchParams.Add(new SearchParam("stime", minValue.ToString("yyyy-MM-dd")));
-            }
-            if ((!string.IsNullOrEmpty(this.EtimeBox.Text.Trim()) && DateTime.TryParse(this.EtimeBox.Text.Trim(), out minValue)) && (minValue > DateTime.MinValue))
-            {
-                searchParams.Add(new SearchParam("etime", minValue.ToString("yyyy-MM-dd")));
-            }
+            DateTime dtbegin = Lib.Utils.Utils.StrToDateTime(this.StimeBox.Text.Trim());
+            searchParams.Add(new SearchParam("stime", dtbegin.ToString("yyyy-MM-dd")));
+
+            DateTime dtend = Lib.Utils.Utils.StrToDateTime(this.EtimeBox.Text.Trim());
+            searchParams.Add(new SearchParam("etime", dtend.ToString("yyyy-MM-dd")));
+
             decimal num2 = 0M;
             if (!(string.IsNullOrEmpty(this.txtvaluefrom.Text.Trim()) || !decimal.TryParse(this.txtvaluefrom.Text.Trim(), out num2)))
             {
@@ -60,9 +56,8 @@
             {
                 searchParams.Add(new SearchParam("fvalueto", num2));
             }
-            string orderby = string.Empty;
-            OrderBank bank = new OrderBank();
-            DataSet set = Dal.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
+            string orderby = " OrderDate asc, UserID asc";
+            DataSet set = OriginalStudio.BLL.Stat.OrderReport.统计商户收益统计(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
             this.gv_data.DataSource = set.Tables[1];
             this.gv_data.DataBind();
@@ -77,6 +72,14 @@
                 this.EtimeBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.EtimeBox.Attributes.Add("onFocus", "WdatePicker()");
+
+                DataTable dt = OriginalStudio.BLL.Channel.SysChannelType.GetCacheList();
+                this.ddlChannelType.Items.Add(new ListItem("--请选择--", ""));
+                foreach (DataRow row in dt.Rows)
+                {
+                    this.ddlChannelType.Items.Add(new ListItem(row["TypeName"].ToString(), row["TypeID"].ToString()));
+                }
+
             }
         }
 

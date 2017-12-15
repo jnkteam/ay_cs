@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.OrderStat
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Order;
@@ -9,13 +9,17 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
 
-    public class orderreport7 : ManagePageBase
+    public class SuccessStat : ManagePageBase
     {
         protected Button btn_Search;
         protected TextBox EtimeBox;
         protected HtmlForm form1;
         protected Repeater rep_report;
         protected TextBox StimeBox;
+        protected string TotalRealvalue = "0.00";
+        protected string TotalSupplierAmt = "0.00";
+        protected string TotalPromAmt = "0.00";
+        protected string TotalPayAmtATM = "0.00";
         protected string TotalProfit = "0.00";
 
         protected void btn_Search_Click(object sender, EventArgs e)
@@ -25,27 +29,17 @@
 
         private void LoadData()
         {
-            DateTime minValue = DateTime.MinValue;
-            if (!(string.IsNullOrEmpty(this.StimeBox.Text.Trim()) || !DateTime.TryParse(this.StimeBox.Text.Trim(), out minValue)))
+            DateTime dtbegin = Lib.Utils.Utils.StrToDateTime(this.StimeBox.Text.Trim());
+            DateTime dtend = Lib.Utils.Utils.StrToDateTime(this.EtimeBox.Text.Trim());
+
+            DataSet ds = OriginalStudio.BLL.Stat.OrderReport.统计通道商成功率(dtbegin, dtend);
+
+            if (ds != null)
             {
+                DataTable dt = ds.Tables[0];
+                this.rep_report.DataSource = dt;
+                this.rep_report.DataBind();
             }
-            DateTime result = DateTime.MinValue;
-            if (!(string.IsNullOrEmpty(this.EtimeBox.Text.Trim()) || !DateTime.TryParse(this.EtimeBox.Text.Trim(), out result)))
-            {
-            }
-            DataSet set = Dal.BusinessStat7(minValue, result.AddDays(1.0));
-            if (set != null)
-            {
-                try
-                {
-                    this.TotalProfit = Convert.ToDecimal(set.Tables[0].Compute("sum(amt)", "")).ToString("f2");
-                }
-                catch
-                {
-                }
-            }
-            this.rep_report.DataSource = set;
-            this.rep_report.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -53,11 +47,10 @@
             this.setPower();
             if (!base.IsPostBack)
             {
-                this.StimeBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
-                this.EtimeBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                this.StimeBox.Text = DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd hh:mm:ss");
+                this.EtimeBox.Text = DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd hh:mm:ss");
                 this.StimeBox.Attributes.Add("onFocus", "WdatePicker()");
                 this.EtimeBox.Attributes.Add("onFocus", "WdatePicker()");
-                this.LoadData();
             }
         }
 

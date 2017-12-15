@@ -17,7 +17,6 @@
         public SysChannelInfo _ItemInfo = null;
         public SysChannelTypeInfo _typeInfo = null;
         protected Button btnSave;
-        protected DropDownList ddlSupp;
         protected DropDownList ddlType;
         protected DropDownList ddlTypeSupp;
         protected HtmlForm form1;
@@ -96,7 +95,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.setPower();
+            this.setPower();
             //ManageFactory.CheckSecondPwd();
             if (!base.IsPostBack)
             {
@@ -104,7 +103,7 @@
                 DataTable table = SysChannelType.GetList(null).Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
-                    this.ddlType.Items.Add(new ListItem(row["typename"].ToString(), row["typeId"].ToString()));
+                    this.ddlType.Items.Add(new ListItem(row["TypeName"].ToString(), row["typeId"].ToString()));
                 }
                 DataTable table2 = SysSupplierFactory.GetList(string.Empty).Tables[0];
                 this.ddlTypeSupp.Items.Add(new ListItem("--请选择--", ""));
@@ -128,24 +127,19 @@
 
         private void ShowInfo()
         {
-            if (this.isUpdate && (this.model != null))
+            if (this.isUpdate && (this.model != null) && (this.model.ID > 0))
             {
                 this.txtcode.Text = this.model.ChannelCode;
                 this.ddlType.SelectedValue = this.model.ChannelTypeId.ToString();
                 this.txtmodeName.Text = this.model.ChannelName;
-                
-                //this.rblTypeOpen.SelectedValue = ((int) this.typeInfo.IsOpen).ToString();
+
                 this.txtsort.Text = this.model.ListSort.ToString();
                 this.txtenmodeName.Text = this.model.ChannelEnName;
-                this.ddlTypeSupp.SelectedValue = this.typeInfo.SupplierCode.ToString();
                 if (this.model.SupplierCode>0)
-                {
-                    this.ddlSupp.SelectedValue = this.model.SupplierCode.ToString();
-                }
+                    this.ddlTypeSupp.SelectedValue = this.model.SupplierCode.ToString();
+
                 if (this.model.IsOpen)
-                {
                     this.rblOpen.SelectedValue = this.model.IsOpen ? "1" : "0" ;
-                }
             }
             //this.ddlTypeSupp.Enabled = false;
             //this.rblTypeOpen.Enabled = false;

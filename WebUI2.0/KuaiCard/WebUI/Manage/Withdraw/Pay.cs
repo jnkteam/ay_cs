@@ -18,6 +18,8 @@
     using System.Web.UI.WebControls;
     using OriginalStudio.BLL.Supplier;
     using OriginalStudio.Model.Withdraw;
+    using System.Collections.Generic;
+    using System.Text;
 
     public class Pay : ManagePageBase
     {
@@ -77,18 +79,18 @@
         protected void btnSure_Click(object sender, EventArgs e)
         {
             string msg = this.DoPay();
-            base.AlertAndRedirect(msg, "Pays.aspx");
+            base.AlertAndRedirect(msg);
         }
 
         private string DoPay()
         {
             try
             {
-                decimal num = decimal.Parse(this.TaxBox.Text.Trim());
-                decimal num2 = decimal.Parse(this.ChargesBox.Text.Trim());
+                decimal tax = decimal.Parse(this.TaxBox.Text.Trim());
+                decimal charges = decimal.Parse(this.ChargesBox.Text.Trim());
                 this.ItemInfo.PayTime = DateTime.Now;
-                this.ItemInfo.Tax = num;
-                this.ItemInfo.Charges = num2;
+                this.ItemInfo.Tax = tax;
+                this.ItemInfo.Charges = charges;
                 this.ItemInfo.Status =  SettledStatusEnum.已支付;
                 this.ItemInfo.AppType = AppTypeEnum.t0;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
@@ -97,7 +99,37 @@
                     this.ItemInfo.Suppid = int.Parse(this.ddlSupplier.SelectedValue);
                 }
 
+                //新方式提交代付。组织参数提交
+                //********************************************************************//
+                SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
+                waitSign.Add("orderid", this.ItemInfo.ID.ToString());
+                waitSign.Add("tax", this.ItemInfo.Tax.ToString());
+                waitSign.Add("charges", this.ItemInfo.Charges.ToString());
+                waitSign.Add("suppid", this.ItemInfo.Suppid.ToString());
+                string InterfaceKey = OriginalStudio.Lib.SysConfig.RuntimeSetting.GetKeyValue("InterfaceKey", "");
+                string sign = OriginalStudio.Lib.Security.Cryptography.SignSortedDictionary(waitSign, InterfaceKey).ToLower();
+                waitSign.Add("sign", sign);
+
+                string tmpPostParm = "";
+                foreach (var key in waitSign.Keys)
+                {
+                    tmpPostParm += key + "=" + waitSign[key] + "&";
+                }
+                tmpPostParm = tmpPostParm.Substring(0, tmpPostParm.Length - 1);
+                string gateSrv = OriginalStudio.Lib.SysConfig.RuntimeSetting.GateWayServer;
+                if (gateSrv == "")
+                    return "支付地址为空。";
+                string payUrl = gateSrv + "/AdminDistribution.ashx";
+
+                payUrl = payUrl + "?" + tmpPostParm;
+                //Lib.Logging.LogHelper.Write("请求支付地址:" + payUrl);
+                string invokeResult = Lib.Web.WebClientHelper.GetString(payUrl, "", "get", Encoding.UTF8, 10000);
+                return invokeResult;
+                //********************************************************************//
+
+                /*
                 //Step1：先记录
+                
                 switch (SettledFactory.Pay(this.ItemInfo))
                 {
                     case 0:
@@ -124,7 +156,7 @@
 
                     case 99:
                         return "未知错误";
-                }
+                }*/
                 return "err";
             }
             catch (Exception exception)

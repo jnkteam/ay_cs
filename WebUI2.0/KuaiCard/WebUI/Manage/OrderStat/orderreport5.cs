@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage.Order
+﻿namespace OriginalStudio.WebUI.Manage.OrderStat
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Order;

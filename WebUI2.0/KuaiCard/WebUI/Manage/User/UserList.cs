@@ -28,6 +28,7 @@
         protected DropDownList ddlisSpecialPayRate;
         protected DropDownList ddlpayrate;
         protected DropDownList ddlSpecial;
+        protected DropDownList ddlUserType;
         protected HtmlForm form1;
         protected HtmlHead Head1;
         protected AspNetPager Pager1;
@@ -39,7 +40,7 @@
         protected TextBox txtMail;
         protected TextBox txtQQ;
         protected TextBox txtTel;
-        protected TextBox txtuserId;
+        protected TextBox txtMerchantName;
         protected TextBox txtuserName;
         protected string wzfmoney = string.Empty;
         protected string yzfmoney = string.Empty;
@@ -116,11 +117,11 @@
                 /* 此处在修改后  需要打开*/
                 if (MchUserFactory.Update(model))
                 {
-                    base.AlertAndRedirect("操作成功");
+                    base.AlertAndRedirect("操作成功", "UserList.aspx");
                 }
                 else
                 {
-                    base.AlertAndRedirect("操作失败");
+                    base.AlertAndRedirect("操作失败", "UserList.aspx");
                 }
                 
             }
@@ -141,7 +142,7 @@
 
         public string isSpecialChannel(object userid)
         {
-            if (ChannelTypeUsers.Exists(Convert.ToInt32(userid)) == 1)
+            if (MchUsersChannelTypeFactory.Exists(Convert.ToInt32(userid)) == 1)
             {
                 return "(独)";
             }
@@ -167,19 +168,18 @@
             {
                 searchParams.Add(new SearchParam("status", int.Parse(this.StatusList.SelectedValue)));
             }
+            if (!string.IsNullOrEmpty(this.ddlUserType.SelectedValue))
+            {
+                searchParams.Add(new SearchParam("usertype", int.Parse(this.ddlUserType.SelectedValue)));
+            }
             if (!string.IsNullOrEmpty(this.txtuserName.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("userName", this.txtuserName.Text.Trim()));
             }
-            if (!string.IsNullOrEmpty(this.txtuserId.Text.Trim()))
+            if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                int result = 0;
-                if (int.TryParse(this.txtuserId.Text.Trim(), out result))
-                {
-                    searchParams.Add(new SearchParam("id", result));
-                }
-            }
-            /*
+                searchParams.Add(new SearchParam("merchantname", txtMerchantName.Text.Trim()));
+            }            /*
             if (!string.IsNullOrEmpty(this.ddlisSpecialPayRate.SelectedValue))
             {
                 searchParams.Add(new SearchParam("special", int.Parse(this.ddlisSpecialPayRate.SelectedValue)));
@@ -284,46 +284,39 @@
             }
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
             {
-                string s = DataBinder.Eval(e.Item.DataItem, "userType").ToString();
-                string str3 = DataBinder.Eval(e.Item.DataItem, "status").ToString();
-                //string str4 = DataBinder.Eval(e.Item.DataItem, "UserLevel").ToString();
-                //string str5 = DataBinder.Eval(e.Item.DataItem, "settles").ToString();
-                string str6 = DataBinder.Eval(e.Item.DataItem, "manageId").ToString();
-                Label label = (Label) e.Item.FindControl("lblUserType");
-                label.Text = Enum.GetName(typeof(UserTypeEnum), int.Parse(s));
-                Label label2 = (Label) e.Item.FindControl("lblUserStat");
-                label2.Text = Enum.GetName(typeof(UserStatusEnum), int.Parse(str3));
-                Label label3 = (Label) e.Item.FindControl("lblUserLevel");
-                //label3.Text = str4;
+                string manageId = DataBinder.Eval(e.Item.DataItem, "manageId").ToString();
+
+                string status = DataBinder.Eval(e.Item.DataItem, "status").ToString();
+
                 Label label4 = (Label) e.Item.FindControl("lblUserSettle");
                 //label4.Text = "T+" + str5;
                 string str7 = DataBinder.Eval(e.Item.DataItem, "userid").ToString();
-                string relname = string.Empty;
-                string str9 = str3;
-                if (str9 != null)
+                string agcmd = string.Empty;
+                if (status != null)
                 {
-                    if (!(str9 == "1"))
+                    if (!(status == "1"))
                     {
-                        if (str9 == "2")
+                        if (status == "2")
                         {
-                            relname = string.Format("<a onclick=\"return confirm('你确定要锁定该用户吗？')\" href=\"?cmd=del&ID={0}\" style=\"color:red;\">锁定</a>", str7);
+                            agcmd = string.Format("<a onclick=\"return confirm('你确定要锁定该用户吗？')\" href=\"?cmd=del&ID={0}\" style=\"color:red;\">锁定</a>", str7);
                         }
-                        else if (str9 == "4")
+                        else if (status == "4")
                         {
-                            relname = string.Format("<a onclick=\"return confirm('你确定要恢复该用户吗？')\" href=\"?cmd=ok&ID={0}\">恢复</a>", str7);
+                            agcmd = string.Format("<a onclick=\"return confirm('你确定要恢复该用户吗？')\" href=\"?cmd=ok&ID={0}\">恢复</a>", str7);
                         }
                     }
                     else
                     {
-                        relname = string.Format("<a onclick=\"return confirm('你确定要通过该用户吗？')\" href=\"?cmd=ok&ID={0}\" style=\"color:Green;\">通过</a> <a onclick=\"return confirm('你确定要锁定该用户吗？')\" href=\"?cmd=del&ID={0}\" style=\"color:red;\">锁定</a>", str7);
+                        agcmd = string.Format("<a onclick=\"return confirm('你确定要通过该用户吗？')\" href=\"?cmd=ok&ID={0}\" style=\"color:Green;\">通过</a> <a onclick=\"return confirm('你确定要锁定该用户吗？')\" href=\"?cmd=del&ID={0}\" style=\"color:red;\">锁定</a>", str7);
                     }
                 }
-                //Label label5 = (Label) e.Item.FindControl("labcmd");
-                //label5.Text = relname;
-                relname = string.Empty;
-                if (!string.IsNullOrEmpty(str6))
+                Label label6 = (Label)e.Item.FindControl("labagcmd");
+                label6.Text = agcmd;
+
+                string relname = string.Empty;
+                if (!string.IsNullOrEmpty(manageId))
                 {
-                    Manage model = ManageFactory.GetModel(int.Parse(str6));
+                    Manage model = ManageFactory.GetModel(int.Parse(manageId));
                     if (model != null)
                     {
                         relname = model.relname;

@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.WebUI.Manage
+﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using Aspose.Cells;
     using OriginalStudio.BLL;
@@ -29,7 +29,7 @@
         protected TextBox txtAccount;
         protected TextBox txtItemInfoId;
         protected TextBox txtpayeeName;
-        protected TextBox txtUserId;
+        protected TextBox txtMerchantName;
 
         private void BindData()
         {
@@ -40,9 +40,9 @@
             {
                 searchParams.Add(new SearchParam("id", result));
             }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
+            if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", txtMerchantName.Text.Trim()));
             }
             if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
             {
@@ -59,6 +59,10 @@
             if (!string.IsNullOrEmpty(this.txtpayeeName.Text.Trim()))
             {
                 searchParams.Add(new SearchParam("payeename", this.txtpayeeName.Text.Trim()));
+            }
+            if (ddlmode.SelectedIndex > 0)
+            {
+                searchParams.Add(new SearchParam("settmode", ddlmode.SelectedValue.ToString()));
             }
             DataSet set = SettledFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, string.Empty);
             this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
@@ -111,9 +115,9 @@
             {
                 searchParams.Add(new SearchParam("id", result));
             }
-            if (!(string.IsNullOrEmpty(this.txtUserId.Text.Trim()) || !int.TryParse(this.txtUserId.Text.Trim(), out result)))
+            if (!string.IsNullOrEmpty(this.txtMerchantName.Text.Trim()))
             {
-                searchParams.Add(new SearchParam("userid", result));
+                searchParams.Add(new SearchParam("merchantname", txtMerchantName.Text.Trim()));
             }
             if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
             {
@@ -140,13 +144,13 @@
             if (!base.IsPostBack)
             {
                 this.ddlmode.Items.Add(new ListItem("--提现方式--", ""));
-                /*
-                foreach (int num in Enum.GetValues(typeof(SettledmodeEnum)))
+                /**/
+                foreach (int num in Enum.GetValues(typeof(SettledModeEnum)))
                 {
-                    string name = Enum.GetName(typeof(SettledmodeEnum), num);
+                    string name = Enum.GetName(typeof(SettledModeEnum), num);
                     this.ddlmode.Items.Add(new ListItem(name, num.ToString()));
                 }
-                */
+                
                 DataTable table = SysSupplierFactory.GetList("isdistribution=1").Tables[0];
                 this.ddlSupplier.Items.Add(new ListItem("--付款接口--", ""));
                 this.ddlSupplier.Items.Add(new ListItem("不走接口", "0"));
@@ -154,6 +158,13 @@
                 {
                     this.ddlSupplier.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
                 }
+
+                //--收款银行--
+                DataTable dtBank = OriginalStudio.BLL.Withdraw.ChannelWithdraw.GetChannelWithdrawList().Tables[0];
+                this.ddlbankName.Items.Add(new ListItem("--收款银行--", ""));
+                foreach (DataRow row in dtBank.Rows)
+                    this.ddlbankName.Items.Add(new ListItem(row["bankName"].ToString(), row["bankCode"].ToString()));
+
                 this.BindData();
             }
         }

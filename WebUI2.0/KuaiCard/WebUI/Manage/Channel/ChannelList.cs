@@ -91,7 +91,7 @@
         protected void Page_Load(object sender, EventArgs e)
         {
             //ManageFactory.CheckSecondPwd();
-            //this.setPower();
+            this.setPower();
             if (!base.IsPostBack)
             {
                 this.ddlType.Items.Add(new ListItem("---全部类型---", ""));

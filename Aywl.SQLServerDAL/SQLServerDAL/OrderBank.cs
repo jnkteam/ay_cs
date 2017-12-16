@@ -545,7 +545,7 @@
                 new SqlParameter("@userid", SqlDbType.Int, 10), 
                 new SqlParameter("@channeltypeId", SqlDbType.Int), 
                 new SqlParameter("@channelcode", SqlDbType.VarChar, 10), 
-                new SqlParameter("@userorder", SqlDbType.VarChar, 30), 
+                new SqlParameter("@userorder", SqlDbType.VarChar, 50), 
                 new SqlParameter("@refervalue", SqlDbType.Decimal, 9), 
                 new SqlParameter("@notifyurl", SqlDbType.VarChar, 500), 
                 new SqlParameter("@returnurl", SqlDbType.VarChar, 500), 

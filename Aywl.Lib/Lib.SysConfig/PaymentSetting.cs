@@ -54,6 +54,15 @@
             }
         }
 
+        public static string ProductFactory
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "prod_factory");
+            }
+        }
+        
+
         public static string ProductEngSubject
         {
             get

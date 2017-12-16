@@ -380,7 +380,7 @@
         {
             int num = defaultvalue;
             MchUserChannelType cacheModel = MchUsersChannelTypeFactory.GetCacheModel(userId, typeId);
-            if ((cacheModel != null) && cacheModel.SupplierCode > 0)
+            if ((cacheModel != null) && cacheModel.UserIsOpen) //cacheModel.userIsOpen
             {
                 num = cacheModel.UserIsOpen ? 1 : 0;
             }

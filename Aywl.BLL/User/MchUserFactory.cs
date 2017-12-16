@@ -447,14 +447,14 @@
             string userloginMsgForUnCheck = string.Empty;
             try
             {
-                if (((userinfo == null) || string.IsNullOrEmpty(userinfo.UserName)) || string.IsNullOrEmpty(userinfo.UserPwd))
+                if (((userinfo == null) || string.IsNullOrEmpty(userinfo.MerchantName)) || string.IsNullOrEmpty(userinfo.UserPwd))
                 {
                     return "请输入账号密码";
                 }
                 userloginMsgForUnCheck = "用户名或者密码错误,请重新输入!";
                 string sessionID = Guid.NewGuid().ToString("b");
                 SqlParameter[] commandParameters = new SqlParameter[] {
-                    DataBase.MakeInParam("@username", SqlDbType.VarChar, 50, userinfo.UserName),
+                    DataBase.MakeInParam("@merchantname", SqlDbType.VarChar, 50, userinfo.MerchantName),
                     DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, userinfo.UserPwd),
                     DataBase.MakeInParam("@loginip", SqlDbType.VarChar, 50, userinfo.LastLoginIP),
                     DataBase.MakeInParam("@logintime", SqlDbType.DateTime, 8, DateTime.Now),
@@ -473,28 +473,28 @@
                         userinfo.Status = (int)reader["status"];
                         if (userinfo.Status == 1)
                         {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForUnCheck", "登录失败！");
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForUnCheck", "商户状态无效！");
                         }
                         else if (userinfo.Status == 2)
                         {
                             userinfo.UserID = (int)reader["userId"];
                             userinfo.UserType = (UserTypeEnum)Convert.ToInt32(reader["userType"]);
-                            userinfo.IsEmail = reader["isEmailPass"].ToString() == "1";
+                            userinfo.IsEmail = reader["isEmail"].ToString() == "1";
                             userloginMsgForUnCheck = "OK";
                             HttpContext.Current.Session[USER_LOGIN_SESSIONID] = sessionID;
                             HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID] = userinfo.UserID;
                         }
                         else if (userinfo.Status == 4)
                         {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForLock", "登录失败！");//.UserloginMsgForlock;
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForLock", "商户已冻结！");//.UserloginMsgForlock;
                         }
                         else if (userinfo.Status == 8)
                         {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForCheckFail", "登录失败！"); //UserloginMsgForCheckfail;
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForCheckFail", "登录失败3！"); //UserloginMsgForCheckfail;
                         }
                         else if (userinfo.Status == 16)
                         {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginLimitIPCheckFail", "登录失败！");
+                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginLimitIPCheckFail", "IP非法！");
                         }
                     }
                     reader.Dispose();
@@ -503,7 +503,7 @@
             }
             catch (Exception exception)
             {
-                userloginMsgForUnCheck = "登录失败";
+                userloginMsgForUnCheck = exception.Message.ToString();
                 ExceptionHandler.HandleException(exception);
                 return userloginMsgForUnCheck;
             }

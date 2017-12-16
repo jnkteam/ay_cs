@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DB1D488-80F0-435A-AFD0-7864B8470E7F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OriginalStudio.WebComponents</RootNamespace>
+    <AssemblyName>Aywl.WebComponents</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebComponents\EmailHelper.cs" />
+    <Compile Include="WebComponents\EquipmentDetermine.cs" />
+    <Compile Include="WebComponents\FileUploadHelper.cs" />
+    <Compile Include="WebComponents\RandomController.cs" />
+    <Compile Include="WebComponents\ScheduledTask\DailyTask.cs" />
+    <Compile Include="WebComponents\ScheduledTask\IntervalTask.cs" />
+    <Compile Include="WebComponents\ScheduledTask\ScheduledTasks.cs" />
+    <Compile Include="WebComponents\Template\Helper.cs" />
+    <Compile Include="WebComponents\UrlManager\Filter.cs" />
+    <Compile Include="WebComponents\UrlManager\HandlerBase.cs" />
+    <Compile Include="WebComponents\UrlManager\PageHandler.cs" />
+    <Compile Include="WebComponents\UrlManager\StaticFileHandler.cs" />
+    <Compile Include="WebComponents\UrlManager\UrlManagerFactory.cs" />
+    <Compile Include="WebComponents\VerifyImage.cs" />
+    <Compile Include="WebComponents\Web\AgentPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebComponents\Web\BusinessPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebComponents\Web\ManagePageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebComponents\Web\PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebComponents\Web\PageBaseControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebComponents\Web\UserHandlerBase.cs" />
+    <Compile Include="WebComponents\Web\UserPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aywl.BLL\Aywl.BLL.csproj">
+      <Project>{cd71bed8-e92e-434c-a0d3-ec26cd240f29}</Project>
+      <Name>Aywl.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Cache\Aywl.Cache.csproj">
+      <Project>{6fedd60e-713b-42b6-8004-757e5b352a4d}</Project>
+      <Name>Aywl.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Lib\Aywl.Lib.csproj">
+      <Project>{467ff2a1-aa89-4d80-95d4-c3fd1b64e71d}</Project>
+      <Name>Aywl.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aywl.Model\Aywl.Model.csproj">
+      <Project>{4768644c-a02e-4d57-b4c4-4d432d87eb47}</Project>
+      <Name>Aywl.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

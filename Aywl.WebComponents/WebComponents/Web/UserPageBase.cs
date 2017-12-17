@@ -1,7 +1,6 @@
 ﻿namespace OriginalStudio.WebComponents.Web
 {
     using OriginalStudio.BLL.User;
-    using OriginalStudio.BLL.User;
     using OriginalStudio.Model.Order;
     using OriginalStudio.Model.User;
     using OriginalStudio.Lib.Security;
@@ -11,13 +10,102 @@
 
     public class UserPageBase : PageBase
     {
-        private UserInfo _currentUser = null;
-        public MchUsersAmtInfo _currentUserAmt = null;
+        #region 属性
+
+        public MchUserBaseInfo CurrentUser
+        {
+            get
+            {
+                MchUserBaseInfo model = MchUserFactory.CurrentMember;
+                if (model == null)
+                    return new MchUserBaseInfo();
+                else
+                    return model;
+            }
+        }
+
+        /// <summary>
+        /// 账户信息
+        /// </summary>
+        public MchUsersAmtInfo CurrentUserAmt
+        {
+            get
+            {
+                if ((this.CurrentUser != null) && (this.CurrentUser.UserID > 0))
+                {
+                    return CurrentUser.MchUsersAmtInfo;
+                }
+                else
+                    return new MchUsersAmtInfo();
+            }
+        }
 
         /// <summary>
         /// 是否可以前台结算。2017.2.13增加
         /// </summary>
-        public bool CanSettlesInFront = false;
+        public bool IsWithdrawInFront
+        {
+            get
+            {
+                if ((this.CurrentUser != null) && (this.CurrentUser.UserID > 0))
+                {
+                    return (CurrentUser.WithdrawType == 0) || (CurrentUser.WithdrawType == 2);
+                }
+                else
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// 账户总额
+        /// </summary>
+        public decimal Balance
+        {
+            get
+            {
+                decimal num = 0M;
+                if (this.CurrentUserAmt != null)
+                {
+                    num = this.CurrentUserAmt.Balance;
+                }
+                return num;
+            }
+        }
+
+        /// <summary>
+        /// 账户冻结金额
+        /// </summary>
+        public decimal Freeze
+        {
+            get
+            {
+                decimal num = 0M;
+                if (this.CurrentUserAmt != null)
+                {
+                    num = this.CurrentUserAmt.Freeze;
+                }
+                return num;
+            }
+        }
+
+        #endregion
+
+        #region 身份验证
+
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            this.CheckLogin();
+        }
+
+
+        public bool IsLogin
+        {
+            get
+            {
+                return (this.CurrentUser != null && this.CurrentUser.UserID > 0);
+            }
+        }
 
         public void CheckLogin()
         {
@@ -34,6 +122,8 @@
                 UserAccessTime.Add(model);
             }
         }
+
+        #endregion
 
         public string getUserTitle(string subPageTitle)
         {
@@ -81,78 +171,6 @@
             return log;
         }
 
-        protected override void OnInit(EventArgs e)
-        {
-            base.OnInit(e);
-            this.CheckLogin();
-        }
-
-        public decimal Balance
-        {
-            get
-            {
-                decimal num = 0M;
-                if (this.currentUserAmt != null)
-                {
-                    num = this.currentUserAmt.Balance;
-                }
-                return num;
-            }
-        }
-
-        public UserInfo CurrentUser
-        {
-            get
-            {
-                if (this._currentUser == null)
-                {
-                    this._currentUser = UserFactory.CurrentMember;
-                    if (this._currentUser == null) return null;
-
-                    this.CanSettlesInFront = (this._currentUser.settles_type == 0) || (this._currentUser.settles_type == 2);
-                }
-                return this._currentUser;
-            }
-        }
-
-        /// <summary>
-        /// 账户总金额
-        /// </summary>
-        public MchUsersAmtInfo currentUserAmt
-        {
-            get
-            {
-                if ((this._currentUserAmt == null) && (this.UserId > 0))
-                {
-                    this._currentUserAmt = MchUsersAmtFactory.GetModel(this.UserId);
-                }
-                return this._currentUserAmt;
-            }
-        }
-
-        /// <summary>
-        /// 账户冻结金额
-        /// </summary>
-        public decimal Freeze
-        {
-            get
-            {
-                decimal num = 0M;
-                if (this.currentUserAmt != null)
-                {
-                    num = this.currentUserAmt.Freeze;
-                }
-                return num;
-            }
-        }
-
-        public bool IsLogin
-        {
-            get
-            {
-                return (this.CurrentUser != null);
-            }
-        }
 
         /// <summary>
         /// 结算方式。0：T+0          1：T+1
@@ -161,7 +179,7 @@
         {
             get
             {
-                return this.CurrentUser.Settles;
+                return 0;   // this.CurrentUser.WithdrawScheme.;
             }
         }
 
@@ -265,9 +283,9 @@
             get
             {
                 decimal num = 0M;
-                if (this.currentUserAmt != null)
+                if (this.CurrentUserAmt != null)
                 {
-                    num = this.currentUserAmt.UnPayment;
+                    num = this.CurrentUserAmt.UnPayment;
                 }
                 return num;
             }
@@ -289,7 +307,7 @@
                 {
                     return 0;
                 }
-                return this.CurrentUser.ID;
+                return this.CurrentUser.UserID;
             }
         }
 
@@ -297,7 +315,7 @@
         {
             get
             {
-                return Strings.ReplaceString(this.CurrentUser.Account, 4, "*");
+                return "";// Strings.ReplaceString(this.CurrentUser.m, 4, "*");
             }
         }
 
@@ -305,7 +323,7 @@
         {
             get
             {
-                return Strings.Mark(this.CurrentUser.Email, '@');
+                return Strings.Mark(this.CurrentUser.EMail, '@');
             }
         }
 
@@ -313,11 +331,11 @@
         {
             get
             {
-                if (string.IsNullOrEmpty(this.CurrentUser.IdCard) || (this.CurrentUser.IdCard.Length < 4))
+                if (string.IsNullOrEmpty(this.CurrentUser.IDCard) || (this.CurrentUser.IDCard.Length < 4))
                 {
                     return string.Empty;
                 }
-                return Strings.ReplaceString(this.CurrentUser.IdCard, 3, (this.CurrentUser.IdCard.Length - 3) - 4, "*");
+                return Strings.ReplaceString(this.CurrentUser.IDCard, 3, (this.CurrentUser.IDCard.Length - 3) - 4, "*");
             }
         }
 
@@ -325,7 +343,7 @@
         {
             get
             {
-                return Strings.Mark(this.CurrentUser.IdCard);
+                return Strings.Mark(this.CurrentUser.IDCard);
             }
         }
 
@@ -333,7 +351,7 @@
         {
             get
             {
-                return Strings.Mark(this.CurrentUser.Tel);
+                return Strings.Mark(this.CurrentUser.Phone);
             }
         }
 

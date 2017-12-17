@@ -30,6 +30,7 @@
                     if (param2.CmpOperator == "=")
                     {
                         str2 = param2.ParamKey.Trim().ToLower();
+                        OriginalStudio.Lib.Logging.LogHelper.Write(str2);
                         switch (str2)
                         {
                             case "userid":
@@ -183,152 +184,177 @@
             {
                 for (int i = 0; i < param.Count; i++)
                 {
-                    string str2;
+                    string strParm2;
                     SearchParam param2 = param[i];
                     if (param2.CmpOperator == "=")
                     {
-                        str2 = param2.ParamKey.Trim().ToLower();
-                        switch (str2)
+                        strParm2 = param2.ParamKey.Trim().ToLower();
+                        OriginalStudio.Lib.Logging.LogHelper.Write("BuilderWhereText参数:" + strParm2 + ";" + param2.ParamValue.ToString());
+                        switch (strParm2)
                         {
                             case "userid":
                                 {
-
                                     SqlParameter item = new SqlParameter("@userid", SqlDbType.Int);
-                                    item.Value = (int)param2.ParamValue;
+                                    item.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(item);
-                                    builder.Append(" AND [userid] = '"+ item.Value + "' "  );
+                                    builder.Append(" AND [userid] = '"+ item.Value.ToString() + "' "  );
                                     break;
                                 }
                             case "agentid":
                                 {
-
                                     SqlParameter parameter2 = new SqlParameter("@agentid", SqlDbType.Int);
-                                    parameter2.Value = (int)param2.ParamValue;
+                                    parameter2.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter2);
-                                    builder.Append(" AND [agentid] = '" + parameter2.Value + "'" );
+                                    builder.Append(" AND [agentid] = '" + parameter2.Value.ToString() + "'" );
                                     break;
                                 }
                             case "manageid":
                                 {
-
                                     SqlParameter parameter3 = new SqlParameter("@manageId", SqlDbType.Int);
-                                    parameter3.Value = (int)param2.ParamValue;
+                                    parameter3.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter3);
-                                    builder.Append(" AND [manageId] = '" + parameter3.Value + "'" );
+                                    builder.Append(" AND [manageId] = '" + parameter3.Value.ToString() + "'" );
                                     break;
                                 }
                             case "typeid":
                                 {
-
                                     SqlParameter parameter4 = new SqlParameter("@typeId", SqlDbType.Int);
-                                    parameter4.Value = (int)param2.ParamValue;
+                                    parameter4.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter4);
-                                    builder.Append(" AND [typeId] = '" + parameter4.Value + "'"  );
+                                    builder.Append(" AND [channeltypeId] = " + parameter4.Value.ToString());
                                     break;
                                 }
                             case "supplierid":
                                 {
-
                                     SqlParameter parameter5 = new SqlParameter("@supplierId", SqlDbType.Int);
-                                    parameter5.Value = (int)param2.ParamValue;
+                                    parameter5.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter5);
-                                    builder.Append(" AND [supplierId] = '" + parameter5.Value + "'"  );
+                                    builder.Append(" AND [supplierId] = " + parameter5.Value.ToString());
                                     break;
                                 }
                             case "userorder":
                                 {
-
                                     SqlParameter parameter6 = new SqlParameter("@userorder", SqlDbType.VarChar, 80);
-                                    parameter6.Value = "%" + SqlHelper.CleanString((string)param2.ParamValue, 80) + "%";
+                                    parameter6.Value = SqlHelper.CleanString((string)param2.ParamValue.ToString(), 80).Trim();
                                     paramList.Add(parameter6);
-                                    builder.Append(" AND [userorder] like '" + parameter6.Value + "'" );
+                                    builder.Append(" AND [userorder] = '" + parameter6.Value.ToString() + "'" );
                                     break;
                                 }
                             case "orderid":
                                 {
-
                                     SqlParameter parameter7 = new SqlParameter("@orderid", SqlDbType.VarChar, 80);
-                                    parameter7.Value = "%" + SqlHelper.CleanString((string)param2.ParamValue, 80) + "%";
+                                    parameter7.Value = SqlHelper.CleanString((string)param2.ParamValue.ToString(), 80).Trim();
                                     paramList.Add(parameter7);
-                                    builder.Append(" AND [orderid] like '" + parameter7.Value + "'"  );
+                                    builder.Append(" AND [orderid] = '" + parameter7.Value.ToString() + "'"  );
                                     break;
                                 }
                             case "supplierorder":
                                 {
-
                                     SqlParameter parameter8 = new SqlParameter("@supplierOrder", SqlDbType.VarChar, 100);
-                                    parameter8.Value = "%" + SqlHelper.CleanString((string)param2.ParamValue, 100) + "%";
+                                    parameter8.Value = SqlHelper.CleanString((string)param2.ParamValue.ToString(), 100);
                                     paramList.Add(parameter8);
-                                    builder.Append(" AND [supplierOrder] like '" + parameter8.Value + "'"  );
+                                    builder.Append(" AND [supplierOrder] = '" + parameter8.Value.ToString() + "'"  );
                                     break;
                                 }
                             case "orderid_like":
                                 {
-
                                     SqlParameter parameter9 = new SqlParameter("@orderid", SqlDbType.VarChar, 100);
-                                    parameter9.Value = SqlHelper.CleanString((string)param2.ParamValue, 100) + "%";
+                                    parameter9.Value = "%" + SqlHelper.CleanString((string)param2.ParamValue.ToString(), 100) + "%";
                                     paramList.Add(parameter9);
-                                    builder.Append(" AND [orderid] like '" + parameter9.Value + "'"  );
+                                    builder.Append(" AND [orderid] like '" + parameter9.Value.ToString() + "'"  );
                                     break;
                                 }
                             case "status":
                                 {
-
-                                    SqlParameter parameter10 = new SqlParameter("@status", SqlDbType.TinyInt);
-                                    parameter10.Value = (int)param2.ParamValue;
+                                    SqlParameter parameter10 = new SqlParameter("@status", SqlDbType.Int);
+                                    parameter10.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter10);
-                                    builder.Append(" AND [status] = '" + parameter10.Value + "'" );
+                                    builder.Append(" AND [status] = " + parameter10.Value.ToString());
                                     break;
                                 }
                             case "statusallfail":
-                                //builder.Append(" AND ([status] = 4 or  [status] = 8)");
-                                builder.Append(" AND ([status] = 4)");  //2017.2.12 =8的情况去掉！！！！！
-                                break;
-
+                                {
+                                    builder.Append(" AND ([status] = 4)");  //2017.2.12 =8的情况去掉！！！！！
+                                    break;
+                                }
                             case "notifystat":
                                 {
-
                                     SqlParameter parameter11 = new SqlParameter("@notifystat", SqlDbType.TinyInt);
-                                    parameter11.Value = (int)param2.ParamValue;
+                                    parameter11.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter11);
-                                    builder.Append(" AND [notifystat] = '" + parameter11.Value + "'"  );
+                                    builder.Append(" AND [notifystat] = '" + parameter11.Value.ToString() + "'"  );
                                     break;
                                 }
                             case "promid":
                                 {
-
                                     SqlParameter parameter12 = new SqlParameter("@promid", SqlDbType.Int);
-                                    parameter12.Value = (int)param2.ParamValue;
+                                    parameter12.Value = Convert.ToInt32(param2.ParamValue.ToString());
                                     paramList.Add(parameter12);
-                                    builder.Append(" AND exists(select 0 from PromotionUser where PromotionUser.PID = '" + parameter12.Value + "' and PromotionUser.RegId=userid)");
+                                    builder.Append(" AND exists(select 0 from PromotionUser where PromotionUser.PID = '" + parameter12.Value.ToString() + "' and PromotionUser.RegId=userid)");
                                     break;
                                 }
                             case "stime":
                                 {
-
-                                    //builder.Append(" AND [addtime] >= @stime");
                                     SqlParameter parameter13 = new SqlParameter("@stime", SqlDbType.DateTime);
-                                    parameter13.Value = param2.ParamValue;
+                                    parameter13.Value = param2.ParamValue.ToString();
                                     paramList.Add(parameter13);
-                                    builder.Append(" AND [processingtime] >= '" + parameter13.Value + "'");
+                                    builder.Append(" AND [completetime] >= '" + parameter13.Value.ToString() + "'");
                                     break;
                                 }
                             case "etime":
                                 {
-
-                                    //builder.Append(" AND [addtime] <= @etime");
                                     SqlParameter parameter14 = new SqlParameter("@etime", SqlDbType.DateTime);
-                                    parameter14.Value = param2.ParamValue;
+                                    parameter14.Value = param2.ParamValue.ToString();
                                     paramList.Add(parameter14);
-                                    builder.Append(" AND [processingtime] <= '" + parameter14.Value + "'");
+                                    builder.Append(" AND [completetime] <= '" + parameter14.Value.ToString() + "'");
+                                    break;
+                                }
+                            case "addstime":
+                                {
+                                    SqlParameter parameter15 = new SqlParameter("@addstime", SqlDbType.DateTime);
+                                    parameter15.Value = param2.ParamValue.ToString();
+                                    paramList.Add(parameter15);
+                                    builder.Append(" AND [addtime] >= '" + parameter15.Value.ToString() + "'");
+                                    break;
+                                }
+                            case "addetime":
+                                {
+                                    SqlParameter parameter16 = new SqlParameter("@addetime", SqlDbType.DateTime);
+                                    parameter16.Value = param2.ParamValue.ToString();
+                                    paramList.Add(parameter16);
+                                    builder.Append(" AND [addtime] <= '" + parameter16.Value.ToString() + "'");
+                                    break;
+                                }
+                            case "merchantname":
+                                {
+                                    SqlParameter parameter17 = new SqlParameter("@merchantname", SqlDbType.VarChar);
+                                    parameter17.Value = (string)param2.ParamValue.ToString();
+                                    paramList.Add(parameter17);
+                                    builder.Append(" AND [merchantname] = '" + parameter17.Value.ToString() + "' ");
+                                    break;
+                                }
+                            case "srefervalue":
+                                {
+                                    SqlParameter parameter18 = new SqlParameter("@srefervalue", SqlDbType.Decimal);
+                                    parameter18.Value = Convert.ToDecimal(param2.ParamValue.ToString());
+                                    paramList.Add(parameter18);
+                                    builder.Append(" AND [refervalue] >= " + parameter18.Value.ToString());
+                                    break;
+                                }
+                            case "erefervalue":
+                                {
+                                    SqlParameter parameter19 = new SqlParameter("@erefervalue", SqlDbType.Decimal);
+                                    parameter19.Value = Convert.ToDecimal(param2.ParamValue.ToString());
+                                    paramList.Add(parameter19);
+                                    builder.Append(" AND [refervalue] <= " + parameter19.Value.ToString());
                                     break;
                                 }
                         }
                     }
                     else
                     {
-                        str2 = param2.ParamKey.Trim().ToLower();
-                        if ((str2 != null) && (str2 == "status"))
+                        strParm2 = param2.ParamKey.Trim().ToLower();
+                        if ((strParm2 != null) && (strParm2 == "status"))
                         {
 
                             SqlParameter parameter15 = new SqlParameter("@status1", SqlDbType.TinyInt);
@@ -679,13 +705,25 @@
                 string key = "[id]";
                 if (string.IsNullOrEmpty(orderby))
                 {
-                    orderby = "id desc";
+                    orderby = " id desc";
                 }
                 List<SqlParameter> paramList = new List<SqlParameter>();
-                string wheres = BuilderWhere(searchParams, paramList);
+                string wheres = BuilderWhereText(searchParams, paramList);
+                OriginalStudio.Lib.Logging.LogHelper.Write(wheres);
+                //return new DataSet();
                 return DataBase.ExecuteDataset(CommandType.Text, SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n"
-                    + SqlHelper.GetPageSelectSQL("[id]\r\n      ,[orderid]\r\n      ,[ordertype]\r\n      ,[userid]\r\n      ,[typeId]\r\n      ,[paymodeId]\r\n      ,[userorder]\r\n      ,[refervalue]\r\n      ,[realvalue]\r\n      ,[notifyurl]\r\n      ,[againNotifyUrl]\r\n      ,[notifycount]\r\n      ,[notifystat]\r\n      ,[notifycontext]\r\n      ,[returnurl]\r\n      ,[attach]\r\n      ,[payerip]\r\n      ,[clientip]\r\n      ,[referUrl]\r\n      ,[addtime]\r\n      ,[supplierID]\r\n      ,[supplierOrder]\r\n      ,[status]\r\n      ,[completetime]\r\n      ,[payRate]\r\n      ,[supplierRate]\r\n      ,[promRate]\r\n      ,[payAmt]\r\n      ,[promAmt]\r\n      ,[supplierAmt]\r\n      ,[profits]\r\n      ,[server]\r\n      ,[modetypename]\r\n      ,[modeName],[commission],[notifytime],[version]\r\n      ,cus_subject,cus_price,cus_quantity,cus_description,cus_field1,cus_field2,cus_field3,cus_field4,cus_field5,agentid", tables, wheres, orderby, key, pageSize, page, false)
-                    + "\r\nselect sum(1) ordtotal,sum(case when [status]=2 then 1 else 0 end) succordtotal,sum(refervalue) refervalue,sum(case when [status]=2 then realvalue else 0 end) realvalue,sum(isnull(promAmt,0)) promAmt,sum(case when [status]=2 then payAmt else 0 end) payAmt,sum(case when [status]=2 then supplierAmt-payAmt-promAmt else 0 end) profits,sum(promAmt) promAmt,sum(commission) commission from " + tables + " where " + wheres, paramList.ToArray());
+                    + SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false)
+                    + "\r\nselect sum(1) ordertotal," +
+                                        "Convert(decimal(18,2),sum(case when [status]=2 then 1 else 0 end)) succordertotal," +
+                                        "Convert(decimal(18,2),sum(refervalue)) refervalue," +
+                                        "Convert(decimal(18,2),sum(case when [status]=2 then realvalue else 0 end)) realvalue," +
+                                        "Convert(decimal(18,2),sum(isnull(promAmt,0))) promAmt," +
+                                        "Convert(decimal(18,2),sum(case when [status]=2 then payAmt else 0 end)) payAmt," +
+                                        "Convert(decimal(18,2),sum(case when [status]=2 then profits else 0 end)) profits," +
+                                        "Convert(decimal(18,2),sum(case when [status]=2 then refervalue * (1 - payRate) else 0 end)) chargeAmt," +
+                                        "Convert(decimal(18,2),sum(promAmt)) promAmt," +
+                                        "Convert(decimal(18,2),sum(commission)) commission " +
+                                        "from " + tables + " where " + wheres, paramList.ToArray());
                 //上面这句话不能随意动，是给客户前台查询专用的！！
             }
             catch (Exception exception)

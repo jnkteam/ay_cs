@@ -122,17 +122,6 @@
             }
         }
 
-        public string SiteName
-        {
-            get
-            {
-                if (this.webInfo == null)
-                {
-                    return string.Empty;
-                }
-                return this.webInfo.Name;
-            }
-        }
 
         public string statJs
         {
@@ -177,13 +166,24 @@
         #region 新增
 
         /// <summary>
-        /// 平台名称
+        /// 网站名称
+        /// </summary>
+        public string SiteName
+        {
+            get
+            {
+                return BLL.SysConfig.GetOptionValue("SiteName", "");
+            }
+        }
+
+        /// <summary>
+        /// 平台名称。取数据库参数。
         /// </summary>
         public string PlatformName
         {
             get
             {
-                return Lib.Configuration.ConfigHelper.GetConfig("runtimeSettings", "PlatformName");
+                return BLL.SysConfig.GetOptionValue("PlatformName", "");
             }
         }
 

@@ -512,7 +512,8 @@
         public static void SignOut()
         {
             HttpContext.Current.Items[USER_CONTEXT_KEY] = null;
-            HttpContext.Current.Session["{10E6C4EE-54C1-4895-8CDE-202A5B3DD9E9}"] = null;
+            HttpContext.Current.Session[USER_LOGIN_SESSIONID] = null;
+            HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID] = null;
         }
 
         /// <summary>

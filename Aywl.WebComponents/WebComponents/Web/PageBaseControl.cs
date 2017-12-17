@@ -5,9 +5,36 @@
     using OriginalStudio.Lib.Security;
     using System;
     using System.Web.UI;
+    using OriginalStudio.Model.User;
+    using OriginalStudio.BLL.User;
 
     public class PageBaseControl : UserControl
     {
+        public MchUserBaseInfo CurrentUser
+        {
+            get
+            {
+                MchUserBaseInfo model = MchUserFactory.CurrentMember;
+                if (model == null)
+                    return new MchUserBaseInfo();
+                else
+                    return model;
+            }
+        }
+
+        public bool IsWithdrawInFront
+        {
+            get
+            {
+                if ((this.CurrentUser != null) && (this.CurrentUser.UserID > 0))
+                {
+                    return (CurrentUser.WithdrawType == 0) || (CurrentUser.WithdrawType == 2);
+                }
+                else
+                    return false;
+            }
+        }
+
         private WebInfo _webinfo = null;
 
         public void AlertAndRedirect(string msg)

@@ -666,19 +666,26 @@ namespace OriginalStudio.Lib.Utils
 			return Common.GetStandardDateTime(fDateTime, "yyyy-MM-dd HH:mm:ss");
 		}
 
-		public static string GetStandardDateTime(string fDateTime, string formatStr)
-		{
-			string result;
-			if (fDateTime == "0000-0-0 0:00:00")
-			{
-				result = fDateTime;
-			}
-			else
-			{
-				result = Convert.ToDateTime(fDateTime).ToString(formatStr);
-			}
-			return result;
-		}
+        public static string GetStandardDateTime(string fDateTime, string formatStr)
+        {
+            try
+            {
+                string result;
+                if (fDateTime == "0000-0-0 0:00:00")
+                {
+                    result = fDateTime;
+                }
+                else
+                {
+                    result = Convert.ToDateTime(fDateTime).ToString(formatStr);
+                }
+                return result;
+            }
+            catch
+            {
+                return "";
+            }
+        }
 
 		public static string GetStaticPageNumbers(int curPage, int countPage, string url, string expname, int extendPage)
 		{

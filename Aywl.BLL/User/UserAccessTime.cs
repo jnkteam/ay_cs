@@ -19,10 +19,11 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@userid", SqlDbType.Int, 10), new SqlParameter("@lastAccesstime", SqlDbType.DateTime) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@userid", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = model.userid;
-                commandParameters[1].Value = model.lastAccesstime;
-                return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_usertime_add", commandParameters) > 0);
+                return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_usertime_ADD", commandParameters) > 0);
             }
             catch (Exception exception)
             {

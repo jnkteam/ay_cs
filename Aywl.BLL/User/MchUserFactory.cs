@@ -873,6 +873,8 @@
 
         #endregion
 
+        #region 其他
+
         public static bool chkAgent(int agentid)
         {
             try
@@ -1131,6 +1133,8 @@
             }
         }
 
+        #endregion
+
         #region 商户图表数据源
 
         public static DataSet GetUserDayOrderChartSource(int userId)
@@ -1354,6 +1358,65 @@
 
         }
 
+        #endregion
+
+        #region 商户自定义通道账号
+
+        /// <summary>
+        /// 获取商户独立通道列表
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public DataSet GetUserSupplierList(int userId)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@userid",SqlDbType.Int)
+                };
+            parameters[0].Value = userId;
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_supplier_list", parameters);
+        }
+
+        /// <summary>
+        /// 编辑商户独立通道
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int EditUserSupplier(MchUserSupplier model)
+        {
+            SqlParameter[] parameters = {
+                new SqlParameter("@userid",SqlDbType.Int),
+                new SqlParameter("@suppliercode",SqlDbType.Int),
+                new SqlParameter("@puserid",SqlDbType.VarChar,100),
+                new SqlParameter("@puserkey",SqlDbType.VarChar,100),
+                new SqlParameter("@pusername",SqlDbType.VarChar,100),
+                new SqlParameter("@puserparm1",SqlDbType.VarChar,100),
+                new SqlParameter("@puserparm2",SqlDbType.VarChar,100)
+            };
+            parameters[0].Value = model.UserID;
+            parameters[1].Value = model.SupplierCode;
+            parameters[2].Value = model.PUserID;
+            parameters[3].Value = model.PUserKey;
+            parameters[4].Value = model.PUserName;
+            parameters[5].Value = model.PUserParm1;
+            parameters[6].Value = model.PUserParm2;
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_supplier_edit", parameters);
+
+        }
+
+        /// <summary>
+        /// 删除自定义通道
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public DataSet DeleteUserSupplier(int Id)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@id",SqlDbType.Int)
+                };
+            parameters[0].Value = Id;
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_supplier_delete", parameters);
+        }
         #endregion
     }
 }

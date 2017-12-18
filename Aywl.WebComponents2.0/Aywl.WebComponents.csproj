@@ -35,49 +35,10 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Output\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Drawing" />
     <Reference Include="System" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Global.cs" />
-    <Compile Include="WebComponents\ScheduledTask\IntervalTask.cs" />
-    <Compile Include="WebComponents\UrlManager\HandlerBase.cs" />
-    <Compile Include="WebComponents\UrlManager\PageHandler.cs" />
-    <Compile Include="WebComponents\JSON.cs" />
-    <Compile Include="WebComponents\UrlManager\UrlManagerFactory.cs" />
-    <Compile Include="WebComponents\Web\PageBaseControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebComponents\Web\PageBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebComponents\Web\AgentPageBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebComponents\Web\UserHandlerBase.cs" />
-    <Compile Include="WebComponents\ScheduledTask\ScheduledTasks.cs" />
-    <Compile Include="WebComponents\UrlManager\Filter.cs" />
-    <Compile Include="WebComponents\ScheduledTask\DailyTask.cs" />
-    <Compile Include="WebComponents\Web\UserPageBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebComponents\Template\Helper.cs" />
-    <Compile Include="WebComponents\EquipmentDetermine.cs" />
-    <Compile Include="WebComponents\FileUploadHelper.cs" />
-    <Compile Include="WebComponents\UrlManager\StaticFileHandler.cs" />
-    <Compile Include="WebComponents\VerifyImage.cs" />
-    <Compile Include="WebComponents\Web\ManagePageBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebComponents\Web\BusinessPageBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebComponents\EmailHelper.cs" />
-    <Compile Include="WebComponents\RandomController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aywl.BLL\Aywl.BLL.csproj">
@@ -96,16 +57,5 @@
       <Project>{4768644c-a02e-4d57-b4c4-4d432d87eb47}</Project>
       <Name>Aywl.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="jmail">
-      <Guid>{AED3A6B0-2171-11D2-B77C-0008C73ACA8F}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
 </Project>

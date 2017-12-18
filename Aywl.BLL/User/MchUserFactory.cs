@@ -442,7 +442,7 @@
 
         #region 用户登录注销
 
-        public static string SignIn(MchUserBaseInfo userinfo)
+        public static string SignIn(MchUserBaseInfo userinfo, int accountType = 1)
         {
             string userloginMsgForUnCheck = string.Empty;
             try
@@ -454,8 +454,9 @@
                 userloginMsgForUnCheck = "用户名或者密码错误,请重新输入!";
                 string sessionID = Guid.NewGuid().ToString("b");
                 SqlParameter[] commandParameters = new SqlParameter[] {
-                    DataBase.MakeInParam("@merchantname", SqlDbType.VarChar, 50, userinfo.MerchantName),
+                    DataBase.MakeInParam("@accountname", SqlDbType.VarChar, 50, userinfo.MerchantName),
                     DataBase.MakeInParam("@password", SqlDbType.VarChar, 100, userinfo.UserPwd),
+                    DataBase.MakeInParam("@accounttype", SqlDbType.TinyInt, 1, accountType),
                     DataBase.MakeInParam("@loginip", SqlDbType.VarChar, 50, userinfo.LastLoginIP),
                     DataBase.MakeInParam("@logintime", SqlDbType.DateTime, 8, DateTime.Now),
                     DataBase.MakeInParam("@sessionId", SqlDbType.VarChar, 100, sessionID),

@@ -63,8 +63,11 @@
         /// auth
         /// </summary>
         public void checkAuth() {
+            string adminUrl = ADMIN_URI;
             string url = HttpContext.Current.Request.Path;
-            //OriginalStudio.Lib.Logging.LogHelper.Write("url:"+url);
+            
+            url = url.Replace(adminUrl, string.Empty);
+            
             int menuId = ExMenuFactory.getExMenuIdByControl(url);          
             if (menuId > 0) {                
                 if (!ExMenuFactory.authContains(menuId.ToString(), "menu")) {

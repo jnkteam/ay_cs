@@ -113,7 +113,7 @@ namespace OriginalStudio.BLL
             DataSet set = DataBase.ExecuteDataset(CommandType.Text, builder.ToString(), commandParameters);
             DataTable table = set.Tables.Count != 0 ? set.Tables[0] : null;
             //admin user auth 
-           
+            string adminUri = Lib.Configuration.ConfigHelper.GetConfig("runtimeSettings", "ADMIN_URI");
             Manage manageModel = ManageFactory.GetModel(ManageFactory.GetCurrent());
             Model.ManageRoles rolesModle = ManageRolesFactory.GetModelById(manageModel.ManageRole);
             string menuText = rolesModle.Menu;
@@ -142,7 +142,7 @@ namespace OriginalStudio.BLL
                     foreach (DataRow readChild in tableChild.Rows)
                     {
                         if (menuArr.Contains(readChild["id"].ToString())) { 
-                        treeView += "<li class='li_" + readChild["id"] + "'><a href = '" + readChild["url"] + "sign=" + readChild["pid"] + "&menuId=" + readChild["id"] + "' ><i class='fa fa-circle-o'></i>" + readChild["title"] + "</a></li>";
+                        treeView += "<li class='li_" + readChild["id"] + "'><a href = '" + adminUri + readChild["url"] + "sign=" + readChild["pid"] + "&menuId=" + readChild["id"] + "' ><i class='fa fa-circle-o'></i>" + readChild["title"] + "</a></li>";
                         }
                     }
                 }

@@ -6,6 +6,7 @@
     using OriginalStudio.Lib.TimeControl;
     using System.Data;
     using OriginalStudio.BLL;
+    using OriginalStudio.BLL.Stat;
 
     public class Default : ManagePageBase
     {
@@ -14,14 +15,12 @@
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.loginip = base.currentManage.lastLoginIp;
-            //this.logintime = FormatConvertor.DateTimeToTimeString(base.currentManage.lastLoginTime.Value);
-            //this.username = base.currentManage.username;
+            
             this.DefaultThemes = this.currentManage.DefaultThemes;
 
-            //this.menuTable = ExMenuFactory.getExMenuList();
-            
-            //this.treeView = ExMenuFactory.getTreeView(0);
+            //DataSet set = OrderReport.统计通道类型总数金额利润(sDate,DateTime.Now);
+            //DataTable countTable = set.Tables.Count != 0 ? set.Tables[0] : null;
+
             this.DataBind();
             
         }

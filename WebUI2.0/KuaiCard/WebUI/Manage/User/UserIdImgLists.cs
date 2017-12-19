@@ -60,11 +60,11 @@
                 model.ID = this.ItemID;
                 if (this.cmd == "ok")
                 {
-                    model.Status = IdImageStatus.审核成功;
+                    model.Status = IdImageStatusEnum.审核成功;
                 }
                 if (this.cmd == "fail")
                 {
-                    model.Status = IdImageStatus.审核失败;
+                    model.Status = IdImageStatusEnum.审核失败;
                 }
                 //model.why = string.Empty;
                 model.CheckTime = DateTime.Now;

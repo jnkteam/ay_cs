@@ -124,7 +124,7 @@
         {
             SqlParameter[] parameters = {
                 new SqlParameter("@id",SqlDbType.Int),
-                new SqlParameter("@status",SqlDbType.),
+                new SqlParameter("@status",SqlDbType.Int),
                 new SqlParameter("@checkuser",SqlDbType.Int)
             };
             parameters[0].Value = imgId;

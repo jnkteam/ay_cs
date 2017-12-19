@@ -57,11 +57,11 @@
                 model.id = this.ItemID;
                 if (this.cmd == "ok")
                 {
-                    model.status = IdImageStatus.审核成功;
+                    model.status = ImageStatus.审核成功;
                 }
                 if (this.cmd == "fail")
                 {
-                    model.status = IdImageStatus.审核失败;
+                    model.status = ImageStatus.审核失败;
                 }
                 model.why = string.Empty;
                 model.checktime = new DateTime?(DateTime.Now);

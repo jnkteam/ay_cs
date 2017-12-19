@@ -51,6 +51,7 @@
     <Compile Include="Enum\DistributionStatusEnum.cs" />
     <Compile Include="Enum\TradeTypeEnum.cs" />
     <Compile Include="Enum\UserClassEnum.cs" />
+    <Compile Include="Enum\IdImagTypeEnum.cs" />
     <Compile Include="FeedBack\feedbackInfo.cs" />
     <Compile Include="FeedBack\feedbackstatus.cs" />
     <Compile Include="FeedBack\feedbacktype.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="SMS\phoneValid.cs" />
     <Compile Include="SMS\PhoneValidLog.cs" />
     <Compile Include="Sys\SysRunLog.cs" />
+    <Compile Include="User\ImageStatus.cs" />
     <Compile Include="User\MchUserChannelType.cs" />
     <Compile Include="Manage\ManageRole.cs" />
     <Compile Include="Enum\AppTypeEnum.cs" />
@@ -126,7 +128,7 @@
     <Compile Include="Supplier\UserSupplierInfo.cs" />
     <Compile Include="Enum\AcctChangeEnum.cs" />
     <Compile Include="User\MchUserBaseInfo.cs" />
-    <Compile Include="Enum\IdImageStatus.cs" />
+    <Compile Include="Enum\IdImageStatusEnum.cs" />
     <Compile Include="Manage\Manage.cs" />
     <Compile Include="User\MchUserBindIP.cs" />
     <Compile Include="User\MchUserPayRateInfo.cs" />

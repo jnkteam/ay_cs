@@ -38,7 +38,7 @@
         protected void Page_Load(object sender, EventArgs e)
         {
             this.setPower();
-            if (this.ItemInfo.status != IdImageStatus.审核中)
+            if (this.ItemInfo.status != ImageStatus.审核中)
             {
                 this.btnFail.Enabled = false;
                 this.btnOK.Enabled = false;
@@ -55,11 +55,11 @@
             model.id = this.ItemInfoId;
             if (cmd == "ok")
             {
-                model.status = IdImageStatus.审核成功;
+                model.status = ImageStatus.审核成功;
             }
             if (cmd == "fail")
             {
-                model.status = IdImageStatus.审核失败;
+                model.status = ImageStatus.审核失败;
             }
             model.why = this.txtWhy.Text.Trim();
             model.checktime = new DateTime?(DateTime.Now);

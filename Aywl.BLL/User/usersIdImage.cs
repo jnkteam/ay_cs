@@ -40,7 +40,7 @@
                 commandParameters[5].Value = model.filesize;
                 commandParameters[6].Value = model.ptype1;
                 commandParameters[7].Value = model.filesize1;
-                commandParameters[8].Value = (int) model.status;
+                commandParameters[8].Value = 0;// model.status;
                 commandParameters[9].Value = model.addtime;
                 DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_usersIdImage_add", commandParameters);
                 return (int) commandParameters[0].Value;
@@ -109,12 +109,12 @@
             {
                 SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@status", SqlDbType.TinyInt, 1), new SqlParameter("@why", SqlDbType.NVarChar, 150), new SqlParameter("@admin", SqlDbType.Int, 10), new SqlParameter("@checktime", SqlDbType.DateTime) };
                 commandParameters[0].Value = model.id;
-                commandParameters[1].Value = (int) model.status;
+                commandParameters[1].Value = 0;// (int) model.status;
                 commandParameters[2].Value = model.why;
                 commandParameters[3].Value = model.admin;
                 commandParameters[4].Value = model.checktime;
                 bool flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_usersIdImage_update", commandParameters) > 0;
-                if (flag && (model.status == ImageStatus.审核成功))
+                if (flag && (model.status == ImageStatus.空))
                 {
                     UserFactory.ClearCache(model.userId.Value);
                 }
@@ -250,7 +250,7 @@
                 }
                 else
                 {
-                    info.status = ImageStatus.未知;
+                    info.status =ImageStatus.空;
                 }
                 info.why = ds.Tables[0].Rows[0]["why"].ToString();
                 if (ds.Tables[0].Rows[0]["admin"].ToString() != "")

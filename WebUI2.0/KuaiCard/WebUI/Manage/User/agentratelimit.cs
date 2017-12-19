@@ -77,6 +77,7 @@
 
         protected void btnCopy_Click(object sender, EventArgs e)
         {
+            /*
             PayRate modelByUser = PayRateFactory.GetModelByUser(this.ItemInfoId);
             if (modelByUser != null)
             {
@@ -136,7 +137,8 @@
                 this.txtp208.Text = num.ToString("0.00");
                 this.txtp209.Text = (Convert.ToDecimal(modelByUser.p209) * 100M).ToString("0.00");
                 this.txtp300.Text = (Convert.ToDecimal(modelByUser.p300) * 100M).ToString("0.00");
-            }
+               
+            } */
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

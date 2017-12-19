@@ -170,20 +170,20 @@
             {
                 if (MchUserFactory.Add(this.model) > 0)
                 {
-                    showPageMsg("保存成功！");
+                    base.AlertAndRedirect("保存成功！");
                 }
                 else
                 {
-                    showPageMsg("保存失败！");
+                    base.AlertAndRedirect("保存失败！");
                 }
             }
             else if (MchUserFactory.Update(this.model))
             {
-                showPageMsg("更新成功！");
+                base.AlertAndRedirect("更新成功！");
             }
             else
             {
-                showPageMsg("更新失败！");
+                base.AlertAndRedirect("更新失败！");
             }
         }
 

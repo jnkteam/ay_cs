@@ -131,7 +131,7 @@
                 parameters[5].Value = model.PayrateXML;
                 parameters[6].Value = model.UserLevel;
 
-                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_payrate_add", parameters) > 0)
+                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_payrate_add", parameters) > 0)
                 {
                     return (int)parameters[0].Value;
                 }
@@ -162,7 +162,7 @@
                     new SqlParameter("@payratexml",SqlDbType.VarChar,4000),
                     new SqlParameter("@userlevel",SqlDbType.Int)
                 };
-                parameters[0].Direction = ParameterDirection.InputOutput;
+                parameters[0].Value = model.ID;
                 parameters[1].Value = model.RateName;
                 parameters[2].Value = model.RateType;
                 parameters[3].Value = model.Active;
@@ -170,7 +170,7 @@
                 parameters[5].Value = model.PayrateXML;
                 parameters[6].Value = model.UserLevel;
 
-                return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_payrate_Update", parameters) > 0);
+                return (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_payrate_Update", parameters) > 0);
             }
             catch (Exception exception)
             {
@@ -235,7 +235,20 @@
                 return null;
             }
         }
-
+        public static DataTable GetAllList()
+        {
+            try
+            {
+                string commandText = "select [ID],[RateName],[RateType],[Active],[CreateUserID],[CreateTime],[PayrateXML],[UserLevel] from sys_payrate ";
+                DataSet o = DataBase.ExecuteDataset(CommandType.Text, commandText);
+                return o.Tables[0];
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return null;
+            }
+        }
         public static SysPayRateInfo GetModelByUser(int userid)
         {
             SqlParameter[] commandParameters = new SqlParameter[] {

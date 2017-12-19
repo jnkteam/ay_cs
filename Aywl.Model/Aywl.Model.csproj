@@ -109,6 +109,7 @@
     <Compile Include="Settled\TocashSchemeInfo.cs" />
     <Compile Include="Settled\Transfer.cs" />
     <Compile Include="Settled\TransferScheme.cs" />
+    <Compile Include="User\MchUserSupplier.cs" />
     <Compile Include="User\UsersAmtFreezeInfo.cs" />
     <Compile Include="ShowStyleEnum.cs" />
     <Compile Include="SinglePage.cs" />

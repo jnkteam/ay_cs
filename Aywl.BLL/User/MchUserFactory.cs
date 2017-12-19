@@ -76,6 +76,8 @@
             modle.LastLoginIP = Convert.ToString(dr["lastloginip"]);
             modle.LastLoginMAC = Convert.ToString(dr["lastloginmac"]);
             modle.LastLoginTime = Utils.StrToDateTime(dr["lastlogintime"]);
+            modle.LastPreLoginTime = Utils.StrToDateTime(dr["lastprelogintime"]);
+            modle.LastPreLoginIP = Convert.ToString(dr["lastpreloginip"]);
             modle.SessionID = Convert.ToString(dr["sessionid"]);
             modle.Status = Utils.StrToInt(dr["status"].ToString(), 0);
             modle.AddTime = String.IsNullOrEmpty(dr["AddTime"].ToString()) ? DateTime.Now : Convert.ToDateTime(dr["AddTime"].ToString());
@@ -258,9 +260,9 @@
                     new SqlParameter("@phone",SqlDbType.VarChar,100),
                     new SqlParameter("@email",SqlDbType.VarChar,100),
                     new SqlParameter("@qq",SqlDbType.VarChar,100),
-                    new SqlParameter("@isphone",SqlDbType.Int),
-                    new SqlParameter("@isemail",SqlDbType.Int),
-                    new SqlParameter("@isrealname",SqlDbType.Int),
+                    new SqlParameter("@isphone",SqlDbType.Bit),
+                    new SqlParameter("@isemail",SqlDbType.Bit),
+                    new SqlParameter("@isrealname",SqlDbType.Bit),
                     new SqlParameter("@withdrawschemeid",SqlDbType.Int),
                     new SqlParameter("@payrateid",SqlDbType.Int),
                     new SqlParameter("@maxdaywithdrawtimes",SqlDbType.Int),
@@ -373,9 +375,9 @@
                     new SqlParameter("@phone",SqlDbType.VarChar,100),
                     new SqlParameter("@email",SqlDbType.VarChar,100),
                     new SqlParameter("@qq",SqlDbType.VarChar,100),
-                    new SqlParameter("@isphone",SqlDbType.Int),
-                    new SqlParameter("@isemail",SqlDbType.Int),
-                    new SqlParameter("@isrealname",SqlDbType.Int),
+                    new SqlParameter("@isphone",SqlDbType.Bit),
+                    new SqlParameter("@isemail",SqlDbType.Bit),
+                    new SqlParameter("@isrealname",SqlDbType.Bit),
                     new SqlParameter("@withdrawschemeid",SqlDbType.Int),
                     new SqlParameter("@payrateid",SqlDbType.Int),
                     new SqlParameter("@maxdaywithdrawtimes",SqlDbType.Int),

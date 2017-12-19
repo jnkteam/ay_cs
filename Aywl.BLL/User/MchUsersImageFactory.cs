@@ -9,6 +9,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
+    using OriginalStudio.Lib.Utils;
 
     /// <summary>
     /// 商户图片管理
@@ -19,12 +20,29 @@
 
         public static int UploadUserImage(MchUserImageInfo model)
         {
-            return 1;
+            SqlParameter[] parameters = {
+                new SqlParameter("@userid",SqlDbType.Int),
+                new SqlParameter("@imagefile",SqlDbType.VarChar,1000),
+                new SqlParameter("@imagetype",SqlDbType.Int),
+                new SqlParameter("@imagedesc",SqlDbType.VarChar,1000)
+            };
+            parameters[0].Value = model.UserID;
+            parameters[1].Value = model.ImageFile;
+            parameters[2].Value = model.ImageType;
+            parameters[3].Value = model.ImageDesc;
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_userIdImage_add", parameters);
         }
 
-        public static int DeleteUserImage(MchUserImageInfo model)
+        public static int DeleteUserImage(int imgId)
         {
-            return 1;
+            SqlParameter[] parameters = {
+                new SqlParameter("@id",SqlDbType.Int)
+            };
+            parameters[0].Value = imgId;
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_userIdImage_delete", parameters);
+
         }
 
         #endregion
@@ -43,23 +61,49 @@
         /// <returns></returns>
         public DataSet GetUserImages(int userId)
         {
-            return new DataSet();
+            SqlParameter[] parameters = {
+                new SqlParameter("@userId",SqlDbType.Int)
+            };
+            parameters[0].Value = userId;
+
+            return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userIdImage_GetByUser", parameters);
+
         }
 
-        public static MchUserImageInfo GetModel(int id)
+        public static MchUserImageInfo GetModel(int imgId)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] {
-                new SqlParameter("@userId", SqlDbType.Int, 10)
+            SqlParameter[] parameters = {
+                new SqlParameter("@id",SqlDbType.Int)
             };
-            commandParameters[0].Value = id;
-            MchUserImageInfo info = new MchUserImageInfo();
-            return info;
+            parameters[0].Value = imgId;
+
+            DataSet ds = DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userIdImage_get", parameters);
+
+            return GetModelFromDs(ds);
         }
 
         public static MchUserImageInfo GetModelFromDs(DataSet ds)
         {
-            MchUserImageInfo info = new MchUserImageInfo();
-            return info;
+            if (ds == null || ds.Tables.Count == 0)
+            {
+                return null;
+            }
+
+            DataRow dr = ds.Tables[0].Rows[0];
+
+            MchUserImageInfo modle = new MchUserImageInfo();
+            modle.ID = Convert.ToInt32(dr["id"]);
+            modle.UserID = Convert.ToInt32(dr["userid"]);
+            modle.ImageFile = Convert.ToString(dr["imagefile"]);
+            //modle.ImageStream = ;
+            modle.ImageType = (IdImagTypeEnum)(Utils.StrToInt(dr["imagetype"].ToString(), 0));
+            modle.ImageDesc = Convert.ToString(dr["imagedesc"]);
+            modle.Status = (IdImageStatusEnum)(Utils.StrToInt(dr["status"].ToString(), 0));
+            modle.AddTime = Utils.StrToDateTime(dr["addTime"].ToString()) ;
+            modle.CheckUser = Utils.StrToInt(dr["checkuser"].ToString(), 0);
+            modle.CheckTime = Utils.StrToDateTime(dr["CheckTime"].ToString()); ;
+
+            return modle;
         }
 
         #endregion
@@ -69,13 +113,23 @@
         /// <summary>
         /// 审核用户图片
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="checkUser"></param>
-        /// <param name="checkStatus"></param>
+        /// <param name="id">图片序号</param>
+        /// <param name="checkUser">审核人</param>
+        /// <param name="checkStatus">审核结果.  2:成功   4:失败</param>
         /// <returns></returns>
-        public static int CheckUserImage(int id , int checkUser,int checkStatus)
+        public static int CheckUserImage(int imgId , int checkUser,int checkStatus)
         {
-            return 1;
+            SqlParameter[] parameters = {
+                new SqlParameter("@id",SqlDbType.Int),
+                new SqlParameter("@status",SqlDbType.),
+                new SqlParameter("@checkuser",SqlDbType.Int)
+            };
+            parameters[0].Value = imgId;
+            parameters[1].Value = checkStatus;
+            parameters[2].Value = checkUser;
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_userIdImage_check", parameters);
+
         }
 
         #endregion

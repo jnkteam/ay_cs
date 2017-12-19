@@ -15,7 +15,7 @@
         private byte[] _image_on;
         private string _ptype;
         private string _ptype1;
-        private IdImageStatus _status;
+        private ImageStatus _status;
         private int? _userid;
         private string _why;
 
@@ -139,7 +139,7 @@
             }
         }
 
-        public IdImageStatus status
+        public ImageStatus status
         {
             get
             {

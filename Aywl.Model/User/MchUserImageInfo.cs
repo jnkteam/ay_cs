@@ -16,9 +16,9 @@
         private System.Int32 _userid = 0;
         private System.String _imagefile = string.Empty;
         private System.Byte[] _imagestream = null;
-        private System.Int32 _imagetype = 0;
+        private IdImagTypeEnum _imagetype = IdImagTypeEnum.空;
         private System.String _imagedesc = string.Empty;
-        private IdImageStatus _status = IdImageStatus.未知;
+        private IdImageStatusEnum _status = IdImageStatusEnum.未知;
         private System.DateTime _addtime = System.DateTime.Now;
         private System.Int32 _checkuser = 0;
         private System.DateTime _checktime = System.DateTime.Now;
@@ -66,7 +66,7 @@
         /// <summary>
         /// 设置或获取图片类型
         /// </summary>
-        public System.Int32 ImageType
+        public IdImagTypeEnum ImageType
         {
             set { this._imagetype = value; }
             get { return this._imagetype; }
@@ -84,7 +84,7 @@
         /// <summary>
         /// 设置或获取状态图片状态
         /// </summary>
-        public IdImageStatus Status
+        public IdImageStatusEnum Status
         {
             set { this._status = value; }
             get { return this._status; }

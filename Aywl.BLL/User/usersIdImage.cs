@@ -114,7 +114,7 @@
                 commandParameters[3].Value = model.admin;
                 commandParameters[4].Value = model.checktime;
                 bool flag = DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_usersIdImage_update", commandParameters) > 0;
-                if (flag && (model.status == IdImageStatus.审核成功))
+                if (flag && (model.status == ImageStatus.审核成功))
                 {
                     UserFactory.ClearCache(model.userId.Value);
                 }
@@ -246,11 +246,11 @@
                 }
                 if (ds.Tables[0].Rows[0]["status"].ToString() != "")
                 {
-                    info.status = (IdImageStatus) int.Parse(ds.Tables[0].Rows[0]["status"].ToString());
+                    info.status = (ImageStatus) int.Parse(ds.Tables[0].Rows[0]["status"].ToString());
                 }
                 else
                 {
-                    info.status = IdImageStatus.未知;
+                    info.status = ImageStatus.未知;
                 }
                 info.why = ds.Tables[0].Rows[0]["why"].ToString();
                 if (ds.Tables[0].Rows[0]["admin"].ToString() != "")

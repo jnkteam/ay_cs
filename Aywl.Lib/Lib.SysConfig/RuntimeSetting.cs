@@ -206,11 +206,54 @@
                 return config;
             }
         }
-    #endregion
+        #endregion
 
-    #region 短信配置
+        #region 短信配置
+        
+        public static string SMUID
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "SMUID");
+            }
+        }
 
-    public static string HostName
+        public static string SMPWD
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "SMPWD");
+            }
+        }
+
+        public static string JXTURL
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "JXTURL");
+            }
+        }
+
+
+        #endregion
+
+        /// <summary>
+        /// 网站用户名称
+        /// </summary>
+        public static string SiteUser
+        {
+            get
+            {
+                return ConfigHelper.GetConfig(SettingGroup, "SiteUser").ToLower();
+            }
+        }
+    }
+}
+
+
+/*
+
+        public static string HostName
         {
             get
             {
@@ -226,20 +269,12 @@
             }
         }
 
-        public static string JXTURL
+            
+        public static string SMSUser
         {
             get
             {
-                return ConfigHelper.GetConfig(SettingGroup, "JXTURL");
-            }
-        }
-
-
-        public static string SMPWD
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "SMPWD");
+                return ConfigHelper.GetConfig(SettingGroup, "SMSUser");
             }
         }
 
@@ -291,39 +326,6 @@
             }
         }
 
-        public static string SMSUser
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "SMSUser");
-            }
-        }
-
-        public static string SMUID
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "SMUID");
-            }
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 网站用户名称
-        /// </summary>
-        public static string SiteUser
-        {
-            get
-            {
-                return ConfigHelper.GetConfig(SettingGroup, "SiteUser").ToLower();
-            }
-        }
-    }
-}
-
-
-/*
  
         public static bool CheckUrlReferrer
         {
@@ -488,4 +490,5 @@
 
 
  */
+
 

@@ -59,12 +59,12 @@
 
         public static string SendSmsWithCheck(string mobile, string msg, string type)
         {
-            //string sMUID = RuntimeSetting.SMUID;
-            //string sMPWD = RuntimeSetting.SMPWD;
-            //string jXTURL = RuntimeSetting.JXTURL;
-            //int maxInformationNumber = SysConfig.MaxInformationNumber;
+            string sMUID = RuntimeSetting.SMUID;
+            string sMPWD = RuntimeSetting.SMPWD;
+            string jXTURL = RuntimeSetting.JXTURL;
+            int maxInformationNumber = 1000000;  //短信最多发送次数，这个不取配置里的信息 SysConfig.MaxInformationNumber;
             //return SendJXTWithCheck(sMUID, sMPWD, jXTURL, maxInformationNumber, mobile, msg, type);
-            return "";
+            return "";    //测试用，成功返回空
         }
 
         public static string SendSmsWithCheck(string sn, string pwd, int maxSendTimes, string mobile, string msg, string type)

@@ -38,9 +38,11 @@ namespace OriginalStudio.Model.User
         private System.String _firstloginip = string.Empty;
         private System.String _firstloginmac = string.Empty;
         private System.String _lastloginip = string.Empty;
+        private System.String _lastpreloginip = string.Empty;
         private System.String _lastloginmac = string.Empty;
         private System.DateTime _firstlogintime = System.DateTime.Now;
         private System.DateTime _lastlogintime = System.DateTime.Now;
+        private System.DateTime _lastprelogintime = System.DateTime.Now; 
         private System.String _sessionid = string.Empty;
         private System.Int32 _status = 0;
         private System.DateTime _addtime = System.DateTime.Now;
@@ -474,6 +476,24 @@ namespace OriginalStudio.Model.User
         {
             set { this._token = value; }
             get { return this._token.Trim(); }
+        }
+
+        /// <summary>
+        /// 设置或获取倒数第二次登录时间
+        /// </summary>
+        public System.DateTime LastPreLoginTime
+        {
+            set { this._lastprelogintime = value; }
+            get { return this._lastprelogintime; }
+        }
+
+        /// <summary>
+        /// 设置或获取倒数第二次登陆IP
+        /// </summary>
+        public System.String LastPreLoginIP
+        {
+            set { this._lastpreloginip = value; }
+            get { return this._lastpreloginip.Trim(); }
         }
 
         #endregion 公开属性

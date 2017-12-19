@@ -19,7 +19,12 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@question", SqlDbType.NVarChar, 150), new SqlParameter("@release", SqlDbType.Bit, 1), new SqlParameter("@sort", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10),
+                    new SqlParameter("@question", SqlDbType.NVarChar, 150),
+                    new SqlParameter("@release", SqlDbType.Bit, 1),
+                    new SqlParameter("@sort", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Direction = ParameterDirection.Output;
                 commandParameters[1].Value = model.question;
                 commandParameters[2].Value = model.release;
@@ -70,7 +75,7 @@
                 o = (DataSet) WebCache.GetCacheService().RetrieveObject(objId);
                 if (o == null)
                 {
-                    SqlDependency dependency = DataBase.AddSqlDependency(objId, "question", "[id]\r\n      ,[question]\r\n      ,[release]\r\n      ,[sort]", "", null);
+                    SqlDependency dependency = DataBase.AddSqlDependency(objId, "question", "*", "", null);
                     o = this.GetList("release=1");
                     WebCache.GetCacheService().AddObject(objId, o);
                 }
@@ -140,7 +145,12 @@
         {
             try
             {
-                SqlParameter[] commandParameters = new SqlParameter[] { new SqlParameter("@id", SqlDbType.Int, 10), new SqlParameter("@question", SqlDbType.NVarChar, 150), new SqlParameter("@release", SqlDbType.Bit, 1), new SqlParameter("@sort", SqlDbType.Int, 10) };
+                SqlParameter[] commandParameters = new SqlParameter[] {
+                    new SqlParameter("@id", SqlDbType.Int, 10),
+                    new SqlParameter("@question", SqlDbType.NVarChar, 150),
+                    new SqlParameter("@release", SqlDbType.Bit, 1),
+                    new SqlParameter("@sort", SqlDbType.Int, 10)
+                };
                 commandParameters[0].Value = model.id;
                 commandParameters[1].Value = model.question;
                 commandParameters[2].Value = model.release;

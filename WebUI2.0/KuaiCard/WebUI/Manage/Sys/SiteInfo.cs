@@ -7,138 +7,74 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using System.Data;
+    using System.Text;
+    using OriginalStudio.Lib.Web;
+    using System.Xml;
 
     public class SiteInfo : ManagePageBase
     {
         private WebInfo _objectInfo = null;
-        protected Button btn_Update;
-        protected RadioButtonList ddlopen;
-        protected RadioButtonList ddlstatus;
+        protected Button btn_Update;      
         protected HtmlForm form1;
-        protected HiddenField hdTemplate;
-        protected HtmlHead Head1;
-        protected HiddenField hfnum;
-        protected HtmlGenericControl jsqqpanle;
-        protected HiddenField JsSave;
-        protected HtmlGenericControl kefu;
-        protected HiddenField kfnum;
-        protected HiddenField kfSave;
-        protected RadioButtonList RadioButtonemail;
-        protected RadioButtonList RadioButtonPhone;
-        protected RadioButtonList RadioButtonshouji;
-        protected RadioButtonList rbl_ActivationByEmail;
-        protected RadioButtonList rbl_debuglog;
-        protected RadioButtonList rbl_isopenCash;
-        protected RadioButtonList rbl_isUserloginByEmail;
-        protected RadioButtonList rbl_mobilval;
-        protected RadioButtonList rbl_NoRef;
-        protected RadioButtonList rbl_settledmode;
-        protected RadioButtonList rblOpenDeduct;
-        protected TextBox TextPhone;
-        protected TextBox txtali;
-        protected TextBox txtapibankname;
-        protected TextBox txtapibankversion;
-        protected TextBox txtapicardname;
-        protected TextBox txtapicardversion;
-        protected TextBox txtbank;
-        protected TextBox txtclosecashReason;
-        protected TextBox txtCode;
-        protected TextBox txtDefaultCPSDrate;
-        protected TextBox txtDomain;
-        protected TextBox txtFooter;
-        protected TextBox txtJSQQ;
-        protected TextBox txtKFQQ;
-        protected TextBox txtMobilMaxSendTimes;
-        protected TextBox txtName;
-        protected TextBox txtPayUrl;
-        protected TextBox txtPhone;
-        protected TextBox txtRefCount;
-        protected TextBox txtTitleSuffix;
-        protected TextBox txtUserloginMsgForCheckfail;
-        protected TextBox txtuserloginMsgForlock;
-        protected TextBox txtUserloginMsgForUnCheck;
-        protected TextBox txtWebSitedescription;
-        protected TextBox txtWebSiteKey;
-        protected TextBox txtweixin;
+        protected DataSet allOptionsSet;
+        protected HiddenField hiddenNameValue;
+        protected DataTable tableOptionsType;
+
+        protected DataTable test1;
+        protected DataTable test2;
+
+        protected DataTable test5;
+
 
         protected void Bind()
         {
-            this.jsqqpanle.InnerHtml = "";
-            this.kefu.InnerHtml = "";
-            this.txtDomain.Text = this.ObjectInfo.Domain;
-            this.txtPayUrl.Text = this.ObjectInfo.PayUrl;
-            this.txtFooter.Text = this.ObjectInfo.Footer;
-            this.txtName.Text = this.ObjectInfo.Name;
-            this.txtPhone.Text = this.ObjectInfo.Phone;
-            this.hdTemplate.Value = this.ObjectInfo.TemplateId.ToString();
-            this.txtCode.Text = this.ObjectInfo.Code;
-            this.txtJSQQ.Text = this.ObjectInfo.Jsqq;
-            this.txtKFQQ.Text = this.ObjectInfo.Kfqq;
-            this.txtapibankname.Text = this.ObjectInfo.apibankname;
-            this.txtapibankversion.Text = this.ObjectInfo.apibankversion;
-            this.txtapicardname.Text = this.ObjectInfo.apicardname;
-            this.txtapicardversion.Text = this.ObjectInfo.apicardversion;
+            DataSet setOptionsTypeList = SysConfig.GetOptionsTypeList(string.Empty);
+            DataTable tableOptionsType = setOptionsTypeList.Tables[0];
+            this.tableOptionsType = tableOptionsType;
+            DataSet coSet = new DataSet();
+            foreach (DataRow row in tableOptionsType.Rows)
+            {
+                DataTable a = SysConfig.GetSysOptionsByTypeId(Convert.ToInt32(row["type_id"])).Tables[0];
+                a.TableName = row["type_id"].ToString();
+                coSet.Tables.Add(a.Copy());
+                
+            }
+   
+            this.allOptionsSet = coSet;
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            this.ObjectInfo.Domain = this.txtDomain.Text.ToLower();
-            this.ObjectInfo.PayUrl = this.txtPayUrl.Text.ToLower();
-            this.ObjectInfo.Footer = this.txtFooter.Text;
-            this.ObjectInfo.Name = this.txtName.Text;
-            this.ObjectInfo.Phone = this.txtPhone.Text;
-            this.ObjectInfo.Jsqq = this.txtJSQQ.Text;
-            this.ObjectInfo.Kfqq = this.txtKFQQ.Text;
-            this.ObjectInfo.Code = this.txtCode.Text;
-            this.ObjectInfo.apibankname = this.txtapibankname.Text.Trim();
-            this.ObjectInfo.apibankversion = this.txtapibankversion.Text.Trim();
-            this.ObjectInfo.apicardname = this.txtapicardname.Text.Trim();
-            this.ObjectInfo.apicardversion = this.txtapicardversion.Text.Trim();
-            if (this.txtName.Text == "")
+            this.Bind();
+            DataTable dtConfig = new DataTable("Table_New");
+           
+            dtConfig.Columns.Add("option_code", typeof(String));
+            dtConfig.Columns.Add("new_value", typeof(String));
+            dtConfig.Columns.Add("option_value", typeof(String));
+
+
+           
+            //string[] itemArr = this.hiddenNameValue.Value.Split('|'); //传递的字符串
+   
+            XmlDocument xmlDoc = new XmlDocument();          
+            xmlDoc.LoadXml(this.hiddenNameValue.Value); 
+            XmlNode rootNode = xmlDoc.SelectSingleNode("HH");
+            foreach (XmlNode xxNode in rootNode.ChildNodes)
             {
-                base.AlertAndRedirect("网站名称不能为空!");
+               
+                string code = xxNode.Name;
+                string name = xxNode.InnerText;
+                string oriOpVal = SysConfig.GetOptionValue(code); //为改变之前的值
+                dtConfig.Rows.Add(code, name, oriOpVal);
+                
             }
-            else if (this.txtDomain.Text == "")
+        
+            if (SysConfig.UpdateSysOptions(dtConfig))
             {
-                base.AlertAndRedirect("域名不能为空!");
+                base.AlertAndRedirect("操作成功", "SiteInfo.aspx?sign=40&menuId=41");
             }
-            else if (this.txtPhone.Text == "")
-            {
-                base.AlertAndRedirect("联系电话不能为空!");
-            }
-            else if (WebInfoFactory.Update(this.ObjectInfo))
-            {
-                SysConfig.Update(1, this.ddlstatus.SelectedValue);
-                SysConfig.Update(2, this.ddlopen.SelectedValue);
-                SysConfig.Update(3, this.rbl_mobilval.SelectedValue);
-                int result = 0;
-                int.TryParse(this.txtMobilMaxSendTimes.Text.Trim(), out result);
-                SysConfig.Update(4, result.ToString());
-                SysConfig.Update(0x25, this.txtRefCount.Text.Trim());
-                SysConfig.Update(0x26, this.rbl_NoRef.SelectedValue);
-                SysConfig.Update(0x27, this.txtuserloginMsgForlock.Text.Trim());
-                SysConfig.Update(40, this.txtUserloginMsgForUnCheck.Text);
-                SysConfig.Update(0x29, this.txtUserloginMsgForCheckfail.Text.Trim());
-                SysConfig.Update(0x2a, this.rblOpenDeduct.SelectedValue);
-                SysConfig.Update(0x2b, this.txtDefaultCPSDrate.Text);
-                SysConfig.Update(0x2c, this.rbl_isopenCash.SelectedValue);
-                SysConfig.Update(0x2d, this.txtclosecashReason.Text);
-                SysConfig.Update(0x2e, this.rbl_settledmode.SelectedValue);
-                SysConfig.Update(0x2f, this.rbl_ActivationByEmail.SelectedValue);
-                SysConfig.Update(0x34, this.rbl_debuglog.SelectedValue);
-                SysConfig.Update(0x39, this.txtTitleSuffix.Text);
-                SysConfig.Update(0x3a, this.txtWebSiteKey.Text);
-                SysConfig.Update(0x3b, this.txtWebSitedescription.Text);
-                SysConfig.Update(0x45, this.rbl_isUserloginByEmail.SelectedValue);
-                SysConfig.Update(0x48, this.TextPhone.Text);
-                SysConfig.Update(0x47, this.RadioButtonPhone.SelectedValue);
-                SysConfig.Update(0x4b, this.RadioButtonshouji.SelectedValue);
-                SysConfig.Update(0x4c, this.RadioButtonemail.SelectedValue);
-                SysConfig.Update(0x4d, this.txtbank.Text);
-                SysConfig.Update(0x4e, this.txtweixin.Text);
-                SysConfig.Update(0x4f, this.txtali.Text);
-                base.AlertAndRedirect("更新成功!");
-            }
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -147,47 +83,12 @@
             if (!base.IsPostBack)
             {
                 this.Bind();
-                this.ddlstatus.SelectedValue = SysConfig.IsAudit ? "1" : "0";
-                this.ddlopen.SelectedValue = SysConfig.IsOpenRegistration ? "1" : "0";
-                this.rbl_mobilval.SelectedValue = SysConfig.IsPhoneVerification ? "1" : "0";
-                if (SysConfig.IsPhoneVerification)
-                {
-                    this.txtMobilMaxSendTimes.Text = SysConfig.MaxInformationNumber.ToString();
+                if (this.cmd == "update") {
+
+                    
                 }
-                else
-                {
-                    this.txtMobilMaxSendTimes.Text = string.Empty;
-                }
-                this.txtRefCount.Text = SysConfig.LaiLuCount.ToString();
-                if (SysConfig.IsOpenNoLaiLu)
-                {
-                    this.rbl_NoRef.SelectedValue = "1";
-                }
-                else
-                {
-                    this.rbl_NoRef.SelectedValue = "0";
-                }
-                this.txtuserloginMsgForlock.Text = SysConfig.UserloginMsgForlock;
-                this.txtUserloginMsgForUnCheck.Text = SysConfig.UserloginMsgForUnCheck;
-                this.txtUserloginMsgForCheckfail.Text = SysConfig.UserloginMsgForCheckfail;
-                this.rblOpenDeduct.SelectedValue = SysConfig.isOpenDeduct ? "1" : "0";
-                this.txtDefaultCPSDrate.Text = SysConfig.DefaultCPSDrate.ToString();
-                this.rbl_isopenCash.SelectedValue = SysConfig.isopenCash ? "1" : "0";
-                this.txtclosecashReason.Text = SysConfig.closecashReason;
-                this.rbl_ActivationByEmail.SelectedValue = SysConfig.RegistrationActivationByEmail ? "1" : "0";
-                this.rbl_settledmode.SelectedValue = SysConfig.DefaultSettledMode.ToString();
-                this.rbl_debuglog.SelectedValue = SysConfig.debuglog ? "1" : "0";
-                this.TextPhone.Text = SysConfig.textPhone.ToString();
-                this.RadioButtonPhone.SelectedValue = SysConfig.radioButtonPhone ? "1" : "0";
-                this.RadioButtonshouji.SelectedValue = SysConfig.radioButtonshouji ? "1" : "0";
-                this.RadioButtonemail.SelectedValue = SysConfig.radioButtonemail ? "1" : "0";
-                this.txtTitleSuffix.Text = SysConfig.WebSiteTitleSuffix;
-                this.txtWebSiteKey.Text = SysConfig.WebSiteKey;
-                this.txtWebSitedescription.Text = SysConfig.WebSitedescription;
-                this.rbl_isUserloginByEmail.SelectedValue = SysConfig.isUserloginByEmail;
-                this.txtbank.Text = SysConfig.banklimit.ToString();
-                this.txtweixin.Text = SysConfig.weixinlimit.ToString();
-                this.txtali.Text = SysConfig.alilimit.ToString();
+
+           
             }
         }
 
@@ -199,7 +100,13 @@
                 base.Response.End();
             }
         }
-
+        public string cmd
+        {
+            get
+            {
+                return WebBase.GetQueryStringString("cmd", "");
+            }
+        }
         public WebInfo ObjectInfo
         {
             get

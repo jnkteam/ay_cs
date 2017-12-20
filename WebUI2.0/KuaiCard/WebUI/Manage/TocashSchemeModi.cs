@@ -10,10 +10,14 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.Model.Withdraw;
+    using OriginalStudio.BLL.Supplier;
+    using System.Data;
 
     public class TocashSchemeModi : ManagePageBase
     {
-        public TocashSchemeInfo _ItemInfo = null;
+        public WithdrawSchemeInfo _ItemInfo = null;
         protected Button btnAdd;
         protected HtmlForm form1;
         protected RadioButtonList rblisdefault;
@@ -32,6 +36,10 @@
         protected TextBox txtotherdetentiondays;
         protected TextBox txtschemename;
         protected TextBox txtweixindetentiondays;
+
+        protected DropDownList SupplierDrop; //结算通道
+
+
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
@@ -85,78 +93,91 @@
                 int num8 = int.Parse(this.rblisdefault.SelectedValue);
                 int num9 = int.Parse(this.rblVaiInterface.SelectedValue);
                 int result = 0;
-                int num11 = 0;
+                //int num11 = 0;
                 int num12 = 0;
                 int num13 = 0;
                 int num14 = 0;
                 int.TryParse(this.txtbankdetentiondays.Text.Trim(), out result);
-                int.TryParse(this.txtcarddetentiondays.Text.Trim(), out num11);
+                //int.TryParse(this.txtcarddetentiondays.Text.Trim(), out num11);
                 int.TryParse(this.txtotherdetentiondays.Text.Trim(), out num12);
                 int.TryParse(this.txtalipaydetentiondays.Text.Trim(), out num13);
                 int.TryParse(this.txtweixindetentiondays.Text.Trim(), out num14);
-                this.model.schemename = text;
-                this.model.minamtlimitofeach = num;
-                this.model.maxamtlimitofeach = num2;
-                this.model.dailymaxtimes = num3;
-                this.model.dailymaxamt = num4;
-                this.model.chargerate = num5;
-                this.model.chargeleastofeach = num6;
-                this.model.chargemostofeach = num7;
-                this.model.isdefault = num8;
-                this.model.vaiInterface = num9;
-                this.model.bankdetentiondays = result;
-                this.model.carddetentiondays = num11;
-                this.model.alipaydetentiondays = num13;
-                this.model.weixindetentiondays = num14;
-                this.model.otherdetentiondays = num12;
-                this.model.tranRequiredAudit = Convert.ToByte(this.rbltranRequiredAudit.SelectedValue);
+                this.model.SchemeName = text;
+                this.model.SingleMinAmtLimit = num;
+                this.model.SingleMaxAmtLimit = num2;
+                this.model.DailyMaxTimes = num3;
+                this.model.DailyMaxAmt = num4;
+                this.model.ChargeRate = num5;
+                this.model.SingleMinCharge = num6;
+                this.model.SingleMaxCharge = num7;
+                this.model.IsDefault = num8;
+                this.model.IsTranApi = num9;
+                this.model.BankDetentionDays = result;
+                //this.model.carddetentiondays = num11;
+                this.model.AlipayDetentionDays = num13;
+                this.model.WeiXinDetentionDays = num14;
+                this.model.OtherDetentionDays = num12;
+                this.model.IsTranRequiredAudit = Convert.ToByte(this.rbltranRequiredAudit.SelectedValue);//需要审核
+                this.model.TranSupplier = Convert.ToInt32(this.SupplierDrop.SelectedValue);//通道
+
                 bool flag = false;
                 if (this.isUpdate)
                 {
-                    if (OriginalStudio.BLL.User.TocashScheme.Update(this.model))
+                    if (WithdrawSchemeFactory.Update(this.model))
                     {
                         flag = true;
                     }
                 }
                 else
                 {
-                    this.model.type = 1;
-                    if (OriginalStudio.BLL.User.TocashScheme.Add(this.model) > 0)
+                    this.model.Type = 1;
+                    if (WithdrawSchemeFactory.Add(this.model) > 0)
                     {
                         flag = true;
                     }
                 }
                 if (flag)
                 {
-                    base.AlertAndRedirect("操作成功", "TocashSchemes.aspx");
+                    showPageMsg("操作成功");
                 }
                 else
                 {
-                    base.AlertAndRedirect("操作失败");
+                    showPageMsg("操作失败");
                 }
             }
         }
 
         private void InitForm()
         {
+
+            //通道类型
+            DataTable SupplierTable = SysSupplierFactory.GetList("IsDistribution  = 1").Tables[0];
+            
+            foreach (DataRow row in SupplierTable.Rows)
+            {
+                this.SupplierDrop.Items.Add(new ListItem(row["SupplierName"].ToString(), row["SupplierCode"].ToString()));
+            }
             if (this.isUpdate)
             {
-                this.txtschemename.Text = this.model.schemename;
-                this.txtminamtlimitofeach.Text = this.model.minamtlimitofeach.ToString();
-                this.txtmaxamtlimitofeach.Text = this.model.maxamtlimitofeach.ToString();
-                this.txtdailymaxtimes.Text = this.model.dailymaxtimes.ToString();
-                this.txtdailymaxamt.Text = this.model.dailymaxamt.ToString();
-                this.txtchargerate.Text = this.model.chargerate.ToString();
-                this.txtchargeleastofeach.Text = this.model.chargeleastofeach.ToString();
-                this.txtchargemostofeach.Text = this.model.chargemostofeach.ToString();
-                this.rblisdefault.SelectedValue = this.model.isdefault.ToString();
-                this.rblVaiInterface.SelectedValue = this.model.vaiInterface.ToString();
-                this.txtbankdetentiondays.Text = this.model.bankdetentiondays.ToString();
-                this.txtcarddetentiondays.Text = this.model.carddetentiondays.ToString();
-                this.txtotherdetentiondays.Text = this.model.otherdetentiondays.ToString();
-                this.rbltranRequiredAudit.SelectedValue = this.model.tranRequiredAudit.ToString();
-                this.txtalipaydetentiondays.Text = this.model.alipaydetentiondays.ToString();
-                this.txtweixindetentiondays.Text = this.model.weixindetentiondays.ToString();
+                this.txtschemename.Text = this.model.SchemeName;
+                this.txtminamtlimitofeach.Text = this.model.SingleMinAmtLimit.ToString();
+                this.txtmaxamtlimitofeach.Text = this.model.SingleMaxAmtLimit.ToString();
+                this.txtdailymaxtimes.Text = this.model.DailyMaxTimes.ToString();
+                this.txtdailymaxamt.Text = this.model.DailyMaxAmt.ToString();
+                this.txtchargerate.Text = this.model.ChargeRate.ToString();
+                this.txtchargeleastofeach.Text = this.model.SingleMinCharge.ToString();
+                this.txtchargemostofeach.Text = this.model.SingleMaxCharge.ToString();
+                this.rblisdefault.SelectedValue = this.model.IsDefault.ToString();
+                this.rblVaiInterface.SelectedValue = this.model.IsTranApi.ToString(); //是否走接口
+                this.txtbankdetentiondays.Text = this.model.BankDetentionDays.ToString();
+                //this.txtcarddetentiondays.Text = this.model.carddetentiondays.ToString();
+                this.txtotherdetentiondays.Text = this.model.OtherDetentionDays.ToString();
+                this.rbltranRequiredAudit.SelectedValue = this.model.IsTranRequiredAudit.ToString();//是否需要审核
+                this.txtalipaydetentiondays.Text = this.model.AlipayDetentionDays.ToString();
+                this.txtweixindetentiondays.Text = this.model.WeiXinDetentionDays.ToString();
+
+
+                this.SupplierDrop.SelectedValue = this.model.TranSupplier.ToString();//通道
             }
         }
 
@@ -207,7 +228,7 @@
             }
         }
 
-        public TocashSchemeInfo model
+        public WithdrawSchemeInfo model
         {
             get
             {
@@ -215,11 +236,11 @@
                 {
                     if (this.isUpdate)
                     {
-                        this._ItemInfo = OriginalStudio.BLL.User.TocashScheme.GetModel(this.ItemInfoId);
+                        this._ItemInfo = WithdrawSchemeFactory.GetModel(this.ItemInfoId);
                     }
                     else
                     {
-                        this._ItemInfo = new TocashSchemeInfo();
+                        this._ItemInfo = new WithdrawSchemeInfo();
                     }
                 }
                 return this._ItemInfo;

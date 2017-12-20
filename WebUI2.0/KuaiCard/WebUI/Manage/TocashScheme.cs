@@ -10,10 +10,13 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
+    using OriginalStudio.BLL.Withdraw;
+    using OriginalStudio.Model.Withdraw;
+    using OriginalStudio.BLL.Supplier;
 
     public class TocashScheme : ManagePageBase
     {
-        public TocashSchemeInfo _ItemInfo = null;
+        public WithdrawSchemeInfo _ItemInfo = null;
         protected Button btnAdd;
         protected HtmlForm form1;
         protected GridView GridView1;
@@ -21,8 +24,10 @@
 
         private void BindView()
         {
-            DataTable table = OriginalStudio.BLL.User.TocashScheme.GetList("type=1").Tables[0];
-            this.GridView1.DataSource = table.DefaultView;
+            
+
+            DataTable table = WithdrawSchemeFactory.GetList("type=1").Tables[0];
+            this.GridView1.DataSource = table;
             this.GridView1.DataBind();
         }
 
@@ -30,18 +35,43 @@
         {
             base.Response.Redirect("TocashSchemeModi.aspx");
         }
+        protected void GVChannel_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView dataItem = e.Row.DataItem as DataRowView;
+                Literal transupplierNameLiteral = e.Row.FindControl("transupplierName") as Literal;
+                Literal isdefaultIconLiteral = e.Row.FindControl("isdefaultIcon") as Literal;
 
+                string str = "<a title='？' style='color:#000' href='javascript:void(0)'> <i class='fa   fa-question-circle'></i></a>";
+                if (dataItem["IsDefault"] != DBNull.Value)
+                {
+                    if (Convert.ToInt32(dataItem["IsDefault"]) == 0)
+                    {
+                        str = "<a title=''  style='color:#ff4a4a' href='javascript:void(0)'> <i class='fa  fa-times-circle'></i></a>";
+                    }
+                    else
+                    {
+                        str = "<a title='' style='color:#1db283' href='javascript:void(0)'> <i class='fa  fa-check-circle'></i></a>";
+                    }
+                }
+                isdefaultIconLiteral.Text = str;
+                string Name = SysSupplierFactory.GetSupplierModelByCode(Convert.ToInt32(dataItem["TranSupplier"])).SupplierName;
+                transupplierNameLiteral.Text = Name;
+
+            }
+        }
         private void DoCmd()
         {
             if (this.isDel)
             {
-                if (OriginalStudio.BLL.User.TocashScheme.Delete(this.ItemInfoId))
+                if (WithdrawSchemeFactory.Delete(this.ItemInfoId))
                 {
-                    base.AlertAndRedirect("删除成功!", "TocashSchemes.aspx");
+                    base.AlertAndRedirect("删除成功!", "TocashSchemes.aspx?sign=19&menuId=25");
                 }
                 else
                 {
-                    base.AlertAndRedirect("删除失败!", "TocashSchemes.aspx");
+                    base.AlertAndRedirect("删除失败!", "TocashSchemes.aspx?sign=19&menuId=25");
                 }
             }
         }
@@ -95,7 +125,7 @@
             }
         }
 
-        public TocashSchemeInfo ItemInfo
+        public WithdrawSchemeInfo ItemInfo
         {
             get
             {
@@ -103,11 +133,11 @@
                 {
                     if (this.isUpdate)
                     {
-                        this._ItemInfo = OriginalStudio.BLL.User.TocashScheme.GetModel(this.ItemInfoId);
+                        this._ItemInfo = WithdrawSchemeFactory.GetModel(this.ItemInfoId);
                     }
                     else
                     {
-                        this._ItemInfo = new TocashSchemeInfo();
+                        this._ItemInfo = new WithdrawSchemeInfo();
                     }
                 }
                 return this._ItemInfo;

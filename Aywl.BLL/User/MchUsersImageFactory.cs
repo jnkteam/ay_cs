@@ -60,7 +60,7 @@
         /// <param name="userId">0显示所有用户图片;>1显示指定用户图片</param>
         /// <param name="status">0显示所有用户图片;  其余状态 1,2,4</param>
         /// <returns></returns>
-        public DataSet GetUserImages(int userId, int status = 0)
+        public static DataSet GetUserImages(int userId, int status = 0)
         {
             SqlParameter[] parameters = {
                 new SqlParameter("@userId",SqlDbType.Int),

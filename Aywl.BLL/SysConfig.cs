@@ -117,7 +117,7 @@
                 if (dr["new_value"].ToString() != dr["option_value"].ToString())
                 {
                     parameters[0].Value = dr["option_code"].ToString();
-                    parameters[1].Value = dr["option_value"].ToString();
+                    parameters[1].Value = dr["new_value"].ToString();  //修改逻辑错误
 
                     if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_sys_option_update", parameters) == 0)
                         return false;
@@ -135,8 +135,49 @@
             return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_sys_option_get", null);
         }
 
+        public static DataSet GetSysOptionsByTypeId(int typeId)
+        {
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.Append("SELECT st.type_id,st.type_desc,so.value_type,so.option_code,so.option_desc,so.option_value,so.select_items FROM sys_options_type st,sys_options so WHERE st.type_id = so.value_type and st.type_id = "+ typeId + " ORDER BY st.type_id, so.list_order ASC ");
+                
+                return DataBase.ExecuteDataset(CommandType.Text, builder.ToString(), null);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取options_type列表
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public static DataSet GetOptionsTypeList(string strWhere)
+        {
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.Append("select  * FROM sys_options_type ");
+                if (strWhere.Trim() != "")
+                    builder.Append(" where " + strWhere);
+                return DataBase.ExecuteDataset(CommandType.Text, builder.ToString(), null);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return null;
+            }
+        }
+
+
+
+
         #region 正在使用
-        
+
         /// <summary>
         /// 启用随机扣量。
         /// </summary>

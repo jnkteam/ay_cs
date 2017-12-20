@@ -68,16 +68,17 @@
                 }
                 //model.why = string.Empty;
                 model.CheckTime = DateTime.Now;
-                //model.admin = new int?(base.ManageId);
+                model.CheckUser = base.ManageId;
                 model.UserID = this.UserId;
                 
-                if (MchUsersImageFactory.CheckUserImage(0,0,0) == 1)
+
+                if (MchUsersImageFactory.CheckUserImage(this.ItemID, base.ManageId, Convert.ToInt32(model.Status)) > 0)
                 {
                     base.AlertAndRedirect("操作成功", "UserIdImgList.aspx?s=1");
                 }
                 else
                 {
-                    base.AlertAndRedirect("操作失败");
+                    base.AlertAndRedirect("操作失败", "UserIdImgList.aspx?s=1");
                 }
             }
         }
@@ -97,35 +98,10 @@
 
         private void LoadData()
         {
-            List<SearchParam> searchParams = new List<SearchParam>();
-            /*
-            if (!string.IsNullOrEmpty(this.StatusList.SelectedValue))
-            {
-                searchParams.Add(new SearchParam("status", int.Parse(this.StatusList.SelectedValue)));
-            }
-            int result = 0;
-            if (int.TryParse(this.txtUserId.Text, out result) && (result > 0))
-            {
-                searchParams.Add(new SearchParam("userid", result));
-            }
-            if (!string.IsNullOrEmpty(this.txtUserName.Text))
-            {
-                searchParams.Add(new SearchParam("userName", this.txtUserName.Text));
-            }
-            DateTime minValue = DateTime.MinValue;
-            if ((!string.IsNullOrEmpty(this.StimeBox.Text.Trim()) && DateTime.TryParse(this.StimeBox.Text.Trim(), out minValue)) && (minValue > DateTime.MinValue))
-            {
-                searchParams.Add(new SearchParam("stime", this.StimeBox.Text.Trim()));
-            }
-            if ((!string.IsNullOrEmpty(this.EtimeBox.Text.Trim()) && DateTime.TryParse(this.EtimeBox.Text.Trim(), out minValue)) && (minValue > DateTime.MinValue))
-            {
-                searchParams.Add(new SearchParam("etime", minValue.AddDays(1.0)));
-            }
-            */
+           
             string orderby = string.Empty;
-            //DataSet set = MchUsersImageFactory.PageSearch(searchParams, this.Pager1.PageSize, this.Pager1.CurrentPageIndex, orderby);
-            //this.Pager1.RecordCount = Convert.ToInt32(set.Tables[0].Rows[0][0]);
-            //this.rptIamges.DataSource = set.Tables[1];
+            DataSet set = MchUsersImageFactory.GetUserImages(0,0);
+            this.rptIamges.DataSource = set.Tables[0];
             this.rptIamges.DataBind();
         }
 
@@ -154,6 +130,14 @@
             this.LoadData();
         }
 
+        public enum ImageType
+        {
+            unknown   = 0,
+            身份证正面  = 1,
+            身份证背面  = 2,
+            营业执照    = 3
+        }
+
         protected void rptUsersItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
@@ -161,13 +145,26 @@
                 string str = DataBinder.Eval(e.Item.DataItem, "id").ToString();
                 string str2 = DataBinder.Eval(e.Item.DataItem, "userid").ToString();
                 string str3 = DataBinder.Eval(e.Item.DataItem, "status").ToString();
+                string ImageType = DataBinder.Eval(e.Item.DataItem, "ImageType").ToString();
+
+
+
                 string str4 = string.Empty;
-                if (str3 == "1")
-                {
-                    str4 = string.Format("<a onclick=\"return confirm('审核成功?')\" href=\"?cmd=ok&ID={0}&userid={1}\" style=\"color:Green;\">通过</a> <a onclick=\"return confirm('审核失败？')\" href=\"?cmd=fail&ID={0}&userid={1}\" style=\"color:red;\">失败</a>", str, str2);
-                }
+                
+                    str4 = string.Format("<a onclick=\"return confirm('审核成功?')\" href=\"?cmd=ok&ID={0}&userid={1}\" style=\"color:#fff;\">通过</a> <a onclick=\"return confirm('审核失败？')\" href=\"?cmd=fail&ID={0}&userid={1}\" style=\"color:#fff;\">失败</a>", str, str2);
+                
+
+                string statusName = Enum.Parse(typeof(ImageStatus), str3, true).ToString();
+                string imageTypeName = Enum.Parse(typeof(ImageType), ImageType, true).ToString();
+
                 Label label = (Label) e.Item.FindControl("labagcmd");
+                Label labelStaus = (Label)e.Item.FindControl("labelStatus");
+                Label labelImageTypeName = (Label)e.Item.FindControl("labelImageTypeName");
+
+
                 label.Text = str4;
+                labelStaus.Text = statusName;
+                labelImageTypeName.Text = imageTypeName;
             }
         }
 

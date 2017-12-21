@@ -62,7 +62,6 @@
             }
         }
 
-
         public static bool Update(SettledInfo model)
         {
             try
@@ -475,10 +474,14 @@
                 string wheres = BuilderWhere(searchParams, paramList);
 
                 return DataBase.ExecuteDataset(CommandType.Text,
-                    SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" +
-                    SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false)
-                    //+ "\r\nselect ISNULL(sum(amount),0) from V_Settled where " + wheres, paramList.ToArray());
-                    + "\r\n select sum(1) totalcount,sum(amount) totalamt,sum(case when [status]=8 then 1 else 0 end) successcount,sum(case when [status]=8 then amount else 0 end) successamt,sum(case when [status]=8 then ISNULL([charges],0) else 0 end) successcharges  from V_Settled where " + wheres, paramList.ToArray());
+                        SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n" +
+                        SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false) + "\r\n" +
+                        "select sum(1) totalcount," +
+                        "sum(amount) totalamt," +
+                        "sum(case when [status]=8 then 1 else 0 end) successcount," +
+                        "sum(case when [status]=8 then amount else 0 end) successamt," +
+                        "sum(case when [status]=8 then ISNULL([charges],0) else 0 end) successcharges  " +
+                        " from V_Settled where " + wheres, paramList.ToArray());
             }
             catch (Exception exception)
             {

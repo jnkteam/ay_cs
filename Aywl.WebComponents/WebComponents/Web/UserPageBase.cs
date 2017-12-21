@@ -88,6 +88,18 @@
             }
         }
 
+        public int UserId
+        {
+            get
+            {
+                if (this.CurrentUser == null)
+                {
+                    return 0;
+                }
+                return this.CurrentUser.UserID;
+            }
+        }
+
         #endregion
 
         #region 身份验证
@@ -121,6 +133,15 @@
                 model.lastAccesstime = DateTime.Now;
                 UserAccessTime.Add(model);
             }
+        }
+
+        #endregion
+
+        #region 格式化
+
+        protected string FormatTime(string src)
+        {
+            return OriginalStudio.Lib.Utils.Common.GetStandardDateTime(src);
         }
 
         #endregion
@@ -299,17 +320,7 @@
             }
         }
 
-        public int UserId
-        {
-            get
-            {
-                if (this.CurrentUser == null)
-                {
-                    return 0;
-                }
-                return this.CurrentUser.UserID;
-            }
-        }
+
 
         public string UserViewBankAccout
         {

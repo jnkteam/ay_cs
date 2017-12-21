@@ -1387,6 +1387,30 @@
             return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_user_paybank_List", parameters);
         }
 
+        public static DataSet GetUserPayBankList(int userId, int pageSize, int page, string orderby)
+        {
+            DataSet set = new DataSet();
+            try
+            {
+                string tables = "mch_userPayBankList"; //用户专用查询。2017.3.2增加
+                string key = "[id]";
+                if (string.IsNullOrEmpty(orderby))
+                {
+                    orderby = " id desc";
+                }
+                List<SqlParameter> paramList = new List<SqlParameter>();
+                string wheres = " UserID = " + userId.ToString();
+
+                return DataBase.ExecuteDataset(CommandType.Text, SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n"
+                    + SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false));
+            }
+            catch (Exception exception)
+            {
+                OriginalStudio.Lib.Logging.LogHelper.Write("GetUserPayBankList错误：" + exception.Message.ToString());
+                return set;
+            }
+        }
+
         /// <summary>
         /// 删除商户银行卡
         /// </summary>

@@ -1327,6 +1327,15 @@
         }
 
         #endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetAllUserList()
+        {
+            string commandText = "select userid,userName from mch_userbase with(nolock) ";
+            return DataBase.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
 
         #region 通道限额显示及设置
 

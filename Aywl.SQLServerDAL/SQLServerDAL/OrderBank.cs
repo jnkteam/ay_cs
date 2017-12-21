@@ -523,6 +523,8 @@
             info.payerip = dr["payerip"].ToString();
             info.clientip = dr["clientip"].ToString();
             info.referUrl = dr["referUrl"].ToString();
+            info.MerchantName = dr["MerchantName"].ToString();
+            info.ipaddress   = dr["ipaddress"].ToString();
             info.addtime = Utils.StrToDateTime(dr["addtime"].ToString());
             info.supplierId = Utils.StrToInt(dr["supplierID"].ToString(), 0);
             info.supplierOrder = dr["supplierOrder"].ToString();

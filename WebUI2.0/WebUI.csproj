@@ -112,6 +112,12 @@
     <Compile Include="KuaiCard\WebUI\Manage\StatCharts\SingleDayHourChart.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserSupplierEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\User\UserSupplier.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="KuaiCard\WebUI\Manage\User\PayRate.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

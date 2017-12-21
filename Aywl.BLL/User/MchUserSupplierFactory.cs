@@ -21,7 +21,7 @@ namespace OriginalStudio.BLL.User
         /// <param name="userId">商户ID。0：全部</param>
         /// <param name="supplierCode">通道代码。0：全部</param>
         /// <returns></returns>
-        public DataSet GetUserSupplierList(int userId, int supplierCode)
+        public static DataSet GetUserSupplierList(int userId, int supplierCode)
         {
             SqlParameter[] parameters = {
                     new SqlParameter("@userid",SqlDbType.Int),
@@ -37,7 +37,7 @@ namespace OriginalStudio.BLL.User
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public int EditUserSupplier(MchUserSupplier model)
+        public static int EditUserSupplier(MchUserSupplier model)
         {
             SqlParameter[] parameters = {
                 new SqlParameter("@userid",SqlDbType.Int),
@@ -71,7 +71,7 @@ namespace OriginalStudio.BLL.User
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public DataSet DeleteUserSupplier(int Id)
+        public static DataSet DeleteUserSupplier(int Id)
         {
             SqlParameter[] parameters = {
                     new SqlParameter("@id",SqlDbType.Int)
@@ -86,7 +86,7 @@ namespace OriginalStudio.BLL.User
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public DataSet GetUserSupplier(int Id)
+        public static DataSet GetUserSupplier(int Id)
         {
             SqlParameter[] parameters = {
                     new SqlParameter("@id",SqlDbType.Int)

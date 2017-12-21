@@ -72,7 +72,7 @@
         
             if (SysConfig.UpdateSysOptions(dtConfig))
             {
-                base.AlertAndRedirect("操作成功", "SiteInfo.aspx?sign=40&menuId=41");
+                base.AlertAndRedirect("操作成功");
             }
 
         }

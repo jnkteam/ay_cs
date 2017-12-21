@@ -88,7 +88,7 @@
         protected TextBox txtali_limit;
         protected TextBox txtqq_limit;
         protected HyperLink hlSetting;
-
+        public string pwdDisplay;
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             this.Save();
@@ -483,8 +483,10 @@
 
         private void ShowInfo()
         {
+            this.pwdDisplay = "block";
             if (this.isUpdate && (this.model != null))
             {
+                this.pwdDisplay = "none";
                 UserInfo promSuperior = UserFactory.GetPromSuperior(this.model.ID);
                 if ((promSuperior != null) && (promSuperior.ID > 0))
                 {

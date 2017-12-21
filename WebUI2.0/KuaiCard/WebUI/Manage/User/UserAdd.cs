@@ -49,7 +49,7 @@
         protected DropDownList AgentID;
         protected DropDownList Status;
         protected TextBox LastLoginRemark;
-
+        public string pwdDisplay;
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             this.Save();
@@ -198,8 +198,10 @@
 
         private void ShowInfo()
         {
+            this.pwdDisplay = "";
             if (this.isUpdate && (this.model != null))
             {
+                this.pwdDisplay = "none";
                 //MchUserBaseInfo promSuperior = MchUserFactory.GetPromSuperior(this.model.UserID);
                 //OriginalStudio.Lib.Logging.LogHelper.Write(this.model.UserName);
                 this.UserName.Text = this.model.UserName;

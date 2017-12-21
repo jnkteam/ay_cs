@@ -117,6 +117,9 @@
                     this.lblid.Text = this.Id.ToString();
                     this.lblorderid.Text = model.orderid;
                     this.lblordertype.Text = model.ordertype.ToString();
+
+
+
                     this.lbluserid.Text = model.MerchantName.ToString() + " (" + model.userid + ")";
                     this.lbltypeId.Text = this.getChannelTypeName(model.channeltypeId);
                     this.lblpaymodeId.Text = this.getChannelName(model.channelcode);
@@ -137,7 +140,7 @@
                     this.lblreturnurl.Text = model.returnurl;
                     this.lblattach.Text = model.attach;
                     this.lblpayerip.Text = model.payerip;
-                    this.lblclientip.Text = model.clientip;
+                    this.lblclientip.Text = model.clientip+"【"+ model.ipaddress + "】";
                     this.lblreferUrl.Text = model.referUrl;
                     this.lbladdtime.Text = FormatConvertor.DateTimeToTimeString(model.addtime);
                     this.lblsupplierId.Text = WebUtility.GetsupplierName(model.supplierId);

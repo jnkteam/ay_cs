@@ -142,7 +142,15 @@
         {
             get
             {
-                return ConfigHelper.GetConfig(SettingGroup, "Sitedomain");
+                string config = ConfigHelper.GetConfig(SettingGroup, "Sitedomain");
+                if (config == string.Empty)
+                {
+                    return "";
+                }
+                if (config.Substring(config.Length - 1) != "/")
+                    return config + "/";
+
+                return config;
             }
         }
 

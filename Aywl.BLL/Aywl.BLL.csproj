@@ -81,6 +81,7 @@
     <Compile Include="Stat\OrderReport.cs" />
     <Compile Include="Sys\SysRunLogFactory.cs" />
     <Compile Include="SMS\SMS.cs" />
+    <Compile Include="User\MchUserQuestionFactory.cs" />
     <Compile Include="User\MchUsersImageFactory.cs" />
     <Compile Include="User\MchUsersChannelTypeFactory.cs" />
     <Compile Include="Settled\Distribution.cs" />

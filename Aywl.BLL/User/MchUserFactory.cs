@@ -1154,16 +1154,49 @@
 
         #region 修改商户其余信息
 
-        public static int ChangeUserPassword(string userName, string passWord)
+        /// <summary>
+        /// 修改登录密码
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public static int ChangeUserLoginPassword(Int32 userId, string oldPassword, string newPassword)
         {
-            SqlParameter[] commandParameters = new SqlParameter[] { 
-                new SqlParameter("@username", SqlDbType.VarChar, 50),
-                new SqlParameter("@password", SqlDbType.VarChar, 255) 
+            SqlParameter[] parameters = {
+                new SqlParameter("@userid",SqlDbType.Int),
+                new SqlParameter("@old_loginpwd",SqlDbType.VarChar,150),
+                new SqlParameter("@new_loginpwd",SqlDbType.VarChar,150)
             };
-            commandParameters[0].Value = userName;
-            commandParameters[1].Value = passWord;
-            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_users_changepwd", commandParameters);
+            parameters[0].Value = userId;
+            parameters[1].Value = oldPassword;
+            parameters[2].Value = newPassword;
 
+            string R = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_change_loginpwd", parameters).ToString();
+            return Utils.StrToInt(R, -1);
+        }
+
+        /// <summary>
+        /// 修改支付密码
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public static int ChangeUserPayPassword(Int32 userId, string oldPassword, string newPassword)
+        {
+            SqlParameter[] parameters = {
+                new SqlParameter("@userid",SqlDbType.Int),
+                new SqlParameter("@old_paypwd",SqlDbType.VarChar,150),
+                new SqlParameter("@new_paypwd",SqlDbType.VarChar,150)
+            };
+            parameters[0].Value = userId;
+            parameters[1].Value = oldPassword;
+            parameters[2].Value = newPassword;
+
+            string R = DataBase.ExecuteScalar(CommandType.StoredProcedure, "proc_mch_user_change_paypwd", parameters).ToString();
+
+            return Utils.StrToInt(R, -1);
         }
 
         /// <summary>
@@ -1357,7 +1390,39 @@
                 };
             parameters[0].Value = id;
             return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_paybank_Delete", parameters);
+        }
 
+
+        public static int AddUserPayBank(MchUserPayBankInfo model)
+        {
+            SqlParameter[] parameters = {
+                new SqlParameter("@userid",SqlDbType.Int),
+                new SqlParameter("@accounttype",SqlDbType.Int),
+                new SqlParameter("@pmode",SqlDbType.Int),
+                new SqlParameter("@bankaccount",SqlDbType.VarChar,50),
+                new SqlParameter("@accountname",SqlDbType.VarChar,50),
+                new SqlParameter("@bankcode",SqlDbType.Int),
+                new SqlParameter("@bankcity",SqlDbType.VarChar,50),
+                new SqlParameter("@bankaddress",SqlDbType.VarChar,100),
+                new SqlParameter("@provincecode",SqlDbType.VarChar,50),
+                new SqlParameter("@citycode",SqlDbType.VarChar,50),
+                new SqlParameter("@listorder",SqlDbType.Int),
+                new SqlParameter("@isdefault",SqlDbType.Int)
+            };
+            parameters[0].Value = model.UserID;
+            parameters[1].Value = model.AccountType;
+            parameters[2].Value = model.PMode;
+            parameters[3].Value = model.BankAccount;
+            parameters[4].Value = model.AccountName;
+            parameters[5].Value = model.BankCode;
+            parameters[6].Value = model.BankCity;
+            parameters[7].Value = model.BankAddress;
+            parameters[8].Value = model.ProvinceCode;
+            parameters[9].Value = model.CityCode;
+            parameters[10].Value = model.ListOrder;
+            parameters[11].Value = model.IsDefault;
+
+            return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_paybank_add", parameters);
         }
 
         #endregion

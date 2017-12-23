@@ -149,20 +149,25 @@
 
 
 
-                string str4 = string.Empty;
-                
-                    str4 = string.Format("<a onclick=\"return confirm('审核成功?')\" href=\"?cmd=ok&ID={0}&userid={1}\" style=\"color:#fff;\">通过</a> <a onclick=\"return confirm('审核失败？')\" href=\"?cmd=fail&ID={0}&userid={1}\" style=\"color:#fff;\">失败</a>", str, str2);
-                
+                string str4 = string.Empty;               
+                    str4 = string.Format("<a onclick=\"return confirm('审核成功?')\" href=\"?cmd=ok&ID={0}&userid={1}\" style=\"color:#fff;\">通过</a>", str, str2);
+
+                string str5 = string.Empty;
+                str5 = string.Format("<a onclick=\"return confirm('审核失败？')\" href=\"?cmd=fail&ID={0}&userid={1}\" style=\"color:#fff;\">失败</a>", str, str2);
+
+
 
                 string statusName = Enum.Parse(typeof(ImageStatus), str3, true).ToString();
                 string imageTypeName = Enum.Parse(typeof(ImageType), ImageType, true).ToString();
 
                 Label label = (Label) e.Item.FindControl("labagcmd");
+                Label label1 = (Label)e.Item.FindControl("labagcmd1");
                 Label labelStaus = (Label)e.Item.FindControl("labelStatus");
                 Label labelImageTypeName = (Label)e.Item.FindControl("labelImageTypeName");
 
 
                 label.Text = str4;
+                label1.Text = str5;
                 labelStaus.Text = statusName;
                 labelImageTypeName.Text = imageTypeName;
             }

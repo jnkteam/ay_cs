@@ -428,7 +428,7 @@
                 }
                 if ((row["Paytype"] != null) && (row["Paytype"].ToString() != ""))
                 {
-                    info.PayType = int.Parse(row["Paytype"].ToString());
+                    info.PayType = (SettlePayTypeEnum)int.Parse(row["Paytype"].ToString());
                 }
                 if (row["PayeeBank"] != null)
                 {

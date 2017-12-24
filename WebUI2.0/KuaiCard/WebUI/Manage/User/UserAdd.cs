@@ -52,6 +52,7 @@
         public string pwdDisplay;
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            this.AlertAndRedirect("test");
             this.Save();
         }
 
@@ -92,19 +93,6 @@
 
         }
 
-        private UsersUpdateLog newUpdateLog(string f, string n, string o)
-        {
-            UsersUpdateLog log = new UsersUpdateLog();
-            log.userid = this.model.UserID;
-            log.Addtime = DateTime.Now;
-            log.field = f;
-            log.newvalue = n;
-            log.oldValue = o;
-            log.Editor = ManageFactory.CurrentManage.username;
-            log.OIp = ServerVariables.TrueIP;
-            return log;
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             this.setPower();
@@ -118,14 +106,14 @@
 
         private void Save()
         {
-            List<UsersUpdateLog> changeList = new List<UsersUpdateLog>();
-
-
             this.model.UserName = this.UserName.Text;
             this.model.ClassID = int.Parse(this.ClassID.SelectedValue);
             this.model.ContactName = this.ContactName.Text;
-            this.model.UserPwd = this.UserPwd.Text;
-            this.model.UserPayPwd = this.UserPayPwd.Text;
+            if (!this.isUpdate)
+            {
+                this.model.UserPwd = this.UserPwd.Text;
+                this.model.UserPayPwd = this.UserPayPwd.Text;
+            }
             this.model.MerchantName = this.MerchantName.Text;
             this.model.ApiKey = this.ApiKey.Text;
             this.model.IDCard = this.IDCard.Text;
@@ -135,17 +123,6 @@
             this.model.EMail = this.EMail.Text;
             this.model.IsEmail = this.IsEmail.SelectedValue == "1" ? true : false;
             this.model.QQ = this.QQ.Text;
-
-            if (!string.IsNullOrEmpty(this.AddTime.Text.ToString()))
-            {
-
-                this.model.AddTime = DateTime.ParseExact(this.AddTime.Text.ToString(), "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                this.model.AddTime = DateTime.Now;
-            }
-
             this.model.WithdrawSchemeID = int.Parse(this.WithdrawSchemeID.SelectedValue);
             this.model.PayRateID = int.Parse(this.PayRateID.SelectedValue);
             this.model.ManageId = int.Parse(this.manageId.SelectedValue);
@@ -153,19 +130,17 @@
             {
                 this.model.SiteUrl = this.SiteUrl.Text;
             }
-
             this.model.WithdrawType = int.Parse(this.WithdrawType.SelectedValue);
             if (!string.IsNullOrEmpty(this.RandomProduct.Text.ToString()))
             {
-                this.model.RandomProduct = int.Parse(this.RandomProduct.Text); //类型未知
+                this.model.RandomProduct = int.Parse(this.RandomProduct.Text);
             }
             this.model.LinkMan = this.LinkMan.Text;
             this.model.AgentID = int.Parse(this.AgentID.SelectedValue);
             this.model.Status = int.Parse(this.Status.SelectedValue);
             this.model.LastLoginRemark = this.LastLoginRemark.Text;
 
-
-
+            this.AlertAndRedirect("test");
             if (!this.isUpdate)
             {
                 if (MchUserFactory.Add(this.model) > 0)

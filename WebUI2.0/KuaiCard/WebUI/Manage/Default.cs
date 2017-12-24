@@ -16,21 +16,22 @@
         public string[] 微信 = { "0", "0", "0", "0" };
 
         protected DataTable menuTable;
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             this.DefaultThemes = this.currentManage.DefaultThemes;
 
 
-            DateTime start = DateTime.Now.AddMonths(-1); //正式上线 需要把次参数改为DateTime.Today
-            DateTime end = DateTime.Now;
+            DateTime start = DateTime.Now.Date; //正式上线 需要把次参数改为DateTime.Today
+            DateTime end = DateTime.Now.AddDays(1);
             DataTable tableInfo = OrderReport.统计通道类型总数金额利润(start, end).Tables[0];
-                foreach (DataRow row in tableInfo.Rows)
+            foreach (DataRow row in tableInfo.Rows)
+            {
+                if (row["通道类型"].ToString() == "合计")
                 {
-
-                if (row["通道类型"].ToString() == "合计") {
-                    if (!string.IsNullOrEmpty(row["订单总数"].ToString())){
+                    if (!string.IsNullOrEmpty(row["订单总数"].ToString()))
+                    {
                         合计[0] = row["订单总数"].ToString();
                     }
                     if (!string.IsNullOrEmpty(row["成功订单数"].ToString()))
@@ -45,9 +46,9 @@
                     {
                         合计[3] = row["利润"].ToString();
                     }
-
                 }
-                else if (row["通道类型"].ToString() == "网银") {
+                else if (row["通道类型"].ToString() == "网银")
+                {
                     if (!string.IsNullOrEmpty(row["订单总数"].ToString()))
                     {
                         网银[0] = row["订单总数"].ToString();
@@ -103,15 +104,8 @@
                         微信[3] = row["利润"].ToString();
                     }
                 }
-
             }
-                
-            
-
-
-
             this.DataBind();
-            
         }
     }
 }

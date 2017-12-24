@@ -214,10 +214,30 @@
                 return config;
             }
         }
+
+        /// <summary>
+        /// 代付接口地址
+        /// </summary>
+        public static string DistributionInterface
+        {
+            get
+            {
+                string config = ConfigHelper.GetConfig(SettingGroup, "GateWay");
+                if (config == string.Empty)
+                {
+                    return "";
+                }
+                if (config.Substring(config.Length - 1) != "/")
+                    return config + "/";
+
+                return config + "PostDistributionHandler.ashx";
+            }
+        }
+
         #endregion
 
         #region 短信配置
-        
+
         public static string SMUID
         {
             get

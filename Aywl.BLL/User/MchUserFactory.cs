@@ -471,34 +471,31 @@
                 SqlDataReader reader = DataBase.ExecuteReader(CommandType.StoredProcedure, "proc_mch_user_Login", commandParameters);
                 if (reader.Read())
                 {
-                    if (reader["status"] != DBNull.Value)
+                    userinfo.Status = (int)reader["status"];
+                    if (userinfo.Status == 1)
                     {
-                        userinfo.Status = (int)reader["status"];
-                        if (userinfo.Status == 1)
-                        {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForUnCheck", "商户状态无效！");
-                        }
-                        else if (userinfo.Status == 2)
-                        {
-                            userinfo.UserID = (int)reader["userId"];
-                            userinfo.UserType = (UserTypeEnum)Convert.ToInt32(reader["userType"]);
-                            userinfo.IsEmail = reader["isEmail"].ToString() == "1";
-                            userloginMsgForUnCheck = "OK";
-                            HttpContext.Current.Session[USER_LOGIN_SESSIONID] = sessionID;
-                            HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID] = userinfo.UserID;
-                        }
-                        else if (userinfo.Status == 4)
-                        {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForLock", "商户已冻结！");//.UserloginMsgForlock;
-                        }
-                        else if (userinfo.Status == 8)
-                        {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForCheckFail", "登录失败3！"); //UserloginMsgForCheckfail;
-                        }
-                        else if (userinfo.Status == 16)
-                        {
-                            userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginLimitIPCheckFail", "IP非法！");
-                        }
+                        userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForUnCheck", "商户状态无效！");
+                    }
+                    else if (userinfo.Status == 2)
+                    {
+                        userinfo.UserID = (int)reader["userId"];
+                        userinfo.UserType = (UserTypeEnum)Convert.ToInt32(reader["userType"]);
+                        userinfo.IsEmail = reader["isEmail"].ToString() == "1";
+                        userloginMsgForUnCheck = "OK";
+                        HttpContext.Current.Session[USER_LOGIN_SESSIONID] = sessionID;
+                        HttpContext.Current.Session[USER_LOGIN_CLIENT_SESSIONID] = userinfo.UserID;
+                    }
+                    else if (userinfo.Status == 4)
+                    {
+                        userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForLock", "商户已冻结！");//.UserloginMsgForlock;
+                    }
+                    else if (userinfo.Status == 8)
+                    {
+                        userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginMsgForCheckFail", "登录失败3！"); //UserloginMsgForCheckfail;
+                    }
+                    else if (userinfo.Status == 16)
+                    {
+                        userloginMsgForUnCheck = SysConfig.GetOptionValue("UserloginLimitIPCheckFail", "IP非法！");
                     }
                     reader.Dispose();
                 }
@@ -1424,8 +1421,7 @@
             parameters[0].Value = id;
             return DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_mch_user_paybank_Delete", parameters);
         }
-
-
+        
         public static int AddUserPayBank(MchUserPayBankInfo model)
         {
             SqlParameter[] parameters = {

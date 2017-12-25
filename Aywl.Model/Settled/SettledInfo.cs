@@ -18,7 +18,7 @@
         private string _PayeeBank = string.Empty;
         private string _payeeName = string.Empty;
         private DateTime _paytime;
-        private int _Paytype;
+        private SettlePayTypeEnum _Paytype = SettlePayTypeEnum.空;
         private DateTime _required;
         private SettledModeEnum _settmode = SettledModeEnum.手动提现;
         private SettledStatusEnum _status = SettledStatusEnum.审核中;
@@ -148,7 +148,7 @@
             }
         }
 
-        public int PayType
+        public SettlePayTypeEnum PayType
         {
             get
             {

@@ -63,7 +63,7 @@
                 }
                 if (SettledFactory.Update(this.ItemInfo))
                 {
-                    base.AlertAndRedirect("修改成功", "Pays.aspx");
+                    base.AlertAndRedirect("修改成功");
                 }
                 else
                 {
@@ -187,6 +187,7 @@
                     this.lblBank.Text = SettledFactory.GetSettleBankName(this.ItemInfo.PayeeBank);
                     this.lblPayeeaddress.Text = this.ItemInfo.PayeeAddress;
                     this.lblAccount.Text = this.ItemInfo.Account;
+                    this.TaxBox.Text = this.ItemInfo.Tax.ToString("f2");
                     if (this.ItemInfo.Charges > 0)
                     {
                         this.ChargesBox.Text = this.ItemInfo.Charges.ToString("f2");

@@ -25,7 +25,7 @@
     {
         private static readonly IDAL.IOrderBank orderDal = LoadeOrderBankStrategy();
         private static readonly IBLLStrategy.IOrderBankStrategy orderInsertStrategy = LoadInsertStrategy();
-        private static readonly IMessaging.IOrderBank orderQueue = LoadeQueueAccessStrategy();
+        //private static readonly IMessaging.IOrderBank orderQueue = LoadeQueueAccessStrategy();
 
         #region 加载操作对象
 

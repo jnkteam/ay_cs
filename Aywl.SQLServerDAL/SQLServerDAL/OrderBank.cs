@@ -679,7 +679,14 @@
                 string wheres = BuilderWhere(searchParams, paramList);
                 return DataBase.ExecuteDataset(CommandType.Text, SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n"
                     + SqlHelper.GetPageSelectSQL("[id]\r\n      ,[orderid]\r\n      ,[ordertype]\r\n      ,[userid]\r\n      ,[typeId]\r\n      ,[paymodeId]\r\n      ,[userorder]\r\n      ,[refervalue]\r\n      ,[realvalue]\r\n      ,[notifyurl]\r\n      ,[againNotifyUrl]\r\n      ,[notifycount]\r\n      ,[notifystat]\r\n      ,[notifycontext]\r\n      ,[returnurl]\r\n      ,[attach]\r\n      ,[payerip]\r\n      ,[clientip]\r\n      ,[referUrl]\r\n      ,[addtime]\r\n      ,[supplierID]\r\n      ,[supplierOrder]\r\n      ,[status]\r\n      ,[completetime]\r\n      ,[payRate]\r\n      ,[supplierRate]\r\n      ,[promRate]\r\n      ,[payAmt]\r\n      ,[promAmt]\r\n      ,[supplierAmt]\r\n      ,[profits]\r\n      ,[server]\r\n      ,[modetypename]\r\n      ,[modeName],[commission],[notifytime],[version]\r\n      ,cus_subject,cus_price,cus_quantity,cus_description,cus_field1,cus_field2,cus_field3,cus_field4,cus_field5,agentid,ipaddress", tables, wheres, orderby, key, pageSize, page, false)
-                    + "\r\nselect sum(1) ordtotal,sum(case when [status]=2 then 1 else 0 end) succordtotal,sum(refervalue) refervalue,sum(case when [status]=2 then realvalue else 0 end) realvalue,sum(isnull(promAmt,0)) promAmt,sum(case when [status]=2 then payAmt else 0 end) payAmt,sum(case when [status]=2 then supplierAmt-payAmt-promAmt else 0 end) profits,sum(promAmt) promAmt,sum(commission) commission from " + tables + " where " + wheres, paramList.ToArray());
+                    + "\r\nselect sum(1) ordtotal,sum(case when [status]=2 then 1 else 0 end) succordtotal," +
+                                "sum(refervalue) refervalue," +
+                                "sum(case when [status]=2 then realvalue else 0 end) realvalue," +
+                                "sum(isnull(promAmt,0)) promAmt," +
+                                "sum(case when [status]=2 then payAmt else 0 end) payAmt," +
+                                "sum(case when [status]=2 then supplierAmt-payAmt-promAmt else 0 end) profits," +
+                                "sum(promAmt) promAmt," +
+                                "sum(commission) commission from " + tables + " where " + wheres, paramList.ToArray());
                     //上面这句话不能随意动，是给客户前台查询用的！！！！！！！2017.2.12备注
             }
             catch (Exception exception)

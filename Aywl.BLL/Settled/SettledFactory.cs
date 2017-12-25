@@ -714,7 +714,7 @@
                 }
                 if ((row["Paytype"] != null) && (row["Paytype"].ToString() != ""))
                 {
-                    info.PayType = int.Parse(row["Paytype"].ToString());
+                    info.PayType = (SettlePayTypeEnum)int.Parse(row["Paytype"].ToString());
                 }
                 if (row["PayeeBank"] != null)
                 {
@@ -809,9 +809,49 @@
 
         #endregion
 
-        #region 结算异步通知
+        #region 调用结算接口
 
-        public void DoNotify(string trade_no)
+        public static string InvokeSettleInterface(string p_merchantName, string p_bankcode, 
+                                                                        string p_account, string p_bankname ,
+                                                                        string p_payeename, SettlePayTypeEnum p_paytype,
+                                                                        SettledModeEnum p_mode,
+                                                                        decimal p_money,
+                                                                        decimal p_charge,
+                                                                        decimal p_tax,
+                                                                        string p_notifyurl)
+        {
+            //组织参数即可
+            SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
+            waitSign.Add("money", p_money.ToString());
+            waitSign.Add("charge", p_charge.ToString());
+            waitSign.Add("tax", p_tax.ToString());
+            waitSign.Add("merchant", p_merchantName.ToString());
+            waitSign.Add("bankcode", p_bankcode.ToString());
+            waitSign.Add("bankname", p_bankname.ToString());
+            waitSign.Add("payeename", p_payeename.ToString());
+            waitSign.Add("account", p_account.ToString());
+            waitSign.Add("notifyurl", p_notifyurl.ToString());
+            waitSign.Add("paytype", ((int)p_paytype).ToString());
+
+            Model.User.MchUserBaseInfo mch = OriginalStudio.BLL.User.MchUserFactory.GetUserBaseByMerchantName(p_merchantName);
+            string sign = Lib.Security.Cryptography.SignSortedDictionary(waitSign, mch.ApiKey).ToLower();
+            waitSign.Add("sign", sign.ToString());
+
+            string tmpPostParm = "";
+            foreach (var kk in waitSign.Keys)
+            {
+                tmpPostParm += kk + "=" + waitSign[kk] + "&";
+            }
+            tmpPostParm = tmpPostParm.Substring(0, tmpPostParm.Length - 1);
+
+            string url = Lib.SysConfig.RuntimeSetting.DistributionInterface + "?" + tmpPostParm;
+
+            string msg = OriginalStudio.Lib.Web.WebClientHelper.GetString(url, string.Empty, "GET", Encoding.UTF8, 5 * 1000);
+
+            return msg;
+        }
+
+        public static void DoNotify(string trade_no)
         {
             OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.User.SettledFactory.GetModel(0);
             if (model != null)

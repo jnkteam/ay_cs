@@ -136,15 +136,7 @@
             this.model.IsEmail = this.IsEmail.SelectedValue == "1" ? true : false;
             this.model.QQ = this.QQ.Text;
 
-            if (!string.IsNullOrEmpty(this.AddTime.Text.ToString()))
-            {
-
-                this.model.AddTime = DateTime.ParseExact(this.AddTime.Text.ToString(), "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                this.model.AddTime = DateTime.Now;
-            }
+            
 
             this.model.WithdrawSchemeID = int.Parse(this.WithdrawSchemeID.SelectedValue);
             this.model.PayRateID = int.Parse(this.PayRateID.SelectedValue);
@@ -168,6 +160,15 @@
 
             if (!this.isUpdate)
             {
+                if (!string.IsNullOrEmpty(this.AddTime.Text.ToString()))
+                {
+
+                    this.model.AddTime = DateTime.ParseExact(this.AddTime.Text.ToString(), "yyyy/MM/dd hh:mm:ss", CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    this.model.AddTime = DateTime.Now;
+                }
                 if (MchUserFactory.Add(this.model) > 0)
                 {
                     base.AlertAndRedirect("保存成功！");

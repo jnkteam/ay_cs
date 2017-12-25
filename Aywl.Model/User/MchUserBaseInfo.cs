@@ -70,6 +70,8 @@ namespace OriginalStudio.Model.User
 
         private MchUsersAmtInfo _mchusersamtinfo = new MchUsersAmtInfo();
 
+        private MchUserPayBankInfo _mchuserpaybankinfo = new MchUserPayBankInfo();
+
         #endregion 字段
 
         #region 基本属性
@@ -514,6 +516,12 @@ namespace OriginalStudio.Model.User
         {
             set { this._mchusersamtinfo = value; }
             get { return this._mchusersamtinfo; }
+        }
+
+        public MchUserPayBankInfo MchUserPayBankInfo
+        {
+            set { this._mchuserpaybankinfo = value; }
+            get { return this._mchuserpaybankinfo; }
         }
 
         #endregion

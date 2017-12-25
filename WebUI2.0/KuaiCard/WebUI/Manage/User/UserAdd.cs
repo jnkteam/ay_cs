@@ -44,7 +44,7 @@
         protected DropDownList manageId;//管理员
         protected TextBox SiteUrl;
         protected RadioButtonList WithdrawType;//结算方式
-        protected TextBox RandomProduct;//随机商品名称
+        protected RadioButtonList RandomProduct;//随机商品名称
         protected TextBox LinkMan;//企业联系人
         protected DropDownList AgentID;
         protected DropDownList Status;
@@ -58,8 +58,6 @@
 
         private void InitForm()
         {
-
-
             DataTable WithdrawScheme = WithdrawSchemeFactory.GetList("type = 1").Tables[0];
             foreach (DataRow row in WithdrawScheme.Rows)
             {
@@ -72,12 +70,14 @@
                 this.PayRateID.Items.Add(new ListItem(row["RateName"].ToString(), row["id"].ToString()));
             }
             DataTable manage = ManageFactory.GetList("status=1").Tables[0];
+            this.manageId.Items.Add(new ListItem("--请选择所属商务--", ""));
             foreach (DataRow row in manage.Rows)
             {
                 this.manageId.Items.Add(new ListItem(row["userName"].ToString(), row["id"].ToString()));
             }
 
             DataTable MchUser = MchUserFactory.GetAgentList();
+            this.AgentID.Items.Add(new ListItem("--请选择代理员--", ""));
             foreach (DataRow row in MchUser.Rows)
             {
                 this.AgentID.Items.Add(new ListItem(row["userName"].ToString(), row["userid"].ToString()));
@@ -87,10 +87,6 @@
                 string name = Enum.GetName(typeof(UserStatusEnum), num2);
                 this.Status.Items.Add(new ListItem(name, num2.ToString()));
             }
-
-
-
-
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -100,7 +96,6 @@
             {
                 this.InitForm();
                 this.ShowInfo();
-
             }
         }
 
@@ -126,33 +121,23 @@
 
             this.model.WithdrawSchemeID = int.Parse(this.WithdrawSchemeID.SelectedValue);
             this.model.PayRateID = int.Parse(this.PayRateID.SelectedValue);
-            this.model.ManageId = int.Parse(this.manageId.SelectedValue);
-            if (!string.IsNullOrEmpty(this.SiteUrl.Text.ToString()))
-            {
-                this.model.SiteUrl = this.SiteUrl.Text;
-            }
+            if (manageId.SelectedIndex > 0)
+                this.model.ManageId = int.Parse(this.manageId.SelectedValue);
+            else
+                this.model.ManageId = 0;
+            this.model.SiteUrl = this.SiteUrl.Text.Trim().ToString();            
             this.model.WithdrawType = int.Parse(this.WithdrawType.SelectedValue);
-            if (!string.IsNullOrEmpty(this.RandomProduct.Text.ToString()))
-            {
-                this.model.RandomProduct = int.Parse(this.RandomProduct.Text);
-            }
+            this.model.RandomProduct = Convert.ToInt32(this.RandomProduct.SelectedValue);
             this.model.LinkMan = this.LinkMan.Text;
-            this.model.AgentID = int.Parse(this.AgentID.SelectedValue);
+            if (this.AgentID.SelectedIndex > 0)
+                this.model.AgentID = int.Parse(this.AgentID.SelectedValue);
+            else
+                this.model.AgentID = 0;
             this.model.Status = int.Parse(this.Status.SelectedValue);
             this.model.LastLoginRemark = this.LastLoginRemark.Text;
-
-           
+                       
             if (!this.isUpdate)
             {
-                if (!string.IsNullOrEmpty(this.AddTime.Text.ToString()))
-                {
-
-                    this.model.AddTime = DateTime.ParseExact(this.AddTime.Text.ToString(), "yyyy/MM/dd hh:mm:ss", CultureInfo.InvariantCulture);
-                }
-                else
-                {
-                    this.model.AddTime = DateTime.Now;
-                }
                 if (MchUserFactory.Add(this.model) > 0)
                 {
                     base.AlertAndRedirect("保存成功！");
@@ -205,7 +190,7 @@
                 this.QQ.Text = this.model.QQ;
                 this.AddTime.Text = this.model.AddTime.ToString();
                 this.SiteUrl.Text = this.model.SiteUrl;
-                this.RandomProduct.Text = this.model.RandomProduct.ToString();
+                this.RandomProduct.SelectedValue = this.model.RandomProduct.ToString();
 
                 this.LinkMan.Text = this.model.LinkMan;
 
@@ -214,8 +199,10 @@
 
                 this.WithdrawSchemeID.SelectedValue = this._ItemInfo.WithdrawSchemeID.ToString();
                 this.PayRateID.SelectedValue = this._ItemInfo.PayRateID.ToString();
-                this.manageId.SelectedValue = this._ItemInfo.ManageId.ToString();
-                this.AgentID.SelectedValue = this._ItemInfo.AgentID.ToString();
+                if (this._ItemInfo.ManageId > 0)
+                    this.manageId.SelectedValue = this._ItemInfo.ManageId.ToString();
+                if (this._ItemInfo.AgentID > 0)
+                    this.AgentID.SelectedValue = this._ItemInfo.AgentID.ToString();
             }
 
         }

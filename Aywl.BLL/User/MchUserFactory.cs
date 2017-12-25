@@ -123,7 +123,19 @@
             modle.WithdrawScheme.AlipayDetentionDays = Utils.StrToInt(dr["alipaydetentiondays"]);
             modle.WithdrawScheme.WeiXinDetentionDays = Utils.StrToInt(dr["weixindetentiondays"]);
             modle.WithdrawScheme.OtherDetentionDays = Utils.StrToInt(dr["otherdetentiondays"]);
-            modle.WithdrawScheme.TranSupplier = Utils.StrToInt(dr["TranSupplier"]);           
+            modle.WithdrawScheme.TranSupplier = Utils.StrToInt(dr["TranSupplier"]);
+
+            //默认银行卡
+            modle.MchUserPayBankInfo.AccountType = Utils.StrToInt(dr["AccountType"]);
+            modle.MchUserPayBankInfo.PMode = Utils.StrToInt(dr["PMode"]); 
+            modle.MchUserPayBankInfo.BankAccount = Convert.ToString(dr["BankAccount"]);
+            modle.MchUserPayBankInfo.AccountName = Convert.ToString(dr["AccountName"]);
+            modle.MchUserPayBankInfo.BankName = Convert.ToString(dr["BankName"]);
+            modle.MchUserPayBankInfo.BankCode = Utils.StrToInt(dr["BankCode"]);
+            modle.MchUserPayBankInfo.BankCity = Convert.ToString(dr["BankCity"]);
+            modle.MchUserPayBankInfo.BankAddress = Convert.ToString(dr["BankAddress"]);
+            modle.MchUserPayBankInfo.ProvinceCode = Convert.ToString(dr["ProvinceCode"]);
+            modle.MchUserPayBankInfo.CityCode = Convert.ToString(dr["CityCode"]);
 
             return modle;
         }

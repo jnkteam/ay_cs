@@ -201,30 +201,55 @@
             {
                 int userId = 0;
                 decimal settleAmt = 0M;
+                Model.User.MchUserBaseInfo ub = new MchUserBaseInfo();
                 TextBox box = e.Item.FindControl("txtpayAmt") as TextBox;
                 try
                 {
                     userId = Convert.ToInt32(e.CommandArgument);
                     settleAmt = Convert.ToDecimal(box.Text.Trim());
+                    ub = BLL.User.MchUserFactory.GetUserBaseByUserID(userId);
                 }
                 catch
                 {
                 }
-                if ((userId <= 0) || (settleAmt <= 0M))
+                if ((userId <= 0) || (settleAmt <= 0M) || ub.MchUserPayBankInfo.AccountName == "" ||
+                    ub.MchUserPayBankInfo.BankName == "")
                 {
-                    base.AlertAndRedirect("参数不正确!");
+                    base.AlertAndRedirect("参数不齐全!");
                 }
                 else
                 {
-                    string str = this.Settle(userId, settleAmt);
-                    if (!string.IsNullOrEmpty(str))
-                    {
-                        base.AlertAndRedirect(str);
-                    }
-                    else
+                    string web_return = OriginalStudio.BLL.User.SettledFactory.InvokeSettleInterface(ub.MerchantName,
+                                                        ub.MchUserPayBankInfo.BankCode.ToString(),
+                                                        ub.MchUserPayBankInfo.BankAccount,
+                                                        ub.MchUserPayBankInfo.BankName,
+                                                        ub.MchUserPayBankInfo.AccountName,
+                                                        SettlePayTypeEnum.管理后台,
+                                                        SettledModeEnum.手动提现,
+                                                        settleAmt, 0, 0, "/");
+
+                    Dictionary<string, string> dicRtn = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(web_return);
+
+                    string respCode = dicRtn["result"].ToUpper();
+                    if (respCode == "OK")
                     {
                         base.AlertAndRedirect("提现成功", "BankForUser.aspx");
                     }
+                    else
+                    {
+                        string msg = dicRtn["msg"].ToUpper();
+                        base.AlertAndRedirect("提现失败，原因："+ msg, "BankForUser.aspx");
+                    }
+
+                    //string str = this.Settle(userId, settleAmt);
+                    //if (!string.IsNullOrEmpty(str))
+                    //{
+                    //    base.AlertAndRedirect(str);
+                    //}
+                    //else
+                    //{
+                    //    base.AlertAndRedirect("提现成功", "BankForUser.aspx");
+                    //}
                 }
             }
         }
@@ -233,18 +258,18 @@
         {
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
             {
-                OriginalStudio.Lib.Logging.LogHelper.Write("111111");
+                //OriginalStudio.Lib.Logging.LogHelper.Write("111111");
 
                 TextBox box = (TextBox) e.Item.FindControl("txtpayAmt");
                 Literal literal = (Literal) e.Item.FindControl("litTodayIncome");
 
-                OriginalStudio.Lib.Logging.LogHelper.Write("222222");
+                //OriginalStudio.Lib.Logging.LogHelper.Write("222222");
 
                 box.Attributes["onkeypress"] = "if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;";
                 box.Text = "0";
                 int userId = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "userid"));
 
-                OriginalStudio.Lib.Logging.LogHelper.Write("userId：" + userId.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("userId：" + userId.ToString());
 
                 //6、检查可提现金额
                 decimal allLimitIncome = BLL.User.TradeFactory.GetMerchantLimitDayIncome(userId);
@@ -254,10 +279,10 @@
                                                         mchInfo.MchUsersAmtInfo.UnPayment -
                                                         allLimitIncome;
 
-                OriginalStudio.Lib.Logging.LogHelper.Write("Balance：" + mchInfo.MchUsersAmtInfo.Balance.ToString());
-                OriginalStudio.Lib.Logging.LogHelper.Write("Freeze：" + mchInfo.MchUsersAmtInfo.Freeze.ToString());
-                OriginalStudio.Lib.Logging.LogHelper.Write("UnPayment：" + mchInfo.MchUsersAmtInfo.UnPayment.ToString());
-                OriginalStudio.Lib.Logging.LogHelper.Write("canPayMoney：" + canPayMoney.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("Balance：" + mchInfo.MchUsersAmtInfo.Balance.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("Freeze：" + mchInfo.MchUsersAmtInfo.Freeze.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("UnPayment：" + mchInfo.MchUsersAmtInfo.UnPayment.ToString());
+                //OriginalStudio.Lib.Logging.LogHelper.Write("canPayMoney：" + canPayMoney.ToString());
 
                 //扣押金额
                 literal.Text = allLimitIncome.ToString();

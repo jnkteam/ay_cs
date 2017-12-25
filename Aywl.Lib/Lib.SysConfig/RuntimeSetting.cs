@@ -228,9 +228,9 @@
                     return "";
                 }
                 if (config.Substring(config.Length - 1) != "/")
-                    return config + "/";
+                    config = config + "/";
 
-                return config + "PostDistributionHandler.ashx";
+                return config;
             }
         }
 

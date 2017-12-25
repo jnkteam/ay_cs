@@ -844,7 +844,9 @@
             }
             tmpPostParm = tmpPostParm.Substring(0, tmpPostParm.Length - 1);
 
-            string url = Lib.SysConfig.RuntimeSetting.DistributionInterface + "?" + tmpPostParm;
+            string url = Lib.SysConfig.RuntimeSetting.GateWayServer + "PostDistributionHandler.ashx?" + tmpPostParm;
+
+            //Lib.Logging.LogHelper.Write("代付地址：" + url);
 
             string msg = OriginalStudio.Lib.Web.WebClientHelper.GetString(url, string.Empty, "GET", Encoding.UTF8, 5 * 1000);
 

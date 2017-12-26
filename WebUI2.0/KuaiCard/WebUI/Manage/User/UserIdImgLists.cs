@@ -32,6 +32,10 @@
         protected TextBox txtUserId;
         protected TextBox txtUserName;
 
+        protected TextBox merchantName;
+        protected DropDownList status;
+
+
         protected void btnCashTo_Click(object sender, EventArgs e)
         {
         }
@@ -98,9 +102,12 @@
 
         private void LoadData()
         {
-           
+
+            string merchantName = this.merchantName.Text;
+            int status = Convert.ToInt32(this.status.SelectedValue);
+
             string orderby = string.Empty;
-            DataSet set = MchUsersImageFactory.GetUserImages("",0);
+            DataSet set = MchUsersImageFactory.GetUserImages(merchantName, status);
             this.rptIamges.DataSource = set.Tables[0];
             this.rptIamges.DataBind();
         }

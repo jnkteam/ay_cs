@@ -836,5 +836,107 @@
         }
 
         #endregion
+
+        #region 收支统计
+
+        public DataSet OrderIncomeStat(List<SearchParam> searchParams, int pageSize, int page, string orderby)
+        {
+            DataSet set = new DataSet();
+            try
+            {
+                string tables = "V_usersOrderIncome";
+                string key = "[id]";
+                if (string.IsNullOrEmpty(orderby))
+                {
+                    orderby = "id desc";
+                }
+                List<SqlParameter> paramList = new List<SqlParameter>();
+                string wheres = OrderIncomeBuilderWhere(searchParams, paramList);
+                string commandText = SqlHelper.GetCountSQL(tables, wheres, string.Empty) + "\r\n"
+                                    + SqlHelper.GetPageSelectSQL("*", tables, wheres, orderby, key, pageSize, page, false)
+                                    + "\r\n select sum(SumPay) SumPay,"
+                                    + "sum(OrderCount) SumOrderCount,"
+                                    + "sum(TotalChargeValue) SumChargeValue,"
+                                    + "sum(TotalOrderValue) SumOrderValue "
+                                    + " from " + tables + " where " + wheres;
+                return DataBase.ExecuteDataset(CommandType.Text, commandText, paramList.ToArray());
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler.HandleException(exception);
+                return set;
+            }
+        }
+
+
+        private string OrderIncomeBuilderWhere(List<SearchParam> param, List<SqlParameter> paramList)
+        {
+            StringBuilder builder = new StringBuilder(" 1 = 1");
+            if ((param != null) && (param.Count > 0))
+            {
+                for (int i = 0; i < param.Count; i++)
+                {
+                    SearchParam param2 = param[i];
+                    if (param2.CmpOperator == "=")
+                    {
+                        SqlParameter parameter;
+                        switch (param2.ParamKey.Trim().ToLower())
+                        {
+                            case "userid":
+                                builder.Append(" AND [userid] = @userid");
+                                parameter = new SqlParameter("@userid", SqlDbType.Int);
+                                parameter.Value = Convert.ToInt32(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;
+
+                            case "merchantname":
+                                builder.Append(" AND [merchantname] = @merchantname");
+                                parameter = new SqlParameter("@merchantname", SqlDbType.VarChar, 50);
+                                parameter.Value = Convert.ToString(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;                                
+
+                            case "stime":
+                                builder.Append(" AND [OrderDate] >= @beginmydate");
+                                parameter = new SqlParameter("@beginmydate", SqlDbType.VarChar, 20);
+                                parameter.Value = Convert.ToString(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;
+
+                            case "etime":
+                                builder.Append(" AND [OrderDate] <= @endmydate");
+                                parameter = new SqlParameter("@endmydate", SqlDbType.VarChar, 20);
+                                parameter.Value = Convert.ToString(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;
+
+                            case "ovaluefrom":
+                                builder.Append(" AND [OrderValue] >= @ovaluefrom");
+                                parameter = new SqlParameter("@ovaluefrom", SqlDbType.Decimal, 9);
+                                parameter.Value = Convert.ToString(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;
+
+                            case "ovalueto":
+                                builder.Append(" AND [OrderValue] <= @ovalueto");
+                                parameter = new SqlParameter("@ovalueto", SqlDbType.Decimal, 9);
+                                parameter.Value = Convert.ToString(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;
+
+                            case "typeid":
+                                builder.Append(" AND [ChanneltypeId] = @typeId");
+                                parameter = new SqlParameter("@typeId", SqlDbType.Int);
+                                parameter.Value = Convert.ToInt32(param2.ParamValue);
+                                paramList.Add(parameter);
+                                break;
+                        }
+                    }
+                }
+            }
+            return builder.ToString();
+        }
+
+        #endregion
     }
 }

@@ -25,6 +25,8 @@
         private usersettingInfo _setting = null;
         public OriginalStudio.Model.User.userspaybank _settleaccoutmodel = null;
         protected Button btnAdd;
+        protected Button btnResetPwd;
+        protected Button btnResetPayPwd;
         protected CheckBox cb_isagentDistribution;
         protected CheckBox cb_isdebug;
         protected CheckBox cb_isEmailPass;

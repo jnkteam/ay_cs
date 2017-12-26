@@ -92,30 +92,22 @@
                 else
                     this.ItemInfo.Suppid = 0;
 
-                //新方式提交代付。组织参数提交
-                //********************************************************************//
-                SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
-                waitSign.Add("orderid", this.ItemInfo.ID.ToString());
-                waitSign.Add("suppid", this.ItemInfo.Suppid.ToString());
-                string InterfaceKey = OriginalStudio.Lib.SysConfig.RuntimeSetting.GetKeyValue("InterfaceKey", "");
-                string sign = OriginalStudio.Lib.Security.Cryptography.SignSortedDictionary(waitSign, InterfaceKey).ToLower();
-                waitSign.Add("sign", sign);
+                string web_return = BLL.Settled.SettledFactory.InvokeSysDistribution(this.ItemInfo.ID, this.ItemInfo.Suppid);
 
-                string tmpPostParm = "";
-                foreach (var key in waitSign.Keys)
+                Dictionary<string, string> dicRtn = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(web_return);
+
+                string respCode = dicRtn["result"].ToUpper();
+                if (respCode == "OK")
                 {
-                    tmpPostParm += key + "=" + waitSign[key] + "&";
+                    return "代付提交成功。";
                 }
-                tmpPostParm = tmpPostParm.Substring(0, tmpPostParm.Length - 1);
-                string gateSrv = OriginalStudio.Lib.SysConfig.RuntimeSetting.GateWayServer;
-                if (gateSrv == "")
-                    return "支付地址为空，检查配置。";
-                string payUrl = gateSrv + "/AdminDistribution.ashx";
+                else
+                {
+                    string msg = dicRtn["msg"].ToUpper();
+                    //base.AlertAndRedirect("提现失败，原因：" + msg, "BankForUser.aspx");
+                    return msg;
+                }
 
-                payUrl = payUrl + "?" + tmpPostParm;
-                //Lib.Logging.LogHelper.Write("请求支付地址:" + payUrl);
-                string invokeResult = Lib.Web.WebClientHelper.GetString(payUrl, "", "get", Encoding.UTF8, 10000);
-                return invokeResult;
                 //********************************************************************//
 
                 /*
@@ -148,7 +140,6 @@
                     case 99:
                         return "未知错误";
                 }*/
-                return "err";
             }
             catch (Exception exception)
             {

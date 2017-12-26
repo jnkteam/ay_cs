@@ -23,6 +23,8 @@
     {
         public MchUserBaseInfo _ItemInfo = null;
         protected Button btnAdd;
+        protected Button btnResetPwd;
+        protected Button btnResetPayPwd;
         protected HtmlForm form1;
         protected TextBox UserName;
         protected RadioButtonList ClassID; //签约属性
@@ -52,7 +54,6 @@
         public string pwdDisplay;
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-           
             this.Save();
         }
 
@@ -240,6 +241,18 @@
                 }
                 return this._ItemInfo;
             }
+        }
+
+        public void btnResetPwd_Click(object sender, EventArgs e)
+        {
+            int R = MchUserFactory.ChangeUserLoginPassword(this.model.UserID, this.model.UserPwd, "888888");
+            this.AlertAndRedirect("密码复位成功，登录密码：888888");
+        }
+
+        public void btnResetPayPwd_Click(object sender, EventArgs e)
+        {
+            int R = MchUserFactory.ChangeUserPayPassword(this.model.UserID, this.model.UserPayPwd, "888888");
+            this.AlertAndRedirect("密码复位成功，支付密码：888888");
         }
     }
 }

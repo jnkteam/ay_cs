@@ -840,6 +840,34 @@
             return msg;
         }
 
+        public static string InvokeSysDistribution(int p_settleId, int p_suppId)
+        {
+            //新方式提交代付。组织参数提交
+            //********************************************************************//
+            SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
+            waitSign.Add("settleid", p_settleId.ToString());
+            waitSign.Add("suppid", p_suppId.ToString());
+            string InterfaceKey = OriginalStudio.Lib.SysConfig.RuntimeSetting.GetKeyValue("InterfaceKey", "");
+            string sign = OriginalStudio.Lib.Security.Cryptography.SignSortedDictionary(waitSign, InterfaceKey).ToLower();
+            waitSign.Add("sign", sign);
+
+            string tmpPostParm = "";
+            foreach (var key in waitSign.Keys)
+            {
+                tmpPostParm += key + "=" + waitSign[key] + "&";
+            }
+            tmpPostParm = tmpPostParm.Substring(0, tmpPostParm.Length - 1);
+            string gateSrv = OriginalStudio.Lib.SysConfig.RuntimeSetting.GateWayServer;
+            if (gateSrv == "")
+                return "支付地址为空，检查配置。";
+            string payUrl = gateSrv + "/AdminDistribution.ashx";
+
+            payUrl = payUrl + "?" + tmpPostParm;
+            //Lib.Logging.LogHelper.Write("请求支付地址:" + payUrl);
+            string invokeResult = Lib.Web.WebClientHelper.GetString(payUrl, "", "get", Encoding.UTF8, 10000);
+            return invokeResult;
+        }
+
         public static void DoNotify(string trade_no)
         {
             OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.Settled.SettledFactory.GetModel(0);

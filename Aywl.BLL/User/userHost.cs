@@ -1,4 +1,4 @@
-﻿namespace OriginalStudio.BLL.User
+﻿namespace OriginalStudio.BLL.Settled
 {
     using DBAccess;
     using OriginalStudio.Cache;

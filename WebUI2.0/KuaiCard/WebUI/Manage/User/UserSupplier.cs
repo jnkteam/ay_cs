@@ -9,7 +9,7 @@
     using System.Data;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.Supplier;
 
     public class UserSupplier : ManagePageBase

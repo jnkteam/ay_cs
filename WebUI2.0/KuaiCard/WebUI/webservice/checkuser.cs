@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.WebUI.webservice
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using System;
     using System.Web;
     using System.Web.SessionState;

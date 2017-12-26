@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.BLL
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Cache;
     using OriginalStudio.Model.Channel;
     using OriginalStudio.Model.Order;

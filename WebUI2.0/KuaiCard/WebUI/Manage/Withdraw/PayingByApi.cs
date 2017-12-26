@@ -12,7 +12,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
     using OriginalStudio.BLL.Supplier;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.Settled;
 
     public class PayingByApi : ManagePageBase

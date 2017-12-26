@@ -3,7 +3,7 @@
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Payment;
     using OriginalStudio.BLL.Sys;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model;
     using OriginalStudio.Model.PayRate;
     using OriginalStudio.Model.User;
@@ -48,7 +48,7 @@
         protected Label lbllastLoginIp;
         protected Label lbllastLoginTime;
         protected Label lblregTime;
-        protected OriginalStudio.BLL.User.userspaybank pbankBLL = new OriginalStudio.BLL.User.userspaybank();
+        protected OriginalStudio.BLL.Settled.userspaybank pbankBLL = new OriginalStudio.BLL.Settled.userspaybank();
         protected RadioButtonList rbl_settledmode;
         protected RadioButtonList rblaccoutType;
         protected RadioButtonList rblsettlemode;
@@ -140,13 +140,13 @@
                 this.ddlagents.Items.Add(new ListItem(row2["username"].ToString(), row2["id"].ToString()));
             }
             this.ddlTocashScheme.Items.Add(new ListItem("--默认--", ""));
-            levName = OriginalStudio.BLL.User.TocashScheme.GetList("type=1").Tables[0];
+            levName = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=1").Tables[0];
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlTocashScheme.Items.Add(new ListItem(row2["schemename"].ToString(), row2["id"].ToString()));
             }
             this.ddlagentDistscheme.Items.Add(new ListItem("--默认--", ""));
-            levName = OriginalStudio.BLL.User.TocashScheme.GetList("type=2").Tables[0];
+            levName = OriginalStudio.BLL.Settled.TocashScheme.GetList("type=2").Tables[0];
             foreach (DataRow row2 in levName.Rows)
             {
                 this.ddlagentDistscheme.Items.Add(new ListItem(row2["schemename"].ToString(), row2["id"].ToString()));

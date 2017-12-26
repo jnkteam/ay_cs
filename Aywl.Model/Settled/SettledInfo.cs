@@ -10,6 +10,7 @@
         private string _Account = string.Empty;
         private DateTime _addtime;
         private decimal _amount;
+        private decimal _settleamount;
         private AppTypeEnum _appType;
         private decimal _charges = 0;
         private int _id;
@@ -61,6 +62,18 @@
             set
             {
                 this._amount = value;
+            }
+        }
+
+        public decimal SettleAmount
+        {
+            get
+            {
+                return this._settleamount;
+            }
+            set
+            {
+                this._settleamount = value;
             }
         }
 

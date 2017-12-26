@@ -8,7 +8,7 @@
     using System;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using System.Data;
     using OriginalStudio.BLL.Channel;
     using OriginalStudio.BLL.BLL.User;

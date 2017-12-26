@@ -168,7 +168,7 @@
 
         public void LoadInfo()
         {
-            OriginalStudio.Model.User.UserInfo userInfo = OriginalStudio.BLL.User.UserFactory.GetModel(this.UserID);
+            OriginalStudio.Model.User.UserInfo userInfo = OriginalStudio.BLL.Settled.UserFactory.GetModel(this.UserID);
             if (userInfo == null) return;
 
             this.txtUserID.Text = userInfo.ID.ToString();

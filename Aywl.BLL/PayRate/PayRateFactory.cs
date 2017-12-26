@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.BLL.PayRate
 {
     using DBAccess;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Cache;
     using OriginalStudio.Model.PayRate;
     using OriginalStudio.Model.User;

@@ -1,9 +1,9 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.Tools;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.ETAPI;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
@@ -52,15 +52,16 @@
         {
             try
             {
-                decimal num = decimal.Parse(this.TaxBox.Text.Trim());
-                decimal num2 = decimal.Parse(this.ChargesBox.Text.Trim());
-                this.ItemInfo.Tax = num;
-                this.ItemInfo.Charges = num2;
+                decimal tax = decimal.Parse(this.TaxBox.Text.Trim());
+                decimal charge = decimal.Parse(this.ChargesBox.Text.Trim());
+                this.ItemInfo.Tax = tax;
+                this.ItemInfo.Charges = charge;
                 this.ItemInfo.PayTime = DateTime.Now;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
                 {
                     this.ItemInfo.Suppid = int.Parse(this.ddlSupplier.SelectedValue);
                 }
+                //这个地方只改  charge  tax，不改动settle_amount
                 if (SettledFactory.Update(this.ItemInfo))
                 {
                     base.AlertAndRedirect("修改成功");
@@ -86,25 +87,15 @@
         {
             try
             {
-                decimal tax = decimal.Parse(this.TaxBox.Text.Trim());
-                decimal charges = decimal.Parse(this.ChargesBox.Text.Trim());
-                this.ItemInfo.PayTime = DateTime.Now;
-                this.ItemInfo.Tax = tax;
-                this.ItemInfo.Charges = charges;
-                this.ItemInfo.Status =  SettledStatusEnum.已支付;
-                this.ItemInfo.AppType = AppTypeEnum.t0;
                 if (!string.IsNullOrEmpty(this.ddlSupplier.SelectedValue))
-                {
-                    //接口商
-                    this.ItemInfo.Suppid = int.Parse(this.ddlSupplier.SelectedValue);
-                }
+                    this.ItemInfo.Suppid = int.Parse(this.ddlSupplier.SelectedValue);//接口商
+                else
+                    this.ItemInfo.Suppid = 0;
 
                 //新方式提交代付。组织参数提交
                 //********************************************************************//
                 SortedDictionary<string, string> waitSign = new SortedDictionary<string, string>();
                 waitSign.Add("orderid", this.ItemInfo.ID.ToString());
-                waitSign.Add("tax", this.ItemInfo.Tax.ToString());
-                waitSign.Add("charges", this.ItemInfo.Charges.ToString());
                 waitSign.Add("suppid", this.ItemInfo.Suppid.ToString());
                 string InterfaceKey = OriginalStudio.Lib.SysConfig.RuntimeSetting.GetKeyValue("InterfaceKey", "");
                 string sign = OriginalStudio.Lib.Security.Cryptography.SignSortedDictionary(waitSign, InterfaceKey).ToLower();
@@ -118,7 +109,7 @@
                 tmpPostParm = tmpPostParm.Substring(0, tmpPostParm.Length - 1);
                 string gateSrv = OriginalStudio.Lib.SysConfig.RuntimeSetting.GateWayServer;
                 if (gateSrv == "")
-                    return "支付地址为空。";
+                    return "支付地址为空，检查配置。";
                 string payUrl = gateSrv + "/AdminDistribution.ashx";
 
                 payUrl = payUrl + "?" + tmpPostParm;
@@ -181,7 +172,7 @@
 
                 if (((this.ItemInfoId > 0) && (this.ItemInfo != null)) && (this.UserInfo != null))
                 {
-                    this.PayMoneyLabel.Text = this.ItemInfo.Amount.ToString("c2");
+                    this.PayMoneyLabel.Text = this.ItemInfo.SettleAmount.ToString("c2");
                     this.AddTimeLabel.Text = FormatConvertor.DateTimeToTimeString(this.ItemInfo.AddTime);
                     this.lblPayeeName.Text = this.ItemInfo.PayeeName;
                     this.lblBank.Text = SettledFactory.GetSettleBankName(this.ItemInfo.PayeeBank);
@@ -195,7 +186,7 @@
                     else
                     {
                         WithdrawSchemeInfo model = this.UserInfo.WithdrawScheme;
-                        decimal chargeleastofeach = model.ChargeRate * this.ItemInfo.Amount;
+                        decimal chargeleastofeach = model.ChargeRate * this.ItemInfo.SettleAmount;
                         if (chargeleastofeach < model.SingleMinCharge)
                         {
                             chargeleastofeach = model.SingleMinCharge;
@@ -226,6 +217,7 @@
                     }
                     if (this.action == "pay")
                     {
+                        this.TaxBox.ReadOnly = this.ChargesBox.ReadOnly = true;
                         this.btnSure.Visible = true;
                         this.btnSave.Visible = false;
                     }

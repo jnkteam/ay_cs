@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.business
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model;
     using OriginalStudio.Model.User;
     using OriginalStudio.WebComponents.Web;

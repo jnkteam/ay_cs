@@ -6,7 +6,7 @@
     using System;
     using System.Web.UI;
     using OriginalStudio.Model.User;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
 
     public class PageBaseControl : UserControl
     {

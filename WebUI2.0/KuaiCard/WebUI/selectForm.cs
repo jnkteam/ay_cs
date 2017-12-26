@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.WebUI
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.User;
     using System;
     using System.Web.UI;

@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.WebUI.merchant.ajax
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Lib.Text;
     using OriginalStudio.Lib.Web;
     using System;

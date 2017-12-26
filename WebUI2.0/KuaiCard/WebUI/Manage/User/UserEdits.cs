@@ -3,9 +3,9 @@
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.BaseData;
     using OriginalStudio.BLL.Payment;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.Sys;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model;
     using OriginalStudio.Model.PayRate;
     using OriginalStudio.Model.User;
@@ -52,7 +52,7 @@
         protected Label lbllastLoginIp;
         protected Label lbllastLoginTime;
         protected Label lblregTime;
-        protected OriginalStudio.BLL.User.userspaybank pbankBLL = new OriginalStudio.BLL.User.userspaybank();
+        protected OriginalStudio.BLL.Settled.userspaybank pbankBLL = new OriginalStudio.BLL.Settled.userspaybank();
         protected RadioButtonList rbl_settledmode;
         protected RadioButtonList rblaccoutType;
         protected RadioButtonList rblsettlemode;

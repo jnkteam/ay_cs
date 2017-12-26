@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace OriginalStudio.BLL.User
+namespace OriginalStudio.BLL.Settled
 {
     public class MchUserQuestionFactory
     {

@@ -4,7 +4,7 @@
     using OriginalStudio.BLL.Channel;
     using OriginalStudio.BLL.News;
     using OriginalStudio.BLL.Supplier;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Cache;
     using OriginalStudio.Model;
     using OriginalStudio.WebComponents.Web;

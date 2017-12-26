@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.WebUI.Manage
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.User;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Data;

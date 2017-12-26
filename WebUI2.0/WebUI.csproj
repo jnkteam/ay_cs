@@ -25,7 +25,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Output\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -76,6 +76,10 @@
     <Compile Include="KuaiCard\WebUI\Manage\OrderStat\SuccessStat.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Order\AdminBankOrderList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KuaiCard\WebUI\Manage\Order\SearchOrderHandler.cs" />
     <Compile Include="KuaiCard\WebUI\Manage\Sys\CleanUpData.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

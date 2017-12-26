@@ -14,7 +14,7 @@
         public static int Complete(int suppId, string trade_no, bool is_cancel, int status, string amount, string supp_trade_no, string message)
         {
             string str = string.Empty;
-            int num = OriginalStudio.BLL.User.Distribution.Process(suppId, trade_no, is_cancel, status, amount, supp_trade_no, message, out str);
+            int num = OriginalStudio.BLL.Settled.Distribution.Process(suppId, trade_no, is_cancel, status, amount, supp_trade_no, message, out str);
             if ((num == 0) && (trade_no.Substring(0, 1) == "2"))
             {
                 new OriginalStudio.BLL.Withdraw.settledAgent().DoNotify(str);
@@ -29,7 +29,7 @@
         public static void InitDistribution(SettledInfo itemInfo)
         {
             OriginalStudio.Model.Settled.Distribution model = new OriginalStudio.Model.Settled.Distribution();
-            model.trade_no = OriginalStudio.BLL.User.Distribution.GenerateTradeNo(1);
+            model.trade_no = OriginalStudio.BLL.Settled.Distribution.GenerateTradeNo(1);
             model.mode = 1;     //!!!!!
             model.settledId = new int?(itemInfo.ID);
             model.batchNo = 1;
@@ -61,7 +61,7 @@
 
             /**/
             //Step1:先记录数据库
-            if (OriginalStudio.BLL.User.Distribution.Add(model) > 0)
+            if (OriginalStudio.BLL.Settled.Distribution.Add(model) > 0)
             {
                 //Step2：调用网关支付
                 SellFactory.ReqDistribution(model);
@@ -76,7 +76,7 @@
         public static void InitDistribution2(OriginalStudio.Model.Withdraw.settledAgent itemInfo)
         {
             OriginalStudio.Model.Settled.Distribution model = new OriginalStudio.Model.Settled.Distribution();
-            model.trade_no = OriginalStudio.BLL.User.Distribution.GenerateTradeNo(2);
+            model.trade_no = OriginalStudio.BLL.Settled.Distribution.GenerateTradeNo(2);
             model.suppid = itemInfo.suppid;
             model.mode = 2;
             model.settledId = new int?(itemInfo.id);
@@ -91,7 +91,7 @@
             model.amount = itemInfo.amount;
             model.charges = itemInfo.charge;
             model.balance2 = 0;
-            if (OriginalStudio.BLL.User.Distribution.Add(model) > 0)
+            if (OriginalStudio.BLL.Settled.Distribution.Add(model) > 0)
             {
                 SellFactory.ReqDistribution(model);
             }

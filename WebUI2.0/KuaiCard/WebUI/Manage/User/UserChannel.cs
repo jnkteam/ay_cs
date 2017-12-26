@@ -3,7 +3,7 @@
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
     using OriginalStudio.BLL.Payment;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Channel;
     using OriginalStudio.Model.PayRate;

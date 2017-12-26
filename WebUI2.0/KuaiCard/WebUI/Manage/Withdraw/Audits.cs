@@ -15,7 +15,7 @@
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
     using OriginalStudio.Model.Settled;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.BLL.Supplier;
 
     public class Audits : ManagePageBase
@@ -236,8 +236,8 @@
 
         protected void rptApply_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            string str = e.CommandArgument.ToString();
-            if (!string.IsNullOrEmpty(str))
+            string settleid = e.CommandArgument.ToString();
+            if (!string.IsNullOrEmpty(settleid))
             {
                 int status = -1;
                 if (e.CommandName == "Pass")
@@ -248,9 +248,9 @@
                 {
                     status = 4;
                 }
-                if (((status != -1) && SettledFactory.Audit(int.Parse(str), status)) && (status == 2))
+                if (((status != -1) && SettledFactory.Audit(int.Parse(settleid), status)) && (status == 2))
                 {
-                    SettledInfo model = SettledFactory.GetModel(int.Parse(str));
+                    SettledInfo model = SettledFactory.GetModel(int.Parse(settleid));
                     if (model.Status == SettledStatusEnum.付款接口支付中)
                     {
                         OriginalStudio.ETAPI.Withdraw.InitDistribution(model);

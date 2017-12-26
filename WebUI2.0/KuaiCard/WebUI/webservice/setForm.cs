@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.WebUI.webservice
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.User;
     using OriginalStudio.Lib.Security;
     using System;

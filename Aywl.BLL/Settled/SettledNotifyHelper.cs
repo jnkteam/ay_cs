@@ -1,6 +1,6 @@
-﻿namespace OriginalStudio.BLL.User
+﻿namespace OriginalStudio.BLL.Settled
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.Withdraw;
     using OriginalStudio.Lib.Text;
     using OriginalStudio.Lib.Web;

@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.BLL.Email
 {
     using DBAccess;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Lib.Data;
     using OriginalStudio.Lib.ExceptionHandling;
     using OriginalStudio.Model.Email;

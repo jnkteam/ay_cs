@@ -1,6 +1,6 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Tools
 {
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.WebComponents.Web;
     using OriginalStudio.Lib.Data;
     using System;

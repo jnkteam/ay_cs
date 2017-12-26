@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Settled
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.ETAPI;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
@@ -79,16 +79,22 @@
                         num++;
                         int userId = 0;
                         decimal settleAmt = 0M;
+                        Model.User.MchUserBaseInfo ub = new MchUserBaseInfo();
                         TextBox box2 = item.FindControl("txtpayAmt") as TextBox;
                         try
                         {
                             userId = Convert.ToInt32(field.Value);
                             settleAmt = Convert.ToDecimal(box2.Text.Trim());
+                            ub = BLL.Settled.MchUserFactory.GetUserBaseByUserID(userId);
+
                         }
                         catch
                         {
                         }
-                        if (((userId > 0) && (settleAmt > 0M)) && string.IsNullOrEmpty(this.Settle(userId, settleAmt)))
+                        if (userId > 0 && settleAmt > 0M
+                            && !String.IsNullOrEmpty(ub.MchUserPayBankInfo.AccountName)
+                            && !String.IsNullOrEmpty(ub.MchUserPayBankInfo.BankName)
+                            && this.Settle(ub, settleAmt) == "OK")
                         {
                             num2++;
                             num3 += settleAmt;
@@ -207,7 +213,7 @@
                 {
                     userId = Convert.ToInt32(e.CommandArgument);
                     settleAmt = Convert.ToDecimal(box.Text.Trim());
-                    ub = BLL.User.MchUserFactory.GetUserBaseByUserID(userId);
+                    ub = BLL.Settled.MchUserFactory.GetUserBaseByUserID(userId);
                 }
                 catch
                 {
@@ -219,37 +225,15 @@
                 }
                 else
                 {
-                    string web_return = OriginalStudio.BLL.User.SettledFactory.InvokeSettleInterface(ub.MerchantName,
-                                                        ub.MchUserPayBankInfo.BankCode.ToString(),
-                                                        ub.MchUserPayBankInfo.BankAccount,
-                                                        ub.MchUserPayBankInfo.BankName,
-                                                        ub.MchUserPayBankInfo.AccountName,
-                                                        SettlePayTypeEnum.管理后台,
-                                                        SettledModeEnum.手动提现,
-                                                        settleAmt, settleAmt * ub.WithdrawScheme.ChargeRate, 0, "/");
-
-                    Dictionary<string, string> dicRtn = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(web_return);
-
-                    string respCode = dicRtn["result"].ToUpper();
-                    if (respCode == "OK")
+                    string msg = this.Settle(ub, settleAmt);
+                    if (msg == "OK")
                     {
                         base.AlertAndRedirect("提现成功", "BankForUser.aspx");
                     }
                     else
                     {
-                        string msg = dicRtn["msg"].ToUpper();
-                        base.AlertAndRedirect("提现失败，原因："+ msg, "BankForUser.aspx");
+                        base.AlertAndRedirect("提现失败，原因：" + msg, "BankForUser.aspx");
                     }
-
-                    //string str = this.Settle(userId, settleAmt);
-                    //if (!string.IsNullOrEmpty(str))
-                    //{
-                    //    base.AlertAndRedirect(str);
-                    //}
-                    //else
-                    //{
-                    //    base.AlertAndRedirect("提现成功", "BankForUser.aspx");
-                    //}
                 }
             }
         }
@@ -272,7 +256,7 @@
                 //OriginalStudio.Lib.Logging.LogHelper.Write("userId：" + userId.ToString());
 
                 //6、检查可提现金额
-                decimal allLimitIncome = BLL.User.TradeFactory.GetMerchantLimitDayIncome(userId);
+                decimal allLimitIncome = BLL.Settled.TradeFactory.GetMerchantLimitDayIncome(userId);
                 MchUserBaseInfo mchInfo = MchUserFactory.GetUserBaseByUserID(userId);
                 decimal canPayMoney = mchInfo.MchUsersAmtInfo.Balance -
                                                         mchInfo.MchUsersAmtInfo.Freeze -
@@ -305,107 +289,30 @@
         /// <param name="userId"></param>
         /// <param name="settleAmt"></param>
         /// <returns></returns>
-        private string Settle(int userId, decimal settleAmt)
+        private string Settle(Model.User.MchUserBaseInfo ub, decimal settleAmt)
         {
-            string str = "";
-            //用户信息
-            MchUserBaseInfo model = MchUserFactory.GetUserBaseByUserID(userId);
-            if (model == null)
-            {
-                return "用户不存在";
-            }
-            if (settleAmt <= 0M)
-            {
-                return "请输入正确的金额";
-            }
-            if (settleAmt > model.MchUsersAmtInfo.EnableAmt)
-            {
-                return "结算金额大于余额 操作有误";
-            }
-            SettledInfo info2 = new SettledInfo();
-            info2.AddTime = DateTime.Now;
-            info2.Amount = settleAmt;
-            info2.PayTime = DateTime.Now;
-            info2.Status =  SettledStatusEnum.审核中;
-            info2.Tax = 0;  //税
-            info2.UserID = userId;
-            info2.AppType = AppTypeEnum.t0;
-            info2.SettledMode =  SettledModeEnum.系统自动结算;
-            //支付通道
-            /*
-            info2.BankCode = model.BankCode;    //代码
-            if (model.PMode == 1)
-            {
-                //银行
-                info2.PayeeBank = model.PayeeBank;  //11.10修改为model.PayeeBank，银行名称。原来为 model.BankCode;
-            }
-            else if (model.PMode == 2)
-            {
-                //支付宝
-                info2.PayeeBank = "支付宝";
-            }
-            else if (model.PMode == 3)
-            {
-                //财付通
-                info2.PayeeBank = "财付通";
-            }
-            */
-            /*
-            info2.PayeeAddress = model.BankAddress;
-            info2.PayeeName = model.PayeeName;      //商户收款姓名
-            info2.Account = model.Account;                  //商户收款账号
-            */
-            TocashSchemeInfo modelByUser = TocashScheme.GetModelByUser(1, userId);
-            info2.Charges = modelByUser.chargerate * settleAmt;
-            decimal? charges = info2.Charges;
-            decimal chargeleastofeach = modelByUser.chargeleastofeach;
-            if ((charges.GetValueOrDefault() < chargeleastofeach) && charges > 0)
-            {
-                info2.Charges = modelByUser.chargeleastofeach;
-            }
-            else
-            {
-                charges = info2.Charges;
-                chargeleastofeach = modelByUser.chargemostofeach;
-                if ((charges.GetValueOrDefault() > chargeleastofeach) && charges.HasValue)
-                {
-                    info2.Charges = modelByUser.chargemostofeach;
-                }
-            }
-            if (DateTime.Now.Hour > 16)
-            {
-                info2.Required = DateTime.Now.AddDays(1.0);
-            }
-            else
-            {
-                info2.Required = DateTime.Now;
-            }
-            if (modelByUser.vaiInterface > 0)
-            {
-                //走接口结算。这里选择结算接口供应商
-                //info2.suppid = this.chnlBLL.GetSupplier(info2.PayeeBank);
-                //2017.2.9修改如下，目的是处理 代付自动走接口
-                //info2.Suppid = this.chnlBLL.GetSupplier(info2.BankCode);
-                info2.Suppid = 0;
+            string web_return = OriginalStudio.BLL.Settled.SettledFactory.InvokeSettleInterface(ub.MerchantName,
+                                                        ub.MchUserPayBankInfo.BankCode.ToString(),
+                                                        ub.MchUserPayBankInfo.BankAccount,
+                                                        ub.MchUserPayBankInfo.BankName,
+                                                        ub.MchUserPayBankInfo.AccountName,
+                                                        SettlePayTypeEnum.管理后台,
+                                                        SettledModeEnum.手动提现,
+                                                        settleAmt, settleAmt * ub.WithdrawScheme.ChargeRate, 0, "/");
 
-            }
-            if ((modelByUser.vaiInterface > 0) && (modelByUser.tranRequiredAudit == 0))
+            Dictionary<string, string> dicRtn = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(web_return);
+
+            string respCode = dicRtn["result"].ToUpper();
+            if (respCode == "OK")
             {
-                //结算不需要审核，且走接口代付。状态为16
-                info2.Status = SettledStatusEnum.付款接口支付中;
+                return respCode;//
             }
-            int num2 = SettledFactory.Apply(info2);
-            info2.ID = num2;
-            if (num2 > 0)
+            else
             {
-                if (info2.Status == SettledStatusEnum.付款接口支付中)
-                {
-                    //结算不需要审核，在点 结算后直接调用接口进行支付。
-                    Withdraw.InitDistribution(info2);
-                }
-                return str;
+                string msg = dicRtn["msg"].ToUpper();
+                //base.AlertAndRedirect("提现失败，原因：" + msg, "BankForUser.aspx");
+                return msg;
             }
-            return "提现失败";
         }
 
         public string cmd

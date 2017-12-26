@@ -11,7 +11,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using OriginalStudio.BLL.Supplier;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.User;
 
     public class UserSupplierEdit : ManagePageBase

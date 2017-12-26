@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace OriginalStudio.BLL.User
+namespace OriginalStudio.BLL.Settled
 {
     /// <summary>
     /// 商户自定义通道账号配置。

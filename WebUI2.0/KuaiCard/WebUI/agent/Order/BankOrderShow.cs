@@ -2,7 +2,7 @@
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Channel;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Order;
     using OriginalStudio.WebComponents.Web;

@@ -1,6 +1,5 @@
-﻿namespace OriginalStudio.BLL.User
+﻿namespace OriginalStudio.BLL.Settled
 {
-    using OriginalStudio.DAL.Settled;
     using OriginalStudio.Lib.ExceptionHandling;
     using System;
     using System.Collections.Generic;
@@ -36,7 +35,7 @@
                 if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_settled_apply",
                             new SqlParameter[] { parameter,
                                 DataBase.MakeInParam("@userid", SqlDbType.Int, 10, model.UserID),
-                                DataBase.MakeInParam("@amount", SqlDbType.Decimal, 9, model.Amount),
+                                DataBase.MakeInParam("@settleamount", SqlDbType.Money,9, model.SettleAmount),
                                 DataBase.MakeInParam("@addtime", SqlDbType.DateTime, 8, model.AddTime),
                                 DataBase.MakeInParam("@apptype", SqlDbType.Int, 10, model.AppType),
                                 DataBase.MakeInParam("@required", SqlDbType.DateTime, 8, model.AddTime),
@@ -69,7 +68,7 @@
                 SqlParameter[] commandParameters = new SqlParameter[] { 
                     DataBase.MakeInParam("@id", SqlDbType.Int, 10, model.ID), 
                     DataBase.MakeInParam("@userid", SqlDbType.Int, 10, model.UserID), 
-                    DataBase.MakeInParam("@amount", SqlDbType.Money, 8, model.Amount), 
+                    DataBase.MakeInParam("@settleamount", SqlDbType.Money, 8, model.SettleAmount), 
                     DataBase.MakeInParam("@status", SqlDbType.Int, 10, model.Status), 
                     DataBase.MakeInParam("@addtime", SqlDbType.DateTime, 8, model.AddTime), 
                     DataBase.MakeInParam("@paytime", SqlDbType.DateTime, 8, model.PayTime), 
@@ -103,34 +102,6 @@
             }
         }
         
-        public static int Add(SettledInfo model)
-        {
-            try
-            {
-                SqlParameter parameter = DataBase.MakeOutParam("@id", SqlDbType.Int, 10);
-                if (DataBase.ExecuteNonQuery(CommandType.StoredProcedure, "proc_settled_add",
-                                new SqlParameter[] { parameter, 
-                                                        DataBase.MakeInParam("@userid", SqlDbType.Int, 10, model.UserID), 
-                                                        DataBase.MakeInParam("@amount", SqlDbType.Money, 8, model.Amount), 
-                                                        DataBase.MakeInParam("@status", SqlDbType.Int, 10, model.Status), 
-                                                        DataBase.MakeInParam("@addtime", SqlDbType.DateTime, 8, model.AddTime), 
-                                                        DataBase.MakeInParam("@paytime", SqlDbType.DateTime, 8, model.PayTime), 
-                                                        DataBase.MakeInParam("@tax", SqlDbType.Money, 8, model.Tax), 
-                                                        DataBase.MakeInParam("@charges", SqlDbType.Money, 8, model.Charges), 
-                                                        DataBase.MakeInParam("@settmode", SqlDbType.TinyInt, 1, model.SettledMode) 
-                                }) == 1)
-                {
-                    return (int)parameter.Value;
-                }
-                return 0;
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleException(exception);
-                return 0;
-            }
-        }
-
         public static bool Delete(DateTime etime)
         {
             try
@@ -480,6 +451,7 @@
                         "sum(amount) totalamt," +
                         "sum(case when [status]=8 then 1 else 0 end) successcount," +
                         "sum(case when [status]=8 then amount else 0 end) successamt," +
+                        "sum(case when [status]=8 then settleamount else 0 end) success_settleamt," +
                         "sum(case when [status]=8 then ISNULL([charges],0) else 0 end) successcharges  " +
                         " from V_Settled where " + wheres, paramList.ToArray());
             }
@@ -680,6 +652,10 @@
                 {
                     info.Amount = decimal.Parse(row["amount"].ToString());
                 }
+                if ((row["settleamount"] != null) && (row["settleamount"].ToString() != ""))
+                {
+                    info.SettleAmount = decimal.Parse(row["settleamount"].ToString());
+                }
                 if ((row["status"] != null) && (row["status"].ToString() != ""))
                 {
                     info.Status = (SettledStatusEnum)int.Parse(row["status"].ToString());
@@ -754,6 +730,11 @@
             {
                 info.Amount = (decimal)obj4;
             }
+            object obj44 = dataReader["settleamount"];
+            if ((obj44 != null) && (obj44 != DBNull.Value))
+            {
+                info.SettleAmount = (decimal)obj44;
+            }
             object obj5 = dataReader["status"];
             if ((obj5 != null) && (obj5 != DBNull.Value))
             {
@@ -804,6 +785,11 @@
             {
                 info.BankCode = (string)obj14;
             }
+            object obj15 = dataReader["tranapi"];
+            if ((obj15 != null) && (obj15 != DBNull.Value))
+            {
+                info.Suppid = (int)obj15;
+            }
             return info;
         }
 
@@ -834,7 +820,7 @@
             waitSign.Add("paytype", ((int)p_paytype).ToString());
             waitSign.Add("mode", ((int)p_mode).ToString());
 
-            Model.User.MchUserBaseInfo mch = OriginalStudio.BLL.User.MchUserFactory.GetUserBaseByMerchantName(p_merchantName);
+            Model.User.MchUserBaseInfo mch = OriginalStudio.BLL.Settled.MchUserFactory.GetUserBaseByMerchantName(p_merchantName);
             string sign = Lib.Security.Cryptography.SignSortedDictionary(waitSign, mch.ApiKey).ToLower();
             waitSign.Add("sign", sign.ToString());
 
@@ -856,7 +842,7 @@
 
         public static void DoNotify(string trade_no)
         {
-            OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.User.SettledFactory.GetModel(0);
+            OriginalStudio.Model.Settled.SettledInfo model = OriginalStudio.BLL.Settled.SettledFactory.GetModel(0);
             if (model != null)
             {
                 SettledNotifyHelper helper = new SettledNotifyHelper();

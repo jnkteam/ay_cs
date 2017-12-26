@@ -2,7 +2,7 @@
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.SMS;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Cache;
     using OriginalStudio.Model.User;
     using System;

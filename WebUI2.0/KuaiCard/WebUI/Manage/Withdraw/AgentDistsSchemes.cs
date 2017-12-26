@@ -1,7 +1,7 @@
 ﻿namespace OriginalStudio.WebUI.Manage.Withdraw
 {
     using OriginalStudio.BLL;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model;
     using OriginalStudio.Model.Settled;
     using OriginalStudio.WebComponents.Web;

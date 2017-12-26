@@ -13,7 +13,7 @@
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using Wuqi.Webdiyer;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Model.Settled;
 
     public class SettledList : ManagePageBase

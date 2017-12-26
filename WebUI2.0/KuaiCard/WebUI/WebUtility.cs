@@ -2,7 +2,7 @@
 {
     using OriginalStudio.BLL;
     using OriginalStudio.BLL.Supplier;
-    using OriginalStudio.BLL.User;
+    using OriginalStudio.BLL.Settled;
     using OriginalStudio.Lib.Security;
     using System;
     using System.Data;

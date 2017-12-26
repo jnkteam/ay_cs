@@ -57,16 +57,16 @@
         /// <summary>
         /// 商户图片列表。
         /// </summary>
-        /// <param name="userId">0显示所有用户图片;>1显示指定用户图片</param>
+        /// <param name="merchantName">商户号，空显示所有用户图片</param>
         /// <param name="status">0显示所有用户图片;  其余状态 1,2,4</param>
         /// <returns></returns>
-        public static DataSet GetUserImages(int userId, int status = 0)
+        public static DataSet GetUserImages(string merchantName, int status = 0)
         {
             SqlParameter[] parameters = {
-                new SqlParameter("@userId",SqlDbType.Int),
+                new SqlParameter("@merchantname",SqlDbType.VarChar,50),
                 new SqlParameter("@status",SqlDbType.Int)
             };
-            parameters[0].Value = userId;
+            parameters[0].Value = merchantName;
             parameters[1].Value = status;
 
             return DataBase.ExecuteDataset(CommandType.StoredProcedure, "proc_mch_userIdImage_GetByUser", parameters);

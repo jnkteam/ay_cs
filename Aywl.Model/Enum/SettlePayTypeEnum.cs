@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// 账户操作方式。加款或扣款
+    /// 账户操作方式
     /// </summary>
     public enum SettlePayTypeEnum
     {

@@ -226,7 +226,7 @@
                                                         ub.MchUserPayBankInfo.AccountName,
                                                         SettlePayTypeEnum.管理后台,
                                                         SettledModeEnum.手动提现,
-                                                        settleAmt, 0, 0, "/");
+                                                        settleAmt, settleAmt * ub.WithdrawScheme.ChargeRate, 0, "/");
 
                     Dictionary<string, string> dicRtn = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(web_return);
 

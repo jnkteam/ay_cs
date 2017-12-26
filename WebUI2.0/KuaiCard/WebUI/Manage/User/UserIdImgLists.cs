@@ -100,7 +100,7 @@
         {
            
             string orderby = string.Empty;
-            DataSet set = MchUsersImageFactory.GetUserImages(0,0);
+            DataSet set = MchUsersImageFactory.GetUserImages("",0);
             this.rptIamges.DataSource = set.Tables[0];
             this.rptIamges.DataBind();
         }

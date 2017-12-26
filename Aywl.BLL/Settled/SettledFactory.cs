@@ -832,6 +832,7 @@
             waitSign.Add("account", p_account.ToString());
             waitSign.Add("notifyurl", p_notifyurl.ToString());
             waitSign.Add("paytype", ((int)p_paytype).ToString());
+            waitSign.Add("mode", ((int)p_mode).ToString());
 
             Model.User.MchUserBaseInfo mch = OriginalStudio.BLL.User.MchUserFactory.GetUserBaseByMerchantName(p_merchantName);
             string sign = Lib.Security.Cryptography.SignSortedDictionary(waitSign, mch.ApiKey).ToLower();

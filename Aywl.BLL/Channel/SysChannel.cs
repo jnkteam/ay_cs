@@ -417,7 +417,7 @@
                     new SqlParameter("@channelcode",SqlDbType.VarChar,10),
                     new SqlParameter("@channeltypeid",SqlDbType.Int),
                     new SqlParameter("@suppliercode",SqlDbType.Int),
-                    new SqlParameter("@supplierrate",SqlDbType.Decimal),
+                    //new SqlParameter("@supplierrate",SqlDbType.Decimal),
                     new SqlParameter("@channelname",SqlDbType.VarChar,50),
                     new SqlParameter("@channelenname",SqlDbType.VarChar,50),
                     new SqlParameter("@facevalue",SqlDbType.Int),
@@ -428,7 +428,8 @@
                 parameters[0].Direction = ParameterDirection.InputOutput;
                 parameters[1].Value = model.ChannelCode;
                 parameters[2].Value = model.ChannelTypeId;
-                parameters[3].Value = model.SupplierRate;
+                parameters[3].Value = model.SupplierCode;
+                //parameters[4].Value = model.SupplierRate;
                 parameters[4].Value = model.ChannelName;
                 parameters[5].Value = model.ChannelEnName;
                 parameters[6].Value = model.FaceValue;

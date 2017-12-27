@@ -90,7 +90,37 @@
 
 
         }
+        /// <summary>
+        /// Code级别页面权限控制
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public bool checkAuthCode(string code)
+        {
 
+            string authCode = code;
+
+
+            int rulesId = ExMenuFactory.getRulesIdByControl(authCode);
+            if (rulesId > 0)
+            {
+                if (!ExMenuFactory.authContains(rulesId.ToString(), "rules"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+
+
+
+        }
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

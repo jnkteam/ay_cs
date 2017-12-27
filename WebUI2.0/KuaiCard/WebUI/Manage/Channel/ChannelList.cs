@@ -40,6 +40,11 @@
             {
                 if (e.CommandName == "del")
                 {
+                    //Code 对应Rules表中name值 进行权限判定
+                    if (!this.checkAuthCode("ChannelListDelete")) {
+                        base.AlertAndRedirect("权限不足");return;                    
+                    }
+
                     OriginalStudio.BLL.Channel.SysChannel.Delete(Convert.ToInt32(e.CommandArgument));
                     base.AlertAndRedirect("删除成功");
                 }

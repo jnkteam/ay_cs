@@ -42,6 +42,7 @@
             string str4 = this.txtrelname.Text.Trim();
             string str5 = this.qq.Text.Trim();
             string str6 = this.tel.Text.Trim();
+            /*
             ManageRole none = ManageRole.None;
             foreach (ListItem item in this.cbl_roles.Items)
             {
@@ -58,6 +59,7 @@
                     }
                 }
             }
+            */
             this.ItemInfo.username = str;
             if (!string.IsNullOrEmpty(str2))
             {
@@ -68,7 +70,7 @@
                 this.ItemInfo.secondpwd = Cryptography.MD5(str3);
             }
             this.ItemInfo.relname = str4;
-            this.ItemInfo.role = none;
+            //this.ItemInfo.role = none;
             this.ItemInfo.ManageRole = int.Parse(this.roles.SelectedValue);
 
             this.ItemInfo.commissiontype = new int?(int.Parse(this.ddlCommissionType.SelectedValue));
@@ -89,8 +91,8 @@
                     this.ItemInfo.cardcommission = new decimal?(num2);
                     this.ItemInfo.commission = new decimal?(result);
                     this.ItemInfo.status = new int?(int.Parse(this.ddlStus.SelectedValue));
-                    this.ItemInfo.isSuperAdmin = this.ckb_SuperAdmin.Checked ? 1 : 0;
-                    this.ItemInfo.isAgent = this.ckb_Agent.Checked ? 1 : 0;
+                    //this.ItemInfo.isSuperAdmin = this.ckb_SuperAdmin.Checked ? 1 : 0;
+                    //this.ItemInfo.isAgent = this.ckb_Agent.Checked ? 1 : 0;
                     this.ItemInfo.qq = str5;
                     this.ItemInfo.tel = str6;
                     bool flag = false;
@@ -123,6 +125,7 @@
             {
                 if (role != ManageRole.None)
                 {
+                    /*
                     int num = (int) role;
                     ListItem item = new ListItem(ManageFactory.GetManageRoleView(role), num.ToString());
                     if ((this.ItemInfo.role & role) == role)
@@ -130,6 +133,7 @@
                         item.Selected = true;
                     }
                     this.cbl_roles.Items.Add(item);
+                    */
                 }
             }
             DataTable table = ManageRolesFactory.GetList("status = 1").Tables[0];
@@ -164,8 +168,8 @@
                 {
                     this.lblbalance.Text = this.ItemInfo.balance.Value.ToString("f2");
                 }
-                this.ckb_SuperAdmin.Checked = this.ItemInfo.isSuperAdmin > 0;
-                this.ckb_Agent.Checked = this.ItemInfo.isAgent > 0;
+                //this.ckb_SuperAdmin.Checked = this.ItemInfo.isSuperAdmin > 0;
+                //this.ckb_Agent.Checked = this.ItemInfo.isAgent > 0;
             }
             else {
                

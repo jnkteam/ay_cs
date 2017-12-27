@@ -44,10 +44,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DAL\Settled\Settled.cs">
-      <SubType>Code</SubType>
-    </Compile>
+  <ItemGroup>  
     <Compile Include="DAL\Withdraw\channelwithdraw.cs" />
     <Compile Include="DAL\Withdraw\settledAgent.cs" />
     <Compile Include="DAL\Withdraw\settledAgentNotify.cs" />
